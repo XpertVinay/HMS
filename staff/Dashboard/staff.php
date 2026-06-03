@@ -1,58 +1,15 @@
 <?php 
-  require_once("../../Includes/config.php"); 
-  require_once("../../Includes/session.php"); 
-  if ($logged==false) {
-       header("Location:../../login.php");
-  }
-  include('header.php'); 
+require_once("../../Includes/portal_header.php");
+require_once("../../Includes/portal_sidebar.php");
 ?>
 
-<!DOCTYPE html>
+<div class="box-title" style="margin-bottom: 20px;">
+    <h2>Staff Dashboard (Registry)</h2>
+</div>
 
-<html lang="en" dir="ltr">
-
-<head>
-    <meta charset="UTF-8">
-
-    <link rel="stylesheet" href="staff.css">
-    <link rel="stylesheet" href="billing.css">
-    <link rel="stylesheet" href="admin_view_mem.css">
-    <link rel="shortcut icon" href="Logo3.jpg">
-
-
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-
-<body>
-    <div class="sidebar">
-        <div class="logo-details">
-            <i><img src="1.png"
-                 alt="logo" width="100px" height="100px"></i>
-            <span class="logo_name">HMS</span>
-        </div>
-        <ul class="nav-links">
-            <li>
-                <a href="../Registry/registry.php" class="active">
-                <i class='bx bxs-face'></i>
-                    <span class="links_name">Registry</span>
-                </a>
-            </li>
-            <li class="log_out">
-                <a href="../../logout.php">
-                    <i class='bx bx-log-out'></i>
-                    <span class="links_name">Log out</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    
-    <section class="home-section">
-      
-
-  <div id="view-panel">
-      <?php $page = isset($_GET['page']) ? $_GET['page'] :'registrylist'; ?>
-  	<?php include $page.'.php' ?>
+<div id="view-panel" style="background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+    <?php $page = isset($_GET['page']) ? $_GET['page'] :'registrylist'; ?>
+    <?php include $page.'.php' ?>
 </div>
 
 <div class="modal fade" id="confirm_modal" role='dialog'>
@@ -70,8 +27,8 @@
       </div>
       </div>
     </div>
-  </div>
-  <div class="modal fade" id="uni_modal" role='dialog'>
+</div>
+<div class="modal fade" id="uni_modal" role='dialog'>
     <div class="modal-dialog modal-md" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -85,18 +42,18 @@
       </div>
       </div>
     </div>
-  </div>
-  <div class="modal fade" id="viewer_modal" role='dialog'>
+</div>
+<div class="modal fade" id="viewer_modal" role='dialog'>
     <div class="modal-dialog modal-md" role="document">
       <div class="modal-content">
               <button type="button" class="btn-close" data-dismiss="modal"><span class="fa fa-times"></span></button>
               <img src="" alt="">
       </div>
     </div>
-  </div>
-</body>
+</div>
+
 <script>
-	 window.start_load = function(){
+    window.start_load = function(){
     $('body').prepend('<di id="preloader2"></di>')
   }
   window.end_load = function(){
@@ -122,7 +79,6 @@
                   focus:true
                 })
                 end_load()  
-
 }
   window.uni_modal = function($title = '' , $url='',$size=""){
     start_load()
@@ -179,16 +135,18 @@ window._conf = function($msg='',$func='',$params = []){
         $(this).remove();
       })
   })
-  $('.datetimepicker').datetimepicker({
-      format:'Y/m/d H:i',
-      startDate: '+3d'
-  })
-  $('.select2').select2({
-    placeholder:"Please select here",
-    width: "100%"
-  })
-</script>	
+  if(typeof $.fn.datetimepicker !== 'undefined') {
+      $('.datetimepicker').datetimepicker({
+          format:'Y/m/d H:i',
+          startDate: '+3d'
+      })
+  }
+  if(typeof $.fn.select2 !== 'undefined') {
+      $('.select2').select2({
+        placeholder:"Please select here",
+        width: "100%"
+      })
+  }
+</script>
 
-</body>
-
-</html>
+<?php require_once("../../Includes/portal_footer.php"); ?>
