@@ -58,23 +58,43 @@ Options -Indexes
 </IfModule>
 
 # ----------------------------------------------------------------------
-# 3. ROUTING & URL REWRITING (CLEAN URLs)
+# 3. ROUTING & URL REWRITING (CLEAN URLs & PUBLIC ROUTING)
 # ----------------------------------------------------------------------
 <IfModule mod_rewrite.c>
     RewriteEngine On
     
-    # Set the default landing pages
+    # 1. Set the default landing page for the root
     DirectoryIndex home/home.php index.php login.php
     
-    # Redirect external requests with .php extension to extensionless URL (Clean URLs)
+    # 2. Redirect external requests with .php to extensionless URLs
+    # Prevent redirecting POST requests to avoid losing form data
+    RewriteCond %{REQUEST_METHOD} !POST
     RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^\ ]+)\.php
     RewriteRule ^/?(.*)\.php$ /$1 [L,R=301]
 
-    # Hide .php extensions in URLs (e.g., /login maps internally to /login.php)
-    # If the request is not for a directory
+    # 3. Redirect /home/* to root /* to hide the 'home' directory from public URLs
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /home/([^?\ ]+)
+    RewriteRule ^/?home/(.*)$ /$1 [L,R=301]
+    
+    # If request is exactly /home or /home/, redirect to /
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /home/?[\ ?]
+    RewriteRule ^/?home/?$ / [L,R=301]
+
+    # 4. Map extensionless root-level requests to the /home/ folder implicitly
+    # If the file exists in /home/ with a .php extension
+    RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    # And if the request with .php appended is a valid file
+    RewriteCond %{DOCUMENT_ROOT}/home/$1.php -f
+    RewriteRule ^(.*)$ home/$1.php [L]
+    
+    # If the exact file exists in /home/ (e.g. static assets like home.css)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{DOCUMENT_ROOT}/home/$1 -f
+    RewriteRule ^(.*)$ home/$1 [L]
+
+    # 5. Hide .php extensions for other root/app files (e.g., /login -> login.php)
+    RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME}\.php -f
-    # Serve the .php file internally
     RewriteRule ^(.*)$ $1.php [L]
 </IfModule>

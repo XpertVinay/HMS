@@ -1,14 +1,9 @@
 <?php
-define('DB_SERVER', getenv('DB_SERVER') ?: 'localhost');
-define('DB_USERNAME', getenv('DB_USERNAME') ?: 'root');
-define('DB_PASSWORD', getenv('DB_PASSWORD') !== false ? getenv('DB_PASSWORD') : 'root');
-define('DB_NAME', getenv('DB_NAME') ?: 'hms');
- 
-/* Attempt to connect to MySQL database */
-$con = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
- 
-// Check connection
-if($con === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
+if (basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"])) { die('Direct access not permitted.'); }
+
+require_once(__DIR__ . "/Database.php");
+
+// Backward compatibility: instantiate the singleton and expose $con
+$db = Database::getInstance();
+$con = $db->getConnection();
 ?>

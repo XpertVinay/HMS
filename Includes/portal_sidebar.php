@@ -1,4 +1,5 @@
 <?php
+if (basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"])) { die('Direct access not permitted.'); }
 $current_page = basename($_SERVER['PHP_SELF']);
 $dir_path = dirname($_SERVER['PHP_SELF']);
 
@@ -46,7 +47,7 @@ function isActive($page) {
             <li><a href="/staff/Event_calender/staff_event.php" class="<?php echo isActive('Event_calender'); ?>"><i class='bx bx-calendar-event'></i><span class="links_name">Events</span></a></li>
         <?php endif; ?>
         
-        <li><a href="https://discord.gg/ytmJWCjyHZ" target="_blank"><i class='bx bx-message'></i><span class="links_name">Chat Box</span></a></li>
+
         <li class="log_out"><a href="/logout.php"><i class='bx bx-log-out'></i><span class="links_name">Log out</span></a></li>
     </ul>
 </div>

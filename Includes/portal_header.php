@@ -1,4 +1,5 @@
 <?php
+if (basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"])) { die('Direct access not permitted.'); }
 if (!isset($con)) {
     require_once(__DIR__ . "/config.php");
 }

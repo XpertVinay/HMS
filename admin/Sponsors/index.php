@@ -4,11 +4,12 @@ require_once("../../Includes/portal_sidebar.php");
 
 // Handle form submission
 if(isset($_POST['submit'])){
-    $name = mysqli_real_escape_string($con, $_POST['name']);
-    $logo_url = mysqli_real_escape_string($con, $_POST['logo_url']);
-    $description = mysqli_real_escape_string($con, $_POST['description']);
-    $website_url = mysqli_real_escape_string($con, $_POST['website_url']);
-    mysqli_query($con, "INSERT INTO sponsors (name, logo_url, description, website_url) VALUES ('$name', '$logo_url', '$description', '$website_url')");
+    $name = $_POST['name'];
+    $logo_url = $_POST['logo_url'];
+    $description = $_POST['description'];
+    $website_url = $_POST['website_url'];
+    $stmt = $db->getPDO()->prepare("INSERT INTO sponsors (name, logo_url, description, website_url) VALUES (:name, :logo, :desc, :web)");
+    $stmt->execute([':name' => $name, ':logo' => $logo_url, ':desc' => $description, ':web' => $website_url]);
     echo "<script>window.location.href='index.php';</script>";
 }
 ?>

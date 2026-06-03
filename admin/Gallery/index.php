@@ -4,10 +4,11 @@ require_once("../../Includes/portal_sidebar.php");
 
 // Handle form submission
 if(isset($_POST['submit'])){
-    $title = mysqli_real_escape_string($con, $_POST['title']);
-    $image_url = mysqli_real_escape_string($con, $_POST['image_url']);
-    $description = mysqli_real_escape_string($con, $_POST['description']);
-    mysqli_query($con, "INSERT INTO gallery (title, image_url, description) VALUES ('$title', '$image_url', '$description')");
+    $title = $_POST['title'];
+    $image_url = $_POST['image_url'];
+    $description = $_POST['description'];
+    $stmt = $db->getPDO()->prepare("INSERT INTO gallery (title, image_url, description) VALUES (:title, :image, :desc)");
+    $stmt->execute([':title' => $title, ':image' => $image_url, ':desc' => $description]);
     echo "<script>window.location.href='index.php';</script>";
 }
 ?>

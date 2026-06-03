@@ -4,10 +4,11 @@ require_once("../../Includes/portal_sidebar.php");
 
 // Handle form submission
 if(isset($_POST['submit'])){
-    $name = mysqli_real_escape_string($con, $_POST['name']);
-    $amount = mysqli_real_escape_string($con, $_POST['amount']);
-    $date = mysqli_real_escape_string($con, $_POST['donation_date']);
-    mysqli_query($con, "INSERT INTO donors (name, amount, donation_date) VALUES ('$name', '$amount', '$date')");
+    $name = $_POST['name'];
+    $amount = $_POST['amount'];
+    $date = $_POST['donation_date'];
+    $stmt = $db->getPDO()->prepare("INSERT INTO donors (name, amount, donation_date) VALUES (:name, :amount, :date)");
+    $stmt->execute([':name' => $name, ':amount' => $amount, ':date' => $date]);
     // Reload page to prevent form resubmission
     echo "<script>window.location.href='index.php';</script>";
 }

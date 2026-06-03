@@ -6,17 +6,19 @@ if ($logged == false) {
     exit();
 }
 if(isset($_POST['submit'])){
-    $title = mysqli_real_escape_string($con, $_POST['title']);
-    $event_date = mysqli_real_escape_string($con, $_POST['event_date']);
-    $event_time = !empty($_POST['event_time']) ? mysqli_real_escape_string($con, $_POST['event_time']) : NULL;
-    $description = mysqli_real_escape_string($con, $_POST['description']);
+    $title = $_POST['title'];
+    $event_date = $_POST['event_date'];
+    $event_time = !empty($_POST['event_time']) ? $_POST['event_time'] : NULL;
+    $description = $_POST['description'];
 
+    $pdo = $db->getPDO();
     if($event_time){
-        $query = "INSERT INTO events (title, event_date, event_time, description) VALUES ('$title', '$event_date', '$event_time', '$description')";
+        $stmt = $pdo->prepare("INSERT INTO events (title, event_date, event_time, description) VALUES (:title, :date, :time, :desc)");
+        $stmt->execute([':title' => $title, ':date' => $event_date, ':time' => $event_time, ':desc' => $description]);
     } else {
-        $query = "INSERT INTO events (title, event_date, description) VALUES ('$title', '$event_date', '$description')";
+        $stmt = $pdo->prepare("INSERT INTO events (title, event_date, description) VALUES (:title, :date, :desc)");
+        $stmt->execute([':title' => $title, ':date' => $event_date, ':desc' => $description]);
     }
-    mysqli_query($con, $query);
     header("Location: admin_event.php");
 }
 ?>

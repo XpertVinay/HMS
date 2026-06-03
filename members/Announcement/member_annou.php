@@ -9,7 +9,7 @@ require_once("../../Includes/portal_sidebar.php");
 
 <div class="sales-boxes" style="flex-direction: column;">
     <?php 
-    $result = mysqli_query($con, "SELECT * FROM announcements ORDER BY created_at DESC");
+    $result = mysqli_query($con, "SELECT * FROM announcement ORDER BY created_at DESC");
     if($result && mysqli_num_rows($result) > 0): 
         while($announcement = mysqli_fetch_assoc($result)): 
     ?>

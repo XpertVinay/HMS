@@ -1,4 +1,5 @@
 <?php
+if (basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"])) { die('Direct access not permitted.'); }
 // Include configuration if not already included
 if (!isset($con)) {
     require_once("../Includes/config.php");
