@@ -1,6 +1,7 @@
 # Environment Variables
 .env
 .env.*
+index.php
 
 # OS generated files
 .DS_Store

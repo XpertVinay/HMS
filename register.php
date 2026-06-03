@@ -120,7 +120,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
         ?>
 
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <div id="js-error" class="glass-alert" style="display:none; background: rgba(220, 53, 69, 0.2); border-color: rgba(220, 53, 69, 0.5); color: #fff;"></div>
+
+        <form id="registerForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="section-title">Organization Details</div>
             
             <div class="glass-input-group">
@@ -136,7 +138,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <input type="text" name="org_reg_code" placeholder="RWA Registration Code" class="glass-input" value="<?php echo htmlspecialchars($org_reg_code); ?>" required>
                 </div>
                 <div class="glass-input-group">
-                    <input type="text" name="subdomain" placeholder="Desired Subdomain (e.g. sunnyvale)" class="glass-input" value="<?php echo htmlspecialchars($subdomain); ?>" required>
+                    <input type="text" name="subdomain" id="subdomain" placeholder="Desired Subdomain (e.g. sunnyvale)" class="glass-input" value="<?php echo htmlspecialchars($subdomain); ?>" required>
                 </div>
             </div>
 
@@ -153,10 +155,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             <div class="form-row">
                 <div class="glass-input-group">
-                    <input type="password" name="password" placeholder="Password" class="glass-input" required>
+                    <input type="password" name="password" id="password" placeholder="Password" class="glass-input" required>
                 </div>
                 <div class="glass-input-group">
-                    <input type="password" name="confirm_password" placeholder="Confirm Password" class="glass-input" required>
+                    <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" class="glass-input" required>
                 </div>
             </div>
             
@@ -168,5 +170,42 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
         </form>
     </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            const subdomain = document.getElementById('subdomain').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            const errorDiv = document.getElementById('js-error');
+            
+            let errors = [];
+
+            // Subdomain validation
+            if (!/^[a-z0-9]+$/.test(subdomain)) {
+                errors.push("Subdomain can only contain lowercase letters and numbers.");
+            }
+
+            // Password length validation
+            if (password.length < 6) {
+                errors.push("Password must have at least 6 characters.");
+            }
+
+            // Password match validation
+            if (password !== confirmPassword) {
+                errors.push("Passwords do not match.");
+            }
+
+            // Show errors or submit
+            if (errors.length > 0) {
+                e.preventDefault(); // Stop form submission
+                errorDiv.innerHTML = errors.join("<br>");
+                errorDiv.style.display = 'block';
+                // Scroll to top of form
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                errorDiv.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
