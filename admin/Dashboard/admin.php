@@ -6,7 +6,7 @@
         <div class="right-side">
             <div class="box-topic">Total members</div>
             <?php
-                $sql = "SELECT * FROM member";
+                $sql = "SELECT * FROM member WHERE organization_id = " . ACTIVE_ORG_ID;
                 if ($result=mysqli_query($con,$sql)) {
                     $rowcount=mysqli_num_rows($result);
                 }
@@ -19,7 +19,7 @@
         <div class="right-side">
             <div class="box-topic">Total Staff</div>
             <?php
-                $sql = "SELECT * FROM staff";
+                $sql = "SELECT * FROM staff WHERE organization_id = " . ACTIVE_ORG_ID;
                 if ($result=mysqli_query($con,$sql)) {
                     $rowcount=mysqli_num_rows($result);
                 }
@@ -32,7 +32,7 @@
         <div class="right-side">
             <div class="box-topic">Society fund</div>
             <?php
-                $query="select SUM(amount_payed) as `societyfund` from billing";
+                $query="SELECT SUM(amount_payed) as `societyfund` FROM billing WHERE organization_id = " . ACTIVE_ORG_ID;
                 $res=mysqli_query($con, $query);
                 $data=mysqli_fetch_array($res);
             ?> 
@@ -44,7 +44,7 @@
         <div class="right-side">
             <div class="box-topic">Unpaid Bills</div>
             <?php
-                $sql = "SELECT * FROM billing where status=0";
+                $sql = "SELECT * FROM billing WHERE status=0 AND organization_id = " . ACTIVE_ORG_ID;
                 if ($result=mysqli_query($con,$sql)) {
                     $rowcount=mysqli_num_rows($result);
                 }
@@ -68,7 +68,7 @@
             </thead>
             <tbody>
                 <?php
-                    $registry = $con->query("SELECT * FROM registry order by person_name asc");
+                    $registry = $con->query("SELECT * FROM registry WHERE organization_id = " . ACTIVE_ORG_ID . " ORDER BY person_name ASC");
                     $i = 1;
                     if($registry && $registry->num_rows > 0) {
                         while($row= $registry->fetch_assoc()):
@@ -100,7 +100,7 @@
             </thead>
             <tbody>
                 <?php
-                    $member = $con->query("SELECT * FROM member order by username asc");
+                    $member = $con->query("SELECT * FROM member WHERE organization_id = " . ACTIVE_ORG_ID . " ORDER BY username ASC");
                     $i = 1;
                     if($member && $member->num_rows > 0) {
                         while($row= $member->fetch_assoc()):

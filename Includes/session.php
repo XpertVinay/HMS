@@ -6,6 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 $logged = false;
+$login_error = null;
 
 if(isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
     $logged = true;
@@ -18,16 +19,21 @@ if(!$logged && isset($_POST['username']) && isset($_POST['password'])) {
     $password = $_POST['password'];
     $pdo = Database::getInstance()->getPDO();
 
-    $tables = ['member', 'admin', 'staff'];
+    $tables = ['super_admin', 'member', 'admin', 'staff'];
+    $user_found_but_invalid = false;
 
     foreach ($tables as $table) {
-        if ($table === 'admin') {
-            $stmt = $pdo->prepare("SELECT * FROM admin WHERE email = :uname OR username = :uname LIMIT 1");
+        if ($table === 'super_admin') {
+            $stmt = $pdo->prepare("SELECT * FROM super_admin WHERE email = :uname OR username = :uname LIMIT 1");
+            $stmt->execute([':uname' => $username]);
+        } elseif ($table === 'admin') {
+            $stmt = $pdo->prepare("SELECT * FROM admin WHERE (email = :uname OR username = :uname) AND organization_id = :org_id LIMIT 1");
+            $stmt->execute([':uname' => $username, ':org_id' => ACTIVE_ORG_ID]);
         } else {
-            $stmt = $pdo->prepare("SELECT * FROM $table WHERE username = :uname OR email = :uname LIMIT 1");
+            $stmt = $pdo->prepare("SELECT * FROM $table WHERE (username = :uname OR email = :uname) AND organization_id = :org_id LIMIT 1");
+            $stmt->execute([':uname' => $username, ':org_id' => ACTIVE_ORG_ID]);
         }
         
-        $stmt->execute([':uname' => $username]);
         $user = $stmt->fetch();
 
         if ($user) {
@@ -47,6 +53,13 @@ if(!$logged && isset($_POST['username']) && isset($_POST['password'])) {
             }
 
             if ($is_valid) {
+                // Check organization status for non-super_admins
+                if ($table !== 'super_admin' && ACTIVE_ORG_STATUS !== 'approved') {
+                    $login_error = "Your organization is currently " . ACTIVE_ORG_STATUS . " and cannot access the platform.";
+                    $user_found_but_invalid = true;
+                    break;
+                }
+
                 // Seamless migration to hashed password
                 if ($needs_rehash) {
                     $new_hash = password_hash($password, PASSWORD_DEFAULT);
@@ -58,6 +71,10 @@ if(!$logged && isset($_POST['username']) && isset($_POST['password'])) {
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['account'] = $table;
                 
+                if ($table !== 'super_admin') {
+                    $_SESSION['organization_id'] = ACTIVE_ORG_ID;
+                }
+                
                 if ($table === 'member') {
                     $_SESSION['member'] = $user['name'] ?? 'Member';
                     $_SESSION['uid'] = $user['id'];
@@ -68,6 +85,9 @@ if(!$logged && isset($_POST['username']) && isset($_POST['password'])) {
                 } elseif ($table === 'staff') {
                     $_SESSION['aid'] = $user['id'];
                     header("Location:staff/Dashboard/staff.php");
+                } elseif ($table === 'super_admin') {
+                    $_SESSION['aid'] = $user['id'];
+                    header("Location:super_admin/Dashboard/index.php");
                 }
                 exit();
             }

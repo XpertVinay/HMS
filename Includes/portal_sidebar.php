@@ -23,6 +23,7 @@ function isActive($page) {
             <li><a href="/admin/Home_Services/home_ser.php" class="<?php echo isActive('Home_Services'); ?>"><i class='bx bxs-user-circle'></i><span class="links_name">Services</span></a></li>
             <li><a href="/admin/Neighbourhood/admin_neigh.php" class="<?php echo isActive('Neighbourhood'); ?>"><i class='bx bx-map'></i><span class="links_name">Neighbours</span></a></li>
             <li><a href="/admin/Members/index.php" class="<?php echo isActive('Members'); ?>"><i class='bx bx-list-ul'></i><span class="links_name">Members</span></a></li>
+            <li><a href="/admin/SubAdmins/index.php" class="<?php echo isActive('SubAdmins'); ?>"><i class='bx bx-user-plus'></i><span class="links_name">Sub-Admins</span></a></li>
             <li><a href="/admin/Members/staff/index.php" class="<?php echo isActive('staff'); ?>"><i class='bx bx-list-ul'></i><span class="links_name">Staff</span></a></li>
             <li><a href="/admin/Donors/index.php" class="<?php echo isActive('Donors'); ?>"><i class='bx bx-donate-heart'></i><span class="links_name">Donors</span></a></li>
             <li><a href="/admin/Sponsors/index.php" class="<?php echo isActive('Sponsors'); ?>"><i class='bx bx-star'></i><span class="links_name">Sponsors</span></a></li>

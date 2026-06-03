@@ -5,6 +5,9 @@
 # Disable directory browsing to protect file structure
 Options -Indexes
 
+# Prevent physical directories from forcing a trailing slash redirect (fixes /members)
+DirectorySlash Off
+
 # Prevent access to sensitive hidden files (e.g., .env, .git, .htaccess)
 <FilesMatch "^\.">
     Require all denied
@@ -83,7 +86,6 @@ Options -Indexes
     # 4. Map extensionless root-level requests to the /home/ folder implicitly
     # If the file exists in /home/ with a .php extension
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{DOCUMENT_ROOT}/home/$1.php -f
     RewriteRule ^(.*)$ home/$1.php [L]
     
