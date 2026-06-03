@@ -11,9 +11,8 @@ function isActive($page) {
 <div class="sidebar">
     <div class="logo-details">
         <a href="/home/home.php">
-            <i><img src="/1.png" alt="logo"></i>
+            <i><img src="/businzo_logo.png" alt="logo" style="object-fit: contain; background: rgba(255, 255, 255, 0.95); padding: 5px 12px; border-radius: 6px;"></i>
         </a>
-        <span class="logo_name">HMS</span>
     </div>
     <ul class="nav-links">
         <?php if ($role == 'admin'): ?>

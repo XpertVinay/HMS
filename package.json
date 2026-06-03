@@ -1,0 +1,15 @@
+{
+  "name": "hms-2",
+  "version": "1.0.0",
+  "description": "**Businzo Residential Community Management System** is a comprehensive solution dedicated to fulfilling community needs and resolutions via an intuitive web and mobile application interface.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^14.5.4"
+  }
+}

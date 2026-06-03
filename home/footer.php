@@ -3,7 +3,7 @@
     
     <footer class="main-footer">
         <div class="footer-content">
-            <p>&copy; <?php echo date("Y"); ?> Housing Management System. All rights reserved.</p>
+            <p>&copy; <?php echo date("Y"); ?> Community Management System | Businzo. All rights reserved.</p>
         </div>
     </footer>
 </body>

@@ -53,7 +53,7 @@ body {
 }
 
 .sidebar .logo-details img {
-  width: 50px;
+  /* width: 50px; */
   height: 50px;
   object-fit: contain;
   transition: var(--transition);
@@ -137,7 +137,7 @@ body {
   transition: var(--transition);
 }
 
-.sidebar.close ~ .home-section {
+.sidebar.close~.home-section {
   left: 78px;
   width: calc(100% - 78px);
 }
@@ -185,17 +185,17 @@ body {
   background: #fff;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   transition: var(--transition);
 }
 
 .box:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
 .box .box-topic {
@@ -238,14 +238,15 @@ table {
   border-collapse: collapse;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 thead {
   background: var(--bg-light);
 }
 
-th, td {
+th,
+td {
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid #e5e7eb;
@@ -284,14 +285,17 @@ tbody tr:hover {
   .sidebar {
     width: 78px;
   }
+
   .sidebar.close {
     width: 0;
   }
+
   .home-section {
     left: 78px;
     width: calc(100% - 78px);
   }
-  .sidebar.close ~ .home-section {
+
+  .sidebar.close~.home-section {
     left: 0;
     width: 100%;
   }

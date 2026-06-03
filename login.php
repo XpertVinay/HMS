@@ -33,16 +33,18 @@ if (isset($_COOKIE['last_login_role'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login | HMS Portal</title>
+    <title>Login | Businzo RCMS</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="login-theme.css">
-    <link rel="shortcut icon" href="Logo3.jpg"/>
+    <link rel="shortcut icon" href="businzo_logo.png"/>
 </head>
 <body class="<?php echo htmlspecialchars($theme_class); ?>">
     
     <div class="login-glass-card">
-        <h2>Welcome Back</h2>
-        <p class="subtitle">Log in to the Housing Management Portal</p>
+        <div style="text-align: center; margin-bottom: 1rem;">
+            <img src="businzo_logo.png" alt="Businzo Logo" style="height: 60px; object-fit: contain; background: rgba(255, 255, 255, 0.95); padding: 8px 16px; border-radius: 8px;">
+        </div>
+        <p class="subtitle">Log in to the Communit Management Portal</p>
 
         <?php
         // Basic error display for invalid login or organization status

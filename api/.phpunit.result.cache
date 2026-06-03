@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Tests\\Integration\\AuthControllerTest::testLoginFailsWithoutCredentials":4},"times":{"Tests\\Unit\\ExampleTest::testExample":0.003,"Tests\\Integration\\AuthControllerTest::testLoginFailsWithoutCredentials":0.013}}

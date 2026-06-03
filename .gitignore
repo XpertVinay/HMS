@@ -11,3 +11,7 @@ index.php
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# slim vendor
+api/vendor
+

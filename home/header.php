@@ -10,16 +10,18 @@ if (!isset($con)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Society Management System</title>
+    <title>Businzo RCMS</title>
     <!-- Modern Typography -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="home.css">
-    <link rel="shortcut icon" href="../Logo3.jpg">
+    <link rel="shortcut icon" href="../businzo_logo.png">
 </head>
 <body>
     <header class="main-header">
         <div class="nav-container">
-            <a href="home.php" class="logo-link">HMS System</a>
+            <a href="home.php" class="logo-link" style="display: flex; align-items: center;">
+                <img src="../businzo_logo.png" alt="Businzo Logo" style="height: 51px; object-fit: contain; background: rgba(255, 255, 255, 0.95); padding: 5px 12px; border-radius: 6px;">
+            </a>
             <ul class="nav-menu">
                 <li><a href="home.php">Home</a></li>
                 <li><a href="members.php">Members</a></li>
