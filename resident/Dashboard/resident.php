@@ -40,9 +40,9 @@ require_once("../../Includes/portal_sidebar.php");
     
     <div class="box">
         <div class="right-side">
-            <div class="box-topic">Unpaid Bills</div>
+            <div class="box-topic">Unpaid Maintenance</div>
             <?php
-                $sql = "SELECT * FROM billing where status=0";
+                $sql = "SELECT * FROM maintenance where status=0";
                 $rowcount = 0;
                 if ($result=mysqli_query($con,$sql)) {
                     $rowcount=mysqli_num_rows($result);

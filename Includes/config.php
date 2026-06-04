@@ -30,16 +30,36 @@ if (isset($_GET['org'])) {
     $subdomain = $_SESSION['dev_org'];
 }
 
-$org_stmt = $pdo->prepare("SELECT id, name, status FROM organizations WHERE subdomain = :subdomain LIMIT 1");
+$org_stmt = $pdo->prepare("SELECT id, name, status, logo_url, primary_color, secondary_color FROM organizations WHERE subdomain = :subdomain LIMIT 1");
 $org_stmt->execute([':subdomain' => $subdomain]);
 $active_org = $org_stmt->fetch();
 
 if (!$active_org) {
     // Fallback if not found (optional, could also show a 404 page)
-    $active_org = ['id' => 1, 'name' => 'Default RWA', 'status' => 'approved'];
+    $active_org = [
+        'id' => 1, 
+        'name' => 'Default RWA', 
+        'status' => 'approved',
+        'logo_url' => null,
+        'primary_color' => null,
+        'secondary_color' => null
+    ];
 }
 
 define('ACTIVE_ORG_ID', $active_org['id']);
 define('ACTIVE_ORG_NAME', $active_org['name']);
 define('ACTIVE_ORG_STATUS', $active_org['status']);
+
+// White-labeling constants with fallbacks to default Businzo brand
+$logo_path = '/businzo_logo.png';
+if (!empty($active_org['logo_url'])) {
+    if (strpos($active_org['logo_url'], 'http') === 0) {
+        $logo_path = $active_org['logo_url'];
+    } else {
+        $logo_path = '/uploads/logos/' . $active_org['logo_url'];
+    }
+}
+define('ACTIVE_ORG_LOGO', $logo_path);
+define('ACTIVE_ORG_PRIMARY_COLOR', !empty($active_org['primary_color']) ? $active_org['primary_color'] : '#4f46e5');
+define('ACTIVE_ORG_SECONDARY_COLOR', !empty($active_org['secondary_color']) ? $active_org['secondary_color'] : '#1d1b31');
 ?>

@@ -31,6 +31,15 @@ $username = $_SESSION['username'];
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <!-- Modern Portal CSS -->
     <link rel="stylesheet" href="/Includes/portal_style.css">
-    <link rel="shortcut icon" href="/Logo3.jpg">
+    <link rel="shortcut icon" href="<?php echo htmlspecialchars(ACTIVE_ORG_LOGO); ?>"/>
+    <style>
+        :root {
+            --primary-color: <?php echo htmlspecialchars(ACTIVE_ORG_PRIMARY_COLOR); ?>;
+            --secondary-color: <?php echo htmlspecialchars(ACTIVE_ORG_SECONDARY_COLOR); ?>;
+            /* Derive a darker variant for hover */
+            --primary-hover: color-mix(in srgb, var(--primary-color) 85%, black);
+            --bg-dark: var(--secondary-color);
+        }
+    </style>
 </head>
 <body>

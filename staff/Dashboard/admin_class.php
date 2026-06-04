@@ -23,12 +23,15 @@ Class Action {
 
 	function save_user(){
 		extract($_POST);
-		$data .= ", person_name = '$person_name' ";
-		$chk = $this->db->query("Select * from registry where person_name = '$person_name' and id !='$id' ")->num_rows;
-		if($chk > 0){
-			return 2;
-			exit;
-		}
+		$data = " visitor_name = '$visitor_name', visitor_contact = '$visitor_contact', host_id = '$host_id', purpose = '$purpose' ";
+        
+        if(isset($status) && !empty($status)) {
+            $data .= ", status = '$status' ";
+        }
+        if(isset($out_time) && !empty($out_time)) {
+            $data .= ", out_time = '$out_time' ";
+        }
+		
 		if(empty($id)){
 			$save = $this->db->query("INSERT INTO registry set ".$data);
 		}else{
@@ -38,6 +41,15 @@ Class Action {
 			return 1;
 		}
 	}
+    function update_status(){
+        extract($_POST);
+        $data = " status = '$status' ";
+        if ($status == 'Completed') {
+            $data .= ", out_time = NOW() ";
+        }
+        $update = $this->db->query("UPDATE registry set ".$data." where id = ".$id);
+        if($update) return 1;
+    }
 	function delete_user(){
 		extract($_POST);
 		$delete = $this->db->query("DELETE FROM registry where id = ".$id);

@@ -11,14 +11,14 @@ function isActive($page) {
 <div class="sidebar">
     <div class="logo-details">
         <a href="/home/home.php">
-            <i><img src="/businzo_logo.png" alt="logo" style="object-fit: contain; background: rgba(255, 255, 255, 0.95); padding: 5px 12px; border-radius: 6px;"></i>
+            <i><img src="<?php echo htmlspecialchars(ACTIVE_ORG_LOGO); ?>" alt="logo" style="max-height: 40px; width: auto; object-fit: contain; background: rgba(255, 255, 255, 0.95); padding: 5px 12px; border-radius: 6px;"></i>
         </a>
     </div>
     <ul class="nav-links">
         <?php if ($role == 'admin'): ?>
             <li><a href="/admin/Dashboard/admin.php" class="<?php echo isActive('Dashboard'); ?>"><i class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>
             <li><a href="/admin/Announcement/admin_annou.php" class="<?php echo isActive('Announcement'); ?>"><i class='bx bx-bell'></i><span class="links_name">Notices</span></a></li>
-            <li><a href="/admin/Bill/index.php" class="<?php echo isActive('Bill'); ?>"><i class='bx bx-pie-chart-alt-2'></i><span class="links_name">Bills</span></a></li>
+            <li><a href="/admin/Maintenance/index.php" class="<?php echo isActive('Maintenance'); ?>"><i class='bx bx-pie-chart-alt-2'></i><span class="links_name">Maintenance</span></a></li>
             <li><a href="/admin/Home_Services/home_ser.php" class="<?php echo isActive('Home_Services'); ?>"><i class='bx bxs-user-circle'></i><span class="links_name">Services</span></a></li>
             <li><a href="/admin/Neighbourhood/admin_neigh.php" class="<?php echo isActive('Neighbourhood'); ?>"><i class='bx bx-map'></i><span class="links_name">Neighbours</span></a></li>
             <li><a href="/admin/Members/index.php" class="<?php echo isActive('Members'); ?>"><i class='bx bx-list-ul'></i><span class="links_name">Members</span></a></li>
@@ -35,11 +35,12 @@ function isActive($page) {
         <?php elseif ($role == 'member'): ?>
             <li><a href="/members/Dashboard/member.php" class="<?php echo isActive('Dashboard'); ?>"><i class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>
             <li><a href="/members/Announcement/member_annou.php" class="<?php echo isActive('Announcement'); ?>"><i class='bx bx-bell'></i><span class="links_name">Notices</span></a></li>
-            <li><a href="/members/Bill/index.php" class="<?php echo isActive('Bill'); ?>"><i class='bx bx-pie-chart-alt-2'></i><span class="links_name">Bills</span></a></li>
+            <li><a href="/members/Maintenance/index.php" class="<?php echo isActive('Maintenance'); ?>"><i class='bx bx-pie-chart-alt-2'></i><span class="links_name">Maintenance</span></a></li>
             <li><a href="/members/Home_Services/home_ser.php" class="<?php echo isActive('Home_Services'); ?>"><i class='bx bxs-user-circle'></i><span class="links_name">Services</span></a></li>
             <li><a href="/members/Neighbourhood/member_neigh.php" class="<?php echo isActive('Neighbourhood'); ?>"><i class='bx bx-map'></i><span class="links_name">Neighbours</span></a></li>
             <li><a href="/members/Members/index.php" class="<?php echo isActive('Members'); ?>"><i class='bx bx-list-ul'></i><span class="links_name">Members</span></a></li>
             <li><a href="/members/Members/staff/index.php" class="<?php echo isActive('staff'); ?>"><i class='bx bx-list-ul'></i><span class="links_name">Staff</span></a></li>
+            <li><a href="/members/Registry/index.php" class="<?php echo isActive('Registry'); ?>"><i class='bx bx-id-card'></i><span class="links_name">Visitors</span></a></li>
             <li><a href="/members/Event_calender/member_event.php" class="<?php echo isActive('Event_calender'); ?>"><i class='bx bx-calendar-event'></i><span class="links_name">Events</span></a></li>
 
         <?php elseif ($role == 'staff'): ?>
@@ -47,6 +48,9 @@ function isActive($page) {
             <li><a href="/staff/Announcement/staff_annou.php" class="<?php echo isActive('Announcement'); ?>"><i class='bx bx-bell'></i><span class="links_name">Notices</span></a></li>
             <li><a href="/staff/Neighbourhood/staff_neigh.php" class="<?php echo isActive('Neighbourhood'); ?>"><i class='bx bx-map'></i><span class="links_name">Neighbours</span></a></li>
             <li><a href="/staff/Members/index.php" class="<?php echo isActive('Members'); ?>"><i class='bx bx-list-ul'></i><span class="links_name">Members</span></a></li>
+            <li><a href="/staff/Residents/index.php" class="<?php echo isActive('Residents'); ?>"><i class='bx bx-home-smile'></i><span class="links_name">Residents</span></a></li>
+            <li><a href="/staff/Vendors/index.php" class="<?php echo isActive('Vendors'); ?>"><i class='bx bx-store-alt'></i><span class="links_name">Vendors</span></a></li>
+            <li><a href="/staff/Dashboard/index.php?page=registrylist" class="<?php echo isActive('registrylist'); ?>"><i class='bx bx-id-card'></i><span class="links_name">Visitors</span></a></li>
             <li><a href="/staff/Event_calender/staff_event.php" class="<?php echo isActive('Event_calender'); ?>"><i class='bx bx-calendar-event'></i><span class="links_name">Events</span></a></li>
         <?php endif; ?>
         

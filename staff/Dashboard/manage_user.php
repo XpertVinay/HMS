@@ -14,9 +14,44 @@ foreach($registry->fetch_array() as $k =>$v){
 	<form action="" id="manage-user">	
 		<input type="hidden" name="id" value="<?php echo isset($meta['id']) ? $meta['id']: '' ?>">
 		<div class="form-group">
-			<label for="person_name">Person Name</label>
-			<input type="text" name="person_name" id="person_name" class="form-control" value="<?php echo isset($meta['person_name']) ? $meta['person_name']: '' ?>" required  autocomplete="off">
+			<label for="visitor_name">Visitor Name</label>
+			<input type="text" name="visitor_name" id="visitor_name" class="form-control" value="<?php echo isset($meta['visitor_name']) ? $meta['visitor_name']: '' ?>" required  autocomplete="off">
 		</div>
+		<div class="form-group">
+			<label for="visitor_contact">Contact Number</label>
+			<input type="text" name="visitor_contact" id="visitor_contact" class="form-control" value="<?php echo isset($meta['visitor_contact']) ? $meta['visitor_contact']: '' ?>" required  autocomplete="off">
+		</div>
+		<div class="form-group">
+			<label for="host_id">Host Resident</label>
+			<select name="host_id" id="host_id" class="custom-select select2" required>
+				<option value=""></option>
+				<?php
+				$members = $con->query("SELECT * FROM member order by username asc");
+				while($row=$members->fetch_assoc()):
+				?>
+				<option value="<?php echo $row['id'] ?>" <?php echo isset($meta['host_id']) && $meta['host_id'] == $row['id'] ? 'selected' : '' ?>><?php echo ucwords($row['username']) ?></option>
+				<?php endwhile; ?>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="purpose">Purpose of Visit</label>
+			<textarea name="purpose" id="purpose" class="form-control" required><?php echo isset($meta['purpose']) ? $meta['purpose']: '' ?></textarea>
+		</div>
+        <?php if(isset($meta['id'])): ?>
+		<div class="form-group">
+			<label for="status">Status</label>
+			<select name="status" id="status" class="custom-select">
+				<option value="Pending" <?php echo isset($meta['status']) && $meta['status'] == 'Pending' ? 'selected' : '' ?>>Pending</option>
+				<option value="Approved" <?php echo isset($meta['status']) && $meta['status'] == 'Approved' ? 'selected' : '' ?>>Approved</option>
+				<option value="Rejected" <?php echo isset($meta['status']) && $meta['status'] == 'Rejected' ? 'selected' : '' ?>>Rejected</option>
+				<option value="Completed" <?php echo isset($meta['status']) && $meta['status'] == 'Completed' ? 'selected' : '' ?>>Completed</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="out_time">Out Time (YYYY-MM-DD HH:MM:SS)</label>
+			<input type="text" name="out_time" id="out_time" class="form-control" value="<?php echo isset($meta['out_time']) ? $meta['out_time']: '' ?>" autocomplete="off" placeholder="Leave blank if not left yet">
+		</div>
+		<?php endif; ?>
 	</form>
 </div>
 <script>

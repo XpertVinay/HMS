@@ -19,13 +19,20 @@ if (!isset($con)) {
     <!-- Modern Typography -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="home.css">
-    <link rel="shortcut icon" href="../businzo_logo.png">
+    <link rel="shortcut icon" href="<?php echo htmlspecialchars(ACTIVE_ORG_LOGO); ?>">
+    <style>
+        :root {
+            --primary-color: <?php echo htmlspecialchars(ACTIVE_ORG_PRIMARY_COLOR); ?>;
+            --secondary-color: <?php echo htmlspecialchars(ACTIVE_ORG_SECONDARY_COLOR); ?>;
+            --primary-hover: color-mix(in srgb, var(--primary-color) 85%, black);
+        }
+    </style>
 </head>
 <body>
     <header class="main-header">
         <div class="nav-container">
             <a href="home.php" class="logo-link" style="display: flex; align-items: center;">
-                <img src="../businzo_logo.png" alt="Businzo Logo" style="height: 51px; object-fit: contain; background: rgba(255, 255, 255, 0.95); padding: 5px 12px; border-radius: 6px;">
+                <img src="<?php echo htmlspecialchars(ACTIVE_ORG_LOGO); ?>" alt="Organization Logo" style="height: 51px; object-fit: contain; background: rgba(255, 255, 255, 0.95); padding: 5px 12px; border-radius: 6px;">
             </a>
             <ul class="nav-menu">
                 <li><a href="home.php">Home</a></li>

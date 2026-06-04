@@ -16,7 +16,7 @@ class StaffController
 
         $pdo = Database::getInstance()->getPDO();
 
-        $query = "SELECT id, person_name, created_at FROM registry";
+        $query = "SELECT r.id, r.visitor_name, r.visitor_contact, r.purpose, r.status, r.created_at, r.out_time, m.username as host_name FROM registry r LEFT JOIN member m ON r.host_id = m.id";
         $params = [];
 
         if ($orgId) {
@@ -42,7 +42,10 @@ class StaffController
         $validator = new Validator;
 
         $validation = $validator->make($parsedBody ?? [], [
-            'person_name' => 'required|min:3'
+            'visitor_name' => 'required|min:3',
+            'host_id' => 'required|numeric',
+            'visitor_contact' => 'required',
+            'purpose' => 'required'
         ]);
         $validation->validate();
 
@@ -50,18 +53,21 @@ class StaffController
             return ResponseFormatter::error($response, 'Validation failed', $validation->errors()->toArray(), 422);
         }
 
-        $personName = $parsedBody['person_name'];
+        $visitorName = $parsedBody['visitor_name'];
+        $hostId = $parsedBody['host_id'];
+        $visitorContact = $parsedBody['visitor_contact'];
+        $purpose = $parsedBody['purpose'];
 
         $pdo = Database::getInstance()->getPDO();
 
         if ($orgId) {
-            $stmt = $pdo->prepare("INSERT INTO registry (person_name, organization_id) VALUES (?, ?)");
-            $stmt->execute([$personName, $orgId]);
+            $stmt = $pdo->prepare("INSERT INTO registry (visitor_name, host_id, visitor_contact, purpose, organization_id) VALUES (?, ?, ?, ?, ?)");
+            $stmt->execute([$visitorName, $hostId, $visitorContact, $purpose, $orgId]);
         } else {
-            $stmt = $pdo->prepare("INSERT INTO registry (person_name) VALUES (?)");
-            $stmt->execute([$personName]);
+            $stmt = $pdo->prepare("INSERT INTO registry (visitor_name, host_id, visitor_contact, purpose) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$visitorName, $hostId, $visitorContact, $purpose]);
         }
 
-        return ResponseFormatter::success($response, ['id' => $pdo->lastInsertId(), 'person_name' => $personName], "Visitor added successfully");
+        return ResponseFormatter::success($response, ['id' => $pdo->lastInsertId(), 'visitor_name' => $visitorName], "Visitor added successfully");
     }
 }

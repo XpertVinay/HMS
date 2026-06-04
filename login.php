@@ -36,13 +36,19 @@ if (isset($_COOKIE['last_login_role'])) {
     <title>Login | Businzo RCMS</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="login-theme.css">
-    <link rel="shortcut icon" href="businzo_logo.png"/>
+    <link rel="shortcut icon" href="<?php echo htmlspecialchars(ACTIVE_ORG_LOGO); ?>"/>
+    <style>
+        :root {
+            --primary-color: <?php echo htmlspecialchars(ACTIVE_ORG_PRIMARY_COLOR); ?>;
+            --secondary-color: <?php echo htmlspecialchars(ACTIVE_ORG_SECONDARY_COLOR); ?>;
+        }
+    </style>
 </head>
 <body class="<?php echo htmlspecialchars($theme_class); ?>">
     
     <div class="login-glass-card">
         <div style="text-align: center; margin-bottom: 1rem;">
-            <img src="businzo_logo.png" alt="Businzo Logo" style="height: 60px; object-fit: contain; background: rgba(255, 255, 255, 0.95); padding: 8px 16px; border-radius: 8px;">
+            <img src="<?php echo htmlspecialchars(ACTIVE_ORG_LOGO); ?>" alt="Organization Logo" style="max-height: 80px; width: auto; object-fit: contain; background: rgba(255, 255, 255, 0.95); padding: 8px 16px; border-radius: 8px;">
         </div>
         <p class="subtitle">Log in to the Communit Management Portal</p>
 

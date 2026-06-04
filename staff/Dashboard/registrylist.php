@@ -18,14 +18,18 @@
 				<tr>
 					<th class="text-center">#</th>
 					<th class="text-center">In Time</th>
-					<th class="text-center">Person Name</th>
+					<th class="text-center">Visitor Name</th>
+					<th class="text-center">Contact</th>
+					<th class="text-center">Host Resident</th>
+					<th class="text-center">Status</th>
+					<th class="text-center">Out Time</th>
 					<th class="text-center">Action</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php
  					// include ("../../Includes/config.php"); 
- 					$registry = $con->query("SELECT * FROM registry order by person_name asc");
+ 					$registry = $con->query("SELECT r.*, m.username as host_name FROM registry r LEFT JOIN member m ON r.host_id = m.id ORDER BY r.created_at DESC");
  					$i = 1;
  					while($row= $registry->fetch_assoc()):
 				 ?>
@@ -34,11 +38,30 @@
 				 		<?php echo $i++ ?>
 				 	</td>
 				 	<td>
-				 		<?php echo ucwords($row['created_at']) ?>
+				 		<?php echo date('M d, Y h:i A', strtotime($row['created_at'])) ?>
 				 	</td>
-				 	
 				 	<td>
-				 		<?php echo $row['person_name'] ?>
+				 		<?php echo ucwords($row['visitor_name']) ?>
+				 	</td>
+				 	<td>
+				 		<?php echo $row['visitor_contact'] ?>
+				 	</td>
+				 	<td>
+				 		<?php echo ucwords($row['host_name']) ?>
+				 	</td>
+				 	<td>
+                        <?php if($row['status'] == 'Pending'): ?>
+                            <span class="badge badge-warning">Pending</span>
+                        <?php elseif($row['status'] == 'Approved'): ?>
+                            <span class="badge badge-success">Approved</span>
+                        <?php elseif($row['status'] == 'Rejected'): ?>
+                            <span class="badge badge-danger">Rejected</span>
+                        <?php elseif($row['status'] == 'Completed'): ?>
+                            <span class="badge badge-secondary">Completed</span>
+                        <?php endif; ?>
+                    </td>
+				 	<td>
+				 		<?php echo $row['out_time'] ? date('M d, Y h:i A', strtotime($row['out_time'])) : 'N/A' ?>
 				 	</td>
 				 	<td>
 				 		<center>
@@ -49,6 +72,10 @@
 								  </button>
 								  <div class="dropdown-menu">
 								    <a class="dropdown-item edit_user" href="javascript:void(0)" data-id = '<?php echo $row['id'] ?>'>Edit</a>
+                                    <?php if($row['status'] == 'Approved'): ?>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item update_status" href="javascript:void(0)" data-id = '<?php echo $row['id'] ?>' data-status='Completed'>Mark Completed</a>
+                                    <?php endif; ?>
 								    <div class="dropdown-divider"></div>
 								    <a class="dropdown-item delete_user" href="javascript:void(0)" data-id = '<?php echo $row['id'] ?>'>Delete</a>
 								  </div>
@@ -88,6 +115,25 @@ $('.delete_user').click(function(){
 						location.reload()
 					},1500)
 
+				}
+			}
+		})
+	}
+	$('.update_status').click(function(){
+		_conf("Are you sure to mark this visit as "+$(this).attr('data-status')+"?","update_status",[$(this).attr('data-id'), "'"+$(this).attr('data-status')+"'"])
+	})
+	function update_status($id, $status){
+		start_load()
+		$.ajax({
+			url:'ajax.php?action=update_status',
+			method:'POST',
+			data:{id:$id, status:$status},
+			success:function(resp){
+				if(resp==1){
+					alert_toast("Status successfully updated",'success')
+					setTimeout(function(){
+						location.reload()
+					},1500)
 				}
 			}
 		})

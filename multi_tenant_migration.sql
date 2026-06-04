@@ -41,12 +41,12 @@ ALTER TABLE `staff` ADD COLUMN `organization_id` INT NOT NULL DEFAULT 1;
 ALTER TABLE `staff` ADD CONSTRAINT `fk_staff_org` FOREIGN KEY (`organization_id`) REFERENCES `organizations`(`id`) ON DELETE CASCADE;
 
 -- billing
-ALTER TABLE `billing` ADD COLUMN `organization_id` INT NOT NULL DEFAULT 1;
-ALTER TABLE `billing` ADD CONSTRAINT `fk_billing_org` FOREIGN KEY (`organization_id`) REFERENCES `organizations`(`id`) ON DELETE CASCADE;
+ALTER TABLE `maintenance` ADD COLUMN `organization_id` INT NOT NULL DEFAULT 1;
+ALTER TABLE `maintenance` ADD CONSTRAINT `fk_billing_org` FOREIGN KEY (`organization_id`) REFERENCES `organizations`(`id`) ON DELETE CASCADE;
 
 -- bills
-ALTER TABLE `bills` ADD COLUMN `organization_id` INT NOT NULL DEFAULT 1;
-ALTER TABLE `bills` ADD CONSTRAINT `fk_bills_org` FOREIGN KEY (`organization_id`) REFERENCES `organizations`(`id`) ON DELETE CASCADE;
+ALTER TABLE `maintenance_items` ADD COLUMN `organization_id` INT NOT NULL DEFAULT 1;
+ALTER TABLE `maintenance_items` ADD CONSTRAINT `fk_bills_org` FOREIGN KEY (`organization_id`) REFERENCES `organizations`(`id`) ON DELETE CASCADE;
 
 -- registry
 ALTER TABLE `registry` ADD COLUMN `organization_id` INT NOT NULL DEFAULT 1;

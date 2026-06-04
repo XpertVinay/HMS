@@ -32,7 +32,7 @@
         <div class="right-side">
             <div class="box-topic">Society fund</div>
             <?php
-                $query="SELECT SUM(amount_payed) as `societyfund` FROM billing WHERE organization_id = " . ACTIVE_ORG_ID;
+                $query="SELECT SUM(amount_payed) as `societyfund` FROM maintenance WHERE organization_id = " . ACTIVE_ORG_ID;
                 $res=mysqli_query($con, $query);
                 $data=mysqli_fetch_array($res);
             ?> 
@@ -42,9 +42,9 @@
     </div>
     <div class="box">
         <div class="right-side">
-            <div class="box-topic">Unpaid Bills</div>
+            <div class="box-topic">Unpaid Maintenance</div>
             <?php
-                $sql = "SELECT * FROM billing WHERE status=0 AND organization_id = " . ACTIVE_ORG_ID;
+                $sql = "SELECT * FROM maintenance WHERE status=0 AND organization_id = " . ACTIVE_ORG_ID;
                 if ($result=mysqli_query($con,$sql)) {
                     $rowcount=mysqli_num_rows($result);
                 }
@@ -52,6 +52,22 @@
             <div class="number"><?php echo $rowcount ?></div>
         </div>
         <i class='bx bxs-file icon file'></i>
+    </div>
+    <div class="box">
+        <div class="right-side">
+            <div class="box-topic">Amenity Bookings</div>
+            <div class="number">₹0.00</div>
+            <div style="font-size: 12px; color: #888;">(Coming Soon)</div>
+        </div>
+        <i class='bx bx-calendar-event icon file' style="background: #e2e3ff; color: #4e73df;"></i>
+    </div>
+    <div class="box">
+        <div class="right-side">
+            <div class="box-topic">Vendor Listings</div>
+            <div class="number">₹0.00</div>
+            <div style="font-size: 12px; color: #888;">(Coming Soon)</div>
+        </div>
+        <i class='bx bx-store-alt icon file' style="background: #e0f8e9; color: #1cc88a;"></i>
     </div>
 </div>
 
@@ -63,12 +79,12 @@
                 <tr>
                     <th>#</th>
                     <th>In Time</th>
-                    <th>Person Name</th>
+                    <th>Visitor Name</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                    $registry = $con->query("SELECT * FROM registry WHERE organization_id = " . ACTIVE_ORG_ID . " ORDER BY person_name ASC");
+                    $registry = $con->query("SELECT * FROM registry WHERE organization_id = " . ACTIVE_ORG_ID . " ORDER BY visitor_name ASC");
                     $i = 1;
                     if($registry && $registry->num_rows > 0) {
                         while($row= $registry->fetch_assoc()):
@@ -76,7 +92,7 @@
                 <tr>
                     <td><?php echo $i++ ?></td>
                     <td><?php echo ucwords($row['created_at']) ?></td>
-                    <td><?php echo htmlspecialchars($row['person_name']) ?></td>
+                    <td><?php echo htmlspecialchars($row['visitor_name']) ?></td>
                 </tr>
                 <?php 
                         endwhile; 

@@ -24,7 +24,7 @@ CREATE TABLE staff (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE `billing` (
+CREATE TABLE `maintenance` (
   `id` int(30) NOT NULL PRIMARY KEY,
   `billing_date` date NOT NULL DEFAULT current_timestamp(),
   `member_id` int(30) NOT NULL,
@@ -36,18 +36,18 @@ CREATE TABLE `billing` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `billing`
+-- Dumping data for table `maintenance`
 --
 
-INSERT INTO `billing` (`id`, `billing_date`, `member_id`, `status`, `total_amount`, `amount_payed`, `amount_change`, `invoice`) VALUES
+INSERT INTO `maintenance` (`id`, `billing_date`, `member_id`, `status`, `total_amount`, `amount_payed`, `amount_change`, `invoice`) VALUES
 (1, '2020-08-23', 2, 1, 9500, 10000, 500, ''),
 (2, '2020-08-23', 1, 1, 8500, 10000, 1500, ''),
 (3, '2020-09-23', 2, 0, 8000, 0, 0, ''),
 (5, '2020-09-01', 1, 0, 6500, 0, 0, '');
 
-CREATE TABLE `bills` (
+CREATE TABLE `maintenance_items` (
   `id` int(30) NOT NULL PRIMARY KEY,
-  `billing_id` int(30) NOT NULL ,
+  `maintenance_id` int(30) NOT NULL ,
   `type` tinyint(1) NOT NULL COMMENT '1= block rent, 2= electricity,3=water',
   `reading` int(30) NOT NULL,
   `consumption` int(30) NOT NULL,
@@ -59,10 +59,10 @@ CREATE TABLE `bills` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `bills`
+-- Dumping data for table `maintenance_items`
 --
 
-INSERT INTO `bills` (`id`, `billing_id`, `type`, `reading`, `consumption`, `rate`, `previous_reading`, `previous_consumption`, `amount`, `previous_amount`) VALUES
+INSERT INTO `maintenance_items` (`id`, `maintenance_id`, `type`, `reading`, `consumption`, `rate`, `previous_reading`, `previous_consumption`, `amount`, `previous_amount`) VALUES
 (1, 1, 1, 0, 0, 5000, 0, 0, 5000, 5000),
 (2, 1, 2, 100, 100, 15, 0, 0, 1500, 0),
 (3, 1, 3, 300, 300, 10, 0, 0, 3000, 0),

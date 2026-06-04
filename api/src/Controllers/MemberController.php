@@ -39,10 +39,10 @@ class MemberController
 
         $pdo = Database::getInstance()->getPDO();
 
-        // Join bills and billing categories
-        $query = "SELECT b.id, b.billing_id, bc.category_name, bc.amount, b.status, b.due_date, b.created_at 
-                  FROM bills b 
-                  LEFT JOIN billing bc ON b.billing_id = bc.id 
+        // Join maintenance_items and maintenance categories
+        $query = "SELECT b.id, b.maintenance_id, bc.category_name, bc.amount, b.status, b.due_date, b.created_at 
+                  FROM maintenance_items b 
+                  LEFT JOIN maintenance bc ON b.maintenance_id = bc.id 
                   WHERE b.member_id = ?";
         
         $params = [$user->user_id];

@@ -73,7 +73,7 @@ class AuthController
             'user' => [
                 'id' => $user['id'],
                 'role' => $role,
-                'name' => $user['name'] ?? $user['person_name'] ?? $user['username']
+                'name' => $user['name'] ?? $user['visitor_name'] ?? $user['username']
             ]
         ], "Login successful");
     }
