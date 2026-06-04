@@ -10,7 +10,7 @@ Class Action {
 
 	public function __construct() {
 		ob_start();
-   	include ("../../../Includes/config.php"); 
+		global $con;
     
     $this->db = $con;
 	}
@@ -25,8 +25,11 @@ Class Action {
 		extract($_POST);
 		$data = " email = '$email' ";
 		$data .= ", username = '$username' ";
+		if(isset($mobile_number)) $data .= ", mobile_number = '$mobile_number' ";
+		$verified = isset($is_id_verified) ? 1 : 0;
+		$data .= ", is_id_verified = '$verified' ";
 		if(!empty($password))
-		$data .= ", password = '($password)' ";
+		$data .= ", password = '".password_hash($password, PASSWORD_DEFAULT)."' ";
 		$chk = $this->db->query("Select * from staff where username = '$username' and id !='$id' ")->num_rows;
 		if($chk > 0){
 			return 2;

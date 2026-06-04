@@ -13,13 +13,16 @@
 	<div class="row">
 		<div class="card col-lg-12">
 			<div class="card-body">
-				<table class="table-striped table-bordered col-md-12">
+				<div class="d-flex justify-content-end mb-3">
+					<button class="btn btn-primary btn-sm" id="new_user" style="background-color: #0d6efd; border-color: #0d6efd;"><i class="fa fa-plus"></i> New Staff</button>
+				</div>
+				<table class="table table-striped table-bordered col-md-12">
 			<thead>
 				<tr>
 					<th class="text-center">#</th>
-					<th class="text-center">Email</th>
-					<th class="text-center">Username</th>
-					<!-- <th class="text-center">Action</th> -->
+					<th class="text-center">EMAIL</th>
+					<th class="text-center">USERNAME</th>
+					<th class="text-center">ACTION</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -43,8 +46,8 @@
 				 	<!-- <td>
 				 		<center>
 								<div class="btn-group">
-								  <button type="button" class="btn btn-primary">Action</button>
-								  <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								  <button type="button" class="btn btn-primary btn-sm" style="background-color: #0d6efd; border-color: #0d6efd;">Action</button>
+								  <button type="button" class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #0d6efd; border-color: #0d6efd;">
 								    <span class="sr-only">Toggle Dropdown</span>
 								  </button>
 								  <div class="dropdown-menu">
@@ -69,10 +72,10 @@
 $('#new_user').click(function(){
 	uni_modal('New Staff','manage_user.php')
 })
-$('.edit_user').click(function(){
+$('table').on('click', '.edit_user', function(){
 	uni_modal('Edit Staff','manage_user.php?id='+$(this).attr('data-id'))
 })
-$('.delete_user').click(function(){
+$('table').on('click', '.delete_user', function(){
 		_conf("Are you sure to delete this staff?","delete_user",[$(this).attr('data-id')])
 	})
 	function delete_user($id){

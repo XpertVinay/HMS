@@ -10,7 +10,7 @@ Class Action {
 
 	public function __construct() {
 		ob_start();
-   	include ("../../../Includes/config.php"); 
+		global $con;
     
     $this->db = $con;
 	}

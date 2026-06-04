@@ -22,6 +22,22 @@ foreach($staff->fetch_array() as $k =>$v){
 			<input type="text" name="username" id="username" class="form-control" value="<?php echo isset($meta['username']) ? $meta['username']: '' ?>" required  autocomplete="off">
 		</div>
 		<div class="form-group">
+			<label for="mobile_number">Mobile Number</label>
+			<input type="text" name="mobile_number" id="mobile_number" class="form-control" value="<?php echo isset($meta['mobile_number']) ? $meta['mobile_number']: '' ?>">
+		</div>
+        <?php if(isset($meta['employment_contract']) && !empty($meta['employment_contract'])): ?>
+            <div class="form-group">
+                <label>Employment Contract</label><br>
+                <a href="/uploads/<?php echo $meta['employment_contract']; ?>" target="_blank" class="btn btn-sm btn-info">View Document</a>
+            </div>
+        <?php endif; ?>
+        <div class="form-group">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="is_id_verified" name="is_id_verified" value="1" <?php echo (isset($meta['is_id_verified']) && $meta['is_id_verified']) ? 'checked' : ''; ?>>
+                <label class="custom-control-label" for="is_id_verified">Mark ID as Visually Verified (Admin Level)</label>
+            </div>
+        </div>
+		<div class="form-group">
 			<label for="password">Password</label>
 			<input type="password" name="password" id="password" class="form-control" value="" autocomplete="off">
 			<?php if(isset($meta['id'])): ?>

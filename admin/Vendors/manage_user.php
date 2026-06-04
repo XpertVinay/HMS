@@ -2,8 +2,8 @@
 include("../../Includes/config.php"); 
 session_start();
 if(isset($_GET['id'])){
-$member = $con->query("SELECT * FROM member where id =".$_GET['id']);
-foreach($member->fetch_array() as $k =>$v){
+$vendor = $con->query("SELECT * FROM vendor where id =".$_GET['id']);
+foreach($vendor->fetch_array() as $k =>$v){
 	$meta[$k] = $v;
 }
 }
@@ -18,29 +18,21 @@ foreach($member->fetch_array() as $k =>$v){
 			<input type="email" name="email" id="email" class="form-control" value="<?php echo isset($meta['email']) ? $meta['email']: '' ?>" required>
 		</div>
 		<div class="form-group">
-			<label for="username">Username</label>
-			<input type="text" name="username" id="username" class="form-control" value="<?php echo isset($meta['username']) ? $meta['username']: '' ?>" required  autocomplete="off">
+			<label for="business_name">Business Name</label>
+			<input type="text" name="business_name" id="business_name" class="form-control" value="<?php echo isset($meta['business_name']) ? $meta['business_name']: '' ?>" required  autocomplete="off">
 		</div>
-		<div class="form-group">
-			<label for="mobile_number">Mobile Number</label>
-			<input type="text" name="mobile_number" id="mobile_number" class="form-control" value="<?php echo isset($meta['mobile_number']) ? $meta['mobile_number']: (isset($meta['phone']) ? $meta['phone'] : '') ?>">
-		</div>
-		<div class="form-group">
-			<label for="address">Address</label>
-			<input type="text" name="address" id="address" class="form-control" value="<?php echo isset($meta['address']) ? $meta['address']: '' ?>">
-		</div>
-        <?php if(isset($meta['share_certificate']) && !empty($meta['share_certificate'])): ?>
+        <?php if(isset($meta['business_registration']) && !empty($meta['business_registration'])): ?>
             <div class="form-group">
-                <label>Share Certificate</label><br>
-                <a href="/uploads/<?php echo $meta['share_certificate']; ?>" target="_blank" class="btn btn-sm btn-info">View Document</a>
+                <label>Business Registration / Trade License</label><br>
+                <a href="/uploads/<?php echo $meta['business_registration']; ?>" target="_blank" class="btn btn-sm btn-info">View Document</a>
             </div>
         <?php endif; ?>
         <div class="form-group">
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="is_deed_verified_admin" name="is_deed_verified_admin" value="1" <?php echo (isset($meta['is_deed_verified_admin']) && $meta['is_deed_verified_admin']) ? 'checked' : ''; ?>>
-                <label class="custom-control-label" for="is_deed_verified_admin">Mark Deed as Visually Verified (Admin Level)</label>
+                <input type="checkbox" class="custom-control-input" id="is_gst_verified_admin" name="is_gst_verified_admin" value="1" <?php echo (isset($meta['is_gst_verified_admin']) && $meta['is_gst_verified_admin']) ? 'checked' : ''; ?>>
+                <label class="custom-control-label" for="is_gst_verified_admin">Mark GST as Visually Verified (Admin Level)</label>
             </div>
-            <?php if(isset($meta['is_deed_verified_staff']) && $meta['is_deed_verified_staff']): ?>
+            <?php if(isset($meta['is_gst_verified_staff']) && $meta['is_gst_verified_staff']): ?>
                 <small class="text-success"><i class='bx bx-check-circle'></i> Already verified by Staff</small>
             <?php else: ?>
                 <small class="text-warning"><i class='bx bx-time'></i> Pending Staff Verification</small>
@@ -75,10 +67,6 @@ foreach($member->fetch_array() as $k =>$v){
 						location.reload()
 					},1500)
 				}
-				// else{
-				// 	$('#msg').html('<div class="alert alert-danger">Username already exist</div>')
-				// 	end_load()
-				// }
 			}
 		})
 	})	

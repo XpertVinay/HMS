@@ -24,6 +24,9 @@ function isActive($page) {
             <li><a href="/admin/Members/index.php" class="<?php echo isActive('Members'); ?>"><i class='bx bx-list-ul'></i><span class="links_name">Members</span></a></li>
             <li><a href="/admin/SubAdmins/index.php" class="<?php echo isActive('SubAdmins'); ?>"><i class='bx bx-user-plus'></i><span class="links_name">Sub-Admins</span></a></li>
             <li><a href="/admin/Members/staff/index.php" class="<?php echo isActive('staff'); ?>"><i class='bx bx-list-ul'></i><span class="links_name">Staff</span></a></li>
+            <li><a href="/admin/Residents/index.php" class="<?php echo isActive('Residents'); ?>"><i class='bx bx-home-smile'></i><span class="links_name">Residents</span></a></li>
+            <li><a href="/admin/Vendors/index.php" class="<?php echo isActive('Vendors'); ?>"><i class='bx bx-store-alt'></i><span class="links_name">Vendors</span></a></li>
+            <li><a href="/admin/Properties/index.php" class="<?php echo isActive('Properties'); ?>"><i class='bx bx-building-house'></i><span class="links_name">Properties</span></a></li>
             <li><a href="/admin/Donors/index.php" class="<?php echo isActive('Donors'); ?>"><i class='bx bx-donate-heart'></i><span class="links_name">Donors</span></a></li>
             <li><a href="/admin/Sponsors/index.php" class="<?php echo isActive('Sponsors'); ?>"><i class='bx bx-star'></i><span class="links_name">Sponsors</span></a></li>
             <li><a href="/admin/Event_calender/admin_event.php" class="<?php echo isActive('Event_calender'); ?>"><i class='bx bx-calendar-event'></i><span class="links_name">Events</span></a></li>
@@ -48,7 +51,6 @@ function isActive($page) {
         <?php endif; ?>
         
 
-        <li class="log_out"><a href="/logout.php"><i class='bx bx-log-out'></i><span class="links_name">Log out</span></a></li>
     </ul>
 </div>
 
@@ -58,11 +60,28 @@ function isActive($page) {
             <i class='bx bx-menu sidebarBtn'></i>
             <span class="dashboard"><?php echo ucfirst($role); ?> Portal</span>
         </div>
-        <div class="profile-details" style="display:flex; align-items:center; gap:10px;">
+        <div class="profile-details dropdown" style="display:flex; align-items:center; gap:10px; cursor: pointer;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">
                 <?php echo strtoupper(substr($username, 0, 1)); ?>
             </div>
             <span class="admin_name" style="font-weight:600;"><?php echo htmlspecialchars($username); ?></span>
+            <i class='bx bx-chevron-down'></i>
+        </div>
+        <div class="dropdown-menu dropdown-menu-right shadow-sm" style="border:none; border-radius:8px;">
+            <?php 
+                $profile_dir = $role;
+                if($role == 'super_admin') $profile_dir = 'admin';
+                if($role == 'member') $profile_dir = 'members';
+            ?>
+            <a class="dropdown-item" href="/<?php echo $profile_dir; ?>/Profile/index.php"><i class='bx bx-user mr-2'></i>My Profile</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-danger" href="/logout.php"><i class='bx bx-log-out mr-2'></i>Logout</a>
         </div>
     </nav>
     <div class="home-content">
+        <!-- Main content will be rendered here -->
+    
+    <!-- Floating Chat Button -->
+    <a href="javascript:void(0)" class="floating-chat-btn">
+        <i class='bx bx-message-rounded-dots'></i>
+    </a>

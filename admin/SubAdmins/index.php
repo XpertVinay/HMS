@@ -56,12 +56,12 @@ $subadmins = $stmt->fetchAll();
 <div class="sales-boxes" style="flex-direction: column; padding: 20px;">
     
     <?php if(!empty($msg)): ?>
-        <div style="padding: 15px; margin-bottom: 20px; background: rgba(40,167,69,0.2); border: 1px solid rgba(40,167,69,0.5); color: #fff; border-radius: 8px;">
+        <div style="padding: 15px; margin-bottom: 20px; background: rgba(40,167,69,0.2); border: 1px solid rgba(40,167,69,0.5); border-radius: 8px;">
             <?php echo htmlspecialchars($msg); ?>
         </div>
     <?php endif; ?>
     <?php if(!empty($err)): ?>
-        <div style="padding: 15px; margin-bottom: 20px; background: rgba(220,53,69,0.2); border: 1px solid rgba(220,53,69,0.5); color: #fff; border-radius: 8px;">
+        <div style="padding: 15px; margin-bottom: 20px; background: rgba(220,53,69,0.2); border: 1px solid rgba(220,53,69,0.5); border-radius: 8px;">
             <?php echo htmlspecialchars($err); ?>
         </div>
     <?php endif; ?>
@@ -70,16 +70,16 @@ $subadmins = $stmt->fetchAll();
         <div class="box-title" style="margin-bottom: 15px;">Add New Sub-Admin</div>
         <form method="post" style="display: flex; gap: 15px; flex-wrap: wrap;">
             <div style="flex: 1; min-width: 200px;">
-                <input type="text" name="username" placeholder="Username" required style="width:100%; padding: 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: #fff;">
+                <input type="text" name="username" placeholder="Username" required style="width:100%; padding: 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: transparent;">
             </div>
             <div style="flex: 1; min-width: 200px;">
-                <input type="email" name="email" placeholder="Email" required style="width:100%; padding: 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: #fff;">
+                <input type="email" name="email" placeholder="Email" required style="width:100%; padding: 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: transparent;">
             </div>
             <div style="flex: 1; min-width: 200px;">
-                <input type="password" name="password" placeholder="Password" required style="width:100%; padding: 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: #fff;">
+                <input type="password" name="password" placeholder="Password" required style="width:100%; padding: 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: transparent;">
             </div>
             <div>
-                <button type="submit" name="add_subadmin" style="padding: 10px 20px; background: var(--primary-color, #4361ee); color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: 500;">Add Sub-Admin</button>
+                <button type="submit" name="add_subadmin" style="padding: 10px 20px; background: var(--primary-color, #4361ee); border: none; border-radius: 6px; cursor: pointer; font-weight: 500; color:#fff">Add Sub-Admin</button>
             </div>
         </form>
     </div>

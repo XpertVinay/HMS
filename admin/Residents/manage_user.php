@@ -2,8 +2,8 @@
 include("../../Includes/config.php"); 
 session_start();
 if(isset($_GET['id'])){
-$member = $con->query("SELECT * FROM member where id =".$_GET['id']);
-foreach($member->fetch_array() as $k =>$v){
+$resident = $con->query("SELECT * FROM resident where id =".$_GET['id']);
+foreach($resident->fetch_array() as $k =>$v){
 	$meta[$k] = $v;
 }
 }
@@ -23,24 +23,24 @@ foreach($member->fetch_array() as $k =>$v){
 		</div>
 		<div class="form-group">
 			<label for="mobile_number">Mobile Number</label>
-			<input type="text" name="mobile_number" id="mobile_number" class="form-control" value="<?php echo isset($meta['mobile_number']) ? $meta['mobile_number']: (isset($meta['phone']) ? $meta['phone'] : '') ?>">
+			<input type="text" name="mobile_number" id="mobile_number" class="form-control" value="<?php echo isset($meta['mobile_number']) ? $meta['mobile_number']: '' ?>">
 		</div>
 		<div class="form-group">
 			<label for="address">Address</label>
 			<input type="text" name="address" id="address" class="form-control" value="<?php echo isset($meta['address']) ? $meta['address']: '' ?>">
 		</div>
-        <?php if(isset($meta['share_certificate']) && !empty($meta['share_certificate'])): ?>
+        <?php if(isset($meta['owner_noc']) && !empty($meta['owner_noc'])): ?>
             <div class="form-group">
-                <label>Share Certificate</label><br>
-                <a href="/uploads/<?php echo $meta['share_certificate']; ?>" target="_blank" class="btn btn-sm btn-info">View Document</a>
+                <label>Owner NOC / Rent Agreement</label><br>
+                <a href="/uploads/<?php echo $meta['owner_noc']; ?>" target="_blank" class="btn btn-sm btn-info">View Document</a>
             </div>
         <?php endif; ?>
         <div class="form-group">
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="is_deed_verified_admin" name="is_deed_verified_admin" value="1" <?php echo (isset($meta['is_deed_verified_admin']) && $meta['is_deed_verified_admin']) ? 'checked' : ''; ?>>
-                <label class="custom-control-label" for="is_deed_verified_admin">Mark Deed as Visually Verified (Admin Level)</label>
+                <input type="checkbox" class="custom-control-input" id="is_rent_agreement_verified_admin" name="is_rent_agreement_verified_admin" value="1" <?php echo (isset($meta['is_rent_agreement_verified_admin']) && $meta['is_rent_agreement_verified_admin']) ? 'checked' : ''; ?>>
+                <label class="custom-control-label" for="is_rent_agreement_verified_admin">Mark Rent Agreement as Visually Verified (Admin Level)</label>
             </div>
-            <?php if(isset($meta['is_deed_verified_staff']) && $meta['is_deed_verified_staff']): ?>
+            <?php if(isset($meta['is_rent_agreement_verified_staff']) && $meta['is_rent_agreement_verified_staff']): ?>
                 <small class="text-success"><i class='bx bx-check-circle'></i> Already verified by Staff</small>
             <?php else: ?>
                 <small class="text-warning"><i class='bx bx-time'></i> Pending Staff Verification</small>
@@ -75,10 +75,6 @@ foreach($member->fetch_array() as $k =>$v){
 						location.reload()
 					},1500)
 				}
-				// else{
-				// 	$('#msg').html('<div class="alert alert-danger">Username already exist</div>')
-				// 	end_load()
-				// }
 			}
 		})
 	})	

@@ -19,7 +19,7 @@ if(!$logged && isset($_POST['username']) && isset($_POST['password'])) {
     $password = $_POST['password'];
     $pdo = Database::getInstance()->getPDO();
 
-    $tables = ['super_admin', 'member', 'admin', 'staff'];
+    $tables = ['super_admin', 'member', 'admin', 'staff', 'resident', 'vendor'];
     $user_found_but_invalid = false;
 
     foreach ($tables as $table) {
@@ -88,6 +88,12 @@ if(!$logged && isset($_POST['username']) && isset($_POST['password'])) {
                 } elseif ($table === 'super_admin') {
                     $_SESSION['aid'] = $user['id'];
                     header("Location:super_admin/Dashboard/index.php");
+                } elseif ($table === 'resident') {
+                    $_SESSION['rid'] = $user['id'];
+                    header("Location:resident/Dashboard/resident.php");
+                } elseif ($table === 'vendor') {
+                    $_SESSION['vid'] = $user['id'];
+                    header("Location:vendor/Dashboard/vendor.php");
                 }
                 exit();
             }

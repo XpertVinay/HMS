@@ -5,16 +5,10 @@
 <div class="container-fluid">
 	
 	<div class="row">
-	<div class="col-lg-12">
-			<button class="btn btn-primary float-right btn-sm" id="new_user"><i class="fa fa-plus"></i> New Staff</button>
-	</div>
-	</div>
-	<br>
-	<div class="row">
 		<div class="card col-lg-12">
 			<div class="card-body">
 				<div class="d-flex justify-content-end mb-3">
-					<button class="btn btn-primary btn-sm" id="new_user" style="background-color: #0d6efd; border-color: #0d6efd;"><i class="fa fa-plus"></i> New Staff</button>
+					<button class="btn btn-primary btn-sm" id="new_user" style="background-color: #0d6efd; border-color: #0d6efd;"><i class="fa fa-plus"></i> New resident</button>
 				</div>
 				<table class="table table-striped table-bordered col-md-12">
 			<thead>
@@ -28,9 +22,9 @@
 			<tbody>
 				<?php
  					// include ("../../Includes/config.php"); 
- 					$staff = $con->query("SELECT * FROM staff order by username asc");
+ 					$resident = $con->query("SELECT * FROM resident order by username asc");
  					$i = 1;
- 					while($row= $staff->fetch_assoc()):
+ 					while($row= $resident->fetch_assoc()):
 				 ?>
 				 <tr>
 				 	<td class="text-center">
@@ -70,13 +64,13 @@
 <script>
 	$('table').dataTable();
 $('#new_user').click(function(){
-	uni_modal('New Staff','manage_user.php')
+	uni_modal('New Resident','manage_user.php')
 })
-$('table').on('click', '.edit_user', function(){
-	uni_modal('Edit Staff','manage_user.php?id='+$(this).attr('data-id'))
+$('.edit_user').click(function(){
+	uni_modal('Edit Resident','manage_user.php?id='+$(this).attr('data-id'))
 })
-$('table').on('click', '.delete_user', function(){
-		_conf("Are you sure to delete this staff?","delete_user",[$(this).attr('data-id')])
+$('.delete_user').click(function(){
+		_conf("Are you sure to delete this resident?","delete_user",[$(this).attr('data-id')])
 	})
 	function delete_user($id){
 		start_load()
