@@ -20,10 +20,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Force HTTPS for all asset URLs to resolve Mixed Content issues
-        // without relying on fragile proxy headers that cause Bad Request errors.
-        if (str_contains(config('app.url'), 'https://')) {
-            \Illuminate\Support\Facades\URL::forceScheme('https');
-        } elseif (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+        // We use a direct host check to bypass all proxy header and .env issues
+        if (request()->getHost() !== 'localhost' && request()->getHost() !== '127.0.0.1') {
             \Illuminate\Support\Facades\URL::forceScheme('https');
         }
     }
