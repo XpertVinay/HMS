@@ -19,6 +19,7 @@ RUN a2enmod rewrite
 
 # Change Apache to listen on port 8080 and set DocumentRoot to public/
 RUN sed -i 's/80/8080/g' /etc/apache2/ports.conf \
+    && sed -i 's/\*:80/\*:8080/g' /etc/apache2/sites-available/000-default.conf \
     && sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf \
     && sed -i '/<\/VirtualHost>/i \    <Directory /var/www/html/public>\n        AllowOverride All\n        Require all granted\n    </Directory>' /etc/apache2/sites-available/000-default.conf
 
