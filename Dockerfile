@@ -28,9 +28,13 @@ COPY . /var/www/html/
 
 # Install dependencies
 WORKDIR /var/www/html
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+RUN composer install --optimize-autoloader --no-interaction
 
 # Set appropriate permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 EXPOSE 8080
+
+# Use the custom entrypoint script
+ENTRYPOINT ["/var/www/html/docker-entrypoint.sh"]
+CMD ["apache2-foreground"]

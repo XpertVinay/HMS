@@ -14,6 +14,8 @@ class AppVendor extends Authenticatable
 {
     protected $table = 'vendor';
 
+    const UPDATED_AT = null;
+
     protected $fillable = [
         'business_name',
         'email',
