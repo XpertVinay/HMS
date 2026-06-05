@@ -230,20 +230,6 @@ Route::prefix('staff')->middleware(['auth.session', 'role:staff'])->name('staff.
     Route::get('/solid-approvals', [\App\Http\Controllers\Staff\SolidApprovalController::class, 'index'])->name('solid.index');
     Route::post('/solid-approvals/{id}/approve', [\App\Http\Controllers\Staff\SolidApprovalController::class, 'approve'])->name('solid.approve');
     Route::post('/solid-approvals/{id}/reject', [\App\Http\Controllers\Staff\SolidApprovalController::class, 'reject'])->name('solid.reject');
-});
-
-/*
-|--------------------------------------------------------------------------
-| Super Admin Portal Routes
-|--------------------------------------------------------------------------
-*/
-
-Route::prefix('super-admin')->middleware(['auth.session', 'role:super_admin'])->name('super_admin.')->group(function () {
-    Route::get('/dashboard', [SuperAdminDashboard::class, 'index'])->name('dashboard');
-    Route::post('/organizations/{id}/approve', [SuperAdminDashboard::class, 'approveOrg'])->name('org.approve');
-    Route::post('/organizations/{id}/reject', [SuperAdminDashboard::class, 'rejectOrg'])->name('org.reject');
-});
-
     // Global Profile Routes (Dynamic for all roles)
     Route::get('/admin/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('admin.profile');
     Route::put('/admin/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('admin.profile.update');
@@ -260,4 +246,16 @@ Route::prefix('super-admin')->middleware(['auth.session', 'role:super_admin'])->
     Route::get('/vendor/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('vendor.profile');
     Route::put('/vendor/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('vendor.profile.update');
 
+});
+
+/*
+|--------------------------------------------------------------------------
+| Super Admin Portal Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('super-admin')->middleware(['auth.session', 'role:super_admin'])->name('super_admin.')->group(function () {
+    Route::get('/dashboard', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/organizations/{id}/approve', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'approveOrg'])->name('org.approve');
+    Route::post('/organizations/{id}/reject', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'rejectOrg'])->name('org.reject');
 });
