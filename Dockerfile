@@ -26,9 +26,16 @@ RUN sed -i 's/80/8080/g' /etc/apache2/ports.conf \
 # Copy project files
 COPY . /var/www/html/
 
-# Install dependencies
+# Install Node.js
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
+
+# Install PHP dependencies
 WORKDIR /var/www/html
 RUN composer install --optimize-autoloader --no-interaction
+
+# Install Node dependencies and build assets
+RUN npm install && npm run build
 
 # Set appropriate permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
