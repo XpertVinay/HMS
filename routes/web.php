@@ -230,7 +230,10 @@ Route::prefix('staff')->middleware(['auth.session', 'role:staff'])->name('staff.
     Route::get('/solid-approvals', [\App\Http\Controllers\Staff\SolidApprovalController::class, 'index'])->name('solid.index');
     Route::post('/solid-approvals/{id}/approve', [\App\Http\Controllers\Staff\SolidApprovalController::class, 'approve'])->name('solid.approve');
     Route::post('/solid-approvals/{id}/reject', [\App\Http\Controllers\Staff\SolidApprovalController::class, 'reject'])->name('solid.reject');
-    // Global Profile Routes (Dynamic for all roles)
+});
+
+// Global Profile Routes (Dynamic for all roles)
+Route::middleware(['auth.session'])->group(function () {
     Route::get('/admin/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('admin.profile');
     Route::put('/admin/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('admin.profile.update');
     
@@ -245,7 +248,6 @@ Route::prefix('staff')->middleware(['auth.session', 'role:staff'])->name('staff.
     
     Route::get('/vendor/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('vendor.profile');
     Route::put('/vendor/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('vendor.profile.update');
-
 });
 
 /*
