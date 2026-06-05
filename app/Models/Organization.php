@@ -18,6 +18,11 @@ class Organization extends Model
         'logo_url',
         'primary_color',
         'secondary_color',
+        'solid_sale_charge',
+        'solid_occupancy_charge',
+        'solid_lease_charge',
+        'solid_interior_charge',
+        'solid_decoration_charge',
     ];
 
     /**
@@ -92,6 +97,16 @@ class Organization extends Model
     public function tickets(): HasMany
     {
         return $this->hasMany(Ticket::class, 'organization_id');
+    }
+
+    public function communityPosts(): HasMany
+    {
+        return $this->hasMany(CommunityPost::class, 'organization_id');
+    }
+
+    public function solidApprovals(): HasMany
+    {
+        return $this->hasMany(SolidApproval::class, 'organization_id');
     }
 
     /* ── Accessors ─────────────────────────────────── */

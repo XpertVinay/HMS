@@ -5,9 +5,12 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Traits\TenantScoped;
 
 class Resident extends Authenticatable
 {
+    use TenantScoped;
+
     protected $table = 'resident';
 
     protected $fillable = [

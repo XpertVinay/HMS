@@ -1,17 +1,35 @@
-@extends('layouts.auth')
+@extends('layouts.public')
 @section('title', 'Sponsors')
 @section('content')
-<div style="max-width: 700px; width: 100%; padding: 40px 20px;">
-    <h1 style="color: #fff; font-size: 28px; font-weight: 800; margin-bottom: 24px; text-align: center;">Our Sponsors</h1>
-    @forelse($sponsors as $sponsor)
-    <div style="background: rgba(255,255,255,0.08); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 16px; margin-bottom: 12px;">
-        <h3 style="color: #fff; font-size: 16px;">{{ $sponsor->name }}</h3>
-        @if($sponsor->description)<p style="color: rgba(255,255,255,0.7); font-size: 13px; margin-top: 6px;">{{ $sponsor->description }}</p>@endif
-        @if($sponsor->website_url)<a href="{{ $sponsor->website_url }}" target="_blank" style="color: #a0b4ff; font-size: 12px;">{{ $sponsor->website_url }}</a>@endif
+<div class="container mx-auto px-4 max-w-7xl py-12">
+    <div class="text-center mb-16">
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-4">Our Sponsors</h1>
+        <p class="text-lg text-gray-600">The brands that help make our community great</p>
     </div>
-    @empty
-    <p style="color: rgba(255,255,255,0.6); text-align: center;">No sponsors yet.</p>
-    @endforelse
-    <div class="glass-links" style="margin-top: 20px;"><a href="{{ route('home') }}">← Back to Home</a></div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        @forelse($sponsors as $sponsor)
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 p-6 flex flex-col items-center text-center group">
+            @if($sponsor->logo)
+            <img src="{{ Storage::url($sponsor->logo) }}" alt="{{ $sponsor->name }}" class="h-20 w-auto mb-4 object-contain group-hover:scale-105 transition-transform">
+            @else
+            <div class="w-20 h-20 mb-4 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-300 group-hover:scale-105 transition-transform">
+                <i class='bx bx-store-alt text-3xl'></i>
+            </div>
+            @endif
+            <h3 class="text-lg font-bold text-gray-900">{{ $sponsor->name }}</h3>
+            @if($sponsor->website)
+            <a href="{{ $sponsor->website }}" target="_blank" class="text-[var(--primary)] text-sm mt-2 font-medium hover:underline inline-flex items-center gap-1">
+                Visit Website <i class='bx bx-link-external'></i>
+            </a>
+            @endif
+        </div>
+        @empty
+        <div class="col-span-full text-center py-16 bg-white rounded-2xl shadow-sm border border-gray-100 border-dashed">
+            <i class='bx bx-building-house text-5xl text-gray-300 mb-4'></i>
+            <p class="text-gray-500 text-lg">No sponsors listed yet.</p>
+        </div>
+        @endforelse
+    </div>
 </div>
 @endsection

@@ -1,6 +1,7 @@
 @php
     $role = session('account', 'member');
     $username = session('username', 'User');
+    $displayName = session('display_name', $username);
 @endphp
 
 <nav>
@@ -9,14 +10,18 @@
         <span class="dashboard">{{ ucfirst($role) }} Portal</span>
     </div>
     <div class="profile-details dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <div class="avatar">{{ strtoupper(substr($username, 0, 1)) }}</div>
-        <span class="admin_name">{{ $username }}</span>
+        <div class="avatar">{{ strtoupper(substr($displayName, 0, 1)) }}</div>
+        <span class="admin_name">{{ $displayName }}</span>
         <i class='bx bx-chevron-down'></i>
     </div>
     <div class="dropdown-menu dropdown-menu-right shadow-sm" style="border:none; border-radius:8px;">
         @php
             $profileRoute = match($role) {
                 'admin', 'super_admin' => route('admin.profile'),
+                'staff' => route('staff.profile'),
+                'member' => route('member.profile'),
+                'resident' => route('resident.profile'),
+                'vendor' => route('vendor.profile'),
                 default => '#',
             };
         @endphp

@@ -4,60 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Login') | {{ $activeOrg->name ?? 'Businzo RCMS' }}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="{{ $activeOrg->resolved_logo ?? '/assets/images/businzo_logo.png' }}">
+    
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
     <style>
         :root {
-            --primary-color: {{ $activeOrg->resolved_primary_color ?? '#4f46e5' }};
-            --secondary-color: {{ $activeOrg->resolved_secondary_color ?? '#1d1b31' }};
+            --primary: {{ $activeOrg->resolved_primary_color ?? '#4f46e5' }};
+            --secondary: {{ $activeOrg->resolved_secondary_color ?? '#1d1b31' }};
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body {
-            min-height: 100vh; display: flex; align-items: center; justify-content: center;
-            background: linear-gradient(135deg, var(--secondary-color) 0%, #2d2b55 50%, var(--primary-color) 100%);
-        }
-        .login-glass-card {
-            background: rgba(255,255,255,0.08); backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.15); border-radius: 20px;
-            padding: 40px; width: 100%; max-width: 420px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        }
-        .login-glass-card .subtitle {
-            color: rgba(255,255,255,0.7); text-align: center;
-            font-size: 14px; margin-bottom: 24px;
-        }
-        .glass-input-group { margin-bottom: 16px; }
-        .glass-input {
-            width: 100%; padding: 14px 18px; border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 12px; background: rgba(255,255,255,0.06);
-            color: #fff; font-size: 14px; outline: none;
-            transition: border-color 0.3s;
-        }
-        .glass-input::placeholder { color: rgba(255,255,255,0.4); }
-        .glass-input:focus { border-color: var(--primary-color); }
-        .glass-btn {
-            width: 100%; padding: 14px; border: none; border-radius: 12px;
-            background: var(--primary-color); color: #fff;
-            font-size: 15px; font-weight: 600; cursor: pointer;
-            transition: all 0.3s ease; margin-top: 8px;
-        }
-        .glass-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-        .glass-alert {
-            background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.3);
-            color: #ff6b6b; padding: 10px 14px; border-radius: 10px;
-            font-size: 13px; margin-bottom: 16px; text-align: center;
-        }
-        .glass-success {
-            background: rgba(39,174,96,0.15); border: 1px solid rgba(39,174,96,0.3);
-            color: #6bffb0; padding: 10px 14px; border-radius: 10px;
-            font-size: 13px; margin-bottom: 16px; text-align: center;
-        }
-        .glass-links { text-align: center; margin-top: 16px; }
-        .glass-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 13px; }
-        .glass-links a:hover { color: #fff; }
     </style>
 </head>
-<body class="@yield('theme-class', 'theme-member')">
-    @yield('content')
+<body class="min-h-screen relative flex items-center justify-center font-sans text-white antialiased overflow-x-hidden @yield('theme-class', '') bg-[var(--secondary)]">
+    <!-- Dynamic Mesh/Gradient Background -->
+    <div class="absolute inset-0 z-0 pointer-events-none">
+        <div class="absolute top-0 left-0 w-full h-full opacity-60 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[var(--primary)] via-[var(--secondary)] to-[var(--secondary)]"></div>
+        <div class="absolute bottom-0 right-0 w-3/4 h-3/4 opacity-40 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-purple-500/30 via-transparent to-transparent"></div>
+    </div>
+    
+    <!-- Decorative Floating Orbs -->
+    <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-[var(--primary)] rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-pulse pointer-events-none"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-purple-500 rounded-full mix-blend-screen filter blur-[120px] opacity-20 pointer-events-none" style="animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;"></div>
+
+    <div class="relative z-10 w-full px-4 py-8 flex justify-center">
+        @yield('content')
+    </div>
 </body>
 </html>

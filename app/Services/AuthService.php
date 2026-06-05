@@ -146,9 +146,12 @@ class AuthService
      */
     private function setSession($user, string $role, array $config, int $orgId): void
     {
+        $displayName = $user->name ?? $user->contact_name ?? $user->business_name ?? $user->username ?? 'User';
+        
         session([
             'logged' => true,
             'username' => $user->username ?? $user->business_name ?? '',
+            'display_name' => $displayName,
             'account' => $role,
             $config['id_key'] => $user->id,
         ]);

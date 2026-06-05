@@ -5,9 +5,12 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Traits\TenantScoped;
 
 class Member extends Authenticatable
 {
+    use TenantScoped;
+
     protected $table = 'member';
 
     protected $fillable = [
@@ -52,5 +55,15 @@ class Member extends Authenticatable
     public function tickets(): HasMany
     {
         return $this->hasMany(Ticket::class, 'member_id');
+    }
+
+    public function communityPosts(): HasMany
+    {
+        return $this->hasMany(CommunityPost::class, 'member_id');
+    }
+
+    public function solidApprovals(): HasMany
+    {
+        return $this->hasMany(SolidApproval::class, 'member_id');
     }
 }

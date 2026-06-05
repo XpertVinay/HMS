@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -6,6 +7,26 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Outfit', 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-outfit: 'Outfit', sans-serif;
+    --font-inter: 'Inter', sans-serif;
+    
+    --color-primary: var(--primary);
+    --color-secondary: var(--secondary);
+}
+
+/* Base custom styles to support glassmorphism and animations */
+@layer utilities {
+    .glass-card {
+        @apply bg-white/10 backdrop-blur-lg border border-white/20 shadow-xl;
+    }
+    .glass-input {
+        @apply w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 text-white placeholder-white/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all;
+    }
+    .glass-btn {
+        @apply w-full px-4 py-3 rounded-xl bg-primary text-white font-semibold hover:opacity-90 hover:-translate-y-0.5 transition-all shadow-lg;
+    }
+    .text-gradient {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-400;
+    }
 }

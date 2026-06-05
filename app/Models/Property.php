@@ -5,16 +5,31 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+use App\Traits\TenantScoped;
+
 class Property extends Model
 {
+    use TenantScoped;
+
     protected $table = 'property';
 
     protected $fillable = [
-        'address',
+        'unit_number',
+        'street_area',
+        'locality_village',
+        'city_town',
+        'district',
+        'state',
+        'pincode',
+        'address_metadata',
         'type',
         'owner_id',
         'organization_id',
         'resident_id',
+    ];
+
+    protected $casts = [
+        'address_metadata' => 'array',
     ];
 
     public function organization(): BelongsTo

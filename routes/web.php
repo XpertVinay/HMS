@@ -45,6 +45,7 @@ use App\Http\Controllers\SuperAdmin\DashboardController as SuperAdminDashboard;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/members', [HomeController::class, 'members'])->name('home.members');
 Route::get('/events', [HomeController::class, 'events'])->name('home.events');
 Route::get('/gallery', [HomeController::class, 'gallery'])->name('home.gallery');
 Route::get('/donors', [HomeController::class, 'donors'])->name('home.donors');
@@ -71,6 +72,11 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 
 Route::prefix('admin')->middleware(['auth.session', 'role:admin'])->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard');
+
+    // Vendor Approvals
+    Route::get('/vendors/approvals', [\App\Http\Controllers\Admin\VendorApprovalController::class, 'index'])->name('vendors.approvals.index');
+    Route::post('/vendors/approvals/{id}/approve', [\App\Http\Controllers\Admin\VendorApprovalController::class, 'approve'])->name('vendors.approvals.approve');
+    Route::post('/vendors/approvals/{id}/reject', [\App\Http\Controllers\Admin\VendorApprovalController::class, 'reject'])->name('vendors.approvals.reject');
 
     // Announcements
     Route::get('/announcements', [AdminAnnouncement::class, 'index'])->name('announcements.index');
@@ -124,8 +130,19 @@ Route::prefix('admin')->middleware(['auth.session', 'role:admin'])->name('admin.
     Route::post('/helpdesk/{id}/respond', [AdminHelpdesk::class, 'respond'])->name('helpdesk.respond');
 
     // Profile
-    Route::get('/profile', [AdminProfile::class, 'index'])->name('profile');
-    Route::put('/profile', [AdminProfile::class, 'update'])->name('profile.update');
+    // Profile Routes have been moved to global level
+
+    // Community Network Approvals (Stage 2)
+    Route::get('/community-approvals', [\App\Http\Controllers\Admin\CommunityApprovalController::class, 'index'])->name('community.approvals');
+    Route::post('/community-approvals/{id}/approve', [\App\Http\Controllers\Admin\CommunityApprovalController::class, 'approve'])->name('community.approve');
+    Route::post('/community-approvals/{id}/reject', [\App\Http\Controllers\Admin\CommunityApprovalController::class, 'reject'])->name('community.reject');
+
+    // SOLID Approvals & Settings (Stage 2)
+    Route::get('/solid-approvals', [\App\Http\Controllers\Admin\SolidApprovalController::class, 'index'])->name('solid.index');
+    Route::post('/solid-approvals/{id}/approve', [\App\Http\Controllers\Admin\SolidApprovalController::class, 'approve'])->name('solid.approve');
+    Route::post('/solid-approvals/{id}/reject', [\App\Http\Controllers\Admin\SolidApprovalController::class, 'reject'])->name('solid.reject');
+    Route::get('/solid-settings', [\App\Http\Controllers\Admin\SolidApprovalController::class, 'settings'])->name('solid.settings');
+    Route::put('/solid-settings', [\App\Http\Controllers\Admin\SolidApprovalController::class, 'updateSettings'])->name('solid.settings.update');
 });
 
 /*
@@ -135,7 +152,11 @@ Route::prefix('admin')->middleware(['auth.session', 'role:admin'])->name('admin.
 */
 
 Route::prefix('member')->middleware(['auth.session', 'role:member'])->name('member.')->group(function () {
-    Route::get('/dashboard', [MemberDashboard::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [\App\Http\Controllers\Member\DashboardController::class, 'index'])->name('dashboard');
+    
+    // Vendor Voting
+    Route::get('/vendors/vote', [\App\Http\Controllers\Member\VendorVoteController::class, 'index'])->name('vendors.vote.index');
+    Route::post('/vendors/vote/{id}', [\App\Http\Controllers\Member\VendorVoteController::class, 'castVote'])->name('vendors.vote.cast');
     Route::get('/announcements', [MemberAnnouncement::class, 'index'])->name('announcements.index');
 
     Route::get('/maintenance', [MemberMaintenance::class, 'index'])->name('maintenance.index');
@@ -145,6 +166,17 @@ Route::prefix('member')->middleware(['auth.session', 'role:member'])->name('memb
     Route::get('/helpdesk/create', [MemberHelpdesk::class, 'create'])->name('helpdesk.create');
     Route::post('/helpdesk', [MemberHelpdesk::class, 'store'])->name('helpdesk.store');
     Route::get('/helpdesk/{id}', [MemberHelpdesk::class, 'show'])->name('helpdesk.show');
+
+    // Community Network
+    Route::get('/community', [\App\Http\Controllers\Member\CommunityFeedController::class, 'index'])->name('community.feed');
+    Route::get('/community/create', [\App\Http\Controllers\Member\CommunityFeedController::class, 'create'])->name('community.create');
+    Route::post('/community', [\App\Http\Controllers\Member\CommunityFeedController::class, 'store'])->name('community.store');
+    Route::get('/community/my-posts', [\App\Http\Controllers\Member\CommunityFeedController::class, 'myPosts'])->name('community.my_posts');
+
+    // SOLID Approvals
+    Route::get('/solid-approvals', [\App\Http\Controllers\Member\SolidApprovalController::class, 'index'])->name('solid.index');
+    Route::get('/solid-approvals/create', [\App\Http\Controllers\Member\SolidApprovalController::class, 'create'])->name('solid.create');
+    Route::post('/solid-approvals', [\App\Http\Controllers\Member\SolidApprovalController::class, 'store'])->name('solid.store');
 });
 
 /*
@@ -155,6 +187,49 @@ Route::prefix('member')->middleware(['auth.session', 'role:member'])->name('memb
 
 Route::prefix('staff')->middleware(['auth.session', 'role:staff'])->name('staff.')->group(function () {
     Route::get('/dashboard', [StaffDashboard::class, 'index'])->name('dashboard');
+
+    // Vendor Proposal
+    Route::get('/vendors/alignments', [\App\Http\Controllers\Staff\VendorAlignmentController::class, 'index'])->name('vendors.alignments.index');
+    Route::post('/vendors/alignments/propose', [\App\Http\Controllers\Staff\VendorAlignmentController::class, 'propose'])->name('vendors.alignments.propose');
+    Route::post('/vendors/alignments/{id}/start-voting', [\App\Http\Controllers\Staff\VendorAlignmentController::class, 'startVoting'])->name('vendors.alignments.start_voting');
+
+    // Helpdesk & Tickets Management (Staff CRUD)
+    Route::get('/helpdesk', [\App\Http\Controllers\Staff\HelpdeskController::class, 'index'])->name('helpdesk.index');
+    Route::get('/helpdesk/{id}/edit', [\App\Http\Controllers\Staff\HelpdeskController::class, 'edit'])->name('helpdesk.edit');
+    Route::put('/helpdesk/{id}', [\App\Http\Controllers\Staff\HelpdeskController::class, 'update'])->name('helpdesk.update');
+    
+    // Properties & Units Management
+    Route::get('/properties', [\App\Http\Controllers\Staff\PropertyController::class, 'index'])->name('properties.index');
+    Route::get('/properties/create', [\App\Http\Controllers\Staff\PropertyController::class, 'create'])->name('properties.create');
+    Route::post('/properties', [\App\Http\Controllers\Staff\PropertyController::class, 'store'])->name('properties.store');
+    Route::get('/properties/{id}/edit', [\App\Http\Controllers\Staff\PropertyController::class, 'edit'])->name('properties.edit');
+    Route::put('/properties/{id}', [\App\Http\Controllers\Staff\PropertyController::class, 'update'])->name('properties.update');
+    Route::get('/properties/bulk-upload', [\App\Http\Controllers\Staff\PropertyController::class, 'bulkUploadForm'])->name('properties.bulk_upload');
+    Route::post('/properties/bulk-upload', [\App\Http\Controllers\Staff\PropertyController::class, 'processBulkUpload'])->name('properties.process_bulk_upload');
+
+    // Members Management
+    Route::get('/members', [\App\Http\Controllers\Staff\MemberController::class, 'index'])->name('members.index');
+    Route::get('/members/create', [\App\Http\Controllers\Staff\MemberController::class, 'create'])->name('members.create');
+    Route::post('/members', [\App\Http\Controllers\Staff\MemberController::class, 'store'])->name('members.store');
+    Route::get('/members/{id}/edit', [\App\Http\Controllers\Staff\MemberController::class, 'edit'])->name('members.edit');
+    Route::put('/members/{id}', [\App\Http\Controllers\Staff\MemberController::class, 'update'])->name('members.update');
+
+    // Residents (Tenants) Management
+    Route::get('/residents', [\App\Http\Controllers\Staff\ResidentController::class, 'index'])->name('residents.index');
+    Route::get('/residents/create', [\App\Http\Controllers\Staff\ResidentController::class, 'create'])->name('residents.create');
+    Route::post('/residents', [\App\Http\Controllers\Staff\ResidentController::class, 'store'])->name('residents.store');
+    Route::get('/residents/{id}/edit', [\App\Http\Controllers\Staff\ResidentController::class, 'edit'])->name('residents.edit');
+    Route::put('/residents/{id}', [\App\Http\Controllers\Staff\ResidentController::class, 'update'])->name('residents.update');
+
+    // Community Network Moderation (Stage 1)
+    Route::get('/community-moderation', [\App\Http\Controllers\Staff\CommunityModerationController::class, 'index'])->name('community.moderation');
+    Route::post('/community-moderation/{id}/approve', [\App\Http\Controllers\Staff\CommunityModerationController::class, 'approve'])->name('community.approve');
+    Route::post('/community-moderation/{id}/reject', [\App\Http\Controllers\Staff\CommunityModerationController::class, 'reject'])->name('community.reject');
+
+    // SOLID Approvals Verification (Stage 1)
+    Route::get('/solid-approvals', [\App\Http\Controllers\Staff\SolidApprovalController::class, 'index'])->name('solid.index');
+    Route::post('/solid-approvals/{id}/approve', [\App\Http\Controllers\Staff\SolidApprovalController::class, 'approve'])->name('solid.approve');
+    Route::post('/solid-approvals/{id}/reject', [\App\Http\Controllers\Staff\SolidApprovalController::class, 'reject'])->name('solid.reject');
 });
 
 /*
@@ -167,4 +242,22 @@ Route::prefix('super-admin')->middleware(['auth.session', 'role:super_admin'])->
     Route::get('/dashboard', [SuperAdminDashboard::class, 'index'])->name('dashboard');
     Route::post('/organizations/{id}/approve', [SuperAdminDashboard::class, 'approveOrg'])->name('org.approve');
     Route::post('/organizations/{id}/reject', [SuperAdminDashboard::class, 'rejectOrg'])->name('org.reject');
+});
+
+    // Global Profile Routes (Dynamic for all roles)
+    Route::get('/admin/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('admin.profile');
+    Route::put('/admin/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('admin.profile.update');
+    
+    Route::get('/staff/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('staff.profile');
+    Route::put('/staff/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('staff.profile.update');
+    
+    Route::get('/member/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('member.profile');
+    Route::put('/member/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('member.profile.update');
+    
+    Route::get('/resident/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('resident.profile');
+    Route::put('/resident/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('resident.profile.update');
+    
+    Route::get('/vendor/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('vendor.profile');
+    Route::put('/vendor/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('vendor.profile.update');
+
 });

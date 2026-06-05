@@ -5,8 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+use App\Traits\TenantScoped;
+
 class VendorInvoice extends Model
 {
+    use TenantScoped;
+
     protected $table = 'vendor_invoice';
 
     protected $fillable = [

@@ -7,8 +7,8 @@
 </div>
 <div class="sales-boxes" style="grid-template-columns: 1fr;"><div class="box">
     <table class="data-table"><thead><tr><th>#</th><th>Address</th><th>Type</th><th>Owner</th><th>Resident</th><th>Actions</th></tr></thead><tbody>
-    @forelse($properties as $i => $p)<tr><td>{{ $i+1 }}</td><td>{{ Str::limit($p->address,30) }}</td><td>{{ $p->type }}</td><td>{{ $p->owner->username ?? '-' }}</td><td>{{ $p->resident->username ?? '-' }}</td><td><a href="{{ route('admin.properties.edit', $p->id) }}" class="btn-modern btn-sm btn-outline">Edit</a> <form action="{{ route('admin.properties.destroy', $p->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Delete?');">@csrf @method('DELETE')<button type="submit" class="btn-modern btn-sm btn-danger">Delete</button></form></td></tr>
-    @empty <tr><td colspan="6">No properties.</td></tr> @endforelse
+    @forelse($properties as $i => $p)<tr><td>{{ $i+1 }}</td><td>{{ Str::limit(trim($p->unit_number . ' ' . $p->street_area . ' ' . $p->locality_village), 40) }}</td><td><span class="capitalize">{{ $p->type }}</span></td><td>{{ $p->owner->username ?? '-' }}</td><td>{{ $p->resident->username ?? '-' }}</td><td><a href="{{ route('admin.properties.edit', $p->id) }}" class="btn-modern btn-sm btn-outline"><i class='bx bx-edit'></i></a> <form action="{{ route('admin.properties.destroy', $p->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Delete?');">@csrf @method('DELETE')<button type="submit" class="btn-modern btn-sm btn-danger"><i class='bx bx-trash'></i></button></form></td></tr>
+    @empty <tr><td colspan="6" class="text-center">No properties added yet.</td></tr> @endforelse
     </tbody></table>
 </div></div>
 @endsection

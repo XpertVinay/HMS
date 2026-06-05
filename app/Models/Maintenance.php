@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+use App\Traits\TenantScoped;
+
 class Maintenance extends Model
 {
+    use TenantScoped;
+
     protected $table = 'maintenance';
     public $timestamps = false;
 

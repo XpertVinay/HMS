@@ -41,6 +41,15 @@ class HomeController extends Controller
         return view('home.events', compact('events'));
     }
 
+    public function members()
+    {
+        $members = Member::where('organization_id', $this->orgId())
+            ->orderBy('username', 'asc')
+            ->get();
+
+        return view('home.members', compact('members'));
+    }
+
     public function gallery()
     {
         $galleries = Gallery::where('organization_id', $this->orgId())
