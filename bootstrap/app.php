@@ -16,9 +16,6 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         // Global middleware — runs on every web request
         $middleware->append(ResolveOrganization::class);
-        
-        // Trust all proxies for VPS deployments to respect HTTPS
-        $middleware->trustProxies(at: '*');
 
         // Named middleware aliases for use in routes
         $middleware->alias([
