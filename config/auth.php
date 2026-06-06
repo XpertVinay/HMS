@@ -42,6 +42,27 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'api_vendor' => [
+            'driver' => 'jwt',
+            'provider' => 'vendors',
+        ],
+        'api_member' => [
+            'driver' => 'jwt',
+            'provider' => 'members',
+        ],
+        'api_resident' => [
+            'driver' => 'jwt',
+            'provider' => 'residents',
+        ],
+        'api_staff' => [
+            'driver' => 'jwt',
+            'provider' => 'staff',
+        ],
+        'api_admin' => [
+            'driver' => 'jwt',
+            'provider' => 'admins',
+        ],
     ],
 
     /*
@@ -66,11 +87,26 @@ return [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', User::class),
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'vendors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\AppVendor::class,
+        ],
+        'members' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Member::class,
+        ],
+        'residents' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Resident::class,
+        ],
+        'staff' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Staff::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
     ],
 
     /*

@@ -5,8 +5,12 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Traits\TenantScoped;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
-class Admin extends Authenticatable
+/**
+ * Maps to the 'admin' table.
+ */
+class Admin extends Authenticatable implements JWTSubject
 {
     use TenantScoped;
 
@@ -38,6 +42,29 @@ class Admin extends Authenticatable
     public function getAccountTypeAttribute(): string
     {
         return 'admin';
+    }
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [
+            'role' => 'admin',
+            'organization_id' => $this->organization_id
+        ];
     }
 
     public function organization(): BelongsTo

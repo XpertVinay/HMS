@@ -19,6 +19,8 @@
             <li><a href="{{ route('admin.staff.index') }}" class="{{ str_contains($currentRoute, 'admin.staff') ? 'active' : '' }}"><i class='bx bx-list-ul'></i><span class="links_name">Staff</span></a></li>
             <li><a href="{{ route('admin.residents.index') }}" class="{{ str_contains($currentRoute, 'residents') ? 'active' : '' }}"><i class='bx bx-home-smile'></i><span class="links_name">Residents</span></a></li>
             <li><a href="{{ route('admin.vendors.index') }}" class="{{ str_contains($currentRoute, 'vendors') ? 'active' : '' }}"><i class='bx bx-store-alt'></i><span class="links_name">Vendors</span></a></li>
+            <li><a href="{{ route('admin.advertisements.index') }}" class="{{ str_contains($currentRoute, 'admin.advertisements') ? 'active' : '' }}"><i class='bx bx-megaphone'></i><span class="links_name">Vendor Ads</span></a></li>
+            <li><a href="{{ route('admin.commissions.index') }}" class="{{ str_contains($currentRoute, 'commissions') ? 'active' : '' }}"><i class='bx bx-money'></i><span class="links_name">Commissions</span></a></li>
             <li><a href="{{ route('admin.properties.index') }}" class="{{ str_contains($currentRoute, 'properties') ? 'active' : '' }}"><i class='bx bx-building-house'></i><span class="links_name">Properties</span></a></li>
             <li><a href="{{ route('admin.donors.index') }}" class="{{ str_contains($currentRoute, 'donors') ? 'active' : '' }}"><i class='bx bx-donate-heart'></i><span class="links_name">Donors</span></a></li>
             <li><a href="{{ route('admin.sponsors.index') }}" class="{{ str_contains($currentRoute, 'sponsors') ? 'active' : '' }}"><i class='bx bx-star'></i><span class="links_name">Sponsors</span></a></li>
@@ -35,6 +37,8 @@
             <li><a href="{{ route('member.solid.index') }}" class="{{ str_contains($currentRoute, 'solid') ? 'active' : '' }}"><i class='bx bx-file'></i><span class="links_name">SOLID Approvals</span></a></li>
             <li><a href="{{ route('member.helpdesk.index') }}" class="{{ str_contains($currentRoute, 'helpdesk') ? 'active' : '' }}"><i class='bx bx-support'></i><span class="links_name">Helpdesk</span></a></li>
             <li><a href="{{ route('member.community.feed') }}" class="{{ str_contains($currentRoute, 'community') ? 'active' : '' }}"><i class='bx bx-world'></i><span class="links_name">Community Feed</span></a></li>
+            <li><a href="{{ route('member.vendors.directory') }}" class="{{ str_contains($currentRoute, 'vendors.directory') || str_contains($currentRoute, 'vendors.show') ? 'active' : '' }}"><i class='bx bx-store-alt'></i><span class="links_name">Vendor Directory</span></a></li>
+            <li><a href="{{ route('member.vendors.vote.index') }}" class="{{ str_contains($currentRoute, 'vendors.vote') ? 'active' : '' }}"><i class='bx bx-check-double'></i><span class="links_name">Vendor Voting</span></a></li>
 
         @elseif($role === 'staff')
             <li><a href="{{ route('staff.dashboard') }}" class="{{ str_contains($currentRoute, 'staff.dashboard') ? 'active' : '' }}"><i class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>
@@ -44,6 +48,10 @@
             <li><a href="{{ route('staff.properties.index') }}" class="{{ str_contains($currentRoute, 'properties') ? 'active' : '' }}"><i class='bx bx-building-house'></i><span class="links_name">Properties</span></a></li>
             <li><a href="{{ route('staff.community.moderation') }}" class="{{ str_contains($currentRoute, 'community') ? 'active' : '' }}"><i class='bx bx-check-shield'></i><span class="links_name">Comm. Moderation</span></a></li>
             <li><a href="{{ route('staff.solid.index') }}" class="{{ str_contains($currentRoute, 'solid') ? 'active' : '' }}"><i class='bx bx-shield-quarter'></i><span class="links_name">SOLID Verification</span></a></li>
+
+        @elseif($role === 'vendor')
+            <li><a href="{{ route('vendor.dashboard') }}" class="{{ str_contains($currentRoute, 'vendor.dashboard') ? 'active' : '' }}"><i class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>
+            <li><a href="{{ route('vendor.advertisements.index') }}" class="{{ str_contains($currentRoute, 'vendor.advertisements') ? 'active' : '' }}"><i class='bx bx-megaphone'></i><span class="links_name">Advertisements</span></a></li>
 
         @elseif($role === 'super_admin')
             <li><a href="{{ route('super_admin.dashboard') }}" class="{{ str_contains($currentRoute, 'super_admin.dashboard') ? 'active' : '' }}"><i class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>

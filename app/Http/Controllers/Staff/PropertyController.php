@@ -5,12 +5,23 @@ namespace App\Http\Controllers\Staff;
 use App\Http\Controllers\Controller;
 use App\Models\Property;
 use App\Models\Member;
+use App\Http\Requests\PropertyRequest;
+use App\Services\PropertyService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 use Yajra\DataTables\Facades\DataTables;
 
 class PropertyController extends Controller
 {
+    protected $propertyService;
+
+    public function __construct(PropertyService $propertyService)
+    {
+        $this->propertyService = $propertyService;
+    }
+
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -21,8 +32,9 @@ class PropertyController extends Controller
                     return $p->owner ? $p->owner->name . '<br><small class="text-gray-500">' . $p->owner->username . '</small>' : '<span class="text-gray-400 italic">Unassigned</span>';
                 })
                 ->addColumn('property_info', function ($p) {
-                    $block = $p->block ? '<span class="text-xs font-bold bg-gray-100 text-gray-600 px-2 py-1 rounded ml-2">Block ' . $p->block . '</span>' : '';
-                    return '<strong>' . $p->property_number . '</strong>' . $block;
+                    $metadata = $p->address_metadata ?? [];
+                    $block = !empty($metadata['block']) ? '<span class="text-xs font-bold bg-gray-100 text-gray-600 px-2 py-1 rounded ml-2">Block ' . htmlspecialchars($metadata['block']) . '</span>' : '';
+                    return '<strong>' . htmlspecialchars($p->unit_number ?? 'N/A') . '</strong>' . $block;
                 })
                 ->addColumn('type', function ($p) {
                     return ucfirst($p->type);
@@ -44,36 +56,9 @@ class PropertyController extends Controller
         return view('staff.properties.create', compact('members'));
     }
 
-    public function store(Request $request)
+    public function store(PropertyRequest $request)
     {
-        $request->validate([
-            'property_number' => 'required|string|max:100',
-            'block' => 'nullable|string|max:100',
-            'type' => 'required|in:residential,commercial',
-            'owner_id' => 'nullable|exists:member,id',
-            'unit_number' => 'nullable|string|max:100',
-            'building_name' => 'nullable|string|max:255',
-            'street_area' => 'nullable|string|max:255',
-            'city_town' => 'nullable|string|max:100',
-            'district' => 'nullable|string|max:100',
-            'state' => 'nullable|string|max:100',
-            'pin_code' => 'nullable|string|max:20',
-        ]);
-
-        Property::create([
-            'organization_id' => app('active_org')->id,
-            'property_number' => $request->property_number,
-            'block' => $request->block,
-            'type' => $request->type,
-            'owner_id' => $request->owner_id,
-            'unit_number' => $request->unit_number,
-            'building_name' => $request->building_name,
-            'street_area' => $request->street_area,
-            'city_town' => $request->city_town,
-            'district' => $request->district,
-            'state' => $request->state,
-            'pin_code' => $request->pin_code,
-        ]);
+        $this->propertyService->createProperty($request->validated(), app('active_org')->id);
 
         return redirect()->route('staff.properties.index')->with('success', 'Property added successfully.');
     }
@@ -85,24 +70,10 @@ class PropertyController extends Controller
         return view('staff.properties.edit', compact('property', 'members'));
     }
 
-    public function update(Request $request, $id)
+    public function update(PropertyRequest $request, $id)
     {
-        $request->validate([
-            'property_number' => 'required|string|max:100',
-            'block' => 'nullable|string|max:100',
-            'type' => 'required|in:residential,commercial',
-            'owner_id' => 'nullable|exists:member,id',
-            'unit_number' => 'nullable|string|max:100',
-            'building_name' => 'nullable|string|max:255',
-            'street_area' => 'nullable|string|max:255',
-            'city_town' => 'nullable|string|max:100',
-            'district' => 'nullable|string|max:100',
-            'state' => 'nullable|string|max:100',
-            'pin_code' => 'nullable|string|max:20',
-        ]);
-
         $property = Property::findOrFail($id);
-        $property->update($request->all());
+        $this->propertyService->updateProperty($property, $request->validated());
 
         return redirect()->route('staff.properties.index')->with('success', 'Property updated successfully.');
     }
@@ -120,25 +91,55 @@ class PropertyController extends Controller
         ]);
         
         $path = $request->file('csv_file')->getRealPath();
-        $data = array_map('str_getcsv', file($path));
-        $header = array_shift($data);
         
-        $count = 0;
-        foreach($data as $row) {
+        $successCount = 0;
+        $failureCount = 0;
+        $errors = [];
+        
+        $handle = fopen($path, 'r');
+        if ($handle === false) {
+            return back()->with('error', 'Failed to open the uploaded file.');
+        }
+
+        $header = fgetcsv($handle);
+        $rowNumber = 1;
+
+        while (($row = fgetcsv($handle)) !== false) {
+            $rowNumber++;
+            
             // Expected CSV format: property_number, block, type, unit_number, building_name
             if(count($row) >= 3) {
-                Property::create([
-                    'organization_id' => app('active_org')->id,
-                    'property_number' => $row[0] ?? '',
-                    'block' => $row[1] ?? null,
-                    'type' => strtolower($row[2]) === 'commercial' ? 'commercial' : 'residential',
-                    'unit_number' => $row[3] ?? null,
-                    'building_name' => $row[4] ?? null,
-                ]);
-                $count++;
+                DB::beginTransaction();
+                try {
+                    $data = [
+                        'property_number' => $row[0] ?? '',
+                        'block' => $row[1] ?? null,
+                        'type' => strtolower($row[2]) === 'commercial' ? 'commercial' : 'residential',
+                        'unit_number' => $row[3] ?? null,
+                        'building_name' => $row[4] ?? null,
+                    ];
+                    
+                    $this->propertyService->createProperty($data, app('active_org')->id);
+                    DB::commit();
+                    $successCount++;
+                } catch (\Exception $e) {
+                    DB::rollBack();
+                    $failureCount++;
+                    $errors[] = "Row $rowNumber: " . $e->getMessage();
+                    Log::error("Bulk upload error on row $rowNumber", ['error' => $e->getMessage()]);
+                }
+            } else {
+                $failureCount++;
+                $errors[] = "Row $rowNumber: Invalid column count.";
             }
         }
         
-        return redirect()->route('staff.properties.index')->with('success', "$count Properties uploaded successfully.");
+        fclose($handle);
+        
+        if ($failureCount > 0) {
+            return redirect()->route('staff.properties.index')->with('warning', "$successCount Properties uploaded successfully. $failureCount failed. Check logs or errors for details.");
+        }
+        
+        return redirect()->route('staff.properties.index')->with('success', "$successCount Properties uploaded successfully.");
     }
 }

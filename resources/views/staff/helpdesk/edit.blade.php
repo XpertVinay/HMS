@@ -34,6 +34,39 @@
                 <div class="text-gray-600 bg-gray-50 p-4 rounded-lg mt-1 whitespace-pre-wrap">{{ $ticket->description }}</div>
             </div>
         </div>
+
+        <div class="mt-8 border-t pt-6">
+            <h3 class="text-lg font-bold text-gray-800 mb-4">Communication History</h3>
+            
+            <div class="space-y-4 mb-6 max-h-[400px] overflow-y-auto pr-2">
+                @if($ticket->response)
+                    <div class="bg-indigo-50 p-4 rounded-lg rounded-tr-none ml-auto max-w-[85%]">
+                        <p class="text-sm text-gray-800">{{ $ticket->response }}</p>
+                        <small class="text-xs text-gray-500 mt-2 block">Legacy Response</small>
+                    </div>
+                @endif
+                
+                @foreach($ticket->messages as $msg)
+                    @if($msg->sender_type === 'staff')
+                        <div class="bg-indigo-50 p-4 rounded-lg rounded-tr-none ml-auto max-w-[85%]">
+                            <p class="text-sm text-gray-800">{{ $msg->message }}</p>
+                            <small class="text-xs text-gray-500 mt-2 block">You • {{ $msg->created_at->format('M d, h:i A') }}</small>
+                        </div>
+                    @else
+                        <div class="bg-gray-100 p-4 rounded-lg rounded-tl-none mr-auto max-w-[85%]">
+                            <p class="text-sm text-gray-800">{{ $msg->message }}</p>
+                            <small class="text-xs text-gray-500 mt-2 block">{{ ucfirst($msg->sender_type) }} • {{ $msg->created_at->format('M d, h:i A') }}</small>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+
+            <form action="{{ route('staff.helpdesk.reply', $ticket->id) }}" method="POST" class="flex gap-2">
+                @csrf
+                <input type="text" name="message" required class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-100" placeholder="Type a reply to the reporter...">
+                <button type="submit" class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-indigo-700 transition"><i class='bx bx-send'></i></button>
+            </form>
+        </div>
     </div>
 
     <!-- Management Form -->

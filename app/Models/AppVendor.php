@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 /**
  * Named AppVendor to avoid conflict with PHP's built-in Vendor namespace.
  * Maps to the 'vendor' table.
  */
-class AppVendor extends Authenticatable
+class AppVendor extends Authenticatable implements JWTSubject
 {
     protected $table = 'vendor';
 
@@ -54,5 +55,42 @@ class AppVendor extends Authenticatable
     public function invoices(): HasMany
     {
         return $this->hasMany(VendorInvoice::class, 'vendor_id');
+    }
+
+    public function alignments(): HasMany
+    {
+        return $this->hasMany(RwaVendorAlignment::class, 'vendor_id');
+    }
+
+    public function advertisements(): HasMany
+    {
+        return $this->hasMany(VendorAdvertisement::class, 'vendor_id');
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(VendorReview::class, 'vendor_id');
+    }
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [
+            'role' => 'vendor'
+        ];
     }
 }

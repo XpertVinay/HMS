@@ -19,6 +19,8 @@ use App\Http\Controllers\Admin\StaffController as AdminStaff;
 use App\Http\Controllers\Admin\ResidentController as AdminResident;
 use App\Http\Controllers\Admin\VendorController as AdminVendor;
 use App\Http\Controllers\Admin\PropertyController as AdminProperty;
+use App\Http\Controllers\Admin\CommissionController as AdminCommission;
+use App\Http\Controllers\Admin\AdvertisementController as AdminAdvertisement;
 use App\Http\Controllers\Admin\DonorController as AdminDonor;
 use App\Http\Controllers\Admin\SponsorController as AdminSponsor;
 use App\Http\Controllers\Admin\EventController as AdminEvent;
@@ -110,6 +112,15 @@ Route::prefix('admin')->middleware(['auth.session', 'role:admin,super_admin'])->
     // Vendors
     Route::resource('vendors', AdminVendor::class);
 
+    // Commissions
+    Route::get('/commissions', [AdminCommission::class, 'index'])->name('commissions.index');
+    Route::post('/commissions/{id}/pay', [AdminCommission::class, 'markPaid'])->name('commissions.pay');
+
+    // Vendor Advertisements
+    Route::get('/advertisements', [AdminAdvertisement::class, 'index'])->name('advertisements.index');
+    Route::post('/advertisements/{id}/approve', [AdminAdvertisement::class, 'approve'])->name('advertisements.approve');
+    Route::post('/advertisements/{id}/reject', [AdminAdvertisement::class, 'reject'])->name('advertisements.reject');
+
     // Properties
     Route::resource('properties', AdminProperty::class);
 
@@ -158,9 +169,14 @@ Route::prefix('admin')->middleware(['auth.session', 'role:admin,super_admin'])->
 Route::prefix('member')->middleware(['auth.session', 'role:member'])->name('member.')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\Member\DashboardController::class, 'index'])->name('dashboard');
     
+    // Vendor Directory & Reviews
+    Route::get('/vendors/directory', [\App\Http\Controllers\Member\VendorDirectoryController::class, 'index'])->name('vendors.directory');
+    Route::get('/vendors/directory/{id}', [\App\Http\Controllers\Member\VendorDirectoryController::class, 'show'])->name('vendors.show');
+    Route::post('/vendors/{id}/review', [\App\Http\Controllers\Member\VendorReviewController::class, 'store'])->name('vendors.review.store');
+    
     // Vendor Voting
     Route::get('/vendors/vote', [\App\Http\Controllers\Member\VendorVoteController::class, 'index'])->name('vendors.vote.index');
-    Route::post('/vendors/vote/{id}', [\App\Http\Controllers\Member\VendorVoteController::class, 'castVote'])->name('vendors.vote.cast');
+
     Route::get('/announcements', [MemberAnnouncement::class, 'index'])->name('announcements.index');
 
     Route::get('/maintenance', [MemberMaintenance::class, 'index'])->name('maintenance.index');
@@ -170,6 +186,7 @@ Route::prefix('member')->middleware(['auth.session', 'role:member'])->name('memb
     Route::get('/helpdesk/create', [MemberHelpdesk::class, 'create'])->name('helpdesk.create');
     Route::post('/helpdesk', [MemberHelpdesk::class, 'store'])->name('helpdesk.store');
     Route::get('/helpdesk/{id}', [MemberHelpdesk::class, 'show'])->name('helpdesk.show');
+    Route::post('/helpdesk/{id}/reply', [MemberHelpdesk::class, 'reply'])->name('helpdesk.reply');
 
     // Community Network
     Route::get('/community', [\App\Http\Controllers\Member\CommunityFeedController::class, 'index'])->name('community.feed');
@@ -201,6 +218,7 @@ Route::prefix('staff')->middleware(['auth.session', 'role:staff'])->name('staff.
     Route::get('/helpdesk', [\App\Http\Controllers\Staff\HelpdeskController::class, 'index'])->name('helpdesk.index');
     Route::get('/helpdesk/{id}/edit', [\App\Http\Controllers\Staff\HelpdeskController::class, 'edit'])->name('helpdesk.edit');
     Route::put('/helpdesk/{id}', [\App\Http\Controllers\Staff\HelpdeskController::class, 'update'])->name('helpdesk.update');
+    Route::post('/helpdesk/{id}/reply', [\App\Http\Controllers\Staff\HelpdeskController::class, 'reply'])->name('helpdesk.reply');
     
     // Properties & Units Management
     Route::get('/properties', [\App\Http\Controllers\Staff\PropertyController::class, 'index'])->name('properties.index');
@@ -256,6 +274,18 @@ Route::middleware(['auth.session'])->group(function () {
     // Mobile Access Routes (Available to all logged-in users)
     Route::get('/profile/mobile-access', [\App\Http\Controllers\ProfileController::class, 'mobileAccess'])->name('profile.mobile_access');
     Route::post('/profile/generate-qr', [\App\Http\Controllers\ProfileController::class, 'generateQr'])->name('profile.generate_qr');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Vendor Portal Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('vendor')->middleware(['auth.session', 'role:vendor'])->name('vendor.')->group(function () {
+    Route::get('/dashboard', [\App\Http\Controllers\Vendor\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/advertisements', [\App\Http\Controllers\Vendor\AdvertisementController::class, 'index'])->name('advertisements.index');
+    Route::post('/advertisements', [\App\Http\Controllers\Vendor\AdvertisementController::class, 'store'])->name('advertisements.store');
 });
 
 /*

@@ -10,8 +10,11 @@ class TokenService
 
     public function __construct()
     {
-        // In production, this should come from environment variables.
-        $this->secretKey = getenv('JWT_SECRET') ?: 'default_super_secret_key_change_in_prod';
+        $secret = getenv('JWT_SECRET');
+        if (empty($secret)) {
+            throw new \RuntimeException('FATAL: JWT_SECRET environment variable is not set.');
+        }
+        $this->secretKey = $secret;
     }
 
     public function generateTokens(array $payload)
@@ -47,9 +50,13 @@ class TokenService
     public function validateToken($token)
     {
         try {
-            return JWT::decode($token, new Key($this->secretKey, 'HS256'));
+            return ['valid' => true, 'payload' => JWT::decode($token, new Key($this->secretKey, 'HS256'))];
+        } catch (\Firebase\JWT\ExpiredException $e) {
+            return ['valid' => false, 'error' => 'expired'];
+        } catch (\Firebase\JWT\SignatureInvalidException $e) {
+            return ['valid' => false, 'error' => 'invalid_signature'];
         } catch (\Exception $e) {
-            return false;
+            return ['valid' => false, 'error' => 'malformed'];
         }
     }
 }

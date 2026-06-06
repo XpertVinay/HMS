@@ -100,6 +100,48 @@ class AuthService
     }
 
     /**
+     * Attempt API login across all user tables using JWT.
+     *
+     * @return array{success: bool, token?: string, role?: string, user?: mixed, error?: string}
+     */
+    public function attemptApi(string $username, string $password, int $orgId): array
+    {
+        foreach (self::ROLE_CONFIG as $role => $config) {
+            $user = $this->findUser($config['model'], $username, $orgId, $config['org_scoped']);
+
+            if (!$user) {
+                continue;
+            }
+
+            $validation = $this->validatePassword($password, $user->password);
+
+            if (!$validation['valid']) {
+                continue;
+            }
+
+            if ($validation['needs_rehash']) {
+                $user->password = Hash::make($password);
+                $user->save();
+            }
+
+            $guardName = 'api_' . $role;
+            $token = auth($guardName)->login($user);
+
+            return [
+                'success' => true,
+                'token' => $token,
+                'role' => $role,
+                'user' => $user,
+            ];
+        }
+
+        return [
+            'success' => false,
+            'error' => 'Invalid credentials.',
+        ];
+    }
+
+    /**
      * Find a user by username or email, optionally scoped to organization.
      */
     private function findUser(string $modelClass, string $username, int $orgId, bool $orgScoped)

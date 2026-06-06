@@ -417,7 +417,10 @@
             </div>
 
             @php
-                $grouped = collect($menuItems)->groupBy('group');
+                $grouped = [];
+                foreach($menuItems as $key => $item) {
+                    $grouped[$item['group']][$key] = $item;
+                }
             @endphp
 
             @foreach($grouped as $groupName => $items)
@@ -425,7 +428,7 @@
                 <div class="menu-toggle-grid">
                     @foreach($items as $key => $item)
                     @php $isEnabled = in_array($key, $enabledMenus); @endphp
-                    <label class="menu-toggle-card {{ $isEnabled ? 'enabled' : '' }}" id="card-{{ $key }}" for="toggle-{{ $key }}">
+                    <label class="menu-toggle-card {{ $isEnabled ? 'enabled' : '' }}" id="card-{{ str_replace('.', '-', $key) }}" for="toggle-{{ str_replace('.', '-', $key) }}">
                         <div class="menu-toggle-icon">
                             <i class='bx {{ $item['icon'] }}'></i>
                         </div>
@@ -435,11 +438,11 @@
                         </div>
                         <div class="toggle-switch">
                             <input type="checkbox"
-                                   id="toggle-{{ $key }}"
+                                   id="toggle-{{ str_replace('.', '-', $key) }}"
                                    name="enabled_menus[]"
                                    value="{{ $key }}"
                                    {{ $isEnabled ? 'checked' : '' }}
-                                   onchange="updateToggleCard(this, '{{ $key }}')">
+                                   onchange="updateToggleCard(this, '{{ str_replace('.', '-', $key) }}')">
                             <span class="toggle-slider"></span>
                         </div>
                     </label>
@@ -489,7 +492,7 @@
     function toggleAll(enable) {
         document.querySelectorAll('input[name="enabled_menus[]"]').forEach(cb => {
             cb.checked = enable;
-            updateToggleCard(cb, cb.value);
+            updateToggleCard(cb, cb.id.replace('toggle-', ''));
         });
         updateCount();
     }
@@ -519,14 +522,15 @@
                 // First disable all
                 document.querySelectorAll('input[name="enabled_menus[]"]').forEach(cb => {
                     cb.checked = false;
-                    updateToggleCard(cb, cb.value);
+                    updateToggleCard(cb, cb.id.replace('toggle-', ''));
                 });
                 // Enable preset menus
                 data.menus.forEach(key => {
-                    const cb = document.getElementById('toggle-' + key);
+                    const idSafeKey = key.replace(/\./g, '-');
+                    const cb = document.getElementById('toggle-' + idSafeKey);
                     if (cb) {
                         cb.checked = true;
-                        updateToggleCard(cb, key);
+                        updateToggleCard(cb, idSafeKey);
                     }
                 });
                 updateCount();

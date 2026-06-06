@@ -13,7 +13,7 @@ class VendorController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $query = AppVendor::where('organization_id', $this->orgId());
+            $query = AppVendor::query(); // Vendors are global
             return DataTables::of($query)
                 ->addIndexColumn()
                 ->addColumn('actions', function ($v) {
@@ -46,34 +46,42 @@ class VendorController extends Controller
             'password' => 'required|string|min:6',
         ]);
 
-        AppVendor::create(array_merge($request->only('business_name', 'email', 'business_registration'), [
-            'password' => Hash::make($request->password),
-            'organization_id' => $this->orgId(),
-        ]));
+        \DB::transaction(function () use ($request) {
+            AppVendor::create(array_merge($request->only('business_name', 'email', 'business_registration'), [
+                'password' => Hash::make($request->password),
+            ]));
+        });
 
         return redirect()->route('admin.vendors.index')->with('success', 'Vendor added.');
     }
 
     public function edit(int $id)
     {
-        $vendor = AppVendor::where('organization_id', $this->orgId())->findOrFail($id);
+        $vendor = AppVendor::findOrFail($id);
         return view('admin.vendors.edit', compact('vendor'));
     }
 
     public function update(Request $request, int $id)
     {
-        $vendor = AppVendor::where('organization_id', $this->orgId())->findOrFail($id);
-        $data = $request->only('business_name', 'email', 'business_registration', 'bank_account_details');
-        if ($request->filled('password')) {
-            $data['password'] = Hash::make($request->password);
-        }
-        $vendor->update($data);
+        $vendor = AppVendor::findOrFail($id);
+        
+        \DB::transaction(function () use ($request, $vendor) {
+            $data = $request->only('business_name', 'email', 'business_registration', 'bank_account_details');
+            if ($request->filled('password')) {
+                $data['password'] = Hash::make($request->password);
+            }
+            $vendor->update($data);
+        });
+        
         return redirect()->route('admin.vendors.index')->with('success', 'Vendor updated.');
     }
 
     public function destroy(int $id)
     {
-        AppVendor::where('organization_id', $this->orgId())->findOrFail($id)->delete();
+        \DB::transaction(function () use ($id) {
+            AppVendor::findOrFail($id)->delete();
+        });
+        
         return redirect()->route('admin.vendors.index')->with('success', 'Vendor removed.');
     }
 }

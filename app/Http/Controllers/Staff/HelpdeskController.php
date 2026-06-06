@@ -70,7 +70,7 @@ class HelpdeskController extends Controller
      */
     public function edit($id)
     {
-        $ticket = Ticket::with(['member', 'resident', 'vendor'])->findOrFail($id);
+        $ticket = Ticket::with(['member', 'resident', 'vendor', 'messages'])->findOrFail($id);
         
         $activeVendorIds = RwaVendorAlignment::where('organization_id', app('active_org')->id)
             ->where('status', 'active')
@@ -111,5 +111,19 @@ class HelpdeskController extends Controller
         ]);
 
         return redirect()->route('staff.helpdesk.index')->with('success', 'Ticket updated successfully.');
+    }
+
+    public function reply(Request $request, $id)
+    {
+        $request->validate(['message' => 'required|string']);
+        $ticket = Ticket::where('organization_id', app('active_org')->id)->findOrFail($id);
+        
+        $ticket->messages()->create([
+            'sender_id' => session('aid'),
+            'sender_type' => 'staff',
+            'message' => $request->message,
+        ]);
+
+        return redirect()->back()->with('success', 'Reply sent.');
     }
 }

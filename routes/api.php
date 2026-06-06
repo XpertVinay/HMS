@@ -19,3 +19,7 @@ Route::prefix('api/theme')->name('api.theme.')->group(function () {
     Route::get('/{orgId}', [ThemeController::class, 'show'])->name('show');
     Route::get('/{orgId}/css', [ThemeController::class, 'css'])->name('css');
 });
+
+Route::prefix('api/auth')->name('api.auth.')->group(function () {
+    Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login'])->name('login');
+});

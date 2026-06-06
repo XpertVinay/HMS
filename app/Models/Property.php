@@ -13,19 +13,10 @@ class Property extends Model
 
     protected $table = 'property';
 
-    protected $fillable = [
-        'unit_number',
-        'street_area',
-        'locality_village',
-        'city_town',
-        'district',
-        'state',
-        'pincode',
-        'address_metadata',
-        'type',
-        'owner_id',
-        'organization_id',
-        'resident_id',
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
     ];
 
     protected $casts = [

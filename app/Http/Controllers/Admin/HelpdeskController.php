@@ -41,7 +41,7 @@ class HelpdeskController extends Controller
 
     public function show(int $id)
     {
-        $ticket = Ticket::where('organization_id', $this->orgId())->with('member')->findOrFail($id);
+        $ticket = Ticket::with(['member', 'messages'])->where('organization_id', $this->orgId())->findOrFail($id);
         return view('admin.helpdesk.show', compact('ticket'));
     }
 
@@ -49,7 +49,15 @@ class HelpdeskController extends Controller
     {
         $request->validate(['response' => 'required|string', 'status' => 'required|in:pending,in_progress,resolved']);
         $ticket = Ticket::where('organization_id', $this->orgId())->findOrFail($id);
-        $ticket->update($request->only('response', 'status'));
+        
+        $ticket->update(['status' => $request->status]);
+        
+        $ticket->messages()->create([
+            'sender_id' => session('aid'),
+            'sender_type' => 'admin',
+            'message' => $request->response,
+        ]);
+
         return redirect()->route('admin.helpdesk.show', $id)->with('success', 'Response submitted.');
     }
 }

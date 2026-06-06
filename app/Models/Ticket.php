@@ -47,4 +47,9 @@ class Ticket extends Model
     {
         return $this->belongsTo(AppVendor::class, 'assigned_vendor_id');
     }
+
+    public function messages()
+    {
+        return $this->hasMany(TicketMessage::class, 'ticket_id');
+    }
 }

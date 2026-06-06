@@ -59,7 +59,21 @@ class HelpdeskController extends Controller
 
     public function show(int $id)
     {
-        $ticket = Ticket::where('organization_id', $this->orgId())->where('member_id', session('uid'))->findOrFail($id);
+        $ticket = Ticket::with('messages')->where('organization_id', $this->orgId())->where('member_id', session('uid'))->findOrFail($id);
         return view('member.helpdesk.show', compact('ticket'));
+    }
+
+    public function reply(Request $request, $id)
+    {
+        $request->validate(['message' => 'required|string']);
+        $ticket = Ticket::where('organization_id', $this->orgId())->where('member_id', session('uid'))->findOrFail($id);
+        
+        $ticket->messages()->create([
+            'sender_id' => session('uid'),
+            'sender_type' => 'member',
+            'message' => $request->message,
+        ]);
+
+        return redirect()->back()->with('success', 'Reply sent.');
     }
 }
