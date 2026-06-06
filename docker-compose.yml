@@ -10,7 +10,8 @@ services:
       - /var/www/html/vendor
       - /var/www/html/public/build
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       - APP_ENV=${APP_ENV}
       - APP_DEBUG=${APP_DEBUG}
@@ -21,29 +22,45 @@ services:
       - DB_DATABASE=hms
       - DB_USERNAME=root
       - DB_PASSWORD=root
+    networks:
+      - hms-network
 
   db:
     image: mysql:8.0
+    command: --skip-ssl
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=hms
     ports:
-      - "3306:3306"
+      - "127.0.0.1:3306:3306"
     volumes:
       - db_data:/var/lib/mysql
+    networks:
+      - hms-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
 
   db_test:
     image: mysql:8.0
+    command: --skip-ssl
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=hms_test
     ports:
-      - "3307:3306"
+      - "127.0.0.1:3307:3306"
     volumes:
       - db_test_data:/var/lib/mysql
 
 volumes:
   db_data:
   db_test_data:
+
+networks:
+  hms-network:
+    driver: bridge

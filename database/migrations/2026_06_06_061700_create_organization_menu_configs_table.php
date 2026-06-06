@@ -13,10 +13,8 @@ return new class extends Migration
     {
         Schema::create('organization_menu_configs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('organization_id')
-                  ->unique()
-                  ->constrained('organizations')
-                  ->cascadeOnDelete();
+            $table->integer('organization_id')->unique();
+            $table->foreign('organization_id')->references('id')->on('organizations')->cascadeOnDelete();
             $table->json('enabled_menus')->comment('Array of enabled menu item keys');
             $table->timestamps();
         });

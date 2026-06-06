@@ -12,7 +12,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('service_booking_id')->constrained('service_bookings')->onDelete('cascade');
             $table->integer('organization_id');
-            $table->foreignId('vendor_id')->constrained('vendor')->onDelete('cascade');
+            $table->integer('vendor_id');
+            $table->foreign('vendor_id')->references('id')->on('vendor')->onDelete('cascade');
             
             $table->decimal('total_booking_amount', 10, 2);
             $table->decimal('commission_percentage', 5, 2);

@@ -10,7 +10,8 @@ return new class extends Migration
     {
         Schema::create('vendor_advertisements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('vendor_id')->constrained('vendor')->onDelete('cascade');
+            $table->integer('vendor_id');
+            $table->foreign('vendor_id')->references('id')->on('vendor')->onDelete('cascade');
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('image_url')->nullable();

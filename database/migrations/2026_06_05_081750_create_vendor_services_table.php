@@ -10,7 +10,8 @@ return new class extends Migration
     {
         Schema::create('vendor_services', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('vendor_id')->constrained('vendor')->onDelete('cascade');
+            $table->integer('vendor_id');
+            $table->foreign('vendor_id')->references('id')->on('vendor')->onDelete('cascade');
             $table->foreignId('service_category_id')->constrained('service_categories')->onDelete('cascade');
             $table->string('title');
             $table->text('description')->nullable();

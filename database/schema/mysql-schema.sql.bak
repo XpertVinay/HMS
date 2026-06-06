@@ -1,0 +1,348 @@
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+DROP TABLE IF EXISTS `admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `admin` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `mobile_number` varchar(20) DEFAULT NULL,
+  `rwa_election_copy` varchar(255) DEFAULT NULL,
+  `social_registration_number` varchar(100) DEFAULT NULL,
+  `is_id_verified` tinyint(1) DEFAULT '0',
+  `organization_id` int NOT NULL DEFAULT '1',
+  `role` enum('admin','sub-admin') NOT NULL DEFAULT 'admin',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`),
+  KEY `fk_admin_org` (`organization_id`),
+  CONSTRAINT `fk_admin_org` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `announcement`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `announcement` (
+  `announcement_id` int NOT NULL AUTO_INCREMENT,
+  `announcement_subject` varchar(250) NOT NULL,
+  `announcement_text` text NOT NULL,
+  `announcement_status` int NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `organization_id` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`announcement_id`),
+  KEY `fk_announcement_org` (`organization_id`),
+  CONSTRAINT `fk_announcement_org` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `donors`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `donors` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `donation_date` date NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `organization_id` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `fk_donors_org` (`organization_id`),
+  CONSTRAINT `fk_donors_org` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `events`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `events` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) NOT NULL,
+  `description` text,
+  `event_date` date NOT NULL,
+  `event_time` time DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `organization_id` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `fk_events_org` (`organization_id`),
+  CONSTRAINT `fk_events_org` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `gallery`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `gallery` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(150) NOT NULL,
+  `image_url` varchar(255) NOT NULL,
+  `description` text,
+  `uploaded_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `organization_id` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `fk_gallery_org` (`organization_id`),
+  CONSTRAINT `fk_gallery_org` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `maintenance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `maintenance` (
+  `id` int NOT NULL,
+  `billing_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `member_id` int NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0=pending,1=paid',
+  `total_amount` double NOT NULL,
+  `amount_payed` double NOT NULL,
+  `amount_change` double NOT NULL,
+  `invoice` varchar(50) NOT NULL,
+  `organization_id` int NOT NULL DEFAULT '1',
+  KEY `fk_billing_org` (`organization_id`),
+  CONSTRAINT `fk_billing_org` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `maintenance_items`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `maintenance_items` (
+  `id` int NOT NULL,
+  `maintenance_id` int NOT NULL,
+  `type` tinyint(1) NOT NULL COMMENT '1= block rent, 2= electricity,3=water',
+  `reading` int NOT NULL,
+  `consumption` int NOT NULL,
+  `rate` double NOT NULL,
+  `previous_reading` int NOT NULL,
+  `previous_consumption` int NOT NULL,
+  `amount` double NOT NULL,
+  `previous_amount` double NOT NULL,
+  `organization_id` int NOT NULL DEFAULT '1',
+  KEY `fk_bills_org` (`organization_id`),
+  CONSTRAINT `fk_bills_org` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `member`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `member` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `phone` int DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `share_certificate` varchar(255) DEFAULT NULL,
+  `is_deed_verified_staff` tinyint(1) DEFAULT '0',
+  `is_deed_verified_admin` tinyint(1) DEFAULT '0',
+  `organization_id` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`),
+  KEY `fk_member_org` (`organization_id`),
+  CONSTRAINT `fk_member_org` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `migrations` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `organizations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `organizations` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `address` text NOT NULL,
+  `registration_code` varchar(100) NOT NULL,
+  `subdomain` varchar(100) NOT NULL,
+  `status` enum('pending','approved','rejected') NOT NULL DEFAULT 'pending',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `logo_url` varchar(255) DEFAULT NULL,
+  `primary_color` varchar(20) DEFAULT NULL,
+  `secondary_color` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `registration_code` (`registration_code`),
+  UNIQUE KEY `subdomain` (`subdomain`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `property`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `property` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `address` varchar(255) NOT NULL,
+  `type` varchar(50) DEFAULT 'Flat',
+  `owner_id` int DEFAULT NULL,
+  `organization_id` int DEFAULT NULL,
+  `resident_id` int DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `address` (`address`),
+  KEY `owner_id` (`owner_id`),
+  KEY `resident_id` (`resident_id`),
+  CONSTRAINT `property_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `member` (`id`) ON DELETE SET NULL,
+  CONSTRAINT `property_ibfk_2` FOREIGN KEY (`resident_id`) REFERENCES `resident` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `registry`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `registry` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `visitor_name` varchar(50) NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `host_id` int DEFAULT NULL,
+  `visitor_contact` varchar(20) DEFAULT NULL,
+  `purpose` varchar(255) DEFAULT NULL,
+  `status` enum('Pending','Approved','Rejected','Completed') DEFAULT 'Pending',
+  `out_time` datetime DEFAULT NULL,
+  `organization_id` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `fk_registry_host` (`host_id`),
+  KEY `fk_registry_org` (`organization_id`),
+  CONSTRAINT `fk_registry_host` FOREIGN KEY (`host_id`) REFERENCES `member` (`id`) ON DELETE SET NULL,
+  CONSTRAINT `fk_registry_org` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `resident`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `resident` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `mobile_number` varchar(20) DEFAULT NULL,
+  `organization_id` int DEFAULT NULL,
+  `owner_noc` varchar(255) DEFAULT NULL,
+  `is_rent_agreement_verified_staff` tinyint(1) DEFAULT '0',
+  `is_rent_agreement_verified_admin` tinyint(1) DEFAULT '0',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `sponsors`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sponsors` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
+  `logo_url` varchar(255) DEFAULT NULL,
+  `description` text,
+  `website_url` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `organization_id` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `fk_sponsors_org` (`organization_id`),
+  CONSTRAINT `fk_sponsors_org` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `staff`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `staff` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `mobile_number` varchar(20) DEFAULT NULL,
+  `employment_contract` varchar(255) DEFAULT NULL,
+  `is_id_verified` tinyint(1) DEFAULT '0',
+  `organization_id` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`),
+  KEY `fk_staff_org` (`organization_id`),
+  CONSTRAINT `fk_staff_org` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `super_admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `super_admin` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `tickets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tickets` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `organization_id` int NOT NULL DEFAULT '1',
+  `member_id` int NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `category` varchar(100) NOT NULL,
+  `status` enum('pending','in_progress','resolved') NOT NULL DEFAULT 'pending',
+  `response` text,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `fk_tickets_org` (`organization_id`),
+  KEY `fk_tickets_member` (`member_id`),
+  CONSTRAINT `fk_tickets_member` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_tickets_org` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `vendor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vendor` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `business_name` varchar(100) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `business_registration` varchar(255) DEFAULT NULL,
+  `organization_id` int DEFAULT NULL,
+  `bank_account_details` text,
+  `is_gst_verified_staff` tinyint(1) DEFAULT '0',
+  `is_gst_verified_admin` tinyint(1) DEFAULT '0',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `business_name` (`business_name`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `vendor_invoice`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vendor_invoice` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `vendor_id` int NOT NULL,
+  `invoice_file` varchar(255) NOT NULL,
+  `amount` double NOT NULL,
+  `organization_id` int DEFAULT NULL,
+  `status` varchar(20) DEFAULT 'Pending',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `vendor_id` (`vendor_id`),
+  CONSTRAINT `vendor_invoice_ibfk_1` FOREIGN KEY (`vendor_id`) REFERENCES `vendor` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+

@@ -11,7 +11,8 @@ return new class extends Migration
         Schema::create('rwa_vendor_alignments', function (Blueprint $table) {
             $table->id();
             $table->integer('organization_id');
-            $table->foreignId('vendor_id')->constrained('vendor')->onDelete('cascade');
+            $table->integer('vendor_id');
+            $table->foreign('vendor_id')->references('id')->on('vendor')->onDelete('cascade');
             $table->enum('status', ['proposed', 'voting', 'admin_approved', 'rejected', 'active'])->default('proposed');
             $table->timestamp('voting_ends_at')->nullable();
             $table->timestamps();
