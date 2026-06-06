@@ -7,15 +7,35 @@ use App\Models\Property;
 use App\Models\Member;
 use Illuminate\Http\Request;
 
+use Yajra\DataTables\Facades\DataTables;
+
 class PropertyController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $properties = Property::with('owner')
-            ->where('organization_id', app('active_org')->id)
-            ->paginate(15);
+        if ($request->ajax()) {
+            $query = Property::with('owner')->where('organization_id', app('active_org')->id);
+            return DataTables::of($query)
+                ->addIndexColumn()
+                ->addColumn('owner', function ($p) {
+                    return $p->owner ? $p->owner->name . '<br><small class="text-gray-500">' . $p->owner->username . '</small>' : '<span class="text-gray-400 italic">Unassigned</span>';
+                })
+                ->addColumn('property_info', function ($p) {
+                    $block = $p->block ? '<span class="text-xs font-bold bg-gray-100 text-gray-600 px-2 py-1 rounded ml-2">Block ' . $p->block . '</span>' : '';
+                    return '<strong>' . $p->property_number . '</strong>' . $block;
+                })
+                ->addColumn('type', function ($p) {
+                    return ucfirst($p->type);
+                })
+                ->addColumn('actions', function ($p) {
+                    $editUrl = route('staff.properties.edit', $p->id);
+                    return "<a href='{$editUrl}' class='btn-modern btn-sm btn-outline'><i class='bx bx-edit'></i> Edit</a>";
+                })
+                ->rawColumns(['owner', 'property_info', 'actions'])
+                ->make(true);
+        }
             
-        return view('staff.properties.index', compact('properties'));
+        return view('staff.properties.index');
     }
 
     public function create()

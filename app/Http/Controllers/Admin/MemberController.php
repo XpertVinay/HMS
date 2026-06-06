@@ -7,15 +7,32 @@ use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+use Yajra\DataTables\Facades\DataTables;
+
 class MemberController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $members = Member::where('organization_id', $this->orgId())
-            ->orderBy('username')
-            ->get();
+        if ($request->ajax()) {
+            $query = Member::where('organization_id', $this->orgId());
+            return DataTables::of($query)
+                ->addIndexColumn()
+                ->addColumn('actions', function ($m) {
+                    $editUrl = route('admin.members.edit', $m->id);
+                    $deleteUrl = route('admin.members.destroy', $m->id);
+                    $csrf = csrf_field();
+                    $method = method_field('DELETE');
+                    return "<a href='{$editUrl}' class='btn-modern btn-sm btn-outline'><i class='bx bx-edit'></i></a> 
+                            <form action='{$deleteUrl}' method='POST' style='display:inline;' onsubmit='return confirm(\"Delete?\");'>
+                                {$csrf} {$method}
+                                <button type='submit' class='btn-modern btn-sm btn-danger'><i class='bx bx-trash'></i></button>
+                            </form>";
+                })
+                ->rawColumns(['actions'])
+                ->make(true);
+        }
 
-        return view('admin.members.index', compact('members'));
+        return view('admin.members.index');
     }
 
     public function create()

@@ -8,7 +8,6 @@ use App\Models\Member;
 use App\Models\Staff;
 use App\Models\Resident;
 use App\Models\AppVendor;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 /**
@@ -55,7 +54,7 @@ class AuthService
             'model' => AppVendor::class,
             'id_key' => 'vid',
             'dashboard' => 'vendor.dashboard',
-            'org_scoped' => true,
+            'org_scoped' => false,
         ],
     ];
 
@@ -68,8 +67,7 @@ class AuthService
     {
         foreach (self::ROLE_CONFIG as $role => $config) {
             $user = $this->findUser($config['model'], $username, $orgId, $config['org_scoped']);
-            echo ">>>>>>>>";
-            print_r([$config, $username, $password, $orgId]);
+
             if (!$user) {
                 continue;
             }
@@ -115,16 +113,9 @@ class AuthService
             }
         });
 
-        // if ($orgScoped) {
-        //     $query->where('organization_id', $orgId);
-        // }
-
-        $sql = $query->toSql();
-        $bindings = $query->getBindings();
-        echo ">>>>>>>";
-        print_r([$sql, $bindings]);
-        echo ">>>>>>>><br>";
-        // exit;
+        if ($orgScoped) {
+            $query->where('organization_id', $orgId);
+        }
 
         return $query->first();
     }

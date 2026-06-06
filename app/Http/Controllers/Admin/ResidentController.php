@@ -6,12 +6,35 @@ use App\Models\Resident;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
+
 class ResidentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $residents = Resident::where('organization_id', $this->orgId())->orderBy('username')->get();
-        return view('admin.residents.index', compact('residents'));
+        if ($request->ajax()) {
+            $query = Resident::where('organization_id', $this->orgId());
+            return DataTables::of($query)
+                ->addIndexColumn()
+                ->addColumn('address', function ($r) {
+                    return Str::limit($r->address, 30);
+                })
+                ->addColumn('actions', function ($r) {
+                    $editUrl = route('admin.residents.edit', $r->id);
+                    $deleteUrl = route('admin.residents.destroy', $r->id);
+                    $csrf = csrf_field();
+                    $method = method_field('DELETE');
+                    return "<a href='{$editUrl}' class='btn-modern btn-sm btn-outline'><i class='bx bx-edit'></i></a> 
+                            <form action='{$deleteUrl}' method='POST' style='display:inline;' onsubmit='return confirm(\"Delete?\");'>
+                                {$csrf} {$method}
+                                <button type='submit' class='btn-modern btn-sm btn-danger'><i class='bx bx-trash'></i></button>
+                            </form>";
+                })
+                ->rawColumns(['actions'])
+                ->make(true);
+        }
+        return view('admin.residents.index');
     }
 
     public function create() { return view('admin.residents.create'); }

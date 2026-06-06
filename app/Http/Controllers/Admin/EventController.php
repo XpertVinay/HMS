@@ -5,12 +5,34 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
 
+use Yajra\DataTables\Facades\DataTables;
+
 class EventController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $events = Event::where('organization_id', $this->orgId())->orderBy('event_date', 'desc')->get();
-        return view('admin.events.index', compact('events'));
+        if ($request->ajax()) {
+            $query = Event::where('organization_id', $this->orgId());
+            return DataTables::of($query)
+                ->addIndexColumn()
+                ->addColumn('event_date', function ($e) {
+                    return $e->event_date ? $e->event_date->format('M d, Y') : '-';
+                })
+                ->addColumn('actions', function ($e) {
+                    $editUrl = route('admin.events.edit', $e->id);
+                    $deleteUrl = route('admin.events.destroy', $e->id);
+                    $csrf = csrf_field();
+                    $method = method_field('DELETE');
+                    return "<a href='{$editUrl}' class='btn-modern btn-sm btn-outline'><i class='bx bx-edit'></i></a> 
+                            <form action='{$deleteUrl}' method='POST' style='display:inline;' onsubmit='return confirm(\"Delete?\");'>
+                                {$csrf} {$method}
+                                <button type='submit' class='btn-modern btn-sm btn-danger'><i class='bx bx-trash'></i></button>
+                            </form>";
+                })
+                ->rawColumns(['actions'])
+                ->make(true);
+        }
+        return view('admin.events.index');
     }
 
     public function create() { return view('admin.events.create'); }

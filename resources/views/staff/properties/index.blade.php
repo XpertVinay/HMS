@@ -16,61 +16,45 @@
 </div>
 
 <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-    <div class="overflow-x-auto">
-        <table class="w-full text-left border-collapse">
+    <div class="overflow-x-auto p-4">
+        <table class="data-table ajax-table w-full" id="properties-table">
             <thead>
                 <tr class="bg-gray-50 border-b border-gray-100">
+                    <th class="p-4 text-sm font-semibold text-gray-600">ID</th>
                     <th class="p-4 text-sm font-semibold text-gray-600">Property No</th>
                     <th class="p-4 text-sm font-semibold text-gray-600">Type</th>
-                    <th class="p-4 text-sm font-semibold text-gray-600">Details</th>
                     <th class="p-4 text-sm font-semibold text-gray-600">Owner</th>
-                    <th class="p-4 text-sm font-semibold text-gray-600">Action</th>
+                    <th class="p-4 text-sm font-semibold text-gray-600 no-sort">Action</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-50">
-                @forelse($properties as $property)
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="p-4 text-gray-800 font-bold">
-                            {{ $property->property_number }}
-                            @if($property->block)
-                                <span class="text-xs font-normal text-gray-500 block">Block: {{ $property->block }}</span>
-                            @endif
-                        </td>
-                        <td class="p-4">
-                            <span class="px-2 py-1 rounded text-xs font-bold {{ $property->type == 'commercial' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800' }}">
-                                {{ ucfirst($property->type) }}
-                            </span>
-                        </td>
-                        <td class="p-4">
-                            <span class="block text-sm text-gray-800">{{ $property->building_name ?? 'N/A' }}</span>
-                            @if($property->unit_number)
-                                <span class="text-xs text-gray-500">Unit: {{ $property->unit_number }}</span>
-                            @endif
-                        </td>
-                        <td class="p-4">
-                            @if($property->owner)
-                                <span class="text-sm font-medium text-gray-800">{{ $property->owner->name }}</span>
-                            @else
-                                <span class="text-sm text-gray-400 italic">No Owner Assigned</span>
-                            @endif
-                        </td>
-                        <td class="p-4">
-                            <a href="{{ route('staff.properties.edit', $property->id) }}" class="btn-modern btn-sm btn-outline">Edit</a>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="5" class="p-8 text-center text-gray-500">No properties found.</td>
-                    </tr>
-                @endforelse
+            <tbody>
             </tbody>
         </table>
     </div>
-    
-    @if($properties->hasPages())
-        <div class="p-4 border-t border-gray-100">
-            {{ $properties->links() }}
-        </div>
-    @endif
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('#properties-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('staff.properties.index') }}",
+            lengthMenu: [[15, 30, 50, 100], [15, 30, 50, 100]],
+            pageLength: 15,
+            language: {
+                search: "",
+                searchPlaceholder: "Search records..."
+            },
+            columns: [
+                { data: 'id', name: 'id' },
+                { data: 'property_info', name: 'property_number' },
+                { data: 'type', name: 'type' },
+                { data: 'owner', name: 'owner.name' },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false }
+            ]
+        });
+    });
+</script>
+@endpush

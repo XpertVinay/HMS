@@ -5,12 +5,37 @@ use App\Http\Controllers\Controller;
 use App\Models\Donor;
 use Illuminate\Http\Request;
 
+use Yajra\DataTables\Facades\DataTables;
+
 class DonorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $donors = Donor::where('organization_id', $this->orgId())->orderBy('donation_date', 'desc')->get();
-        return view('admin.donors.index', compact('donors'));
+        if ($request->ajax()) {
+            $query = Donor::where('organization_id', $this->orgId());
+            return DataTables::of($query)
+                ->addIndexColumn()
+                ->addColumn('amount', function ($d) {
+                    return '₹' . number_format($d->amount, 2);
+                })
+                ->addColumn('donation_date', function ($d) {
+                    return $d->donation_date ? $d->donation_date->format('M d, Y') : '-';
+                })
+                ->addColumn('actions', function ($d) {
+                    $editUrl = route('admin.donors.edit', $d->id);
+                    $deleteUrl = route('admin.donors.destroy', $d->id);
+                    $csrf = csrf_field();
+                    $method = method_field('DELETE');
+                    return "<a href='{$editUrl}' class='btn-modern btn-sm btn-outline'><i class='bx bx-edit'></i></a> 
+                            <form action='{$deleteUrl}' method='POST' style='display:inline;' onsubmit='return confirm(\"Delete?\");'>
+                                {$csrf} {$method}
+                                <button type='submit' class='btn-modern btn-sm btn-danger'><i class='bx bx-trash'></i></button>
+                            </form>";
+                })
+                ->rawColumns(['actions'])
+                ->make(true);
+        }
+        return view('admin.donors.index');
     }
 
     public function create() { return view('admin.donors.create'); }

@@ -49,6 +49,16 @@
             <li><a href="{{ route('super_admin.dashboard') }}" class="{{ str_contains($currentRoute, 'super_admin.dashboard') ? 'active' : '' }}"><i class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>
             <li><a href="{{ route('super_admin.theme_builder.index') }}" class="{{ str_contains($currentRoute, 'theme_builder') ? 'active' : '' }}"><i class='bx bx-palette'></i><span class="links_name">Theme Builder</span></a></li>
             <li><a href="{{ route('super_admin.menu_config.index') }}" class="{{ str_contains($currentRoute, 'menu_config') ? 'active' : '' }}"><i class='bx bx-menu'></i><span class="links_name">Menu Config</span></a></li>
+
+            @if(session()->has('managed_org_id'))
+                <li style="padding: 10px; color: #fff; text-transform: uppercase; font-size: 11px; font-weight: bold; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">Managing: {{ Str::limit(session('managed_org_name'), 20) }}</li>
+                <li><a href="{{ route('admin.admins.index') }}" class="{{ str_contains($currentRoute, 'admin.admins') ? 'active' : '' }}"><i class='bx bx-shield'></i><span class="links_name">Admins</span></a></li>
+                <li><a href="{{ route('admin.members.index') }}" class="{{ str_contains($currentRoute, 'members') ? 'active' : '' }}"><i class='bx bx-list-ul'></i><span class="links_name">Members</span></a></li>
+                <li><a href="{{ route('admin.staff.index') }}" class="{{ str_contains($currentRoute, 'admin.staff') ? 'active' : '' }}"><i class='bx bx-list-ul'></i><span class="links_name">Staff</span></a></li>
+                <li><a href="{{ route('admin.residents.index') }}" class="{{ str_contains($currentRoute, 'residents') ? 'active' : '' }}"><i class='bx bx-home-smile'></i><span class="links_name">Residents</span></a></li>
+                <li><a href="{{ route('admin.vendors.index') }}" class="{{ str_contains($currentRoute, 'vendors') ? 'active' : '' }}"><i class='bx bx-store-alt'></i><span class="links_name">Vendors</span></a></li>
+                <li><a href="{{ route('admin.properties.index') }}" class="{{ str_contains($currentRoute, 'properties') ? 'active' : '' }}"><i class='bx bx-building-house'></i><span class="links_name">Properties</span></a></li>
+            @endif
         @endif
     </ul>
 </div>

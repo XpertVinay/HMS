@@ -9,29 +9,48 @@
 <div class="sales-boxes" style="grid-template-columns: 1fr;">
     <div class="box">
         <div class="box-title">All Organizations</div>
-        <table class="data-table">
-            <thead><tr><th>#</th><th>Name</th><th>Subdomain</th><th>Status</th><th>Admins</th><th>Members</th><th>Actions</th></tr></thead>
-            <tbody>
-                @forelse($organizations as $i => $org)
+        <table class="data-table ajax-table" id="organizations-table">
+            <thead>
                 <tr>
-                    <td>{{ $i+1 }}</td>
-                    <td><strong>{{ $org->name }}</strong></td>
-                    <td><code>{{ $org->subdomain }}</code></td>
-                    <td><span class="badge-status {{ $org->status }}">{{ ucfirst($org->status) }}</span></td>
-                    <td>{{ $org->admins_count }}</td>
-                    <td>{{ $org->members_count }}</td>
-                    <td>
-                        @if($org->status === 'pending')
-                        <form action="{{ route('super_admin.org.approve', $org->id) }}" method="POST" style="display:inline;">@csrf<button type="submit" class="btn-modern btn-sm btn-success">Approve</button></form>
-                        <form action="{{ route('super_admin.org.reject', $org->id) }}" method="POST" style="display:inline;">@csrf<button type="submit" class="btn-modern btn-sm btn-danger">Reject</button></form>
-                        @else
-                        <span style="color: #888; font-size: 12px;">{{ ucfirst($org->status) }}</span>
-                        @endif
-                    </td>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Subdomain</th>
+                    <th>Status</th>
+                    <th>Admins</th>
+                    <th>Members</th>
+                    <th class="no-sort">Actions</th>
                 </tr>
-                @empty <tr><td colspan="7">No organizations.</td></tr> @endforelse
+            </thead>
+            <tbody>
             </tbody>
         </table>
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('#organizations-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('super_admin.dashboard') }}",
+            lengthMenu: [[10, 20, 30, 40, 50], [10, 20, 30, 40, 50]],
+            pageLength: 10,
+            language: {
+                search: "",
+                searchPlaceholder: "Search records..."
+            },
+            columns: [
+                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                { data: 'name', name: 'name' },
+                { data: 'subdomain', name: 'subdomain' },
+                { data: 'status', name: 'status' },
+                { data: 'admins_count', name: 'admins_count', searchable: false },
+                { data: 'members_count', name: 'members_count', searchable: false },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false }
+            ]
+        });
+    });
+</script>
+@endpush

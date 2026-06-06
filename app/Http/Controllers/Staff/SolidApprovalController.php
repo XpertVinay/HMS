@@ -7,22 +7,57 @@ use Illuminate\Http\Request;
 use App\Models\SolidApproval;
 use Illuminate\Support\Facades\Auth;
 
+use Yajra\DataTables\Facades\DataTables;
+
 class SolidApprovalController extends Controller
 {
     /**
      * Display a listing of SOLID approvals pending Stage 1 staff review.
      */
-    public function index()
+    public function index(Request $request)
     {
         $staff = \App\Models\Staff::find(session('aid'));
         
-        $approvals = SolidApproval::with(['member', 'maintenance'])
-            ->where('organization_id', $staff->organization_id)
-            ->where('status', 'pending_staff')
-            ->orderBy('created_at', 'asc')
-            ->paginate(10);
+        if ($request->ajax()) {
+            $query = SolidApproval::with(['member', 'maintenance'])
+                ->where('organization_id', $staff->organization_id)
+                ->where('status', 'pending_staff');
+                
+            return DataTables::of($query)
+                ->addIndexColumn()
+                ->addColumn('member', function ($a) {
+                    return $a->member->username ?? 'Unknown';
+                })
+                ->addColumn('details', function ($a) {
+                    $html = '<div><strong>Fee:</strong> ₹' . number_format($a->maintenance->total_amount ?? 0, 2) . '</div>';
+                    $paidStatus = ($a->maintenance && $a->maintenance->isPaid()) 
+                                    ? '<span class="text-green-600 font-bold">Paid</span>' 
+                                    : '<span class="text-red-600 font-bold">Unpaid</span>';
+                    $html .= '<div><strong>Payment:</strong> ' . $paidStatus . '</div>';
+                    return $html;
+                })
+                ->addColumn('date', function ($a) {
+                    return $a->created_at ? $a->created_at->format('M d, Y') : '-';
+                })
+                ->addColumn('actions', function ($a) {
+                    $approveUrl = route('staff.solid.approve', $a->id);
+                    $rejectUrl = route('staff.solid.reject', $a->id);
+                    $csrf = csrf_field();
+                    
+                    return "<form action='{$approveUrl}' method='POST' style='display:inline;'>
+                                {$csrf}
+                                <button type='submit' class='btn-modern btn-sm btn-success' onclick='return confirm(\"Approve this request for Stage 2?\")'>Approve</button>
+                            </form>
+                            <form action='{$rejectUrl}' method='POST' style='display:inline;'>
+                                {$csrf}
+                                <button type='submit' class='btn-modern btn-sm btn-danger' onclick='return confirm(\"Reject this request?\")'>Reject</button>
+                            </form>";
+                })
+                ->rawColumns(['details', 'actions'])
+                ->make(true);
+        }
             
-        return view('staff.solid.index', compact('approvals'));
+        return view('staff.solid.index');
     }
 
     /**

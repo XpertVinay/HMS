@@ -23,6 +23,10 @@ class Controller extends BaseController
      */
     protected function orgId(): int
     {
+        if (session('account') === 'super_admin' && session()->has('managed_org_id')) {
+            return session('managed_org_id');
+        }
+
         return $this->activeOrg()->id;
     }
 }

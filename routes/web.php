@@ -71,13 +71,16 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 |--------------------------------------------------------------------------
 */
 
-Route::prefix('admin')->middleware(['auth.session', 'role:admin'])->name('admin.')->group(function () {
+Route::prefix('admin')->middleware(['auth.session', 'role:admin,super_admin'])->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard');
 
     // Vendor Approvals
     Route::get('/vendors/approvals', [\App\Http\Controllers\Admin\VendorApprovalController::class, 'index'])->name('vendors.approvals.index');
     Route::post('/vendors/approvals/{id}/approve', [\App\Http\Controllers\Admin\VendorApprovalController::class, 'approve'])->name('vendors.approvals.approve');
     Route::post('/vendors/approvals/{id}/reject', [\App\Http\Controllers\Admin\VendorApprovalController::class, 'reject'])->name('vendors.approvals.reject');
+
+    // Admins (Sub-Admins)
+    Route::resource('admins', \App\Http\Controllers\Admin\AdminController::class);
 
     // Announcements
     Route::get('/announcements', [AdminAnnouncement::class, 'index'])->name('announcements.index');
@@ -249,6 +252,10 @@ Route::middleware(['auth.session'])->group(function () {
     
     Route::get('/vendor/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('vendor.profile');
     Route::put('/vendor/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('vendor.profile.update');
+
+    // Mobile Access Routes (Available to all logged-in users)
+    Route::get('/profile/mobile-access', [\App\Http\Controllers\ProfileController::class, 'mobileAccess'])->name('profile.mobile_access');
+    Route::post('/profile/generate-qr', [\App\Http\Controllers\ProfileController::class, 'generateQr'])->name('profile.generate_qr');
 });
 
 /*
@@ -259,6 +266,8 @@ Route::middleware(['auth.session'])->group(function () {
 
 Route::prefix('super-admin')->middleware(['auth.session', 'role:super_admin'])->name('super_admin.')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/organizations/{id}/manage', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'manageOrg'])->name('org.manage');
+    Route::post('/organizations/stop-managing', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'stopManaging'])->name('org.stop_managing');
     Route::post('/organizations/{id}/approve', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'approveOrg'])->name('org.approve');
     Route::post('/organizations/{id}/reject', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'rejectOrg'])->name('org.reject');
 

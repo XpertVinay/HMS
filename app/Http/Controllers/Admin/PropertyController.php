@@ -7,12 +7,44 @@ use App\Models\Member;
 use App\Models\Resident;
 use Illuminate\Http\Request;
 
+use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
+
 class PropertyController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $properties = Property::with(['owner', 'resident'])->get();
-        return view('admin.properties.index', compact('properties'));
+        if ($request->ajax()) {
+            $query = Property::with(['owner', 'resident'])->where('organization_id', $this->orgId());
+            return DataTables::of($query)
+                ->addIndexColumn()
+                ->addColumn('address', function ($p) {
+                    return Str::limit(trim($p->unit_number . ' ' . $p->street_area . ' ' . $p->locality_village), 40);
+                })
+                ->addColumn('type', function ($p) {
+                    return '<span class="capitalize">' . htmlspecialchars($p->type) . '</span>';
+                })
+                ->addColumn('owner_name', function ($p) {
+                    return $p->owner->username ?? '-';
+                })
+                ->addColumn('resident_name', function ($p) {
+                    return $p->resident->username ?? '-';
+                })
+                ->addColumn('actions', function ($p) {
+                    $editUrl = route('admin.properties.edit', $p->id);
+                    $deleteUrl = route('admin.properties.destroy', $p->id);
+                    $csrf = csrf_field();
+                    $method = method_field('DELETE');
+                    return "<a href='{$editUrl}' class='btn-modern btn-sm btn-outline'><i class='bx bx-edit'></i></a> 
+                            <form action='{$deleteUrl}' method='POST' style='display:inline;' onsubmit='return confirm(\"Delete?\");'>
+                                {$csrf} {$method}
+                                <button type='submit' class='btn-modern btn-sm btn-danger'><i class='bx bx-trash'></i></button>
+                            </form>";
+                })
+                ->rawColumns(['type', 'actions'])
+                ->make(true);
+        }
+        return view('admin.properties.index');
     }
 
     public function create()

@@ -9,30 +9,44 @@
 
 <div class="sales-boxes" style="grid-template-columns: 1fr;">
     <div class="box">
-        <table class="data-table">
+        <table class="data-table ajax-table" id="announcements-table">
             <thead>
-                <tr><th>#</th><th>Subject</th><th>Message</th><th>Date</th><th>Actions</th></tr>
+                <tr>
+                    <th>#</th>
+                    <th>Subject</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                    <th class="no-sort">Actions</th>
+                </tr>
             </thead>
             <tbody>
-                @forelse($announcements as $i => $item)
-                <tr>
-                    <td>{{ $i + 1 }}</td>
-                    <td><strong>{{ $item->announcement_subject }}</strong></td>
-                    <td>{{ Str::limit($item->announcement_text, 80) }}</td>
-                    <td>{{ $item->created_at?->format('M d, Y') }}</td>
-                    <td>
-                        <a href="{{ route('admin.announcements.edit', $item->announcement_id) }}" class="btn-modern btn-sm btn-outline">Edit</a>
-                        <form action="{{ route('admin.announcements.destroy', $item->announcement_id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Delete this announcement?');">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="btn-modern btn-sm btn-danger">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                @empty
-                <tr><td colspan="5">No announcements found.</td></tr>
-                @endforelse
             </tbody>
         </table>
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('#announcements-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('admin.announcements.index') }}",
+            lengthMenu: [[10, 20, 30, 40, 50], [10, 20, 30, 40, 50]],
+            pageLength: 10,
+            language: {
+                search: "",
+                searchPlaceholder: "Search records..."
+            },
+            columns: [
+                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                { data: 'announcement_subject', name: 'announcement_subject', render: function(data) { return '<strong>'+data+'</strong>'; } },
+                { data: 'announcement_text', name: 'announcement_text', render: function(data, type, row) { return data ? data.substring(0, 80) + (data.length > 80 ? '...' : '') : ''; } },
+                { data: 'date', name: 'created_at' },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false }
+            ]
+        });
+    });
+</script>
+@endpush

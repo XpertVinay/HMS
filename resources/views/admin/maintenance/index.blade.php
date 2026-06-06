@@ -7,30 +7,46 @@
 </div>
 <div class="sales-boxes" style="grid-template-columns: 1fr;">
     <div class="box">
-        <table class="data-table">
-            <thead><tr><th>#</th><th>Member</th><th>Date</th><th>Total</th><th>Paid</th><th>Status</th><th>Actions</th></tr></thead>
-            <tbody>
-                @forelse($maintenances as $i => $m)
+        <table class="data-table ajax-table" id="maintenance-table">
+            <thead>
                 <tr>
-                    <td>{{ $i + 1 }}</td>
-                    <td>{{ $m->member->username ?? 'N/A' }}</td>
-                    <td>{{ $m->billing_date?->format('M d, Y') }}</td>
-                    <td>₹{{ number_format($m->total_amount, 2) }}</td>
-                    <td>₹{{ number_format($m->amount_payed, 2) }}</td>
-                    <td><span class="badge-status {{ $m->isPaid() ? 'paid' : 'unpaid' }}">{{ $m->isPaid() ? 'Paid' : 'Unpaid' }}</span></td>
-                    <td>
-                        <a href="{{ route('admin.maintenance.show', $m->id) }}" class="btn-modern btn-sm btn-outline">View</a>
-                        <form action="{{ route('admin.maintenance.destroy', $m->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Delete?');">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="btn-modern btn-sm btn-danger">Delete</button>
-                        </form>
-                    </td>
+                    <th>#</th>
+                    <th>Member</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th class="no-sort">Actions</th>
                 </tr>
-                @empty
-                <tr><td colspan="7">No maintenance records found.</td></tr>
-                @endforelse
+            </thead>
+            <tbody>
             </tbody>
         </table>
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('#maintenance-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('admin.maintenance.index') }}",
+            lengthMenu: [[10, 20, 30, 40, 50], [10, 20, 30, 40, 50]],
+            pageLength: 10,
+            language: {
+                search: "",
+                searchPlaceholder: "Search records..."
+            },
+            columns: [
+                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                { data: 'member', name: 'member.username' },
+                { data: 'billing_date', name: 'billing_date' },
+                { data: 'total_amount', name: 'total_amount' },
+                { data: 'status', name: 'status', orderable: false, searchable: false },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false }
+            ]
+        });
+    });
+</script>
+@endpush

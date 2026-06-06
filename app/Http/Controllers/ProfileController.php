@@ -72,4 +72,37 @@ class ProfileController extends Controller
 
         return redirect()->back()->with('success', 'Profile updated successfully.');
     }
+
+    public function mobileAccess()
+    {
+        [$role, $userId, $model] = $this->getRoleConfig();
+        $user = $model::findOrFail($userId);
+
+        return view('profile.mobile_access', compact('user', 'role'));
+    }
+
+    public function generateQr()
+    {
+        [$role, $userId, $model] = $this->getRoleConfig();
+        $user = $model::findOrFail($userId);
+        
+        $token = bin2hex(random_bytes(32));
+        $orgId = $user->organization_id ?? 1;
+
+        \Illuminate\Support\Facades\DB::table('qr_auth_tokens')->insert([
+            'token' => $token,
+            'user_type' => $role,
+            'user_id' => $userId,
+            'organization_id' => $orgId,
+            'expires_at' => now()->addSeconds(60),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'qrToken' => $token,
+            'expiresIn' => 60
+        ]);
+    }
 }

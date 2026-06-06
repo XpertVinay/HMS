@@ -8,6 +8,14 @@
     <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
         <span class="dashboard">{{ ucfirst($role) }} Portal</span>
+        @if(session()->has('managed_org_id'))
+        <form action="{{ route('super_admin.org.stop_managing') }}" method="POST" style="display:inline; margin-left: 15px;">
+            @csrf
+            <button type="submit" class="btn-modern btn-sm btn-danger" style="padding: 4px 10px; font-size: 12px; font-weight: bold; border-radius: 4px;">
+                <i class='bx bx-x-circle'></i> Stop Managing {{ Str::limit(session('managed_org_name'), 15) }}
+            </button>
+        </form>
+        @endif
     </div>
     <div class="profile-details dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <div class="avatar">{{ strtoupper(substr($displayName, 0, 1)) }}</div>

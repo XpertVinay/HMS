@@ -6,15 +6,35 @@ use App\Http\Controllers\Controller;
 use App\Models\Announcement;
 use Illuminate\Http\Request;
 
+use Yajra\DataTables\Facades\DataTables;
+
 class AnnouncementController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $announcements = Announcement::where('organization_id', $this->orgId())
-            ->orderBy('created_at', 'desc')
-            ->get();
+        if ($request->ajax()) {
+            $query = Announcement::where('organization_id', $this->orgId());
+            return DataTables::of($query)
+                ->addIndexColumn()
+                ->addColumn('date', function ($a) {
+                    return $a->created_at->format('M d, Y H:i');
+                })
+                ->addColumn('actions', function ($a) {
+                    $editUrl = route('admin.announcements.edit', $a->announcement_id);
+                    $deleteUrl = route('admin.announcements.destroy', $a->announcement_id);
+                    $csrf = csrf_field();
+                    $method = method_field('DELETE');
+                    return "<a href='{$editUrl}' class='btn-modern btn-sm btn-outline'>Edit</a> 
+                            <form action='{$deleteUrl}' method='POST' style='display:inline;' onsubmit='return confirm(\"Delete this announcement?\");'>
+                                {$csrf} {$method}
+                                <button type='submit' class='btn-modern btn-sm btn-danger'>Delete</button>
+                            </form>";
+                })
+                ->rawColumns(['actions'])
+                ->make(true);
+        }
 
-        return view('admin.announcements.index', compact('announcements'));
+        return view('admin.announcements.index');
     }
 
     public function create()

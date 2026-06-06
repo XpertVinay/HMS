@@ -19,12 +19,22 @@ class RbacMiddleware
     {
         $user = $request->getAttribute('user');
 
-        if (!$user || !isset($user->role)) {
+        if (!$user || (!isset($user->roles) && !isset($user->user_type))) {
             $response = new Response();
             return ResponseFormatter::error($response, 'Forbidden: Missing role information', null, 403);
         }
 
-        if (!in_array($user->role, $this->requiredRoles)) {
+        $userRoles = isset($user->roles) ? (array)$user->roles : [$user->user_type];
+        
+        $hasRole = false;
+        foreach ($userRoles as $role) {
+            if (in_array($role, $this->requiredRoles)) {
+                $hasRole = true;
+                break;
+            }
+        }
+
+        if (!$hasRole) {
             $response = new Response();
             return ResponseFormatter::error($response, 'Forbidden: Insufficient permissions', null, 403);
         }

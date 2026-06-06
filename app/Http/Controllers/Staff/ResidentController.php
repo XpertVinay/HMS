@@ -7,14 +7,25 @@ use App\Models\Resident;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+use Yajra\DataTables\Facades\DataTables;
+
 class ResidentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $residents = Resident::where('organization_id', app('active_org')->id)
-            ->paginate(15);
+        if ($request->ajax()) {
+            $query = Resident::where('organization_id', app('active_org')->id);
+            return DataTables::of($query)
+                ->addIndexColumn()
+                ->addColumn('actions', function ($r) {
+                    $editUrl = route('staff.residents.edit', $r->id);
+                    return "<a href='{$editUrl}' class='btn-modern btn-sm btn-outline'><i class='bx bx-edit'></i> Edit</a>";
+                })
+                ->rawColumns(['actions'])
+                ->make(true);
+        }
             
-        return view('staff.residents.index', compact('residents'));
+        return view('staff.residents.index');
     }
 
     public function create()

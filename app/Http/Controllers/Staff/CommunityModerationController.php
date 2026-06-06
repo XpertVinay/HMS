@@ -9,22 +9,52 @@ use App\Models\Admin;
 use App\Notifications\PostRequiresStage2Approval;
 use Illuminate\Support\Facades\Auth;
 
+use Yajra\DataTables\Facades\DataTables;
+
 class CommunityModerationController extends Controller
 {
     /**
      * Display a listing of posts requiring Stage 1 approval.
      */
-    public function index()
+    public function index(Request $request)
     {
         $staff = \App\Models\Staff::find(session('aid'));
         
-        $posts = CommunityPost::with('member')
-            ->where('organization_id', $staff->organization_id)
-            ->where('status', 'pending_stage_1')
-            ->orderBy('created_at', 'asc')
-            ->paginate(10);
+        if ($request->ajax()) {
+            $query = CommunityPost::with('member')
+                ->where('organization_id', $staff->organization_id)
+                ->where('status', 'pending_stage_1');
+                
+            return DataTables::of($query)
+                ->addIndexColumn()
+                ->addColumn('member', function ($p) {
+                    return $p->member->username ?? 'Unknown';
+                })
+                ->addColumn('content', function ($p) {
+                    return \Illuminate\Support\Str::limit($p->content, 100);
+                })
+                ->addColumn('date', function ($p) {
+                    return $p->created_at ? $p->created_at->format('M d, Y H:i') : '-';
+                })
+                ->addColumn('actions', function ($p) {
+                    $approveUrl = route('staff.community.approve', $p->id);
+                    $rejectUrl = route('staff.community.reject', $p->id);
+                    $csrf = csrf_field();
+                    
+                    return "<form action='{$approveUrl}' method='POST' style='display:inline;'>
+                                {$csrf}
+                                <button type='submit' class='btn-modern btn-sm btn-success' onclick='return confirm(\"Approve this post for Stage 2?\")'>Approve</button>
+                            </form>
+                            <form action='{$rejectUrl}' method='POST' style='display:inline;'>
+                                {$csrf}
+                                <button type='submit' class='btn-modern btn-sm btn-danger' onclick='return confirm(\"Reject this post?\")'>Reject</button>
+                            </form>";
+                })
+                ->rawColumns(['actions'])
+                ->make(true);
+        }
             
-        return view('staff.community.moderation', compact('posts'));
+        return view('staff.community.moderation');
     }
 
     /**

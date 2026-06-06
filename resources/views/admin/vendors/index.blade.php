@@ -6,9 +6,41 @@
     <a href="{{ route('admin.vendors.create') }}" class="btn-modern"><i class='bx bx-plus'></i> Add Vendor</a>
 </div>
 <div class="sales-boxes" style="grid-template-columns: 1fr;"><div class="box">
-    <table class="data-table"><thead><tr><th>#</th><th>Business</th><th>Email</th><th>Actions</th></tr></thead><tbody>
-    @forelse($vendors as $i => $v)<tr><td>{{ $i+1 }}</td><td>{{ $v->business_name }}</td><td>{{ $v->email }}</td><td><a href="{{ route('admin.vendors.edit', $v->id) }}" class="btn-modern btn-sm btn-outline">Edit</a> <form action="{{ route('admin.vendors.destroy', $v->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Delete?');">@csrf @method('DELETE')<button type="submit" class="btn-modern btn-sm btn-danger">Delete</button></form></td></tr>
-    @empty <tr><td colspan="4">No vendors.</td></tr> @endforelse
-    </tbody></table>
+    <table class="data-table ajax-table" id="vendors-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Business</th>
+                <th>Email</th>
+                <th class="no-sort">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 </div></div>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('#vendors-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('admin.vendors.index') }}",
+            lengthMenu: [[10, 20, 30, 40, 50], [10, 20, 30, 40, 50]],
+            pageLength: 10,
+            language: {
+                search: "",
+                searchPlaceholder: "Search records..."
+            },
+            columns: [
+                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                { data: 'business_name', name: 'business_name' },
+                { data: 'email', name: 'email' },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false }
+            ]
+        });
+    });
+</script>
+@endpush

@@ -3,18 +3,36 @@
 @section('content')
 <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 20px;">My Maintenance Bills</h2>
 <div class="sales-boxes" style="grid-template-columns: 1fr;"><div class="box">
-    <table class="data-table">
-        <thead><tr><th>#</th><th>Date</th><th>Total</th><th>Paid</th><th>Status</th><th>Action</th></tr></thead>
+    <table class="data-table ajax-table" id="maintenance-table" style="width: 100%">
+        <thead><tr><th>#</th><th>Billing Month</th><th>Total</th><th>Due Date</th><th>Status</th><th class="no-sort">Action</th></tr></thead>
         <tbody>
-            @forelse($maintenances as $i => $m)
-            <tr>
-                <td>{{ $i+1 }}</td><td>{{ $m->billing_date?->format('M d, Y') }}</td>
-                <td>₹{{ number_format($m->total_amount,2) }}</td><td>₹{{ number_format($m->amount_payed,2) }}</td>
-                <td><span class="badge-status {{ $m->isPaid() ? 'paid' : 'unpaid' }}">{{ $m->isPaid() ? 'Paid' : 'Unpaid' }}</span></td>
-                <td><a href="{{ route('member.maintenance.show', $m->id) }}" class="btn-modern btn-sm btn-outline">View</a></td>
-            </tr>
-            @empty <tr><td colspan="6">No maintenance records.</td></tr> @endforelse
         </tbody>
     </table>
 </div></div>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('#maintenance-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('member.maintenance.index') }}",
+            lengthMenu: [[15, 30, 50, 100], [15, 30, 50, 100]],
+            pageLength: 15,
+            language: {
+                search: "",
+                searchPlaceholder: "Search records..."
+            },
+            columns: [
+                { data: 'DT_RowIndex', name: 'id', orderable: false, searchable: false },
+                { data: 'month', name: 'billing_date' },
+                { data: 'amount', name: 'total_amount' },
+                { data: 'due_date', name: 'due_date' },
+                { data: 'status', name: 'status' },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false }
+            ]
+        });
+    });
+</script>
+@endpush

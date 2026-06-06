@@ -12,6 +12,8 @@ use App\Notifications\PostRequiresStage1Approval;
 use App\Notifications\PostRequiresStage2Approval;
 use Illuminate\Support\Facades\Auth;
 
+use Yajra\DataTables\Facades\DataTables;
+
 class CommunityFeedController extends Controller
 {
     /**
@@ -98,13 +100,39 @@ class CommunityFeedController extends Controller
     /**
      * Display a listing of the member's own posts and their statuses.
      */
-    public function myPosts()
+    public function myPosts(Request $request)
     {
         $member = \App\Models\Member::find(session('uid'));
-        $posts = CommunityPost::where('member_id', $member->id)
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+        
+        if ($request->ajax()) {
+            $query = CommunityPost::where('member_id', $member->id);
+                
+            return DataTables::of($query)
+                ->addIndexColumn()
+                ->addColumn('title', function ($p) {
+                    return '<span class="font-bold text-gray-800">' . $p->title . '</span>';
+                })
+                ->addColumn('date', function ($p) {
+                    return $p->created_at ? $p->created_at->format('M d, Y') : '-';
+                })
+                ->addColumn('ai_score', function ($p) {
+                    if($p->ai_score) {
+                        $class = $p->ai_score >= 80 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
+                        return '<span class="text-xs font-semibold px-2 py-1 rounded ' . $class . '">' . $p->ai_score . ' / 100</span>';
+                    }
+                    return '<span class="text-gray-400">N/A</span>';
+                })
+                ->addColumn('status', function ($p) {
+                    if($p->status === 'approved') return '<span class="badge-status approved"><i class="bx bx-check"></i> Approved</span>';
+                    if($p->status === 'rejected') return '<span class="badge-status rejected"><i class="bx bx-x"></i> Rejected</span>';
+                    if($p->status === 'pending_stage_1') return '<span class="badge-status pending"><i class="bx bx-time"></i> Pending Stage 1 (Staff)</span>';
+                    if($p->status === 'pending_stage_2') return '<span class="badge-status pending"><i class="bx bx-time"></i> Pending Stage 2 (Admin)</span>';
+                    return ucfirst($p->status);
+                })
+                ->rawColumns(['title', 'ai_score', 'status'])
+                ->make(true);
+        }
             
-        return view('member.community.my_posts', compact('posts'));
+        return view('member.community.my_posts');
     }
 }

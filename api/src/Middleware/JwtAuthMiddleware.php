@@ -11,7 +11,12 @@ use Database;
 
 class JwtAuthMiddleware
 {
-    private $secretKey = 'YOUR_SUPER_SECRET_KEY'; // In production, move to .env
+    private $secretKey;
+
+    public function __construct()
+    {
+        $this->secretKey = getenv('JWT_SECRET') ?: 'default_super_secret_key_change_in_prod';
+    }
 
     public function __invoke(Request $request, RequestHandler $handler): Response
     {
@@ -27,11 +32,13 @@ class JwtAuthMiddleware
             $decoded = JWT::decode($token, new Key($this->secretKey, 'HS256'));
             
             // Optional: Check if JTI is in denylist (for strict logout enforcement even on access tokens)
-            $pdo = Database::getInstance()->getPDO();
-            $stmt = $pdo->prepare("SELECT jti FROM jwt_denylist WHERE jti = ?");
-            $stmt->execute([$decoded->jti]);
-            if ($stmt->fetch()) {
-                throw new \Exception('Token has been revoked.');
+            if (isset($decoded->jti)) {
+                $pdo = Database::getInstance()->getPDO();
+                $stmt = $pdo->prepare("SELECT jti FROM jwt_denylist WHERE jti = ?");
+                $stmt->execute([$decoded->jti]);
+                if ($stmt->fetch()) {
+                    throw new \Exception('Token has been revoked.');
+                }
             }
 
             // Append decoded token to request attributes for downstream controllers

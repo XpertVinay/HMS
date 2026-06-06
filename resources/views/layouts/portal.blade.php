@@ -6,9 +6,9 @@
     <title>@yield('title', 'Businzo RCMS') | {{ $activeOrg->name ?? 'Community Portal' }}</title>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
     <link rel="shortcut icon" href="{{ $theme->favicon ?? $activeOrg->resolved_logo ?? '/assets/images/businzo_logo.png' }}">
     <link rel="manifest" href="/manifest.json">
-    
     @include('partials.theme-variables')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
@@ -65,6 +65,27 @@
                 }
             });
         }
+    </script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var $tables = $('.data-table:not(.ajax-table), table.w-full.text-left.border-collapse:not(.ajax-table)');
+            if ($tables.length > 0) {
+                $tables.DataTable({
+                    lengthMenu: [[10, 20, 30, 40, 50], [10, 20, 30, 40, 50]],
+                    pageLength: 10,
+                    language: {
+                        search: "",
+                        searchPlaceholder: "Search records..."
+                    },
+                    columnDefs: [
+                        { targets: 'no-sort', orderable: false }
+                    ],
+                    retrieve: true
+                });
+            }
+        });
     </script>
     @stack('scripts')
 </body>

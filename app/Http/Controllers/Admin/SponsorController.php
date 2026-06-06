@@ -5,12 +5,31 @@ use App\Http\Controllers\Controller;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
 
+use Yajra\DataTables\Facades\DataTables;
+
 class SponsorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $sponsors = Sponsor::where('organization_id', $this->orgId())->get();
-        return view('admin.sponsors.index', compact('sponsors'));
+        if ($request->ajax()) {
+            $query = Sponsor::where('organization_id', $this->orgId());
+            return DataTables::of($query)
+                ->addIndexColumn()
+                ->addColumn('actions', function ($s) {
+                    $editUrl = route('admin.sponsors.edit', $s->id);
+                    $deleteUrl = route('admin.sponsors.destroy', $s->id);
+                    $csrf = csrf_field();
+                    $method = method_field('DELETE');
+                    return "<a href='{$editUrl}' class='btn-modern btn-sm btn-outline'><i class='bx bx-edit'></i></a> 
+                            <form action='{$deleteUrl}' method='POST' style='display:inline;' onsubmit='return confirm(\"Delete?\");'>
+                                {$csrf} {$method}
+                                <button type='submit' class='btn-modern btn-sm btn-danger'><i class='bx bx-trash'></i></button>
+                            </form>";
+                })
+                ->rawColumns(['actions'])
+                ->make(true);
+        }
+        return view('admin.sponsors.index');
     }
 
     public function create() { return view('admin.sponsors.create'); }

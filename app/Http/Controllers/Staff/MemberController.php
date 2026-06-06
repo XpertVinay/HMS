@@ -7,14 +7,25 @@ use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+use Yajra\DataTables\Facades\DataTables;
+
 class MemberController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $members = Member::where('organization_id', app('active_org')->id)
-            ->paginate(15);
+        if ($request->ajax()) {
+            $query = Member::where('organization_id', app('active_org')->id);
+            return DataTables::of($query)
+                ->addIndexColumn()
+                ->addColumn('actions', function ($m) {
+                    $editUrl = route('staff.members.edit', $m->id);
+                    return "<a href='{$editUrl}' class='btn-modern btn-sm btn-outline'><i class='bx bx-edit'></i> Edit</a>";
+                })
+                ->rawColumns(['actions'])
+                ->make(true);
+        }
             
-        return view('staff.members.index', compact('members'));
+        return view('staff.members.index');
     }
 
     public function create()
