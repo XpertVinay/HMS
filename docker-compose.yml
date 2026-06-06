@@ -4,16 +4,23 @@ services:
   web:
     build: .
     ports:
-      - "8080:80"
+      - "8080:8080"
     volumes:
       - .:/var/www/html
+      - /var/www/html/vendor
+      - /var/www/html/public/build
     depends_on:
       - db
     environment:
-      - DB_SERVER=db
+      - APP_ENV=${APP_ENV}
+      - APP_DEBUG=${APP_DEBUG}
+      - APP_KEY=${APP_KEY}
+      - DB_CONNECTION=mysql
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=hms
       - DB_USERNAME=root
       - DB_PASSWORD=root
-      - DB_NAME=hms
 
   db:
     image: mysql:8.0
@@ -25,8 +32,18 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
-      # Mount the DB dump to initialize the database
-      - "./hms .sql:/docker-entrypoint-initdb.d/init.sql"
+
+  db_test:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=hms_test
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_test_data:/var/lib/mysql
 
 volumes:
   db_data:
+  db_test_data:
