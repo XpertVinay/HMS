@@ -26,6 +26,10 @@ class ResolveOrganization
             $org = Organization::find(1) ?? $this->defaultOrganization();
         }
 
+        if ($org->status !== 'approved') {
+            abort(403, "This organization is currently {$org->status} and cannot be accessed.");
+        }
+
         // Bind to container so it can be injected anywhere
         app()->instance('active_org', $org);
 

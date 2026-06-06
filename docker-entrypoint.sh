@@ -12,5 +12,9 @@ if [ ! -f "vendor/autoload.php" ]; then
     composer install --no-interaction --optimize-autoloader
 fi
 
+# Run database migrations
+echo "Running database migrations..."
+php artisan migrate --force
+
 # Run the main container command (apache2)
 exec "$@"
