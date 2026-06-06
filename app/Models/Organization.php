@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Organization extends Model
 {
@@ -12,6 +13,8 @@ class Organization extends Model
     protected $fillable = [
         'name',
         'address',
+        'location',
+        'residential_type',
         'registration_code',
         'subdomain',
         'status',
@@ -109,7 +112,26 @@ class Organization extends Model
         return $this->hasMany(SolidApproval::class, 'organization_id');
     }
 
+    public function menuConfig(): HasOne
+    {
+        return $this->hasOne(OrganizationMenuConfig::class, 'organization_id');
+    }
+
     /* ── Accessors ─────────────────────────────────── */
+
+    /**
+     * Returns the list of enabled menu keys for this organization.
+     * Falls back to all available menus if no config exists.
+     */
+    public function getEnabledMenusAttribute(): array
+    {
+        if ($this->relationLoaded('menuConfig') && $this->menuConfig) {
+            return $this->menuConfig->enabled_menus ?? array_keys(config('menu_items', []));
+        }
+
+        $config = $this->menuConfig;
+        return $config ? $config->enabled_menus : array_keys(config('menu_items', []));
+    }
 
     /**
      * Returns the resolved logo path (handles external URLs, uploads, and fallback).

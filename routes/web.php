@@ -37,6 +37,7 @@ use App\Http\Controllers\Staff\DashboardController as StaffDashboard;
 
 // SuperAdmin Controllers
 use App\Http\Controllers\SuperAdmin\DashboardController as SuperAdminDashboard;
+use App\Http\Controllers\SuperAdmin\MenuConfigController as SuperAdminMenuConfig;
 
 /*
 |--------------------------------------------------------------------------
@@ -260,4 +261,12 @@ Route::prefix('super-admin')->middleware(['auth.session', 'role:super_admin'])->
     Route::get('/dashboard', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'index'])->name('dashboard');
     Route::post('/organizations/{id}/approve', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'approveOrg'])->name('org.approve');
     Route::post('/organizations/{id}/reject', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'rejectOrg'])->name('org.reject');
+
+    // Menu Configuration
+    Route::get('/menu-config', [SuperAdminMenuConfig::class, 'index'])->name('menu_config.index');
+    Route::get('/menu-config/bulk-edit', [SuperAdminMenuConfig::class, 'bulkEdit'])->name('menu_config.bulk_edit');
+    Route::put('/menu-config/bulk-update', [SuperAdminMenuConfig::class, 'bulkUpdate'])->name('menu_config.bulk_update');
+    Route::get('/menu-config/{id}/edit', [SuperAdminMenuConfig::class, 'edit'])->name('menu_config.edit');
+    Route::put('/menu-config/{id}', [SuperAdminMenuConfig::class, 'update'])->name('menu_config.update');
+    Route::get('/menu-config/presets/{type}', [SuperAdminMenuConfig::class, 'presetMenus'])->name('menu_config.presets');
 });
