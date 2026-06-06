@@ -68,7 +68,8 @@ class AuthService
     {
         foreach (self::ROLE_CONFIG as $role => $config) {
             $user = $this->findUser($config['model'], $username, $orgId, $config['org_scoped']);
-
+            echo ">>>>>>>>";
+            print_r([$config, $username, $password, $orgId]);
             if (!$user) {
                 continue;
             }
@@ -114,9 +115,16 @@ class AuthService
             }
         });
 
-        if ($orgScoped) {
-            $query->where('organization_id', $orgId);
-        }
+        // if ($orgScoped) {
+        //     $query->where('organization_id', $orgId);
+        // }
+
+        $sql = $query->toSql();
+        $bindings = $query->getBindings();
+        echo ">>>>>>>";
+        print_r([$sql, $bindings]);
+        echo ">>>>>>>><br>";
+        // exit;
 
         return $query->first();
     }
@@ -147,7 +155,7 @@ class AuthService
     private function setSession($user, string $role, array $config, int $orgId): void
     {
         $displayName = $user->name ?? $user->contact_name ?? $user->business_name ?? $user->username ?? 'User';
-        
+
         session([
             'logged' => true,
             'username' => $user->username ?? $user->business_name ?? '',

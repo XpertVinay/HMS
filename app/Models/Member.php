@@ -13,8 +13,6 @@ class Member extends Authenticatable
 
     protected $table = 'member';
 
-    const UPDATED_AT = null;
-
     protected $fillable = [
         'username',
         'email',

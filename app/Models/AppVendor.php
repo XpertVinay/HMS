@@ -14,17 +14,17 @@ class AppVendor extends Authenticatable
 {
     protected $table = 'vendor';
 
-    const UPDATED_AT = null;
-
     protected $fillable = [
         'business_name',
         'email',
         'password',
         'business_registration',
-        'organization_id',
         'bank_account_details',
         'is_gst_verified_staff',
         'is_gst_verified_admin',
+        'global_rating',
+        'total_tasks_completed',
+        'is_active_globally',
     ];
 
     protected $hidden = ['password'];
@@ -47,10 +47,9 @@ class AppVendor extends Authenticatable
         return $this->business_name;
     }
 
-    public function organization(): BelongsTo
-    {
-        return $this->belongsTo(Organization::class, 'organization_id');
-    }
+    /**
+     * Vendors are now global — organization alignment is via rwa_vendor_alignments table.
+     */
 
     public function invoices(): HasMany
     {

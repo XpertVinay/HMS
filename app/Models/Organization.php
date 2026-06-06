@@ -35,6 +35,62 @@ class Organization extends Model
     const DEFAULT_PRIMARY_COLOR = '#E6192B';
     const DEFAULT_SECONDARY_COLOR = '#1E2B58';
 
+    /* ── Theme Engine Relationships ────────────────── */
+
+    /**
+     * Custom domains/subdomains mapped to this organization.
+     */
+    public function domains(): HasMany
+    {
+        return $this->hasMany(TenantDomain::class, 'organization_id');
+    }
+
+    /**
+     * All theme configurations for this organization.
+     */
+    public function themes(): HasMany
+    {
+        return $this->hasMany(TenantTheme::class, 'organization_id');
+    }
+
+    /**
+     * The currently active theme.
+     */
+    public function activeTheme(): HasOne
+    {
+        return $this->hasOne(TenantTheme::class, 'organization_id')
+                    ->where('is_active', true);
+    }
+
+    /**
+     * Returns the resolved TenantTheme for this organization.
+     * Falls back to a virtual default theme built from legacy columns.
+     */
+    public function getResolvedThemeAttribute(): TenantTheme
+    {
+        // Try to load the active theme from DB
+        if ($this->relationLoaded('activeTheme') && $this->activeTheme) {
+            return $this->activeTheme;
+        }
+
+        $theme = $this->activeTheme;
+        if ($theme) {
+            return $theme;
+        }
+
+        // Fallback: build a virtual TenantTheme from legacy columns
+        $fallback = new TenantTheme();
+        $fallback->organization_id = $this->id;
+        $fallback->primary_color   = $this->primary_color ?: self::DEFAULT_PRIMARY_COLOR;
+        $fallback->secondary_color = $this->secondary_color ?: self::DEFAULT_SECONDARY_COLOR;
+        $fallback->logo_light      = $this->resolved_logo;
+        $fallback->theme_mode      = 'light';
+        $fallback->theme_version   = '0.0.0';
+        $fallback->is_active       = true;
+
+        return $fallback;
+    }
+
     /* ── Relationships ─────────────────────────────── */
 
     public function admins(): HasMany

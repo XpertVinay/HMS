@@ -10,7 +10,8 @@ class LoginController extends Controller
 {
     public function __construct(
         private AuthService $authService
-    ) {}
+    ) {
+    }
 
     /**
      * Show the login form.

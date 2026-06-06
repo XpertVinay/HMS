@@ -80,7 +80,7 @@ return new class extends Migration
             $table->string('email', 50)->unique();
             $table->string('password', 255);
             $table->string('address', 255);
-            $table->integer('phone')->nullable();
+            $table->string('phone', 20)->nullable();
             $table->dateTime('created_at')->nullable()->useCurrent();
             $table->string('share_certificate', 255)->nullable();
             $table->boolean('is_deed_verified_staff')->default(false);

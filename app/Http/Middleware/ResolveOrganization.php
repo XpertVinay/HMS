@@ -3,23 +3,33 @@
 namespace App\Http\Middleware;
 
 use App\Models\Organization;
+use App\Services\TenantResolver;
+use App\Services\ThemeService;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Resolves the active organization from the subdomain or ?org= query param.
- * Binds the resolved Organization to the service container and shares it with all views.
+ * Resolves the active organization from the request domain/subdomain,
+ * loads the active theme, and shares both with the application.
  *
- * Replaces the legacy config/app.php subdomain resolution logic.
+ * Replaces the legacy subdomain-only resolution with full support for:
+ *  - Custom domains (myrwa.com)
+ *  - Subdomains (org1.rcms.businzo.com)
+ *  - Query param override (?org=slug)
+ *  - Theme CSS injection into Blade views
  */
 class ResolveOrganization
 {
+    public function __construct(
+        protected TenantResolver $tenantResolver,
+        protected ThemeService $themeService,
+    ) {}
+
     public function handle(Request $request, Closure $next): Response
     {
-        $subdomain = $this->resolveSubdomain($request);
-
-        $org = Organization::where('subdomain', $subdomain)->first();
+        // ── 1. Resolve Organization ──────────────────────
+        $org = $this->tenantResolver->resolve($request);
 
         if (!$org) {
             // Fallback to default organization
@@ -30,44 +40,31 @@ class ResolveOrganization
             abort(403, "This organization is currently {$org->status} and cannot be accessed.");
         }
 
-        // Bind to container so it can be injected anywhere
+        // Eager-load the active theme to avoid N+1
+        if ($org->exists && !$org->relationLoaded('activeTheme')) {
+            $org->load('activeTheme');
+        }
+
+        // ── 2. Resolve Theme ─────────────────────────────
+        $theme = $this->themeService->resolveTheme($org);
+        $themeCss = $this->themeService->getThemeCss($org);
+        $themeCustomCss = $this->themeService->getCustomCss($theme);
+
+        // ── 3. Bind to Container ─────────────────────────
         app()->instance('active_org', $org);
+        app()->instance('active_theme', $theme);
 
-        // Share with all Blade views
+        // ── 4. Share with Blade Views ────────────────────
         view()->share('activeOrg', $org);
+        view()->share('theme', $theme);
+        view()->share('themeCss', $themeCss);
+        view()->share('themeCustomCss', $themeCustomCss);
+        view()->share('themeMode', $theme->theme_mode ?? 'light');
 
-        // Store in session for backwards compatibility
+        // ── 5. Session for Backward Compatibility ────────
         session(['active_org_id' => $org->id]);
 
         return $next($request);
-    }
-
-    /**
-     * Extract the subdomain from the request host.
-     * Supports override via ?org= query parameter for development.
-     */
-    private function resolveSubdomain(Request $request): string
-    {
-        // Development override via query parameter
-        if ($request->has('org')) {
-            $subdomain = $request->query('org');
-            session(['dev_org' => $subdomain]);
-            return $subdomain;
-        }
-
-        if (session()->has('dev_org')) {
-            return session('dev_org');
-        }
-
-        // Extract subdomain from host (e.g., org1.rcms.businzo.com → org1)
-        $host = $request->getHost();
-        $parts = explode('.', $host);
-
-        if (count($parts) >= 3 && $parts[0] !== 'www') {
-            return $parts[0];
-        }
-
-        return 'default';
     }
 
     /**

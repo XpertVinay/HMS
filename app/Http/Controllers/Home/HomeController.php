@@ -9,12 +9,15 @@ use App\Models\Gallery;
 use App\Models\Donor;
 use App\Models\Sponsor;
 use App\Models\Member;
+use App\Models\Organization;
 
 class HomeController extends Controller
 {
     public function index()
     {
         $orgId = $this->orgId();
+
+        $organization = Organization::where('id', $orgId)->first();
 
         $announcements = Announcement::where('organization_id', $orgId)
             ->orderBy('created_at', 'desc')

@@ -1,5 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
+
+/* Portal theme styles (extracted from inline portal.blade.php) */
+@import './portal-theme.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -11,8 +14,14 @@
     --font-outfit: 'Outfit', sans-serif;
     --font-inter: 'Inter', sans-serif;
     
-    --color-primary: var(--primary);
-    --color-secondary: var(--secondary);
+    /* Theme engine CSS variable bridge for Tailwind */
+    --color-primary: var(--color-primary, #2563eb);
+    --color-secondary: var(--color-secondary, #64748b);
+    --color-accent: var(--color-accent, #10b981);
+
+    /* Legacy aliases (backward compatibility) */
+    --color-primary: var(--primary, #2563eb);
+    --color-secondary: var(--secondary, #64748b);
 }
 
 /* Base custom styles to support glassmorphism and animations */
@@ -21,12 +30,15 @@
         @apply bg-white/10 backdrop-blur-lg border border-white/20 shadow-xl;
     }
     .glass-input {
-        @apply w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 text-white placeholder-white/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all;
+        @apply w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 text-white placeholder-white/50 focus:outline-none transition-all;
+        border-color: var(--color-primary);
     }
     .glass-btn {
-        @apply w-full px-4 py-3 rounded-xl bg-primary text-white font-semibold hover:opacity-90 hover:-translate-y-0.5 transition-all shadow-lg;
+        @apply w-full px-4 py-3 rounded-xl text-white font-semibold hover:opacity-90 hover:-translate-y-0.5 transition-all shadow-lg;
+        background: var(--color-primary);
     }
     .text-gradient {
-        @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-400;
+        @apply bg-clip-text text-transparent;
+        background-image: linear-gradient(to right, var(--color-primary), var(--color-accent, #a855f7));
     }
 }

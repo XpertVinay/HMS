@@ -12,6 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
         web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
+        then: function () {
+            // Theme Engine API routes (stateless, no session middleware)
+            require __DIR__.'/../routes/api.php';
+        },
     )
     ->withMiddleware(function (Middleware $middleware): void {
         // Global middleware — runs on every web request

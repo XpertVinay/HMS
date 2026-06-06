@@ -269,4 +269,16 @@ Route::prefix('super-admin')->middleware(['auth.session', 'role:super_admin'])->
     Route::get('/menu-config/{id}/edit', [SuperAdminMenuConfig::class, 'edit'])->name('menu_config.edit');
     Route::put('/menu-config/{id}', [SuperAdminMenuConfig::class, 'update'])->name('menu_config.update');
     Route::get('/menu-config/presets/{type}', [SuperAdminMenuConfig::class, 'presetMenus'])->name('menu_config.presets');
+
+    // Theme Builder
+    Route::prefix('theme-builder')->name('theme_builder.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\SuperAdmin\ThemeBuilderController::class, 'index'])->name('index');
+        Route::get('/presets', [\App\Http\Controllers\SuperAdmin\ThemeBuilderController::class, 'presets'])->name('presets');
+        Route::get('/{orgId}/edit', [\App\Http\Controllers\SuperAdmin\ThemeBuilderController::class, 'edit'])->name('edit');
+        Route::post('/{orgId}', [\App\Http\Controllers\SuperAdmin\ThemeBuilderController::class, 'store'])->name('store');
+        Route::post('/{orgId}/preview', [\App\Http\Controllers\SuperAdmin\ThemeBuilderController::class, 'preview'])->name('preview');
+        Route::post('/{orgId}/publish', [\App\Http\Controllers\SuperAdmin\ThemeBuilderController::class, 'publish'])->name('publish');
+        Route::post('/{orgId}/rollback', [\App\Http\Controllers\SuperAdmin\ThemeBuilderController::class, 'rollback'])->name('rollback');
+        Route::post('/{orgId}/apply-preset', [\App\Http\Controllers\SuperAdmin\ThemeBuilderController::class, 'applyPreset'])->name('apply_preset');
+    });
 });

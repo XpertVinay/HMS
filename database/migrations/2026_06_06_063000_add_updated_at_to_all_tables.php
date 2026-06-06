@@ -7,19 +7,27 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Tables that are missing the `updated_at` timestamp column.
-     * These models rely on Eloquent timestamps but the column was never added.
+     * Tables that might be missing the `updated_at` timestamp column.
      */
     private array $tables = [
+        'organizations',
+        'super_admin',
+        'admin',
+        'staff',
+        'member',
+        'resident',
+        'property',
+        'vendor',
+        'vendor_invoice',
         'announcement',
         'donors',
         'events',
-        'organizations',
-        'property',
+        'gallery',
+        'maintenance',
+        'maintenance_items',
         'registry',
         'sponsors',
         'tickets',
-        'vendor_invoice',
     ];
 
     public function up(): void
@@ -27,19 +35,10 @@ return new class extends Migration
         foreach ($this->tables as $table) {
             if (Schema::hasTable($table) && !Schema::hasColumn($table, 'updated_at')) {
                 Schema::table($table, function (Blueprint $blueprint) {
-                    $blueprint->timestamp('updated_at')->nullable()->after('created_at');
+                    $blueprint->timestamp('updated_at')->nullable();
                 });
             }
         }
-
-        // Gallery uses `uploaded_at` instead of `created_at` and sets UPDATED_AT = null,
-        // so it does NOT need an updated_at column.
-
-        // Vendor table sets UPDATED_AT = null in the AppVendor model,
-        // so it does NOT need an updated_at column.
-
-        // Maintenance & MaintenanceItem have $timestamps = false,
-        // so they do NOT need timestamp columns.
     }
 
     public function down(): void
