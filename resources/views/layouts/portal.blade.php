@@ -13,8 +13,8 @@
     
     <style>
         :root {
-            --primary-color: {{ $activeOrg->resolved_primary_color ?? '#4f46e5' }};
-            --secondary-color: {{ $activeOrg->resolved_secondary_color ?? '#1d1b31' }};
+            --primary-color: {{ $activeOrg->resolved_primary_color ?? '#E6192B' }};
+            --secondary-color: {{ $activeOrg->resolved_secondary_color ?? '#1E2B58' }};
             --sidebar-bg: var(--secondary-color);
             --accent: var(--primary-color);
         }
@@ -185,7 +185,7 @@
         .btn-modern {
             display: inline-flex; align-items: center; justify-content: center; gap: 6px;
             padding: 10px 24px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, #4338ca 100%); color: #fff;
+            background: var(--primary-color); color: #fff;
             border: none; border-radius: 12px;
             font-weight: 600; font-size: 14px;
             cursor: pointer; text-decoration: none;
@@ -250,7 +250,7 @@
         .floating-chat-btn {
             position: fixed; bottom: 32px; right: 32px;
             width: 64px; height: 64px; border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color) 0%, #4338ca 100%); color: #fff;
+            background: var(--primary-color); color: #fff;
             display: flex; align-items: center; justify-content: center;
             font-size: 28px; box-shadow: 0 10px 25px rgba(79,70,229,0.4);
             text-decoration: none; z-index: 1000;

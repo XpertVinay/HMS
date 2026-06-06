@@ -11,8 +11,8 @@
     
     <style>
         :root {
-            --primary: {{ $activeOrg->resolved_primary_color ?? '#4f46e5' }};
-            --secondary: {{ $activeOrg->resolved_secondary_color ?? '#1d1b31' }};
+            --primary: {{ $activeOrg->resolved_primary_color ?? '#E6192B' }};
+            --secondary: {{ $activeOrg->resolved_secondary_color ?? '#1E2B58' }};
         }
     </style>
 </head>
@@ -24,25 +24,25 @@
             <div class="flex justify-between items-center h-[72px]">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center gap-3">
-                    <img src="{{ $activeOrg->resolved_logo ?? '/assets/images/businzo_logo.png' }}" alt="Logo" class="h-10 w-auto object-contain">
+                    <img src="{{ $activeOrg->resolved_logo ?? '/assets/images/businzo_logo.png' }}" alt="Logo" class="h-10 w-auto object-contain" style="height: 70px;">
                 </div>
                 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-2">
-                    <a href="{{ route('home') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50 transition-colors">Home</a>
-                    <a href="{{ route('home.members') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50 transition-colors">Members</a>
-                    <a href="{{ route('home.donors') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50 transition-colors">Donors</a>
-                    <a href="{{ route('home.events') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50 transition-colors">Events</a>
-                    <a href="{{ route('home.notices') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50 transition-colors">Notices</a>
-                    <a href="{{ route('home.sponsors') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50 transition-colors">Sponsors</a>
-                    <a href="{{ route('home.gallery') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-700 hover:text-[var(--primary)] hover:bg-gray-50 transition-colors">Gallery</a>
+                    <a href="{{ route('home') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-700 hover:text-primary hover:bg-gray-50 transition-colors">Home</a>
+                    <a href="{{ route('home.members') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-700 hover:text-primary hover:bg-gray-50 transition-colors">Members</a>
+                    <a href="{{ route('home.donors') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-700 hover:text-primary hover:bg-gray-50 transition-colors">Donors</a>
+                    <a href="{{ route('home.events') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-700 hover:text-primary hover:bg-gray-50 transition-colors">Events</a>
+                    <a href="{{ route('home.notices') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-700 hover:text-primary hover:bg-gray-50 transition-colors">Notices</a>
+                    <a href="{{ route('home.sponsors') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-700 hover:text-primary hover:bg-gray-50 transition-colors">Sponsors</a>
+                    <a href="{{ route('home.gallery') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-700 hover:text-primary hover:bg-gray-50 transition-colors">Gallery</a>
                     
-                    <a href="{{ route('login') }}" class="ml-4 px-6 py-2.5 rounded-lg text-sm font-bold text-white bg-[#5a67d8] hover:bg-[#4c51bf] shadow-md transition-all">Login</a>
+                    <a href="{{ route('login') }}" class="ml-4 px-6 py-2.5 rounded-lg text-sm font-bold text-white bg-primary hover:opacity-90 shadow-md transition-all" style="background: #0d1f3f">Login</a>
                 </div>
                 
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
-                    <a href="{{ route('login') }}" class="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-[#5a67d8] mr-2">Login</a>
+                    <a href="{{ route('login') }}" class="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-primary mr-2">Login</a>
                 </div>
             </div>
         </div>
@@ -70,10 +70,10 @@
                 <div>
                     <h4 class="text-white font-bold mb-6 tracking-wider uppercase text-sm">Quick Links</h4>
                     <ul class="space-y-3">
-                        <li><a href="{{ route('home') }}" class="hover:text-white transition-colors flex items-center gap-2"><i class='bx bx-chevron-right text-[var(--primary)]'></i> Home</a></li>
-                        <li><a href="{{ route('home.events') }}" class="hover:text-white transition-colors flex items-center gap-2"><i class='bx bx-chevron-right text-[var(--primary)]'></i> Events</a></li>
-                        <li><a href="{{ route('home.gallery') }}" class="hover:text-white transition-colors flex items-center gap-2"><i class='bx bx-chevron-right text-[var(--primary)]'></i> Gallery</a></li>
-                        <li><a href="{{ route('login') }}" class="hover:text-white transition-colors flex items-center gap-2"><i class='bx bx-chevron-right text-[var(--primary)]'></i> Resident Login</a></li>
+                        <li><a href="{{ route('home') }}" class="hover:text-white transition-colors flex items-center gap-2"><i class='bx bx-chevron-right text-primary'></i> Home</a></li>
+                        <li><a href="{{ route('home.events') }}" class="hover:text-white transition-colors flex items-center gap-2"><i class='bx bx-chevron-right text-primary'></i> Events</a></li>
+                        <li><a href="{{ route('home.gallery') }}" class="hover:text-white transition-colors flex items-center gap-2"><i class='bx bx-chevron-right text-primary'></i> Gallery</a></li>
+                        <li><a href="{{ route('login') }}" class="hover:text-white transition-colors flex items-center gap-2"><i class='bx bx-chevron-right text-primary'></i> Resident Login</a></li>
                     </ul>
                 </div>
                 
@@ -81,11 +81,11 @@
                     <h4 class="text-white font-bold mb-6 tracking-wider uppercase text-sm">Contact Info</h4>
                     <ul class="space-y-4">
                         <li class="flex items-start gap-3">
-                            <i class='bx bx-map text-[var(--primary)] text-xl mt-0.5'></i>
+                            <i class='bx bx-map text-primary text-xl mt-0.5'></i>
                             <span class="text-white/70">{{ $activeOrg->address ?? '123 Community Lane, Cityville' }}</span>
                         </li>
                         <li class="flex items-center gap-3">
-                            <i class='bx bx-envelope text-[var(--primary)] text-xl'></i>
+                            <i class='bx bx-envelope text-primary text-xl'></i>
                             <span class="text-white/70">support@{{ $activeOrg->subdomain ?? 'community' }}.com</span>
                         </li>
                     </ul>
@@ -95,9 +95,9 @@
             <div class="border-t border-white/10 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-sm text-white/50">&copy; {{ date('Y') }} {{ $activeOrg->name ?? 'Businzo RCMS' }}. All rights reserved.</p>
                 <div class="flex gap-4">
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[var(--primary)] transition-colors"><i class='bx bxl-facebook text-xl'></i></a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[var(--primary)] transition-colors"><i class='bx bxl-twitter text-xl'></i></a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[var(--primary)] transition-colors"><i class='bx bxl-instagram text-xl'></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors"><i class='bx bxl-facebook text-xl'></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors"><i class='bx bxl-twitter text-xl'></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors"><i class='bx bxl-instagram text-xl'></i></a>
                 </div>
             </div>
         </div>

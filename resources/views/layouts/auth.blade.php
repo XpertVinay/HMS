@@ -10,15 +10,15 @@
     
     <style>
         :root {
-            --primary: {{ $activeOrg->resolved_primary_color ?? '#4f46e5' }};
-            --secondary: {{ $activeOrg->resolved_secondary_color ?? '#1d1b31' }};
+            --primary: {{ $activeOrg->resolved_primary_color ?? '#E6192B' }};
+            --secondary: {{ $activeOrg->resolved_secondary_color ?? '#1E2B58' }};
         }
     </style>
 </head>
 <body class="min-h-screen relative flex items-center justify-center font-sans text-white antialiased overflow-x-hidden @yield('theme-class', '') bg-[var(--secondary)]">
     <!-- Dynamic Mesh/Gradient Background -->
     <div class="absolute inset-0 z-0 pointer-events-none">
-        <div class="absolute top-0 left-0 w-full h-full opacity-60 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[var(--primary)] via-[var(--secondary)] to-[var(--secondary)]"></div>
+        <div class="absolute top-0 left-0 w-full h-full opacity-60 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary via-secondary to-secondary"></div>
         <div class="absolute bottom-0 right-0 w-3/4 h-3/4 opacity-40 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-purple-500/30 via-transparent to-transparent"></div>
     </div>
     

@@ -32,8 +32,8 @@ class Organization extends Model
      * Default brand values used when org has no custom branding.
      */
     const DEFAULT_LOGO = '/assets/images/businzo_logo.png';
-    const DEFAULT_PRIMARY_COLOR = '#4f46e5';
-    const DEFAULT_SECONDARY_COLOR = '#1d1b31';
+    const DEFAULT_PRIMARY_COLOR = '#E6192B';
+    const DEFAULT_SECONDARY_COLOR = '#1E2B58';
 
     /* ── Relationships ─────────────────────────────── */
 
