@@ -64,7 +64,8 @@ class ThemeCacheService
      */
     private function cacheKey(int $orgId, string $version): string
     {
-        return "theme_css_{$orgId}_{$version}";
+        $bustTimestamp = Cache::store($this->driver())->get("theme_bust_{$orgId}", '0');
+        return "theme_css_{$orgId}_{$version}_{$bustTimestamp}";
     }
 
     /**

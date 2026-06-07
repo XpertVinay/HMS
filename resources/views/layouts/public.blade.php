@@ -83,7 +83,23 @@
                         class="px-4 py-2 text-sm font-semibold text-white mr-2"
                         style="background: var(--color-primary); border-radius: var(--border-radius-md);"
                         >Login</a>
+                    <button id="mobileMenuBtn" class="text-gray-500 hover:text-gray-900 focus:outline-none p-2">
+                        <i class='bx bx-menu text-3xl' style="color: var(--text-primary);"></i>
+                    </button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden border-t" style="background: var(--navbar-bg); border-color: var(--border-color-light);">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="{{ route('home') }}" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);">Home</a>
+                <a href="{{ route('home.members') }}" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);">Members</a>
+                <a href="{{ route('home.donors') }}" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);">Donors</a>
+                <a href="{{ route('home.events') }}" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);">Events</a>
+                <a href="{{ route('home.notices') }}" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);">Notices</a>
+                <a href="{{ route('home.sponsors') }}" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);">Sponsors</a>
+                <a href="{{ route('home.gallery') }}" class="block px-3 py-2 rounded-md text-base font-medium" style="color: var(--text-primary);">Gallery</a>
             </div>
         </div>
     </nav>
@@ -162,6 +178,20 @@
             </div>
         </div>
     </footer>
+
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('mobileMenuBtn');
+            const menu = document.getElementById('mobileMenu');
+
+            if (btn && menu) {
+                btn.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

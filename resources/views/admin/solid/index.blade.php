@@ -2,22 +2,24 @@
 @section('title', 'SOLID Approvals (Stage 2)')
 @section('content')
 <div class="flex justify-between items-center mb-6">
-    <h2 class="text-2xl font-bold text-gray-800">SOLID Approvals Queue <span class="text-sm font-normal text-gray-500 ml-2">(Stage 2 / Final)</span></h2>
+    <h2 class="text-2xl font-bold" style="color: var(--text-primary);">SOLID Approvals Queue <span class="text-sm font-normal ml-2" style="color: var(--text-secondary);">(Stage 2 / Final)</span></h2>
 </div>
 
-<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-    <table class="data-table ajax-table w-full" id="solid-table">
-        <thead>
-            <tr>
-                <th>Member</th>
-                <th>Request Details</th>
-                <th>Stage 1 Result</th>
-                <th class="no-sort">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+<div class="sales-boxes" style="grid-template-columns: 1fr;">
+    <div class="box">
+        <table class="data-table ajax-table w-full" id="solid-table">
+            <thead>
+                <tr>
+                    <th>Member</th>
+                    <th>Request Details</th>
+                    <th>Stage 1 Result</th>
+                    <th class="no-sort">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 </div>
 @endsection
 

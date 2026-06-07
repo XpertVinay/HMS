@@ -107,6 +107,10 @@
                         ['primary_color', 'Primary Color', $theme->primary_color ?? $defaults['primary_color']],
                         ['secondary_color', 'Secondary Color', $theme->secondary_color ?? $defaults['secondary_color']],
                         ['accent_color', 'Accent Color', $theme->accent_color ?? $defaults['accent_color']],
+                        ['background_primary', 'Background Primary', $theme->background_primary ?? $defaults['background_primary']],
+                        ['background_secondary', 'Background Secondary', $theme->background_secondary ?? $defaults['background_secondary']],
+                        ['text_primary', 'Text Primary', $theme->text_primary ?? $defaults['text_primary']],
+                        ['text_secondary', 'Text Secondary', $theme->text_secondary ?? $defaults['text_secondary']],
                     ] as [$field, $label, $value])
                     <div class="color-input-group">
                         <label for="{{ $field }}">{{ $label }}</label>
@@ -146,6 +150,7 @@
                     @foreach([
                         ['logo_light', 'Logo (Light Background)', $theme->logo_light ?? $organization->logo_url],
                         ['logo_dark', 'Logo (Dark Background)', $theme->logo_dark ?? $organization->logo_url],
+                        ['favicon', 'Favicon (16x16 or 32x32)', $theme->favicon],
                     ] as [$field, $label, $currentValue])
                     <div>
                         <label class="block text-sm font-semibold mb-2" style="color: var(--text-secondary);">{{ $label }}</label>

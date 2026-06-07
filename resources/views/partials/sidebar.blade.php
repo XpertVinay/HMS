@@ -6,7 +6,20 @@
 <div class="sidebar">
     <div class="logo-details">
         <a href="{{ route('home') }}">
-            <i><img src="{{ $activeOrg->resolved_logo ?? '/assets/images/businzo_logo.png' }}" alt="logo"></i>
+            @php
+                $logoUrl = '/assets/images/businzo_logo.png';
+                if (isset($theme)) {
+                    // Decide which logo based on theme mode. Sidebar is dark, so usually we'd want logo_dark if available
+                    $logoUrl = $theme->logo_dark ?? $theme->logo_light ?? $activeOrg->resolved_logo ?? '/assets/images/businzo_logo.png';
+                } elseif (isset($activeOrg)) {
+                    $logoUrl = $activeOrg->resolved_logo ?? '/assets/images/businzo_logo.png';
+                }
+                
+                $finalLogoSrc = (str_starts_with($logoUrl, 'http') || str_starts_with($logoUrl, '/')) 
+                    ? $logoUrl 
+                    : asset('storage/' . $logoUrl);
+            @endphp
+            <i><img src="{{ $finalLogoSrc }}" alt="logo"></i>
         </a>
     </div>
     <ul class="nav-links">

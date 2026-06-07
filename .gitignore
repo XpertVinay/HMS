@@ -31,3 +31,12 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
+
+# cypress
+cypress/
+
+# test files
+test_cache.php
+test_migration.php
+test_role.php
+test_theme.php

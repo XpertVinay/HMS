@@ -8,7 +8,7 @@
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        @forelse($gallery as $photo)
+        @forelse($galleries as $photo)
         <div class="relative group rounded-2xl overflow-hidden aspect-square bg-gray-100 shadow-sm border border-gray-200">
             <img src="{{ Storage::url($photo->image_path) }}" alt="{{ $photo->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">

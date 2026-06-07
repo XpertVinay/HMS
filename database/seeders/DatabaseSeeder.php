@@ -25,6 +25,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call(SuperAdminSeeder::class);
 
-        $this->call(DemoDataSeeder::class);
+        // Suppressed old demo data seeder
+        // $this->call(DemoDataSeeder::class);
+
+        // Run the new MultiOrg Demo Data seeder
+        $this->call(MultiOrgDemoDataSeeder::class);
     }
 }
