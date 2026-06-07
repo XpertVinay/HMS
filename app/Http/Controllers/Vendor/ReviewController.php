@@ -11,7 +11,7 @@ class ReviewController extends Controller
 {
     public function index()
     {
-        $vendor = AppVendor::find(session('uid'));
+        $vendor = AppVendor::find(session('vid'));
         
         $reviews = VendorReview::where('vendor_id', $vendor->id)
             ->with('member')

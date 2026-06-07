@@ -47,6 +47,27 @@
         </div>
         <i class='bx bx-store-alt icon' style="background: #e0f8e9; color: #1cc88a;"></i>
     </div>
+    <div class="box">
+        <div class="right-side">
+            <div class="box-topic">Requests Resolved</div>
+            <div class="number">{{ $totalRequestsResolved }}</div>
+        </div>
+        <i class='bx bx-check-circle icon staff'></i>
+    </div>
+    <div class="box">
+        <div class="right-side">
+            <div class="box-topic">Pending Requests</div>
+            <div class="number">{{ $pendingRequests }}</div>
+        </div>
+        <i class='bx bx-time icon file'></i>
+    </div>
+    <div class="box">
+        <div class="right-side">
+            <div class="box-topic">Monthly Maintenance</div>
+            <div class="number">₹{{ number_format($monthlyMaintenanceCollected, 2) }}</div>
+        </div>
+        <i class='bx bx-money icon money'></i>
+    </div>
 </div>
 
 <div class="sales-boxes">

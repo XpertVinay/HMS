@@ -14,7 +14,7 @@ class ServiceRequestController extends Controller
 {
     public function index()
     {
-        $vendor = AppVendor::find(session('uid'));
+        $vendor = AppVendor::find(session('vid'));
         
         // Find tickets that are available for this vendor
         $availableRequests = Ticket::where('vendor_service_status', 'broadcasting')
@@ -61,7 +61,7 @@ class ServiceRequestController extends Controller
 
     public function accept(Request $request, $id)
     {
-        $vendor = AppVendor::find(session('uid'));
+        $vendor = AppVendor::find(session('vid'));
         $ticket = Ticket::findOrFail($id);
 
         if ($ticket->vendor_service_status !== 'broadcasting') {
@@ -79,7 +79,7 @@ class ServiceRequestController extends Controller
 
     public function pass(Request $request, $id)
     {
-        $vendor = AppVendor::find(session('uid'));
+        $vendor = AppVendor::find(session('vid'));
         
         $request->validate([
             'comment' => 'required|string|max:500'
@@ -96,7 +96,7 @@ class ServiceRequestController extends Controller
 
     public function generateInvoice(Request $request, $id)
     {
-        $vendor = AppVendor::find(session('uid'));
+        $vendor = AppVendor::find(session('vid'));
         $ticket = Ticket::where('assigned_vendor_id', $vendor->id)->findOrFail($id);
 
         $request->validate([
@@ -127,7 +127,7 @@ class ServiceRequestController extends Controller
 
     public function complete($id)
     {
-        $vendor = AppVendor::find(session('uid'));
+        $vendor = AppVendor::find(session('vid'));
         $ticket = Ticket::where('assigned_vendor_id', $vendor->id)->findOrFail($id);
 
         $ticket->update([
