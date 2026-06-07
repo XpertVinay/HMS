@@ -48,11 +48,31 @@ use App\Http\Controllers\SuperAdmin\MenuConfigController as SuperAdminMenuConfig
 */
 
 $businzoRoutes = function () {
-    Route::get('/', function () { return view('businzo.pages.home'); })->name('businzo.home');
-    Route::get('/about', function () { return view('businzo.pages.about'); })->name('businzo.about');
-    Route::get('/services', function () { return view('businzo.pages.services'); })->name('businzo.services');
-    Route::get('/contact', function () { return view('businzo.pages.contact'); })->name('businzo.contact');
-    Route::get('/estimate', function () { return view('businzo.pages.estimate'); })->name('businzo.estimate');
+    Route::get('/', function () {
+        return view('businzo.pages.home');
+    })->name('businzo.home');
+    Route::get('/about', function () {
+        return view('businzo.pages.about');
+    })->name('businzo.about');
+    Route::get('/services', function () {
+        return view('businzo.pages.services');
+    })->name('businzo.services');
+    Route::get('/contact', function () {
+        return view('businzo.pages.contact');
+    })->name('businzo.contact');
+    Route::post('/contact', [\App\Http\Controllers\BusinzoContactController::class, 'submit'])->name('businzo.contact.submit');
+    Route::get('/estimate', function () {
+        return view('businzo.pages.estimate');
+    })->name('businzo.estimate');
+    Route::get('/privacy', function () {
+        return view('businzo.pages.privacy');
+    })->name('businzo.privacy');
+    Route::get('/terms', function () {
+        return view('businzo.pages.terms');
+    })->name('businzo.terms');
+    Route::get('/careers', function () {
+        return view('businzo.pages.careers');
+    })->name('businzo.careers');
 };
 
 Route::domain('businzo.com')->group($businzoRoutes);
@@ -189,12 +209,12 @@ Route::prefix('admin')->middleware(['auth.session', 'role:admin,super_admin'])->
 
 Route::prefix('member')->middleware(['auth.session', 'role:member'])->name('member.')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\Member\DashboardController::class, 'index'])->name('dashboard');
-    
+
     // Vendor Directory & Reviews
     Route::get('/vendors/directory', [\App\Http\Controllers\Member\VendorDirectoryController::class, 'index'])->name('vendors.directory');
     Route::get('/vendors/directory/{id}', [\App\Http\Controllers\Member\VendorDirectoryController::class, 'show'])->name('vendors.show');
     Route::post('/vendors/{id}/review', [\App\Http\Controllers\Member\VendorReviewController::class, 'store'])->name('vendors.review.store');
-    
+
     // Vendor Voting
     Route::get('/vendors/vote', [\App\Http\Controllers\Member\VendorVoteController::class, 'index'])->name('vendors.vote.index');
 
@@ -240,7 +260,7 @@ Route::prefix('staff')->middleware(['auth.session', 'role:staff'])->name('staff.
     Route::get('/helpdesk/{id}/edit', [\App\Http\Controllers\Staff\HelpdeskController::class, 'edit'])->name('helpdesk.edit');
     Route::put('/helpdesk/{id}', [\App\Http\Controllers\Staff\HelpdeskController::class, 'update'])->name('helpdesk.update');
     Route::post('/helpdesk/{id}/reply', [\App\Http\Controllers\Staff\HelpdeskController::class, 'reply'])->name('helpdesk.reply');
-    
+
     // Properties & Units Management
     Route::get('/properties', [\App\Http\Controllers\Staff\PropertyController::class, 'index'])->name('properties.index');
     Route::get('/properties/create', [\App\Http\Controllers\Staff\PropertyController::class, 'create'])->name('properties.create');
@@ -283,16 +303,16 @@ Route::middleware(['auth.session'])->group(function () {
 
     Route::get('/admin/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('admin.profile');
     Route::put('/admin/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('admin.profile.update');
-    
+
     Route::get('/staff/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('staff.profile');
     Route::put('/staff/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('staff.profile.update');
-    
+
     Route::get('/member/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('member.profile');
     Route::put('/member/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('member.profile.update');
-    
+
     Route::get('/resident/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('resident.profile');
     Route::put('/resident/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('resident.profile.update');
-    
+
     Route::get('/vendor/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('vendor.profile');
     Route::put('/vendor/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('vendor.profile.update');
 
@@ -311,7 +331,7 @@ Route::prefix('vendor')->middleware(['auth.session', 'role:vendor'])->name('vend
     Route::get('/dashboard', [\App\Http\Controllers\Vendor\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/advertisements', [\App\Http\Controllers\Vendor\AdvertisementController::class, 'index'])->name('advertisements.index');
     Route::post('/advertisements', [\App\Http\Controllers\Vendor\AdvertisementController::class, 'store'])->name('advertisements.store');
-    
+
     // Services
     Route::get('/services', [\App\Http\Controllers\Vendor\ServiceRequestController::class, 'index'])->name('services.index');
     Route::post('/services/{id}/accept', [\App\Http\Controllers\Vendor\ServiceRequestController::class, 'accept'])->name('services.accept');

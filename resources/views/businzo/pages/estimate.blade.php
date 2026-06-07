@@ -3,11 +3,11 @@
 @section('title', 'Project Estimation Calculator')
 
 @section('content')
-<div class="pt-32 pb-20 relative overflow-hidden bg-slate-900 border-b border-slate-800">
+<div class="pt-32 pb-20 relative overflow-hidden bg-background border-b border-slate-800">
     <div class="absolute inset-0 bg-gradient-to-r from-blue-900/10 to-emerald-900/10 z-0"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center" data-aos="fade-up">
         <h1 class="text-4xl md:text-5xl font-bold font-['Outfit'] mb-6">Estimation <span class="gradient-text">Calculator</span></h1>
-        <p class="text-xl text-slate-400 max-w-3xl mx-auto">Get an instant ballpark estimate for your software development project.</p>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto">Get an instant ballpark estimate for your software development project.</p>
     </div>
 </div>
 
@@ -16,10 +16,10 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
             <!-- Calculator Form -->
-            <div class="lg:col-span-2 space-y-8" id="calculator-form">
+            <div class="lg:col-span-2 space-y-8" id="calculator-form" data-aos="fade-right">
                 
                 <!-- Step 1: Project Type -->
-                <div class="bg-slate-800/50 p-6 md:p-8 rounded-2xl border border-slate-700">
+                <div class="glass-panel p-6 md:p-8 rounded-2xl border border-white/10">
                     <h3 class="text-xl font-bold font-['Outfit'] mb-6 flex items-center gap-2">
                         <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-500 flex items-center justify-center text-sm">1</span> 
                         Select Project Type
@@ -28,40 +28,40 @@
                         <!-- Option Web -->
                         <label class="cursor-pointer relative">
                             <input type="radio" name="project_type" value="web" class="peer sr-only" checked>
-                            <div class="p-4 rounded-xl border-2 border-slate-700 bg-slate-900 peer-checked:border-blue-500 peer-checked:bg-blue-500/10 transition-all hover:border-slate-500 text-center">
-                                <i class='bx bx-desktop text-3xl text-slate-400 peer-checked:text-blue-500 mb-2'></i>
+                            <div class="p-4 rounded-xl border-2 border-white/10 bg-background peer-checked:border-blue-500 peer-checked:bg-blue-500/10 transition-all hover:border-slate-500 text-center">
+                                <i class='bx bx-desktop text-3xl text-gray-400 peer-checked:text-blue-500 mb-2'></i>
                                 <div class="font-bold text-sm">Web App</div>
                             </div>
                         </label>
                         <!-- Option Mobile -->
                         <label class="cursor-pointer relative">
                             <input type="radio" name="project_type" value="mobile" class="peer sr-only">
-                            <div class="p-4 rounded-xl border-2 border-slate-700 bg-slate-900 peer-checked:border-blue-500 peer-checked:bg-blue-500/10 transition-all hover:border-slate-500 text-center">
-                                <i class='bx bx-mobile-alt text-3xl text-slate-400 peer-checked:text-blue-500 mb-2'></i>
+                            <div class="p-4 rounded-xl border-2 border-white/10 bg-background peer-checked:border-blue-500 peer-checked:bg-blue-500/10 transition-all hover:border-slate-500 text-center">
+                                <i class='bx bx-mobile-alt text-3xl text-gray-400 peer-checked:text-blue-500 mb-2'></i>
                                 <div class="font-bold text-sm">Mobile App</div>
                             </div>
                         </label>
                         <!-- Option AI -->
                         <label class="cursor-pointer relative">
                             <input type="radio" name="project_type" value="ai" class="peer sr-only">
-                            <div class="p-4 rounded-xl border-2 border-slate-700 bg-slate-900 peer-checked:border-blue-500 peer-checked:bg-blue-500/10 transition-all hover:border-slate-500 text-center">
-                                <i class='bx bx-brain text-3xl text-slate-400 peer-checked:text-blue-500 mb-2'></i>
+                            <div class="p-4 rounded-xl border-2 border-white/10 bg-background peer-checked:border-blue-500 peer-checked:bg-blue-500/10 transition-all hover:border-slate-500 text-center">
+                                <i class='bx bx-brain text-3xl text-gray-400 peer-checked:text-blue-500 mb-2'></i>
                                 <div class="font-bold text-sm">AI / RAG</div>
                             </div>
                         </label>
                         <!-- Option eCommerce -->
                         <label class="cursor-pointer relative">
                             <input type="radio" name="project_type" value="ecommerce" class="peer sr-only">
-                            <div class="p-4 rounded-xl border-2 border-slate-700 bg-slate-900 peer-checked:border-blue-500 peer-checked:bg-blue-500/10 transition-all hover:border-slate-500 text-center">
-                                <i class='bx bx-shopping-bag text-3xl text-slate-400 peer-checked:text-blue-500 mb-2'></i>
+                            <div class="p-4 rounded-xl border-2 border-white/10 bg-background peer-checked:border-blue-500 peer-checked:bg-blue-500/10 transition-all hover:border-slate-500 text-center">
+                                <i class='bx bx-shopping-bag text-3xl text-gray-400 peer-checked:text-blue-500 mb-2'></i>
                                 <div class="font-bold text-sm">eCommerce</div>
                             </div>
                         </label>
                         <!-- Option Custom Software -->
                         <label class="cursor-pointer relative">
                             <input type="radio" name="project_type" value="custom" class="peer sr-only">
-                            <div class="p-4 rounded-xl border-2 border-slate-700 bg-slate-900 peer-checked:border-blue-500 peer-checked:bg-blue-500/10 transition-all hover:border-slate-500 text-center">
-                                <i class='bx bx-code-alt text-3xl text-slate-400 peer-checked:text-blue-500 mb-2'></i>
+                            <div class="p-4 rounded-xl border-2 border-white/10 bg-background peer-checked:border-blue-500 peer-checked:bg-blue-500/10 transition-all hover:border-slate-500 text-center">
+                                <i class='bx bx-code-alt text-3xl text-gray-400 peer-checked:text-blue-500 mb-2'></i>
                                 <div class="font-bold text-sm">Custom Dev</div>
                             </div>
                         </label>
@@ -69,65 +69,65 @@
                 </div>
 
                 <!-- Step 2: Project Complexity -->
-                <div class="bg-slate-800/50 p-6 md:p-8 rounded-2xl border border-slate-700">
+                <div class="glass-panel p-6 md:p-8 rounded-2xl border border-white/10">
                     <h3 class="text-xl font-bold font-['Outfit'] mb-6 flex items-center gap-2">
-                        <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-500 flex items-center justify-center text-sm">2</span> 
+                        <span class="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center text-sm">2</span> 
                         Project Complexity
                     </h3>
                     <div class="space-y-4">
-                        <label class="flex items-center p-4 border border-slate-700 rounded-xl cursor-pointer hover:bg-slate-800 transition-colors">
-                            <input type="radio" name="complexity" value="basic" class="w-5 h-5 text-purple-500 bg-slate-900 border-slate-600 focus:ring-purple-500" checked>
+                        <label class="flex items-center p-4 border border-white/10 rounded-xl cursor-pointer hover:bg-slate-800 transition-colors">
+                            <input type="radio" name="complexity" value="basic" class="w-5 h-5 text-primary bg-background border-slate-600 focus:ring-primary" checked>
                             <div class="ml-4 flex-grow">
                                 <div class="font-bold">Basic Minimum Viable Product (MVP)</div>
-                                <div class="text-sm text-slate-400">Core features, simple UI, standard functionality.</div>
+                                <div class="text-sm text-gray-400">Core features, simple UI, standard functionality.</div>
                             </div>
                         </label>
-                        <label class="flex items-center p-4 border border-slate-700 rounded-xl cursor-pointer hover:bg-slate-800 transition-colors">
-                            <input type="radio" name="complexity" value="medium" class="w-5 h-5 text-purple-500 bg-slate-900 border-slate-600 focus:ring-purple-500">
+                        <label class="flex items-center p-4 border border-white/10 rounded-xl cursor-pointer hover:bg-slate-800 transition-colors">
+                            <input type="radio" name="complexity" value="medium" class="w-5 h-5 text-primary bg-background border-slate-600 focus:ring-primary">
                             <div class="ml-4 flex-grow">
                                 <div class="font-bold">Professional Application</div>
-                                <div class="text-sm text-slate-400">Custom UI/UX, user roles, API integrations, admin panel.</div>
+                                <div class="text-sm text-gray-400">Custom UI/UX, user roles, API integrations, admin panel.</div>
                             </div>
                         </label>
-                        <label class="flex items-center p-4 border border-slate-700 rounded-xl cursor-pointer hover:bg-slate-800 transition-colors">
-                            <input type="radio" name="complexity" value="complex" class="w-5 h-5 text-purple-500 bg-slate-900 border-slate-600 focus:ring-purple-500">
+                        <label class="flex items-center p-4 border border-white/10 rounded-xl cursor-pointer hover:bg-slate-800 transition-colors">
+                            <input type="radio" name="complexity" value="complex" class="w-5 h-5 text-primary bg-background border-slate-600 focus:ring-primary">
                             <div class="ml-4 flex-grow">
                                 <div class="font-bold">Enterprise System</div>
-                                <div class="text-sm text-slate-400">Complex architecture, high security, scalability, custom algorithms.</div>
+                                <div class="text-sm text-gray-400">Complex architecture, high security, scalability, custom algorithms.</div>
                             </div>
                         </label>
                     </div>
                 </div>
 
                 <!-- Step 3: Additional Features -->
-                <div class="bg-slate-800/50 p-6 md:p-8 rounded-2xl border border-slate-700">
+                <div class="glass-panel p-6 md:p-8 rounded-2xl border border-white/10">
                     <h3 class="text-xl font-bold font-['Outfit'] mb-6 flex items-center gap-2">
                         <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center text-sm">3</span> 
                         Additional Requirements
                     </h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <label class="flex items-center p-3 border border-slate-700 rounded-lg cursor-pointer hover:bg-slate-800 transition-colors">
-                            <input type="checkbox" name="features" value="auth" class="w-5 h-5 rounded text-emerald-500 bg-slate-900 border-slate-600 focus:ring-emerald-500" checked>
+                        <label class="flex items-center p-3 border border-white/10 rounded-lg cursor-pointer hover:bg-slate-800 transition-colors">
+                            <input type="checkbox" name="features" value="auth" class="w-5 h-5 rounded text-emerald-500 bg-background border-slate-600 focus:ring-emerald-500" checked>
                             <span class="ml-3 font-medium text-sm">User Authentication (Login/Register)</span>
                         </label>
-                        <label class="flex items-center p-3 border border-slate-700 rounded-lg cursor-pointer hover:bg-slate-800 transition-colors">
-                            <input type="checkbox" name="features" value="payment" class="w-5 h-5 rounded text-emerald-500 bg-slate-900 border-slate-600 focus:ring-emerald-500">
+                        <label class="flex items-center p-3 border border-white/10 rounded-lg cursor-pointer hover:bg-slate-800 transition-colors">
+                            <input type="checkbox" name="features" value="payment" class="w-5 h-5 rounded text-emerald-500 bg-background border-slate-600 focus:ring-emerald-500">
                             <span class="ml-3 font-medium text-sm">Payment Gateway Integration</span>
                         </label>
-                        <label class="flex items-center p-3 border border-slate-700 rounded-lg cursor-pointer hover:bg-slate-800 transition-colors">
-                            <input type="checkbox" name="features" value="chat" class="w-5 h-5 rounded text-emerald-500 bg-slate-900 border-slate-600 focus:ring-emerald-500">
+                        <label class="flex items-center p-3 border border-white/10 rounded-lg cursor-pointer hover:bg-slate-800 transition-colors">
+                            <input type="checkbox" name="features" value="chat" class="w-5 h-5 rounded text-emerald-500 bg-background border-slate-600 focus:ring-emerald-500">
                             <span class="ml-3 font-medium text-sm">Real-time Chat / Notifications</span>
                         </label>
-                        <label class="flex items-center p-3 border border-slate-700 rounded-lg cursor-pointer hover:bg-slate-800 transition-colors">
-                            <input type="checkbox" name="features" value="cms" class="w-5 h-5 rounded text-emerald-500 bg-slate-900 border-slate-600 focus:ring-emerald-500">
+                        <label class="flex items-center p-3 border border-white/10 rounded-lg cursor-pointer hover:bg-slate-800 transition-colors">
+                            <input type="checkbox" name="features" value="cms" class="w-5 h-5 rounded text-emerald-500 bg-background border-slate-600 focus:ring-emerald-500">
                             <span class="ml-3 font-medium text-sm">Content Management System (CMS)</span>
                         </label>
-                        <label class="flex items-center p-3 border border-slate-700 rounded-lg cursor-pointer hover:bg-slate-800 transition-colors">
-                            <input type="checkbox" name="features" value="multi_language" class="w-5 h-5 rounded text-emerald-500 bg-slate-900 border-slate-600 focus:ring-emerald-500">
+                        <label class="flex items-center p-3 border border-white/10 rounded-lg cursor-pointer hover:bg-slate-800 transition-colors">
+                            <input type="checkbox" name="features" value="multi_language" class="w-5 h-5 rounded text-emerald-500 bg-background border-slate-600 focus:ring-emerald-500">
                             <span class="ml-3 font-medium text-sm">Multi-language Support</span>
                         </label>
-                        <label class="flex items-center p-3 border border-slate-700 rounded-lg cursor-pointer hover:bg-slate-800 transition-colors">
-                            <input type="checkbox" name="features" value="admin" class="w-5 h-5 rounded text-emerald-500 bg-slate-900 border-slate-600 focus:ring-emerald-500">
+                        <label class="flex items-center p-3 border border-white/10 rounded-lg cursor-pointer hover:bg-slate-800 transition-colors">
+                            <input type="checkbox" name="features" value="admin" class="w-5 h-5 rounded text-emerald-500 bg-background border-slate-600 focus:ring-emerald-500">
                             <span class="ml-3 font-medium text-sm">Advanced Admin Dashboard</span>
                         </label>
                     </div>
@@ -136,8 +136,8 @@
             </div>
 
             <!-- Sticky Summary Sidebar -->
-            <div class="lg:col-span-1">
-                <div class="bg-gradient-to-b from-slate-800 to-slate-900 p-6 md:p-8 rounded-2xl border border-slate-700 sticky top-24 shadow-2xl">
+            <div class="lg:col-span-1" data-aos="fade-left" data-aos-delay="200">
+                <div class="bg-gradient-to-b from-slate-800 to-slate-900 p-6 md:p-8 rounded-2xl border border-white/10 sticky top-24 shadow-2xl">
                     <h3 class="text-2xl font-bold font-['Outfit'] mb-6 text-center">Estimated Cost</h3>
                     
                     <div class="text-center mb-8">
@@ -161,7 +161,7 @@
                         </div>
                     </div>
 
-                    <p class="text-xs text-slate-500 text-center mb-6 leading-relaxed">
+                    <p class="text-xs text-gray-500 text-center mb-6 leading-relaxed">
                         *This is a rough estimate and not a final quote. Prices vary based on exact requirements, third-party services, and design specifications.
                     </p>
 
