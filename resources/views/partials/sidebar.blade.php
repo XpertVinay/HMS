@@ -111,6 +111,7 @@
 
         @elseif($role === 'super_admin')
             <li><a href="{{ route('super_admin.dashboard') }}" class="{{ str_contains($currentRoute, 'super_admin.dashboard') ? 'active' : '' }}"><i class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>
+            <li><a href="{{ route('super_admin.earnings') }}" class="{{ str_contains($currentRoute, 'super_admin.earnings') ? 'active' : '' }}"><i class='bx bx-money'></i><span class="links_name">Earnings</span></a></li>
             <li><a href="{{ route('super_admin.theme_builder.index') }}" class="{{ str_contains($currentRoute, 'theme_builder') ? 'active' : '' }}"><i class='bx bx-palette'></i><span class="links_name">Theme Builder</span></a></li>
             <li><a href="{{ route('super_admin.menu_config.index') }}" class="{{ str_contains($currentRoute, 'menu_config') ? 'active' : '' }}"><i class='bx bx-menu'></i><span class="links_name">Menu Config</span></a></li>
 

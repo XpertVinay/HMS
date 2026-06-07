@@ -311,6 +311,7 @@ Route::prefix('vendor')->middleware(['auth.session', 'role:vendor'])->name('vend
 
 Route::prefix('super-admin')->middleware(['auth.session', 'role:super_admin'])->name('super_admin.')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/earnings', [\App\Http\Controllers\SuperAdmin\EarningsController::class, 'index'])->name('earnings');
     Route::post('/organizations/{id}/manage', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'manageOrg'])->name('org.manage');
     Route::post('/organizations/stop-managing', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'stopManaging'])->name('org.stop_managing');
     Route::post('/organizations/{id}/approve', [\App\Http\Controllers\SuperAdmin\DashboardController::class, 'approveOrg'])->name('org.approve');

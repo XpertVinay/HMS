@@ -4,6 +4,8 @@
 <div class="overview-boxes">
     <div class="box"><div class="right-side"><div class="box-topic">Total Organizations</div><div class="number">{{ $totalCount }}</div></div><i class='bx bx-building icon staff'></i></div>
     <div class="box"><div class="right-side"><div class="box-topic">Pending Approval</div><div class="number">{{ $pendingCount }}</div></div><i class='bx bx-time icon file'></i></div>
+    <div class="box"><div class="right-side"><div class="box-topic">Today's Tickets Resolved</div><div class="number">{{ $todayTicketsResolved }}</div></div><i class='bx bx-check-circle icon' style="background: #e0f8e9; color: #1cc88a;"></i></div>
+    <div class="box"><div class="right-side"><div class="box-topic">Today's Tickets Pending</div><div class="number">{{ $todayTicketsPending }}</div></div><i class='bx bx-time icon' style="background: #ffe3e3; color: #e74a3b;"></i></div>
 </div>
 
 <div class="sales-boxes" style="grid-template-columns: 1fr;">

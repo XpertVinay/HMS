@@ -48,7 +48,17 @@ class DashboardController extends Controller
         $pendingCount = Organization::where('status', 'pending')->count();
         $totalCount = Organization::count();
 
-        return view('super_admin.dashboard', compact('pendingCount', 'totalCount'));
+        $todayTicketsResolved = \App\Models\Ticket::whereNotNull('assigned_vendor_id')
+            ->where('status', 'resolved')
+            ->whereDate('updated_at', \Carbon\Carbon::today())
+            ->count();
+
+        $todayTicketsPending = \App\Models\Ticket::whereNotNull('assigned_vendor_id')
+            ->where('status', 'pending')
+            ->whereDate('created_at', \Carbon\Carbon::today())
+            ->count();
+
+        return view('super_admin.dashboard', compact('pendingCount', 'totalCount', 'todayTicketsResolved', 'todayTicketsPending'));
     }
 
     public function approveOrg(int $id)
