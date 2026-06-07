@@ -19,6 +19,10 @@ class VendorInvoice extends Model
         'amount',
         'organization_id',
         'status',
+        'ticket_id',
+        'task_details',
+        'member_id',
+        'resident_id',
     ];
 
     protected $casts = [
@@ -28,5 +32,20 @@ class VendorInvoice extends Model
     public function vendor(): BelongsTo
     {
         return $this->belongsTo(AppVendor::class, 'vendor_id');
+    }
+
+    public function ticket(): BelongsTo
+    {
+        return $this->belongsTo(Ticket::class, 'ticket_id');
+    }
+
+    public function member(): BelongsTo
+    {
+        return $this->belongsTo(Member::class, 'member_id');
+    }
+
+    public function resident(): BelongsTo
+    {
+        return $this->belongsTo(Resident::class, 'resident_id');
     }
 }

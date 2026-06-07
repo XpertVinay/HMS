@@ -79,7 +79,7 @@ return new class extends Migration
             $table->string('username', 50)->unique();
             $table->string('email', 50)->unique();
             $table->string('password', 255);
-            $table->string('address', 255);
+            $table->string('address', 255)->nullable();
             $table->string('phone', 20)->nullable();
             $table->dateTime('created_at')->nullable()->useCurrent();
             $table->string('share_certificate', 255)->nullable();
@@ -209,7 +209,7 @@ return new class extends Migration
 
         // ── Maintenance ──────────────────────────────────────────────────
         Schema::create('maintenance', function (Blueprint $table) {
-            $table->integer('id');
+            $table->integer('id')->autoIncrement();
             $table->dateTime('billing_date')->useCurrent();
             $table->integer('member_id');
             $table->boolean('status')->default(false)->comment('0=pending,1=paid');
@@ -225,7 +225,7 @@ return new class extends Migration
 
         // ── Maintenance Items ────────────────────────────────────────────
         Schema::create('maintenance_items', function (Blueprint $table) {
-            $table->integer('id');
+            $table->integer('id')->autoIncrement();
             $table->integer('maintenance_id');
             $table->tinyInteger('type')->comment('1=block rent, 2=electricity, 3=water');
             $table->integer('reading');

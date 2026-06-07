@@ -65,6 +65,7 @@ class MaintenanceController extends Controller
         $request->validate([
             'member_id' => 'required|integer|exists:member,id',
             'total_amount' => 'required|numeric|min:0',
+            'comment' => 'nullable|string|max:1000',
         ]);
 
         $maintenance = Maintenance::create([
@@ -74,6 +75,7 @@ class MaintenanceController extends Controller
             'amount_change' => 0,
             'status' => 0,
             'invoice' => '',
+            'comment' => $request->comment,
             'organization_id' => $this->orgId(),
         ]);
 
@@ -117,8 +119,10 @@ class MaintenanceController extends Controller
             'amount_payed' => 'required|numeric|min:0',
         ]);
 
+        $status = $request->amount_payed >= $maintenance->total_amount ? 1 : 0;
+
         $maintenance->update([
-            'status' => 1,
+            'status' => $status,
             'amount_payed' => $request->amount_payed,
             'amount_change' => $request->amount_payed - $maintenance->total_amount,
         ]);

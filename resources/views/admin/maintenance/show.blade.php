@@ -8,6 +8,9 @@
     <div class="form-group"><label>Total Amount</label><p>₹{{ number_format($maintenance->total_amount, 2) }}</p></div>
     <div class="form-group"><label>Amount Paid</label><p>₹{{ number_format($maintenance->amount_payed, 2) }}</p></div>
     <div class="form-group"><label>Status</label><p><span class="badge-status {{ $maintenance->isPaid() ? 'paid' : 'unpaid' }}">{{ $maintenance->isPaid() ? 'Paid' : 'Unpaid' }}</span></p></div>
+    @if($maintenance->comment)
+    <div class="form-group"><label>Comment/Details</label><p>{{ $maintenance->comment }}</p></div>
+    @endif
 
     @if($maintenance->items->count())
     <h3 style="margin-top: 20px; font-size: 16px; font-weight: 600;">Line Items</h3>

@@ -20,8 +20,8 @@ class SolidApprovalController extends Controller
         
         if ($request->ajax()) {
             $query = SolidApproval::with(['member', 'maintenance', 'staffReviewer'])
-                ->where('organization_id', $admin->organization_id)
-                ->where('status', 'pending_admin');
+                ->where('solid_approvals.organization_id', $admin->organization_id)
+                ->where('solid_approvals.status', 'pending_admin');
                 
             return DataTables::of($query)
                 ->addColumn('member', function ($a) {

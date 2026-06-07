@@ -26,6 +26,7 @@ class Organization extends Model
         'solid_lease_charge',
         'solid_interior_charge',
         'solid_decoration_charge',
+        'vendor_acceptance_timeout_minutes',
     ];
 
     /**

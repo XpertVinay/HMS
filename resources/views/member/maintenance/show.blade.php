@@ -7,6 +7,9 @@
     <div class="form-group"><label>Total</label><p>₹{{ number_format($maintenance->total_amount, 2) }}</p></div>
     <div class="form-group"><label>Paid</label><p>₹{{ number_format($maintenance->amount_payed, 2) }}</p></div>
     <div class="form-group"><label>Status</label><p><span class="badge-status {{ $maintenance->isPaid() ? 'paid' : 'unpaid' }}">{{ $maintenance->isPaid() ? 'Paid' : 'Unpaid' }}</span></p></div>
+    @if($maintenance->comment)
+    <div class="form-group"><label>Details</label><p>{{ $maintenance->comment }}</p></div>
+    @endif
     @if($maintenance->items->count())
     <table class="data-table" style="margin-top: 16px;">
         <thead><tr><th>Type</th><th>Reading</th><th>Rate</th><th>Amount</th></tr></thead>

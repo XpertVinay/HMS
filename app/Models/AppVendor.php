@@ -26,6 +26,7 @@ class AppVendor extends Authenticatable implements JWTSubject
         'global_rating',
         'total_tasks_completed',
         'is_active_globally',
+        'is_featured',
     ];
 
     protected $hidden = ['password'];
@@ -33,6 +34,7 @@ class AppVendor extends Authenticatable implements JWTSubject
     protected $casts = [
         'is_gst_verified_staff' => 'boolean',
         'is_gst_verified_admin' => 'boolean',
+        'is_featured' => 'boolean',
     ];
 
     public function getAccountTypeAttribute(): string

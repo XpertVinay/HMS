@@ -62,4 +62,34 @@ class CommunityApprovalController extends Controller
         
         return back()->with('success', 'Post rejected. It will not be published.');
     }
+
+    /**
+     * Bulk approve or reject posts.
+     */
+    public function bulkAction(Request $request)
+    {
+        $admin = \App\Models\Admin::find(session('aid'));
+        
+        $action = $request->input('action');
+        $postIds = $request->input('post_ids', []);
+        
+        if (empty($postIds)) {
+            return response()->json(['success' => false, 'message' => 'No posts selected.']);
+        }
+        
+        $status = $action === 'approve' ? 'approved' : 'rejected';
+
+        CommunityPost::where('organization_id', $admin->organization_id)
+            ->where('status', 'pending_stage_2')
+            ->whereIn('id', $postIds)
+            ->update([
+                'status' => $status,
+                'stage_2_admin_id' => $admin->id
+            ]);
+            
+        return response()->json([
+            'success' => true, 
+            'message' => count($postIds) . ' posts have been ' . $status . '.'
+        ]);
+    }
 }

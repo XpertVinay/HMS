@@ -3,12 +3,19 @@
 @section('content')
 <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-bold text-gray-800">Final Approvals Queue <span class="text-sm font-normal text-gray-500 ml-2">(Stage 2)</span></h2>
+    <div class="flex gap-2">
+        <button id="bulk-approve" class="btn-modern btn-success" style="display: none;"><i class='bx bx-check-double'></i> Bulk Approve</button>
+        <button id="bulk-reject" class="btn-modern btn-danger" style="display: none;"><i class='bx bx-x'></i> Bulk Reject</button>
+    </div>
 </div>
 
 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-    <table class="data-table">
+    <table class="data-table" id="community-table">
         <thead>
             <tr>
+                <th class="no-sort w-10">
+                    <input type="checkbox" id="select-all" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                </th>
                 <th>Author</th>
                 <th>Post Content</th>
                 <th>Stage 1 Result</th>
@@ -18,6 +25,9 @@
         <tbody>
                 @foreach($posts as $post)
             <tr>
+                <td class="align-top">
+                    <input type="checkbox" class="row-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" value="{{ $post->id }}">
+                </td>
                 <td class="align-top">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold shrink-0">
@@ -67,3 +77,67 @@
     {{ $posts->links() }}
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        // Handle Select All
+        $('#select-all').on('click', function() {
+            var isChecked = $(this).prop('checked');
+            $('.row-checkbox').prop('checked', isChecked);
+            toggleBulkButtons();
+        });
+
+        // Handle individual row checkbox
+        $('#community-table').on('change', '.row-checkbox', function() {
+            if (!$(this).prop('checked')) {
+                $('#select-all').prop('checked', false);
+            }
+            toggleBulkButtons();
+        });
+
+        function toggleBulkButtons() {
+            var selectedCount = $('.row-checkbox:checked').length;
+            if (selectedCount > 0) {
+                $('#bulk-approve, #bulk-reject').show();
+            } else {
+                $('#bulk-approve, #bulk-reject').hide();
+            }
+        }
+
+        // Bulk Actions
+        $('#bulk-approve, #bulk-reject').on('click', function() {
+            var action = $(this).attr('id') === 'bulk-approve' ? 'approve' : 'reject';
+            var selectedIds = [];
+            $('.row-checkbox:checked').each(function() {
+                selectedIds.push($(this).val());
+            });
+
+            if (selectedIds.length === 0) return;
+
+            if (confirm('Are you sure you want to bulk ' + action + ' ' + selectedIds.length + ' post(s)?')) {
+                $.ajax({
+                    url: "{{ route('admin.community.bulk') }}",
+                    method: 'POST',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        action: action,
+                        post_ids: selectedIds
+                    },
+                    success: function(response) {
+                        if(response.success) {
+                            alert(response.message);
+                            window.location.reload();
+                        } else {
+                            alert(response.message || 'An error occurred.');
+                        }
+                    },
+                    error: function() {
+                        alert('A server error occurred while processing your request.');
+                    }
+                });
+            }
+        });
+    });
+</script>
+@endpush

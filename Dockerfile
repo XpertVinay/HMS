@@ -6,7 +6,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     default-mysql-client \
     && docker-php-ext-install mysqli pdo_mysql zip \
-    && docker-php-ext-enable mysqli pdo_mysql \
+    && pecl install redis \
+    && docker-php-ext-enable mysqli pdo_mysql redis \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Composer

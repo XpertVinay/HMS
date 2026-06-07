@@ -15,6 +15,7 @@
             </select>
         </div>
         <div class="form-group"><label>Total Amount (₹)</label><input type="number" name="total_amount" step="0.01" required value="{{ old('total_amount') }}"></div>
+        <div class="form-group"><label>Comment/Details</label><textarea name="comment" rows="3" style="width: 100%; border: 1px solid #ddd; border-radius: 6px; padding: 10px;">{{ old('comment') }}</textarea></div>
         <button type="submit" class="btn-modern">Create Bill</button>
         <a href="{{ route('admin.maintenance.index') }}" class="btn-modern btn-outline" style="margin-left: 8px;">Cancel</a>
     </form>

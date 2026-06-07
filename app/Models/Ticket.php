@@ -23,9 +23,17 @@ class Ticket extends Model
         'status',
         'response',
         'assigned_vendor_id',
+        'vendor_category',
+        'vendor_broadcast_phase',
+        'vendor_broadcast_started_at',
+        'vendor_service_status',
         'vendor_invoice_amount',
         'vendor_invoice_file',
         'vendor_approval_status',
+    ];
+
+    protected $casts = [
+        'vendor_broadcast_started_at' => 'datetime',
     ];
 
     public function organization(): BelongsTo

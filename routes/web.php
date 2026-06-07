@@ -149,6 +149,7 @@ Route::prefix('admin')->middleware(['auth.session', 'role:admin,super_admin'])->
 
     // Community Network Approvals (Stage 2)
     Route::get('/community-approvals', [\App\Http\Controllers\Admin\CommunityApprovalController::class, 'index'])->name('community.approvals');
+    Route::post('/community-approvals/bulk', [\App\Http\Controllers\Admin\CommunityApprovalController::class, 'bulkAction'])->name('community.bulk');
     Route::post('/community-approvals/{id}/approve', [\App\Http\Controllers\Admin\CommunityApprovalController::class, 'approve'])->name('community.approve');
     Route::post('/community-approvals/{id}/reject', [\App\Http\Controllers\Admin\CommunityApprovalController::class, 'reject'])->name('community.reject');
 
@@ -245,6 +246,7 @@ Route::prefix('staff')->middleware(['auth.session', 'role:staff'])->name('staff.
 
     // Community Network Moderation (Stage 1)
     Route::get('/community-moderation', [\App\Http\Controllers\Staff\CommunityModerationController::class, 'index'])->name('community.moderation');
+    Route::post('/community-moderation/bulk', [\App\Http\Controllers\Staff\CommunityModerationController::class, 'bulkAction'])->name('community.bulk');
     Route::post('/community-moderation/{id}/approve', [\App\Http\Controllers\Staff\CommunityModerationController::class, 'approve'])->name('community.approve');
     Route::post('/community-moderation/{id}/reject', [\App\Http\Controllers\Staff\CommunityModerationController::class, 'reject'])->name('community.reject');
 
@@ -289,6 +291,16 @@ Route::prefix('vendor')->middleware(['auth.session', 'role:vendor'])->name('vend
     Route::get('/dashboard', [\App\Http\Controllers\Vendor\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/advertisements', [\App\Http\Controllers\Vendor\AdvertisementController::class, 'index'])->name('advertisements.index');
     Route::post('/advertisements', [\App\Http\Controllers\Vendor\AdvertisementController::class, 'store'])->name('advertisements.store');
+    
+    // Services
+    Route::get('/services', [\App\Http\Controllers\Vendor\ServiceRequestController::class, 'index'])->name('services.index');
+    Route::post('/services/{id}/accept', [\App\Http\Controllers\Vendor\ServiceRequestController::class, 'accept'])->name('services.accept');
+    Route::post('/services/{id}/pass', [\App\Http\Controllers\Vendor\ServiceRequestController::class, 'pass'])->name('services.pass');
+    Route::post('/services/{id}/invoice', [\App\Http\Controllers\Vendor\ServiceRequestController::class, 'generateInvoice'])->name('services.invoice');
+    Route::post('/services/{id}/complete', [\App\Http\Controllers\Vendor\ServiceRequestController::class, 'complete'])->name('services.complete');
+
+    // Reviews
+    Route::get('/reviews', [\App\Http\Controllers\Vendor\ReviewController::class, 'index'])->name('reviews.index');
 });
 
 /*

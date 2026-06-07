@@ -43,7 +43,7 @@ class PostRequiresStage1Approval extends Notification
             'post_id' => $this->post->id,
             'title' => 'New Community Post requires Stage 1 Verification',
             'message' => 'A new post titled "' . $this->post->title . '" by ' . ($this->post->member->username ?? 'a member') . ' requires your review.',
-            'url' => route('staff.moderation.index') // Assuming we will create this route
+            'url' => route('staff.community.moderation')
         ];
     }
 }

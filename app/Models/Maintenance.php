@@ -23,6 +23,7 @@ class Maintenance extends Model
         'amount_payed',
         'amount_change',
         'invoice',
+        'comment',
         'organization_id',
     ];
 

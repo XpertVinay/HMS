@@ -12,6 +12,7 @@
                 <tr>
                     <th>#</th>
                     <th>Business Name</th>
+                    <th>Rating</th>
                     <th>Reviews</th>
                     <th>Actions</th>
                 </tr>
@@ -21,6 +22,9 @@
                     <tr>
                         <td>{{ $vendors->firstItem() + $index }}</td>
                         <td>{{ $vendor->business_name }}</td>
+                        <td>
+                            <span style="color: #f39c12;">★</span> {{ number_format($vendor->global_rating, 1) }}
+                        </td>
                         <td>{{ $vendor->reviews_count }} Review(s)</td>
                         <td>
                             <a href="{{ route('member.vendors.show', $vendor->id) }}" class="btn-modern" style="padding: 4px 8px; font-size: 13px;">View Profile</a>

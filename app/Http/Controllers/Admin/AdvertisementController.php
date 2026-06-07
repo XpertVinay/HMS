@@ -12,7 +12,7 @@ class AdvertisementController extends Controller
     {
         $orgId = $this->orgId();
         
-        $advertisements = VendorAdvertisement::whereHas('vendor', function($q) use ($orgId) {
+        $advertisements = VendorAdvertisement::whereHas('vendor.alignments', function($q) use ($orgId) {
                 $q->where('organization_id', $orgId);
             })
             ->with('vendor')
@@ -25,7 +25,7 @@ class AdvertisementController extends Controller
     public function approve($id)
     {
         $orgId = $this->orgId();
-        $ad = VendorAdvertisement::whereHas('vendor', function($q) use ($orgId) {
+        $ad = VendorAdvertisement::whereHas('vendor.alignments', function($q) use ($orgId) {
             $q->where('organization_id', $orgId);
         })->findOrFail($id);
 
@@ -38,7 +38,7 @@ class AdvertisementController extends Controller
     public function reject($id)
     {
         $orgId = $this->orgId();
-        $ad = VendorAdvertisement::whereHas('vendor', function($q) use ($orgId) {
+        $ad = VendorAdvertisement::whereHas('vendor.alignments', function($q) use ($orgId) {
             $q->where('organization_id', $orgId);
         })->findOrFail($id);
 
