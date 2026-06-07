@@ -175,10 +175,10 @@ class AuthService
             ];
         }
 
-        // Legacy plaintext comparison
+        // Legacy plaintext passwords are no longer supported.
         return [
-            'valid' => $input === $stored,
-            'needs_rehash' => true,
+            'valid' => false,
+            'needs_rehash' => false,
         ];
     }
 

@@ -18,9 +18,15 @@ class OrganizationScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        // Don't apply the scope if we are authenticated as a SuperAdmin
+        // Verify the super_admin role against the database (cached per request)
         if (session('account') === 'super_admin') {
-            return;
+            static $isVerifiedSuperAdmin = null;
+            if ($isVerifiedSuperAdmin === null) {
+                $isVerifiedSuperAdmin = \App\Models\SuperAdmin::where('id', session('aid'))->exists();
+            }
+            if ($isVerifiedSuperAdmin) {
+                return;
+            }
         }
 
         // Check if there is an active organization bound to the container (resolved by middleware)

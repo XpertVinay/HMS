@@ -14,8 +14,8 @@
     <div class="box">
         <div class="box-title">Recent Visitors</div>
         <table class="data-table"><thead><tr><th>#</th><th>Time</th><th>Visitor</th></tr></thead><tbody>
-            @forelse($recentRegistry as $i => $e)<tr><td>{{ $i+1 }}</td><td>{{ $e->created_at?->format('M d, H:i') }}</td><td>{{ $e->visitor_name }}</td></tr>
-            @empty <tr><td colspan="3">No entries.</td></tr> @endforelse
+            @foreach($recentRegistry as $i => $e)<tr><td>{{ $i+1 }}</td><td>{{ $e->created_at?->format('M d, H:i') }}</td><td>{{ $e->visitor_name }}</td></tr>
+            @endforeach
         </tbody></table>
     </div>
 </div>

@@ -26,7 +26,7 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($advertisements as $index => $ad)
+                @foreach($advertisements as $index => $ad)
                     <tr>
                         <td>{{ $advertisements->firstItem() + $index }}</td>
                         <td>{{ $ad->vendor->business_name ?? 'N/A' }}</td>
@@ -63,11 +63,7 @@
                             @endif
                         </td>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="7" style="text-align: center; padding: 20px;">No advertisements found.</td>
-                    </tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
         

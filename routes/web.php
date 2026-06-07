@@ -62,7 +62,7 @@ Route::get('/notices', [HomeController::class, 'notices'])->name('home.notices')
 */
 
 Route::get('/login', [LoginController::class, 'showForm'])->name('login');
-Route::post('/login', [LoginController::class, 'authenticate'])->name('login.post');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login.post')->middleware('throttle:6,1');
 Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
@@ -256,6 +256,9 @@ Route::prefix('staff')->middleware(['auth.session', 'role:staff'])->name('staff.
 
 // Global Profile Routes (Dynamic for all roles)
 Route::middleware(['auth.session'])->group(function () {
+    Route::get('/super-admin/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('super_admin.profile');
+    Route::put('/super-admin/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('super_admin.profile.update');
+
     Route::get('/admin/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('admin.profile');
     Route::put('/admin/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('admin.profile.update');
     

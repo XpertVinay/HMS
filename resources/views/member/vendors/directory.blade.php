@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($vendors as $index => $vendor)
+                @foreach($vendors as $index => $vendor)
                     <tr>
                         <td>{{ $vendors->firstItem() + $index }}</td>
                         <td>{{ $vendor->business_name }}</td>
@@ -26,11 +26,7 @@
                             <a href="{{ route('member.vendors.show', $vendor->id) }}" class="btn-modern" style="padding: 4px 8px; font-size: 13px;">View Profile</a>
                         </td>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="4" style="text-align: center; padding: 20px;">No vendors found.</td>
-                    </tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
         

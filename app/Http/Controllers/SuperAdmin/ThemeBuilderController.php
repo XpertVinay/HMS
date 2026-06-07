@@ -82,6 +82,9 @@ class ThemeBuilderController extends Controller
             'theme_mode'          => 'nullable|in:light,dark,auto,custom',
             'custom_css'          => 'nullable|string|max:50000',
             'component_tokens'    => 'nullable|json',
+            'logo_light'          => 'nullable|file|mimes:jpeg,png,svg,webp,ico|max:2048',
+            'logo_dark'           => 'nullable|file|mimes:jpeg,png,svg,webp,ico|max:2048',
+            'favicon'             => 'nullable|file|mimes:ico,png|max:512',
         ]);
 
         // Handle logo uploads

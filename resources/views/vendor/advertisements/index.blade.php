@@ -50,7 +50,7 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($advertisements as $index => $ad)
+                @foreach($advertisements as $index => $ad)
                     <tr>
                         <td>{{ $advertisements->firstItem() + $index }}</td>
                         <td>{{ $ad->title }}</td>
@@ -73,11 +73,7 @@
                         </td>
                         <td>{{ $ad->created_at->format('Y-m-d') }}</td>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="6" style="text-align: center; padding: 20px;">No advertisements found.</td>
-                    </tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
         

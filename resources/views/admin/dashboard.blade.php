@@ -57,15 +57,13 @@
                 <tr><th>#</th><th>In Time</th><th>Visitor Name</th></tr>
             </thead>
             <tbody>
-                @forelse($recentRegistry as $i => $entry)
+                @foreach($recentRegistry as $i => $entry)
                 <tr>
                     <td>{{ $i + 1 }}</td>
                     <td>{{ $entry->created_at?->format('M d, H:i') }}</td>
                     <td>{{ $entry->visitor_name }}</td>
                 </tr>
-                @empty
-                <tr><td colspan="3">No registry entries found.</td></tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -77,15 +75,13 @@
                 <tr><th>#</th><th>Email</th><th>Username</th></tr>
             </thead>
             <tbody>
-                @forelse($recentMembers as $i => $member)
+                @foreach($recentMembers as $i => $member)
                 <tr>
                     <td>{{ $i + 1 }}</td>
                     <td>{{ $member->email }}</td>
                     <td>{{ $member->username }}</td>
                 </tr>
-                @empty
-                <tr><td colspan="3">No members found.</td></tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
         <div style="margin-top: 15px;">

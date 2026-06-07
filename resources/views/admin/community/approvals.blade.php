@@ -16,7 +16,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($posts as $post)
+                @foreach($posts as $post)
             <tr>
                 <td class="align-top">
                     <div class="flex items-center gap-3">
@@ -58,14 +58,7 @@
                     </div>
                 </td>
             </tr>
-            @empty
-            <tr>
-                <td colspan="4" class="text-center py-12 text-gray-500">
-                    <i class='bx bx-check-double text-5xl text-gray-300 mb-3 block'></i>
-                    No posts require final Stage 2 approval at this time.
-                </td>
-            </tr>
-            @endforelse
+                @endforeach
         </tbody>
     </table>
 </div>
