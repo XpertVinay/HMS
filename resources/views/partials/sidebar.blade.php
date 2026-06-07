@@ -59,6 +59,8 @@
             @if(in_array('community_approvals', $activeOrg->enabled_menus))
             <li><a href="{{ route('admin.community.approvals') }}" class="{{ str_contains($currentRoute, 'community') ? 'active' : '' }}"><i class='bx bx-check-double'></i><span class="links_name">Comm. Approvals</span></a></li>
             @endif
+            <li><a href="{{ route('admin.theme_settings.edit') }}" class="{{ str_contains($currentRoute, 'theme_settings') ? 'active' : '' }}"><i class='bx bx-palette'></i><span class="links_name">Theme Settings</span></a></li>
+
 
         @elseif($role === 'member')
             <li><a href="{{ route('member.dashboard') }}" class="{{ str_contains($currentRoute, 'member.dashboard') ? 'active' : '' }}"><i class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>

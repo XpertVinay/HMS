@@ -32,7 +32,21 @@ class ResolveOrganization
         $org = $this->tenantResolver->resolve($request);
 
         if (!$org) {
-            // Fallback to default organization
+            $host = strtolower($request->getHost());
+            $baseHost = strtolower(parse_url(config('app.url'), PHP_URL_HOST) ?? 'localhost');
+            
+            $cleanHost = preg_replace('/^www\./', '', $host);
+            $cleanBaseHost = preg_replace('/^www\./', '', $baseHost);
+            
+            $isIp = filter_var($cleanHost, FILTER_VALIDATE_IP);
+            
+            // If the host is not the base domain, not an IP, and not localhost, then it's an unrecognized
+            // subdomain or custom domain. We must throw a 404 instead of showing the default portal.
+            if (!$isIp && $cleanHost !== $cleanBaseHost && $cleanHost !== 'localhost') {
+                abort(404, "Organization not found for this domain/subdomain.");
+            }
+
+            // Fallback to default organization for the main portal
             $org = Organization::find(1) ?? $this->defaultOrganization();
         }
 

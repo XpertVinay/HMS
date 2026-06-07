@@ -159,6 +159,9 @@ Route::prefix('admin')->middleware(['auth.session', 'role:admin,super_admin'])->
     Route::post('/solid-approvals/{id}/reject', [\App\Http\Controllers\Admin\SolidApprovalController::class, 'reject'])->name('solid.reject');
     Route::get('/solid-settings', [\App\Http\Controllers\Admin\SolidApprovalController::class, 'settings'])->name('solid.settings');
     Route::put('/solid-settings', [\App\Http\Controllers\Admin\SolidApprovalController::class, 'updateSettings'])->name('solid.settings.update');
+    // Theme Settings for RWA Admins
+    Route::get('/theme-settings', [\App\Http\Controllers\Admin\ThemeSettingsController::class, 'edit'])->name('theme_settings.edit');
+    Route::put('/theme-settings', [\App\Http\Controllers\Admin\ThemeSettingsController::class, 'update'])->name('theme_settings.update');
 });
 
 /*
