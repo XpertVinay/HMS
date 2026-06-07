@@ -41,6 +41,16 @@ class MultiOrgDemoDataSeeder extends Seeder
         // Create some default vendors to be shared or used randomly
         $this->command->info('Creating Vendors & Services...');
         $vendors = [];
+        $categories = ['Plumbing', 'Electrical Repair', 'Carpentry', 'Cleaning', 'Pest Control', 'Painting'];
+        $categoryIds = [];
+        foreach ($categories as $cat) {
+            $category = \App\Models\ServiceCategory::firstOrCreate(
+                ['slug' => \Illuminate\Support\Str::slug($cat)],
+                ['name' => $cat, 'is_active' => true]
+            );
+            $categoryIds[] = $category->id;
+        }
+
         for ($i = 0; $i < 15; $i++) {
             $vendor = AppVendor::create([
                 'business_name' => $faker->unique()->company,
@@ -55,7 +65,8 @@ class MultiOrgDemoDataSeeder extends Seeder
             for ($s = 0; $s < 3; $s++) {
                 VendorService::create([
                     'vendor_id' => $vendor->id,
-                    'service_name' => $faker->randomElement(['Plumbing', 'Electrical Repair', 'Carpentry', 'Cleaning', 'Pest Control', 'Painting']) . ' - ' . $faker->word,
+                    'service_category_id' => $faker->randomElement($categoryIds),
+                    'title' => $faker->randomElement($categories) . ' - ' . $faker->word,
                     'description' => $faker->sentence,
                     'price' => $faker->randomFloat(2, 50, 500),
                 ]);
