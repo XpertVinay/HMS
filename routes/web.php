@@ -43,6 +43,23 @@ use App\Http\Controllers\SuperAdmin\MenuConfigController as SuperAdminMenuConfig
 
 /*
 |--------------------------------------------------------------------------
+| Businzo IT Company Website Routes
+|--------------------------------------------------------------------------
+*/
+
+$businzoRoutes = function () {
+    Route::get('/', function () { return view('businzo.pages.home'); })->name('businzo.home');
+    Route::get('/about', function () { return view('businzo.pages.about'); })->name('businzo.about');
+    Route::get('/services', function () { return view('businzo.pages.services'); })->name('businzo.services');
+    Route::get('/contact', function () { return view('businzo.pages.contact'); })->name('businzo.contact');
+    Route::get('/estimate', function () { return view('businzo.pages.estimate'); })->name('businzo.estimate');
+};
+
+Route::domain('businzo.com')->group($businzoRoutes);
+Route::domain('www.businzo.com')->group($businzoRoutes);
+
+/*
+|--------------------------------------------------------------------------
 | Public Routes
 |--------------------------------------------------------------------------
 */

@@ -1,0 +1,17 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - app/
+        - config/
+        - database/
+        - routes/
+
+    # Level 9 is the highest level. Level 5 is a good starting point.
+    level: 5
+
+    excludePaths:
+        - bootstrap/cache/*
+        - storage/*
+        - vendor/*

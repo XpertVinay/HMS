@@ -1,0 +1,95 @@
+name: PR Validation and Deployment Readiness
+
+on:
+  push:
+    branches:
+      - main
+      - development
+  pull_request:
+    branches:
+      - main
+      - development
+
+jobs:
+  validate:
+    name: Validate Code and Deployment Readiness
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: hms_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, mysql, mysqli, pdo_mysql
+          coverage: none
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Composer Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+      - name: Install Composer Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Generate Application Key
+        run: php artisan key:generate
+
+      - name: Set Environment Variables for DB
+        run: |
+          sed -i 's/DB_CONNECTION=.*/DB_CONNECTION=mysql/g' .env
+          sed -i 's/DB_HOST=.*/DB_HOST=127.0.0.1/g' .env
+          sed -i 's/DB_PORT=.*/DB_PORT=3306/g' .env
+          sed -i 's/DB_DATABASE=.*/DB_DATABASE=hms_test/g' .env
+          sed -i 's/DB_USERNAME=.*/DB_USERNAME=root/g' .env
+          sed -i 's/DB_PASSWORD=.*/DB_PASSWORD=/g' .env
+
+      - name: Set Directory Permissions
+        run: chmod -R 777 storage bootstrap/cache
+
+      - name: Install NPM Dependencies
+        run: npm ci
+
+      - name: Compile Frontend Assets (Production Readiness)
+        run: npm run build
+
+      - name: Run Database Migrations (Sync Check)
+        run: php artisan migrate --force
+
+      - name: Run PHPStan (Code Quality Analysis)
+        run: ./vendor/bin/phpstan analyse --memory-limit=2G
+
+      - name: Run Tests (PHPUnit Code Errors Check)
+        run: php artisan test
