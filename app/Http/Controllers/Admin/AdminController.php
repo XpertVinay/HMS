@@ -39,12 +39,16 @@ class AdminController extends Controller
     {
         $request->validate([
             'username' => 'required|string|max:50|unique:admin,username',
+            'first_name' => 'nullable|string|max:100',
+            'last_name' => 'nullable|string|max:100',
             'email' => 'required|email|max:50|unique:admin,email',
             'password' => 'required|string|min:6',
         ]);
 
         Admin::create([
             'username' => $request->username,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'admin',
@@ -69,7 +73,7 @@ class AdminController extends Controller
             'email' => 'required|email|max:50|unique:admin,email,' . $id,
         ]);
 
-        $data = $request->only('username', 'email', 'mobile_number');
+        $data = $request->only('username', 'first_name', 'last_name', 'email', 'mobile_number');
         if ($request->filled('password')) { $data['password'] = Hash::make($request->password); }
         $adminAccount->update($data);
         return redirect()->route('admin.admins.index')->with('success', 'Admin updated successfully.');

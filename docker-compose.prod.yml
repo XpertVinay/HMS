@@ -1,0 +1,31 @@
+# Production overrides — use with:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+#
+# Before deploying:
+#   1. Set strong DB_PASSWORD, REDIS_PASSWORD, APP_KEY in .env
+#   2. Set APP_ENV=production and APP_DEBUG=false
+#   3. Point nginx/ssl to real certificates (Let's Encrypt)
+
+services:
+  web:
+    ports: []
+    restart: always
+
+  proxy:
+    restart: always
+
+  db:
+    ports: []
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+
+  redis:
+    ports: []
+    restart: always
+
+  queue:
+    restart: always
+
+  db_test:
+    profiles:
+      - test

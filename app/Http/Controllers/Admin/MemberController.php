@@ -44,6 +44,8 @@ class MemberController extends Controller
     {
         $request->validate([
             'username' => 'required|string|max:50|unique:member,username',
+            'first_name' => 'nullable|string|max:100',
+            'last_name' => 'nullable|string|max:100',
             'email' => 'required|email|max:50|unique:member,email',
             'password' => 'required|string|min:6',
             'address' => 'required|string|max:255',
@@ -52,6 +54,8 @@ class MemberController extends Controller
 
         Member::create([
             'username' => $request->username,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'address' => $request->address,
@@ -85,7 +89,7 @@ class MemberController extends Controller
             'address' => 'required|string|max:255',
         ]);
 
-        $data = $request->only('username', 'email', 'address', 'phone');
+        $data = $request->only('username', 'first_name', 'last_name', 'email', 'address', 'phone');
         if ($request->filled('password')) {
             $data['password'] = Hash::make($request->password);
         }

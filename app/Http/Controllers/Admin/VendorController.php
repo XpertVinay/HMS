@@ -42,12 +42,14 @@ class VendorController extends Controller
     {
         $request->validate([
             'business_name' => 'required|string|max:100|unique:vendor,business_name',
+            'first_name' => 'nullable|string|max:100',
+            'last_name' => 'nullable|string|max:100',
             'email' => 'required|email|max:50|unique:vendor,email',
             'password' => 'required|string|min:6',
         ]);
 
         \DB::transaction(function () use ($request) {
-            AppVendor::create(array_merge($request->only('business_name', 'email', 'business_registration'), [
+            AppVendor::create(array_merge($request->only('business_name', 'first_name', 'last_name', 'email', 'business_registration'), [
                 'password' => Hash::make($request->password),
             ]));
         });
@@ -66,7 +68,7 @@ class VendorController extends Controller
         $vendor = AppVendor::findOrFail($id);
         
         \DB::transaction(function () use ($request, $vendor) {
-            $data = $request->only('business_name', 'email', 'business_registration', 'bank_account_details');
+            $data = $request->only('business_name', 'first_name', 'last_name', 'email', 'business_registration', 'bank_account_details');
             if ($request->filled('password')) {
                 $data['password'] = Hash::make($request->password);
             }

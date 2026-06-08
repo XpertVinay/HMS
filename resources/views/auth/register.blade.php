@@ -70,6 +70,14 @@
                     </h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="space-y-1">
+                            <label class="text-xs font-semibold text-white/70 ml-1">Admin First Name</label>
+                            <input type="text" name="admin_first_name" placeholder="First name" class="glass-input" value="{{ old('admin_first_name') }}">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-xs font-semibold text-white/70 ml-1">Admin Last Name</label>
+                            <input type="text" name="admin_last_name" placeholder="Last name" class="glass-input" value="{{ old('admin_last_name') }}">
+                        </div>
+                        <div class="space-y-1">
                             <label class="text-xs font-semibold text-white/70 ml-1">Admin Username</label>
                             <input type="text" name="admin_username" placeholder="Username" class="glass-input" required value="{{ old('admin_username') }}">
                         </div>

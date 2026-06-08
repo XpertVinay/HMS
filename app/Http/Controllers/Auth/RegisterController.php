@@ -30,6 +30,8 @@ class RegisterController extends Controller
             'registration_code' => 'required|string|max:100|unique:organizations,registration_code',
             'subdomain' => 'required|string|max:100|unique:organizations,subdomain|alpha_dash',
             'admin_username' => 'required|string|max:50',
+            'admin_first_name' => 'nullable|string|max:100',
+            'admin_last_name' => 'nullable|string|max:100',
             'admin_email' => 'required|email|max:50',
             'admin_password' => 'required|string|min:6|confirmed',
         ]);
@@ -45,6 +47,8 @@ class RegisterController extends Controller
 
             Admin::create([
                 'username' => $request->admin_username,
+                'first_name' => $request->admin_first_name,
+                'last_name' => $request->admin_last_name,
                 'email' => $request->admin_email,
                 'password' => Hash::make($request->admin_password),
                 'organization_id' => $org->id,

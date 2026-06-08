@@ -6,6 +6,7 @@
         <div class="box-title">Add New Admin</div>
         <form action="{{ route('admin.admins.store') }}" method="POST">
             @csrf
+            @include('partials.name_fields')
             <div class="form-group" style="margin-bottom: 15px;">
                 <label>Username</label>
                 <input type="text" name="username" class="form-control" value="{{ old('username') }}" required style="width: 100%; padding: 8px;">

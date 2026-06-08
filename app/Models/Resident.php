@@ -5,17 +5,20 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Traits\HasPersonName;
 use App\Traits\TenantScoped;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 class Resident extends Authenticatable implements JWTSubject
 {
-    use TenantScoped;
+    use HasPersonName, TenantScoped;
 
     protected $table = 'resident';
 
     protected $fillable = [
         'username',
+        'first_name',
+        'last_name',
         'email',
         'password',
         'address',

@@ -11,12 +11,7 @@
             <input type="text" value="{{ $user->username ?? $user->business_name }}" disabled class="bg-gray-100">
         </div>
         
-        @if($role === 'vendor')
-        <div class="form-group">
-            <label>Contact Person Name</label>
-            <input type="text" name="contact_name" value="{{ old('contact_name', $user->contact_name) }}" required>
-        </div>
-        @endif
+        @include('partials.name_fields', ['user' => $user])
 
         <div class="form-group">
             <label>Email Address</label>

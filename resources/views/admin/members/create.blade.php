@@ -5,6 +5,7 @@
 <div class="form-card">
     <form action="{{ route('admin.members.store') }}" method="POST">
         @csrf
+        @include('partials.name_fields')
         <div class="form-group"><label>Username</label><input type="text" name="username" required value="{{ old('username') }}"></div>
         <div class="form-group"><label>Email</label><input type="email" name="email" required value="{{ old('email') }}"></div>
         <div class="form-group"><label>Password</label><input type="password" name="password" required></div>

@@ -46,13 +46,14 @@ class ProfileController extends Controller
         [$role, $userId, $model] = $this->getRoleConfig();
         $user = $model::findOrFail($userId);
 
+        $request->validate([
+            'first_name' => 'nullable|string|max:100',
+            'last_name' => 'nullable|string|max:100',
+            'email' => 'required|email|max:255',
+        ]);
+
         // Common profile data
-        $data = $request->only('email', 'phone', 'mobile_number', 'address');
-        
-        // Vendor specific
-        if ($role === 'vendor' && $request->filled('contact_name')) {
-            $data['contact_name'] = $request->contact_name;
-        }
+        $data = $request->only('email', 'phone', 'mobile_number', 'address', 'first_name', 'last_name');
         
         // Map phone vs mobile_number properly if provided
         if ($request->filled('phone') && $role === 'resident') {

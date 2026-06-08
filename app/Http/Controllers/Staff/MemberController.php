@@ -36,7 +36,8 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:100',
+            'first_name' => 'nullable|string|max:100',
+            'last_name' => 'nullable|string|max:100',
             'username' => 'required|string|max:50|unique:member,username',
             'email' => 'nullable|email|max:50',
             'phone' => 'nullable|string|max:20',
@@ -45,12 +46,12 @@ class MemberController extends Controller
 
         Member::create([
             'organization_id' => app('active_org')->id,
-            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'username' => $request->username,
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
-            'is_approved' => true, // Staff adds them, so auto-approve
         ]);
 
         return redirect()->route('staff.members.index')->with('success', 'Member added successfully.');
@@ -67,14 +68,16 @@ class MemberController extends Controller
         $member = Member::findOrFail($id);
         
         $request->validate([
-            'name' => 'required|string|max:100',
+            'first_name' => 'nullable|string|max:100',
+            'last_name' => 'nullable|string|max:100',
             'username' => 'required|string|max:50|unique:member,username,'.$member->id,
             'email' => 'nullable|email|max:50',
             'phone' => 'nullable|string|max:20',
         ]);
 
         $member->update([
-            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'username' => $request->username,
             'email' => $request->email,
             'phone' => $request->phone,

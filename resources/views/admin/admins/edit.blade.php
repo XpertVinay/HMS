@@ -7,6 +7,7 @@
         <form action="{{ route('admin.admins.update', $adminAccount->id) }}" method="POST">
             @csrf
             @method('PUT')
+            @include('partials.name_fields', ['adminAccount' => $adminAccount])
             <div class="form-group" style="margin-bottom: 15px;">
                 <label>Username</label>
                 <input type="text" name="username" class="form-control" value="{{ old('username', $adminAccount->username) }}" required style="width: 100%; padding: 8px;">

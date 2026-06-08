@@ -20,6 +20,8 @@ class SuperAdminSeeder extends Seeder
             ['email' => 'sa@businzo.com'],
             [
                 'username' => 'superadmin',
+                'first_name' => 'Super',
+                'last_name' => 'Admin',
                 'password' => Hash::make('password'),
             ]
         );

@@ -187,7 +187,7 @@ class AuthService
      */
     private function setSession($user, string $role, array $config, int $orgId): void
     {
-        $displayName = $user->name ?? $user->contact_name ?? $user->business_name ?? $user->username ?? 'User';
+        $displayName = $user->full_name ?? $user->business_name ?? $user->username ?? 'User';
 
         session([
             'logged' => true,
@@ -202,7 +202,7 @@ class AuthService
         }
 
         if ($role === 'member') {
-            session(['member' => $user->name ?? 'Member']);
+            session(['member' => $user->full_name ?? 'Member']);
         }
     }
 

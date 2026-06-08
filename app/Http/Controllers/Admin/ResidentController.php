@@ -43,12 +43,14 @@ class ResidentController extends Controller
     {
         $request->validate([
             'username' => 'required|string|max:50|unique:resident,username',
+            'first_name' => 'nullable|string|max:100',
+            'last_name' => 'nullable|string|max:100',
             'email' => 'required|email|max:50|unique:resident,email',
             'password' => 'required|string|min:6',
             'address' => 'required|string|max:255',
         ]);
 
-        Resident::create(array_merge($request->only('username', 'email', 'address', 'mobile_number'), [
+        Resident::create(array_merge($request->only('username', 'first_name', 'last_name', 'email', 'address', 'mobile_number'), [
             'password' => Hash::make($request->password),
             'organization_id' => $this->orgId(),
         ]));
@@ -65,7 +67,7 @@ class ResidentController extends Controller
     public function update(Request $request, int $id)
     {
         $resident = Resident::where('organization_id', $this->orgId())->findOrFail($id);
-        $data = $request->only('username', 'email', 'address', 'mobile_number');
+        $data = $request->only('username', 'first_name', 'last_name', 'email', 'address', 'mobile_number');
         if ($request->filled('password')) { $data['password'] = Hash::make($request->password); }
         $resident->update($data);
         return redirect()->route('admin.residents.index')->with('success', 'Resident updated.');

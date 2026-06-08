@@ -14,7 +14,7 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-6">
                 <i class='bx bx-code-alt text-accent-light'></i>
-                <span class="text-xs font-bold tracking-widest text-muted uppercase">The Company</span>
+                <span class="text-xs font-bold tracking-widest text-muted uppercase">Businzo Technologies</span>
             </div>
             <h1 class="text-5xl md:text-7xl font-black font-['Outfit'] tracking-tight mb-4 text-foreground" data-aos="fade-up">We Build <br><span class="text-muted">Software Products.</span></h1>
             <p class="text-lg text-muted max-w-xl font-light" data-aos="fade-up" data-aos-delay="100">Web applications, mobile experiences, AI/ML systems, and custom platforms — engineered for performance and reliability.</p>
@@ -117,37 +117,37 @@
     </div>
 </section>
 
-<!-- Values Section -->
+<!-- Engineering Principles Section -->
 <section class="py-32">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="text-center mb-20 max-w-3xl mx-auto" data-aos="fade-up">
             <h2 class="text-4xl font-black mb-6 font-['Outfit']">Engineering Principles</h2>
-            <p class="text-muted text-lg">How we build — and how we build for you.</p>
+            <p class="text-muted text-lg">The standards behind every product we design, build, and ship — from first commit to production release.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="group" data-aos="fade-up" data-aos-delay="100">
                 <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:bg-white/10 transition-colors">
-                    <i class='bx bx-rocket text-3xl text-muted'></i>
+                    <i class='bx bx-badge-check text-3xl text-muted'></i>
                 </div>
-                <h4 class="text-xl font-bold mb-4 font-['Outfit']">Ship with Confidence</h4>
-                <p class="text-muted leading-relaxed">Every pull request passes PHPStan static analysis, PHPUnit tests, migration checks, and frontend builds in CI. We deploy what we can prove works.</p>
+                <h4 class="text-xl font-bold mb-4 font-['Outfit']">Quality by Design</h4>
+                <p class="text-muted leading-relaxed">Reliability is built in, not added later. We use automated testing, peer code review, static analysis, and CI/CD pipelines on every change — so defects are caught early and releases go out on a predictable, evidence-backed cadence.</p>
             </div>
             
             <div class="group" data-aos="fade-up" data-aos-delay="200">
                 <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:bg-white/10 transition-colors">
                     <i class='bx bx-shield-quarter text-3xl text-muted'></i>
                 </div>
-                <h4 class="text-xl font-bold mb-4 font-['Outfit']">Tenant-First Security</h4>
-                <p class="text-muted leading-relaxed">Organization-scoped queries, role-based middleware, JWT deny lists, and session regeneration on login. Data isolation is architectural, not optional.</p>
+                <h4 class="text-xl font-bold mb-4 font-['Outfit']">Security by Default</h4>
+                <p class="text-muted leading-relaxed">Authentication, authorization, encryption, and audit logging are part of the foundation — not a late-stage add-on. We apply least-privilege access, secure API design, and compliance-aware data handling so your product stays protected as users and data grow.</p>
             </div>
             
             <div class="group" data-aos="fade-up" data-aos-delay="300">
                 <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:bg-white/10 transition-colors">
-                    <i class='bx bx-chip text-3xl text-muted'></i>
+                    <i class='bx bx-layer text-3xl text-muted'></i>
                 </div>
-                <h4 class="text-xl font-bold mb-4 font-['Outfit']">Built to Scale</h4>
-                <p class="text-muted leading-relaxed">Docker Compose for local dev, Nginx reverse proxy, Redis-backed queues, and per-tenant theme engines. One codebase serves unlimited organizations.</p>
+                <h4 class="text-xl font-bold mb-4 font-['Outfit']">Architecture for Growth</h4>
+                <p class="text-muted leading-relaxed">We favor modular, API-first systems with clear separation of concerns — containerized for cloud deployment, observable in production, and ready to scale horizontally. Your software handles today's load and adapts to new features and integrations without costly rewrites.</p>
             </div>
         </div>
     </div>

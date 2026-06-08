@@ -18,6 +18,7 @@
         <h3 class="text-lg font-bold text-gray-800 border-b pb-3 mb-4">Account Information</h3>
         
         <div class="grid grid-cols-1 gap-4">
+            @include('partials.name_fields', ['resident' => $resident ?? null])
             <div class="form-group">
                 <label>Username (Login ID) <span class="text-red-500">*</span></label>
                 <input type="text" name="username" value="{{ old('username', $resident->username ?? '') }}" required>

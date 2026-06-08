@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasPersonName;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,10 +14,14 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
  */
 class AppVendor extends Authenticatable implements JWTSubject
 {
+    use HasPersonName;
+
     protected $table = 'vendor';
 
     protected $fillable = [
         'business_name',
+        'first_name',
+        'last_name',
         'email',
         'password',
         'business_registration',

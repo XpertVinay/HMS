@@ -50,6 +50,8 @@ class DemoDataSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             Admin::create([
                 'username' => $faker->unique()->userName,
+                'first_name' => $faker->firstName,
+                'last_name' => $faker->lastName,
                 'email' => $faker->unique()->safeEmail,
                 'password' => $password,
                 'mobile_number' => $faker->numerify('##########'),
@@ -63,6 +65,8 @@ class DemoDataSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             Staff::create([
                 'username' => $faker->unique()->userName,
+                'first_name' => $faker->firstName,
+                'last_name' => $faker->lastName,
                 'email' => $faker->unique()->safeEmail,
                 'password' => $password,
                 'mobile_number' => $faker->numerify('##########'),
@@ -76,6 +80,8 @@ class DemoDataSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             $members[] = Member::create([
                 'username' => $faker->unique()->userName,
+                'first_name' => $faker->firstName,
+                'last_name' => $faker->lastName,
                 'email' => $faker->unique()->safeEmail,
                 'password' => $password,
                 'address' => $faker->streetAddress,
@@ -91,6 +97,8 @@ class DemoDataSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             $residents[] = Resident::create([
                 'username' => $faker->unique()->userName,
+                'first_name' => $faker->firstName,
+                'last_name' => $faker->lastName,
                 'email' => $faker->unique()->safeEmail,
                 'password' => $password,
                 'address' => $faker->streetAddress,
@@ -105,6 +113,8 @@ class DemoDataSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             AppVendor::create([
                 'business_name' => $faker->unique()->company,
+                'first_name' => $faker->firstName,
+                'last_name' => $faker->lastName,
                 'email' => $faker->unique()->companyEmail,
                 'password' => $password,
                 'is_gst_verified_staff' => $faker->boolean(70),

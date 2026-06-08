@@ -5,6 +5,7 @@
 <div class="form-card">
     <form action="{{ route('admin.members.update', $member->id) }}" method="POST">
         @csrf @method('PUT')
+        @include('partials.name_fields', ['member' => $member])
         <div class="form-group"><label>Username</label><input type="text" name="username" required value="{{ old('username', $member->username) }}"></div>
         <div class="form-group"><label>Email</label><input type="email" name="email" required value="{{ old('email', $member->email) }}"></div>
         <div class="form-group"><label>New Password (leave blank to keep)</label><input type="password" name="password"></div>

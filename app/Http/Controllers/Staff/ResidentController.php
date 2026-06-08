@@ -37,6 +37,8 @@ class ResidentController extends Controller
     {
         $request->validate([
             'username' => 'required|string|max:50|unique:resident,username',
+            'first_name' => 'nullable|string|max:100',
+            'last_name' => 'nullable|string|max:100',
             'email' => 'required|email|max:50|unique:resident,email',
             'password' => 'required|string|min:6',
             'address' => 'required|string|max:255',
@@ -45,6 +47,8 @@ class ResidentController extends Controller
 
         Resident::create([
             'organization_id' => app('active_org')->id,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -68,12 +72,16 @@ class ResidentController extends Controller
         
         $request->validate([
             'username' => 'required|string|max:50|unique:resident,username,'.$resident->id,
+            'first_name' => 'nullable|string|max:100',
+            'last_name' => 'nullable|string|max:100',
             'email' => 'required|email|max:50|unique:resident,email,'.$resident->id,
             'address' => 'required|string|max:255',
             'mobile_number' => 'nullable|string|max:20',
         ]);
 
         $resident->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'username' => $request->username,
             'email' => $request->email,
             'address' => $request->address,

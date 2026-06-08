@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\HasPersonName;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 /**
@@ -11,10 +11,14 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
  */
 class SuperAdmin extends Authenticatable implements JWTSubject
 {
+    use HasPersonName;
+
     protected $table = 'super_admin';
 
     protected $fillable = [
         'username',
+        'first_name',
+        'last_name',
         'email',
         'password',
     ];
