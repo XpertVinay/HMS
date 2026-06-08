@@ -1,13 +1,13 @@
 @extends('businzo.layouts.app')
 
-@section('title', 'Contact Us')
+@section('title', 'Contact Businzo Technologies')
 
 @section('content')
 <div class="pt-32 pb-20 relative overflow-hidden bg-background border-b border-slate-800">
     <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 z-0"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center" data-aos="fade-up">
-        <h1 class="text-4xl md:text-5xl font-bold font-['Outfit'] mb-6">Get in <span class="gradient-text">Touch</span></h1>
-        <p class="text-xl text-gray-400 max-w-3xl mx-auto">Have a project in mind? Let's discuss how we can help you bring your ideas to life.</p>
+        <h1 class="text-4xl md:text-5xl font-bold font-['Outfit'] mb-6">Let's Build <span class="gradient-text">Together</span></h1>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto">Need a web application, mobile app, AI/ML feature, or custom software platform? Tell us about your project and we'll respond within 24 hours.</p>
     </div>
 </div>
 
@@ -17,19 +17,19 @@
             
             <!-- Contact Info -->
             <div data-aos="fade-right">
-                <h2 class="text-3xl font-bold font-['Outfit'] mb-8">Let's build something great together.</h2>
+                <h2 class="text-3xl font-bold font-['Outfit'] mb-8">From idea to production.</h2>
                 <p class="text-gray-400 mb-10 leading-relaxed">
-                    Whether you're looking for a dedicated team of engineers, a custom SaaS application, or an AI-powered enterprise solution, our team is ready to deliver. Reach out to us for a free consultation.
+                    We don't just consult — we ship production software. From MVPs to enterprise platforms, we build web applications, mobile apps, AI/ML systems, and custom software with clean architecture and reliable deployment practices.
                 </p>
 
                 <div class="space-y-8">
                     <div class="flex items-start gap-4">
                         <div class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0">
-                            <i class='bx bx-map text-2xl text-blue-500'></i>
+                            <i class='bx bx-buildings text-2xl text-blue-500'></i>
                         </div>
                         <div>
-                            <h4 class="text-lg font-bold font-['Outfit'] mb-1">Our Headquarters</h4>
-                            <p class="text-gray-400">123 Innovation Drive,<br>Tech District, TD 12345</p>
+                            <h4 class="text-lg font-bold font-['Outfit'] mb-1">What We Build</h4>
+                            <p class="text-gray-400">Web apps, mobile applications, AI/ML engineering, custom platforms, integrations, and automation.</p>
                         </div>
                     </div>
 
@@ -39,19 +39,19 @@
                         </div>
                         <div>
                             <h4 class="text-lg font-bold font-['Outfit'] mb-1">Email Us</h4>
-                            <a href="mailto:hello@businzo.com" class="text-gray-400 hover:text-white transition-colors">hello@businzo.com</a>
-                            <p class="text-sm text-slate-500 mt-1">We typically reply within 24 hours.</p>
+                            <a href="mailto:sales@businzo.com" class="text-gray-400 hover:text-white transition-colors">hello@businzo.com</a>
+                            <p class="text-sm text-slate-500 mt-1">For project inquiries, proposals, and partnership discussions.</p>
                         </div>
                     </div>
 
                     <div class="flex items-start gap-4">
                         <div class="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center shrink-0">
-                            <i class='bx bx-phone text-2xl text-emerald-500'></i>
+                            <i class='bx bx-briefcase text-2xl text-emerald-500'></i>
                         </div>
                         <div>
-                            <h4 class="text-lg font-bold font-['Outfit'] mb-1">Call Us</h4>
-                            <p class="text-gray-400">+1 (555) 123-4567</p>
-                            <p class="text-sm text-slate-500 mt-1">Mon-Fri, 9am-6pm EST</p>
+                            <h4 class="text-lg font-bold font-['Outfit'] mb-1">Careers</h4>
+                            <a href="mailto:careers@businzo.com" class="text-gray-400 hover:text-white transition-colors">careers@businzo.com</a>
+                            <p class="text-sm text-slate-500 mt-1">We're hiring for multliple tech stack roles - software developers, architects, mobile engineers, and AI specialists.</p>
                         </div>
                     </div>
                 </div>
@@ -59,9 +59,9 @@
                 <div class="mt-12 pt-12 border-t border-slate-800">
                     <h4 class="text-lg font-bold font-['Outfit'] mb-4">Follow Us</h4>
                     <div class="flex space-x-4">
-                        <a href="#" class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-gray-400 hover:bg-blue-600 hover:text-white transition-all"><i class='bx bxl-linkedin text-xl'></i></a>
-                        <a href="#" class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-gray-400 hover:bg-blue-400 hover:text-white transition-all"><i class='bx bxl-twitter text-xl'></i></a>
-                        <a href="#" class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-gray-400 hover:bg-pink-600 hover:text-white transition-all"><i class='bx bxl-instagram text-xl'></i></a>
+                        <a href="https://in.linkedin.com/company/businzotech" class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-gray-400 hover:bg-blue-600 hover:text-white transition-all"><i class='bx bxl-linkedin text-xl'></i></a>
+                        <a href="https://x.com/businzotech" class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-gray-400 hover:bg-blue-400 hover:text-white transition-all"><i class='bx bxl-twitter text-xl'></i></a>
+                        <a href="https://www.facebook.com/BusinzoTechnologies" class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-gray-400 hover:bg-pink-600 hover:text-white transition-all"><i class='bx bxl-facebook text-xl'></i></a>
                     </div>
                 </div>
             </div>
@@ -74,50 +74,79 @@
                         <span>{{ session('success') }}</span>
                     </div>
                 @endif
-                <form action="{{ route('businzo.contact.submit') }}" method="POST" class="space-y-6">
+                <div id="contact-form-alert" class="hidden mb-6 px-4 py-3 rounded-lg flex items-start gap-2" role="alert" aria-live="polite"></div>
+
+                <form id="contact-form" action="{{ route('businzo.contact.submit') }}" method="POST" class="space-y-6" novalidate>
                     @csrf
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="first_name" class="block text-sm font-medium text-slate-300 mb-2">First Name</label>
-                            <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" class="w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors" placeholder="John" required>
+                        <div class="contact-field" data-field="first_name">
+                            <label for="first_name" class="block text-sm font-medium text-slate-300 mb-2">First Name <span class="text-accent">*</span></label>
+                            <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" autocomplete="given-name" maxlength="255"
+                                class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                                placeholder="John" aria-describedby="first_name-error first_name-hint">
+                            <p id="first_name-hint" class="text-gray-600 text-xs mt-1">Letters only, at least 3 characters.</p>
+                            <p id="first_name-error" class="contact-error text-red-400 text-xs mt-1 hidden" role="alert"></p>
                             @error('first_name') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                         </div>
-                        <div>
+                        <div class="contact-field" data-field="last_name">
                             <label for="last_name" class="block text-sm font-medium text-slate-300 mb-2">Last Name</label>
-                            <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}" class="w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors" placeholder="Doe">
+                            <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}" autocomplete="family-name" maxlength="255"
+                                class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                                placeholder="Doe" aria-describedby="last_name-error last_name-hint">
+                            <p id="last_name-hint" class="text-gray-600 text-xs mt-1">Optional. Letters only, min 3 characters if provided.</p>
+                            <p id="last_name-error" class="contact-error text-red-400 text-xs mt-1 hidden" role="alert"></p>
                             @error('last_name') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Work Email</label>
-                        <input type="email" id="email" name="email" value="{{ old('email') }}" class="w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors" placeholder="john@company.com" required>
+                    <div class="contact-field" data-field="email">
+                        <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Work Email <span class="text-accent">*</span></label>
+                        <input type="email" id="email" name="email" value="{{ old('email') }}" autocomplete="email" maxlength="255" inputmode="email"
+                            class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                            placeholder="john@company.com" aria-describedby="email-error email-hint">
+                        <p id="email-hint" class="text-gray-600 text-xs mt-1">Use your work or business email address.</p>
+                        <p id="email-error" class="contact-error text-red-400 text-xs mt-1 hidden" role="alert"></p>
                         @error('email') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                     </div>
 
-                    <div>
+                    <div class="contact-field" data-field="service">
                         <label for="service" class="block text-sm font-medium text-slate-300 mb-2">Interested Service</label>
-                        <select id="service" name="service" class="w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors">
+                        <select id="service" name="service"
+                            class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                            aria-describedby="service-error">
                             <option value="">Select a service...</option>
                             <option value="web" {{ old('service') == 'web' ? 'selected' : '' }}>Web Application Development</option>
                             <option value="mobile" {{ old('service') == 'mobile' ? 'selected' : '' }}>Mobile Application Development</option>
-                            <option value="ai" {{ old('service') == 'ai' ? 'selected' : '' }}>AI & Data Pipelines</option>
-                            <option value="custom" {{ old('service') == 'custom' ? 'selected' : '' }}>Custom Software Solutions</option>
+                            <option value="ai" {{ old('service') == 'ai' ? 'selected' : '' }}>AI/ML Engineering</option>
+                            <option value="custom" {{ old('service') == 'custom' ? 'selected' : '' }}>Custom Software Development</option>
+                            <option value="consulting" {{ old('service') == 'consulting' ? 'selected' : '' }}>Architecture & Consulting</option>
                         </select>
+                        <p id="service-error" class="contact-error text-red-400 text-xs mt-1 hidden" role="alert"></p>
                         @error('service') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                     </div>
 
-                    <div>
-                        <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Project Details</label>
-                        <textarea id="message" name="message" rows="5" class="w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors resize-none" placeholder="Tell us a little bit about your project and goals..." required>{{ old('message') }}</textarea>
+                    <div class="contact-field" data-field="message">
+                        <div class="flex items-center justify-between mb-2">
+                            <label for="message" class="block text-sm font-medium text-gray-300">Project Details <span class="text-accent">*</span></label>
+                            <span id="message-counter" class="text-xs text-gray-600">0 / 1000</span>
+                        </div>
+                        <textarea id="message" name="message" rows="5" maxlength="1000"
+                            class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors resize-none"
+                            placeholder="Tell us about your platform — number of users, key features, timeline, and any specific requirements..."
+                            aria-describedby="message-error message-hint">{{ old('message') }}</textarea>
+                        <p id="message-hint" class="text-gray-600 text-xs mt-1">Minimum 3 characters. Letters, numbers, spaces, and . , ' # - allowed.</p>
+                        <p id="message-error" class="contact-error text-red-400 text-xs mt-1 hidden" role="alert"></p>
                         @error('message') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                     </div>
 
-                    <button type="submit" class="w-full btn-premium py-4 rounded-lg text-black font-bold text-lg flex justify-center items-center gap-2">
-                        Send Message <i class='bx bx-send'></i>
+                    <button type="submit" id="contact-submit-btn"
+                        class="w-full btn-premium py-4 rounded-lg text-black font-bold text-lg flex justify-center items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed transition-opacity">
+                        <span id="contact-submit-label">Send Message</span>
+                        <i id="contact-submit-icon" class='bx bx-send'></i>
+                        <i id="contact-submit-spinner" class='bx bx-loader-alt bx-spin hidden'></i>
                     </button>
                     
-                    <p class="text-xs text-gray-500 text-center mt-4">By submitting this form, you agree to our privacy policy and terms of service.</p>
+                    <p class="text-xs text-gray-500 text-center mt-4">By submitting this form, you agree to our <a href="{{ route('businzo.privacy') }}" class="text-gray-400 hover:text-white underline">privacy policy</a> and <a href="{{ route('businzo.terms') }}" class="text-gray-400 hover:text-white underline">terms of service</a>.</p>
                 </form>
             </div>
 
@@ -125,3 +154,235 @@
     </div>
 </section>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    const submitBtn = document.getElementById('contact-submit-btn');
+    const submitLabel = document.getElementById('contact-submit-label');
+    const submitIcon = document.getElementById('contact-submit-icon');
+    const submitSpinner = document.getElementById('contact-submit-spinner');
+    const formAlert = document.getElementById('contact-form-alert');
+    const messageField = document.getElementById('message');
+    const messageCounter = document.getElementById('message-counter');
+
+    const RULES = {
+        first_name: {
+            required: true,
+            validate: (value) => {
+                if (!value.trim()) return 'First name is required.';
+                if (value.trim().length < 3) return 'First name must be at least 3 characters.';
+                if (value.length > 255) return 'First name cannot exceed 255 characters.';
+                if (!/^[a-zA-Z]+$/.test(value.trim())) return 'First name may only contain letters.';
+                return '';
+            },
+        },
+        last_name: {
+            required: false,
+            validate: (value) => {
+                if (!value.trim()) return '';
+                if (value.trim().length < 3) return 'Last name must be at least 3 characters if provided.';
+                if (value.length > 255) return 'Last name cannot exceed 255 characters.';
+                if (!/^[a-zA-Z]+$/.test(value.trim())) return 'Last name may only contain letters.';
+                return '';
+            },
+        },
+        email: {
+            required: true,
+            validate: (value) => {
+                const trimmed = value.trim();
+                if (!trimmed) return 'Email address is required.';
+                if (trimmed.length < 3) return 'Email must be at least 3 characters.';
+                if (trimmed.length > 255) return 'Email cannot exceed 255 characters.';
+                const emailPattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+                if (!emailPattern.test(trimmed)) return 'Please enter a valid email address.';
+                if (/^(test|example|noreply)@/i.test(trimmed)) return 'Please use a real work or business email.';
+                return '';
+            },
+        },
+        service: {
+            required: false,
+            validate: (value) => {
+                if (!value) return '';
+                const allowed = ['web', 'mobile', 'ai', 'custom', 'consulting'];
+                if (!allowed.includes(value)) return 'Please select a valid service option.';
+                return '';
+            },
+        },
+        message: {
+            required: true,
+            validate: (value) => {
+                const trimmed = value.trim();
+                if (!trimmed) return 'Project details are required.';
+                if (trimmed.length < 3) return 'Message must be at least 3 characters.';
+                if (value.length > 1000) return 'Message cannot exceed 1000 characters.';
+                if (!/^[a-zA-Z0-9\s.,'#-]+$/.test(value)) return 'Message contains invalid characters. Use letters, numbers, spaces, and . , \' # - only.';
+                return '';
+            },
+        },
+    };
+
+    const touched = {};
+    let isSubmitting = false;
+
+    function getField(name) {
+        return form.querySelector(`[name="${name}"]`);
+    }
+
+    function getErrorEl(name) {
+        return document.getElementById(`${name}-error`);
+    }
+
+    function setFieldState(name, error) {
+        const input = getField(name);
+        const errorEl = getErrorEl(name);
+        const wrapper = form.querySelector(`[data-field="${name}"]`);
+
+        if (!input || !errorEl) return;
+
+        const baseClasses = ['border-white/10', 'focus:border-blue-500', 'focus:ring-blue-500'];
+        const invalidClasses = ['border-red-500/70', 'focus:border-red-500', 'focus:ring-red-500'];
+        const validClasses = ['border-emerald-500/50', 'focus:border-emerald-500', 'focus:ring-emerald-500'];
+
+        input.classList.remove(...invalidClasses, ...validClasses, ...baseClasses);
+
+        if (error) {
+            input.classList.add(...invalidClasses);
+            input.setAttribute('aria-invalid', 'true');
+            errorEl.textContent = error;
+            errorEl.classList.remove('hidden');
+            wrapper?.classList.add('shake-once');
+            setTimeout(() => wrapper?.classList.remove('shake-once'), 400);
+        } else if (touched[name] && input.value.trim()) {
+            input.classList.add(...validClasses);
+            input.setAttribute('aria-invalid', 'false');
+            errorEl.textContent = '';
+            errorEl.classList.add('hidden');
+        } else {
+            input.classList.add(...baseClasses);
+            input.setAttribute('aria-invalid', 'false');
+            errorEl.textContent = '';
+            errorEl.classList.add('hidden');
+        }
+    }
+
+    function validateField(name, showError = true) {
+        const input = getField(name);
+        if (!input || !RULES[name]) return true;
+
+        const error = RULES[name].validate(input.value);
+        if (showError) setFieldState(name, error);
+        return !error;
+    }
+
+    function validateForm() {
+        let isValid = true;
+        let firstInvalid = null;
+
+        Object.keys(RULES).forEach((name) => {
+            touched[name] = true;
+            const fieldValid = validateField(name, true);
+            if (!fieldValid) {
+                isValid = false;
+                if (!firstInvalid) firstInvalid = getField(name);
+            }
+        });
+
+        return { isValid, firstInvalid };
+    }
+
+    function showFormAlert(message, type = 'error') {
+        formAlert.classList.remove('hidden', 'bg-red-500/10', 'border-red-500/50', 'text-red-400', 'bg-emerald-500/10', 'border-emerald-500/50', 'text-emerald-400', 'border');
+        if (type === 'error') {
+            formAlert.classList.add('bg-red-500/10', 'border', 'border-red-500/50', 'text-red-400');
+            formAlert.innerHTML = `<i class='bx bx-error-circle text-xl shrink-0'></i><span>${message}</span>`;
+        }
+        formAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function hideFormAlert() {
+        formAlert.classList.add('hidden');
+        formAlert.innerHTML = '';
+    }
+
+    function updateMessageCounter() {
+        const len = messageField.value.length;
+        messageCounter.textContent = `${len} / 1000`;
+        messageCounter.classList.toggle('text-red-400', len > 1000);
+        messageCounter.classList.toggle('text-amber-400', len >= 900 && len <= 1000);
+        messageCounter.classList.toggle('text-gray-600', len < 900);
+    }
+
+    function debounce(fn, delay) {
+        let timer;
+        return (...args) => {
+            clearTimeout(timer);
+            timer = setTimeout(() => fn(...args), delay);
+        };
+    }
+
+    Object.keys(RULES).forEach((name) => {
+        const input = getField(name);
+        if (!input) return;
+
+        input.addEventListener('blur', () => {
+            touched[name] = true;
+            validateField(name, true);
+        });
+
+        input.addEventListener('input', debounce(() => {
+            if (touched[name] || input.value.trim()) {
+                touched[name] = true;
+                validateField(name, true);
+            }
+            hideFormAlert();
+        }, 300));
+    });
+
+    messageField.addEventListener('input', updateMessageCounter);
+    updateMessageCounter();
+
+    form.addEventListener('submit', function (e) {
+        if (isSubmitting) {
+            e.preventDefault();
+            return;
+        }
+
+        hideFormAlert();
+        const { isValid, firstInvalid } = validateForm();
+
+        if (!isValid) {
+            e.preventDefault();
+            showFormAlert('Please fix the highlighted fields before submitting.');
+            if (firstInvalid) {
+                firstInvalid.focus();
+                firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return;
+        }
+
+        isSubmitting = true;
+        submitBtn.disabled = true;
+        submitLabel.textContent = 'Sending...';
+        submitIcon.classList.add('hidden');
+        submitSpinner.classList.remove('hidden');
+    });
+});
+</script>
+@endpush
+
+@push('styles')
+<style>
+    @keyframes contact-shake {
+        0%, 100% { transform: translateX(0); }
+        20%, 60% { transform: translateX(-4px); }
+        40%, 80% { transform: translateX(4px); }
+    }
+    .shake-once {
+        animation: contact-shake 0.35s ease-in-out;
+    }
+</style>
+@endpush

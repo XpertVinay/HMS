@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
  *
  * Supports:
  *  1. Custom domains  → myrwa.com, community.network.com
- *  2. Subdomains      → org1.rcms.businzo.com
+ *  2. Subdomains      → org1.businzo.com
  *  3. Query param     → ?org=slug (dev mode only)
  *  4. Session fallback → sticky dev override
  */
@@ -36,7 +36,7 @@ class TenantResolver
         $org = $this->resolveByCustomDomain($host);
         if ($org) return $org;
 
-        // 4. Try subdomain extraction (e.g., org1.rcms.businzo.com → org1)
+        // 4. Try subdomain extraction (e.g., org1.businzo.com → org1)
         $org = $this->resolveBySubdomain($host);
         if ($org) return $org;
 
@@ -88,7 +88,7 @@ class TenantResolver
      * Resolve via subdomain extraction from the host.
      *
      * Extracts the first segment from hosts like:
-     *   org1.rcms.businzo.com → org1
+     *   org1.businzo.com → org1
      *   green-valley.platform.com → green-valley
      *
      * Also checks tenant_domains.subdomain for explicit mappings.

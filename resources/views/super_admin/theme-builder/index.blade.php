@@ -85,7 +85,7 @@
             <div class="p-5">
                 <h3 class="font-bold text-base mb-1" style="color: var(--text-primary);">{{ $org->name }}</h3>
                 <p class="text-xs mb-3" style="color: var(--text-secondary);">
-                    <i class='bx bx-globe mr-1'></i>{{ $org->subdomain }}.rcms.businzo.com
+                    <i class='bx bx-globe mr-1'></i>{{ $org->subdomain }}.businzo.com
                 </p>
 
                 <div class="flex items-center justify-between mb-3">

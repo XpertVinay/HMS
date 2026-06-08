@@ -16,7 +16,7 @@
 <section class="py-24 relative z-10" data-aos="fade-up" data-aos-delay="200">
     <div class="max-w-4xl mx-auto px-6 lg:px-8 prose prose-invert prose-lg">
         <p class="text-gray-400 leading-relaxed mb-8">
-            At Businzo Technologies, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our software development and IT services.
+            At Businzo Technologies, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, request project estimates, or engage our software development services.
         </p>
 
         <h3 class="text-2xl font-bold font-['Outfit'] mt-12 mb-4 text-white">1. Information We Collect</h3>

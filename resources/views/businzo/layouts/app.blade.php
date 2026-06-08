@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Businzo Technologies | Premium Software Engineering')</title>
+    <title>@yield('title', 'Businzo Technologies | Web, Mobile & AI Software Engineering')</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -133,6 +133,7 @@
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="{{ route('businzo.home') }}" class="text-gray-400 hover:text-white transition-colors font-medium text-sm">Home</a>
                     <a href="{{ route('businzo.about') }}" class="text-gray-400 hover:text-white transition-colors font-medium text-sm">Company</a>
+                    <a href="{{ route('businzo.portfolio') }}" class="text-gray-400 hover:text-white transition-colors font-medium text-sm">Work</a>
                     
                     <!-- Services Dropdown -->
                     <div class="relative group py-2">
@@ -144,28 +145,28 @@
                                 <i class='bx bx-desktop text-xl text-primary group-hover/item:text-blue-400'></i>
                                 <div>
                                     <div class="text-sm font-bold text-white mb-0.5">Web Architecture</div>
-                                    <div class="text-xs text-gray-500">Scalable enterprise web apps</div>
+                                    <div class="text-xs text-gray-500">Multi-tenant SaaS & enterprise portals</div>
                                 </div>
                             </a>
                             <a href="{{ route('businzo.services') }}#mobile" class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group/item">
                                 <i class='bx bx-mobile-alt text-xl text-accent group-hover/item:text-red-400'></i>
                                 <div>
                                     <div class="text-sm font-bold text-white mb-0.5">Mobile Engineering</div>
-                                    <div class="text-xs text-gray-500">Native iOS & Android</div>
+                                    <div class="text-xs text-gray-500">JWT APIs, iOS & Android apps</div>
                                 </div>
                             </a>
                             <a href="{{ route('businzo.services') }}#ai" class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group/item">
                                 <i class='bx bx-brain text-xl text-blue-400 group-hover/item:text-blue-300'></i>
                                 <div>
                                     <div class="text-sm font-bold text-white mb-0.5">AI & Data</div>
-                                    <div class="text-xs text-gray-500">RAG, LLMs, Machine Learning</div>
+                                    <div class="text-xs text-gray-500">Smart workflows, RAG & automation</div>
                                 </div>
                             </a>
                             <a href="{{ route('businzo.services') }}#custom" class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group/item">
                                 <i class='bx bx-code-alt text-xl text-red-400 group-hover/item:text-red-300'></i>
                                 <div>
                                     <div class="text-sm font-bold text-white mb-0.5">Custom Software</div>
-                                    <div class="text-xs text-gray-500">Bespoke SaaS & internal tools</div>
+                                    <div class="text-xs text-gray-500">Domain-specific platforms like RCMS</div>
                                 </div>
                             </a>
                         </div>
@@ -194,6 +195,7 @@
             <div class="px-6 py-6 space-y-4">
                 <a href="{{ route('businzo.home') }}" class="block text-xl text-gray-300 hover:text-white font-medium">Home</a>
                 <a href="{{ route('businzo.about') }}" class="block text-xl text-gray-300 hover:text-white font-medium">Company</a>
+                <a href="{{ route('businzo.portfolio') }}" class="block text-xl text-gray-300 hover:text-white font-medium">Work</a>
                 <div class="py-2 border-y border-white/5">
                     <span class="block text-xs text-gray-500 uppercase tracking-widest font-bold mb-3">Expertise</span>
                     <a href="{{ route('businzo.services') }}#web" class="block py-2 text-gray-300 hover:text-white">Web Architecture</a>
@@ -222,12 +224,12 @@
                         <img src="{{ asset('assets/images/businzo/logo.png') }}" alt="Businzo Technologies Logo" class="h-16 w-auto rounded-2xl shadow-xl border border-white/10">
                     </a>
                     <p class="text-gray-500 text-sm leading-relaxed mb-8 max-w-sm">
-                        Building the internet, one pixel and line of code at a time. We engineer high-performance platforms for forward-thinking companies.
+                        We build production-grade software — web platforms, mobile applications, AI/ML engineering, and custom systems. From discovery to deployment, we ship secure, scalable products that teams rely on.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-gray-500 hover:text-white transition-colors"><i class='bx bxl-github text-2xl'></i></a>
-                        <a href="#" class="text-gray-500 hover:text-white transition-colors"><i class='bx bxl-twitter text-2xl'></i></a>
-                        <a href="#" class="text-gray-500 hover:text-white transition-colors"><i class='bx bxl-linkedin-square text-2xl'></i></a>
+                        <a href="https://in.linkedin.com/company/businzotech" class="text-gray-500 hover:text-white transition-colors"><i class='bx bxl-linkedin text-2xl'></i></a>
+                        <a href="https://x.com/businzotech" class="text-gray-500 hover:text-white transition-colors"><i class='bx bxl-twitter text-2xl'></i></a>
+                        <a href="https://www.facebook.com/BusinzoTechnologies" class="text-gray-500 hover:text-white transition-colors"><i class='bx bxl-facebook text-2xl'></i></a>
                     </div>
                 </div>
 
@@ -310,6 +312,8 @@
             easing: 'ease-out-cubic',
         });
     </script>
+
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     
     @stack('scripts')
 </body>

@@ -6,8 +6,8 @@
 <div class="pt-32 pb-20 relative overflow-hidden bg-background border-b border-slate-800">
     <div class="absolute inset-0 bg-gradient-to-r from-blue-900/10 to-emerald-900/10 z-0"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center" data-aos="fade-up">
-        <h1 class="text-4xl md:text-5xl font-bold font-['Outfit'] mb-6">Estimation <span class="gradient-text">Calculator</span></h1>
-        <p class="text-xl text-gray-400 max-w-3xl mx-auto">Get an instant ballpark estimate for your software development project.</p>
+        <h1 class="text-4xl md:text-5xl font-bold font-['Outfit'] mb-6">Project <span class="gradient-text">Estimator</span></h1>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto">Get an instant ballpark estimate for your web platform, mobile app, AI/ML integration, or custom software development.</p>
     </div>
 </div>
 
@@ -57,6 +57,14 @@
                                 <div class="font-bold text-sm">eCommerce</div>
                             </div>
                         </label>
+                        <!-- Option SaaS Platform -->
+                        <label class="cursor-pointer relative">
+                            <input type="radio" name="project_type" value="saas" class="peer sr-only">
+                            <div class="p-4 rounded-xl border-2 border-white/10 bg-background peer-checked:border-blue-500 peer-checked:bg-blue-500/10 transition-all hover:border-slate-500 text-center">
+                                <i class='bx bx-buildings text-3xl text-gray-400 peer-checked:text-blue-500 mb-2'></i>
+                                <div class="font-bold text-sm">SaaS Platform</div>
+                            </div>
+                        </label>
                         <!-- Option Custom Software -->
                         <label class="cursor-pointer relative">
                             <input type="radio" name="project_type" value="custom" class="peer sr-only">
@@ -78,22 +86,22 @@
                         <label class="flex items-center p-4 border border-white/10 rounded-xl cursor-pointer hover:bg-slate-800 transition-colors">
                             <input type="radio" name="complexity" value="basic" class="w-5 h-5 text-primary bg-background border-slate-600 focus:ring-primary" checked>
                             <div class="ml-4 flex-grow">
-                                <div class="font-bold">Basic Minimum Viable Product (MVP)</div>
-                                <div class="text-sm text-gray-400">Core features, simple UI, standard functionality.</div>
+                                <div class="font-bold">Basic MVP</div>
+                                <div class="text-sm text-gray-400">Core portal, auth, 1-2 modules (e.g. notices + helpdesk).</div>
                             </div>
                         </label>
                         <label class="flex items-center p-4 border border-white/10 rounded-xl cursor-pointer hover:bg-slate-800 transition-colors">
                             <input type="radio" name="complexity" value="medium" class="w-5 h-5 text-primary bg-background border-slate-600 focus:ring-primary">
                             <div class="ml-4 flex-grow">
-                                <div class="font-bold">Professional Application</div>
-                                <div class="text-sm text-gray-400">Custom UI/UX, user roles, API integrations, admin panel.</div>
+                                <div class="font-bold">Professional Platform</div>
+                                <div class="text-sm text-gray-400">Multi-role portals, billing, vendor module, theme engine, mobile API.</div>
                             </div>
                         </label>
                         <label class="flex items-center p-4 border border-white/10 rounded-xl cursor-pointer hover:bg-slate-800 transition-colors">
                             <input type="radio" name="complexity" value="complex" class="w-5 h-5 text-primary bg-background border-slate-600 focus:ring-primary">
                             <div class="ml-4 flex-grow">
-                                <div class="font-bold">Enterprise System</div>
-                                <div class="text-sm text-gray-400">Complex architecture, high security, scalability, custom algorithms.</div>
+                                <div class="font-bold">Enterprise SaaS</div>
+                                <div class="text-sm text-gray-400">Multi-tenant, custom domains, super-admin, AI features, native mobile apps.</div>
                             </div>
                         </label>
                     </div>
@@ -129,6 +137,14 @@
                         <label class="flex items-center p-3 border border-white/10 rounded-lg cursor-pointer hover:bg-slate-800 transition-colors">
                             <input type="checkbox" name="features" value="admin" class="w-5 h-5 rounded text-emerald-500 bg-background border-slate-600 focus:ring-emerald-500">
                             <span class="ml-3 font-medium text-sm">Advanced Admin Dashboard</span>
+                        </label>
+                        <label class="flex items-center p-3 border border-white/10 rounded-lg cursor-pointer hover:bg-slate-800 transition-colors">
+                            <input type="checkbox" name="features" value="multi_tenant" class="w-5 h-5 rounded text-emerald-500 bg-background border-slate-600 focus:ring-emerald-500">
+                            <span class="ml-3 font-medium text-sm">Multi-Tenant / Custom Domains</span>
+                        </label>
+                        <label class="flex items-center p-3 border border-white/10 rounded-lg cursor-pointer hover:bg-slate-800 transition-colors">
+                            <input type="checkbox" name="features" value="theme" class="w-5 h-5 rounded text-emerald-500 bg-background border-slate-600 focus:ring-emerald-500">
+                            <span class="ml-3 font-medium text-sm">Theme Engine & White-Labeling</span>
                         </label>
                     </div>
                 </div>
@@ -210,14 +226,16 @@
             mobile: 65000,
             ai: 100000,
             ecommerce: 80000,
+            saas: 150000,
             custom: 120000
         };
 
         const typeLabels = {
             web: 'Web Application',
             mobile: 'Mobile Application',
-            ai: 'AI / RAG App',
+            ai: 'AI / RAG Integration',
             ecommerce: 'eCommerce Solution',
+            saas: 'Multi-Tenant SaaS',
             custom: 'Custom Software'
         };
 
@@ -245,7 +263,9 @@
             chat: 25000,
             cms: 20000,
             multi_language: 10000,
-            admin: 15000
+            admin: 15000,
+            multi_tenant: 40000,
+            theme: 25000
         };
 
         // DOM Elements

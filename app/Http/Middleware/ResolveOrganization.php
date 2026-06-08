@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * Replaces the legacy subdomain-only resolution with full support for:
  *  - Custom domains (myrwa.com)
- *  - Subdomains (org1.rcms.businzo.com)
+ *  - Subdomains (org1.businzo.com)
  *  - Query param override (?org=slug)
  *  - Theme CSS injection into Blade views
  */
@@ -88,7 +88,7 @@ class ResolveOrganization
     {
         $org = new Organization();
         $org->id = 1;
-        $org->name = 'Default RWA';
+        $org->name = 'Businzo Technologies';
         $org->status = 'approved';
         $org->logo_url = null;
         $org->primary_color = null;

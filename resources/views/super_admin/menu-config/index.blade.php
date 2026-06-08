@@ -318,7 +318,7 @@
                 <div class="org-avatar">{{ strtoupper(substr($org->name, 0, 2)) }}</div>
                 <div class="org-info">
                     <h3>{{ $org->name }}</h3>
-                    <div class="org-subdomain">{{ $org->subdomain }}.rcms.businzo.com</div>
+                    <div class="org-subdomain">{{ $org->subdomain }}.businzo.com</div>
                 </div>
             </div>
 

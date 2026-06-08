@@ -348,7 +348,7 @@
     <div class="org-header-avatar">{{ strtoupper(substr($organization->name, 0, 2)) }}</div>
     <div class="org-header-info">
         <h2>{{ $organization->name }}</h2>
-        <div class="sub">{{ $organization->subdomain }}.rcms.businzo.com</div>
+        <div class="sub">{{ $organization->subdomain }}.businzo.com</div>
         <div class="org-header-badges">
             <span class="header-badge">{{ ucfirst($organization->status) }}</span>
             @if($organization->residential_type)

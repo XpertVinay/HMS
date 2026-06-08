@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * Examples:
  *   domain = 'myrwa.com'                 → Organization #3
- *   subdomain = 'green-valley'           → green-valley.rcms.businzo.com → Organization #5
+ *   subdomain = 'green-valley'           → green-valley.businzo.com → Organization #5
  *   domain = 'community.network.com'     → Organization #7
  */
 class TenantDomain extends Model
