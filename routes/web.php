@@ -67,9 +67,8 @@ $businzoRoutes = function () {
         return view('businzo.pages.contact');
     })->name('businzo.contact');
     Route::post('/contact', [\App\Http\Controllers\BusinzoContactController::class, 'submit'])->name('businzo.contact.submit');
-    Route::get('/estimate', function () {
-        return view('businzo.pages.estimate');
-    })->name('businzo.estimate');
+    Route::get('/estimate', [\App\Http\Controllers\BusinzoEstimateController::class, 'index'])->name('businzo.estimate');
+    Route::post('/estimate/calculate', [\App\Http\Controllers\BusinzoEstimateController::class, 'calculate'])->name('businzo.estimate.calculate');
     Route::get('/privacy', function () {
         return view('businzo.pages.privacy');
     })->name('businzo.privacy');
@@ -81,8 +80,10 @@ $businzoRoutes = function () {
     })->name('businzo.careers');
 };
 
-Route::domain('businzo.local.com')->group($businzoRoutes);
-Route::domain('www.businzo.local.com')->group($businzoRoutes);
+$businzoDomains = explode(' ', env('BUSINZO_DOMAIN'));
+
+Route::domain($businzoDomains[0])->group($businzoRoutes);
+Route::domain($businzoDomains[1])->group($businzoRoutes);
 
 
 

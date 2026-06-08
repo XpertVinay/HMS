@@ -3,11 +3,11 @@
 @section('title', 'Contact Businzo Technologies')
 
 @section('content')
-<div class="pt-32 pb-20 relative overflow-hidden bg-background border-b border-slate-800">
+<div class="pt-32 pb-20 relative overflow-hidden bg-background border-b border-white/10">
     <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 z-0"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center" data-aos="fade-up">
         <h1 class="text-4xl md:text-5xl font-bold font-['Outfit'] mb-6">Let's Build <span class="gradient-text">Together</span></h1>
-        <p class="text-xl text-gray-400 max-w-3xl mx-auto">Need a web application, mobile app, AI/ML feature, or custom software platform? Tell us about your project and we'll respond within 24 hours.</p>
+        <p class="text-xl text-muted max-w-3xl mx-auto">Need a web application, mobile app, AI/ML feature, or custom software platform? Tell us about your project and we'll respond within 24 hours.</p>
     </div>
 </div>
 
@@ -18,18 +18,18 @@
             <!-- Contact Info -->
             <div data-aos="fade-right">
                 <h2 class="text-3xl font-bold font-['Outfit'] mb-8">From idea to production.</h2>
-                <p class="text-gray-400 mb-10 leading-relaxed">
+                <p class="text-muted mb-10 leading-relaxed">
                     We don't just consult — we ship production software. From MVPs to enterprise platforms, we build web applications, mobile apps, AI/ML systems, and custom software with clean architecture and reliable deployment practices.
                 </p>
 
                 <div class="space-y-8">
                     <div class="flex items-start gap-4">
-                        <div class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0">
-                            <i class='bx bx-buildings text-2xl text-blue-500'></i>
+                        <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                            <i class='bx bx-buildings text-2xl text-primary'></i>
                         </div>
                         <div>
                             <h4 class="text-lg font-bold font-['Outfit'] mb-1">What We Build</h4>
-                            <p class="text-gray-400">Web apps, mobile applications, AI/ML engineering, custom platforms, integrations, and automation.</p>
+                            <p class="text-muted">Web apps, mobile applications, AI/ML engineering, custom platforms, integrations, and automation.</p>
                         </div>
                     </div>
 
@@ -39,8 +39,8 @@
                         </div>
                         <div>
                             <h4 class="text-lg font-bold font-['Outfit'] mb-1">Email Us</h4>
-                            <a href="mailto:sales@businzo.com" class="text-gray-400 hover:text-white transition-colors">hello@businzo.com</a>
-                            <p class="text-sm text-slate-500 mt-1">For project inquiries, proposals, and partnership discussions.</p>
+                            <a href="mailto:sales@businzo.com" class="text-muted hover:text-foreground transition-colors">hello@businzo.com</a>
+                            <p class="text-sm text-subtle mt-1">For project inquiries, proposals, and partnership discussions.</p>
                         </div>
                     </div>
 
@@ -50,18 +50,18 @@
                         </div>
                         <div>
                             <h4 class="text-lg font-bold font-['Outfit'] mb-1">Careers</h4>
-                            <a href="mailto:careers@businzo.com" class="text-gray-400 hover:text-white transition-colors">careers@businzo.com</a>
-                            <p class="text-sm text-slate-500 mt-1">We're hiring for multliple tech stack roles - software developers, architects, mobile engineers, and AI specialists.</p>
+                            <a href="mailto:careers@businzo.com" class="text-muted hover:text-foreground transition-colors">careers@businzo.com</a>
+                            <p class="text-sm text-subtle mt-1">We're hiring for multliple tech stack roles - software developers, architects, mobile engineers, and AI specialists.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-12 pt-12 border-t border-slate-800">
+                <div class="mt-12 pt-12 border-t border-white/10">
                     <h4 class="text-lg font-bold font-['Outfit'] mb-4">Follow Us</h4>
                     <div class="flex space-x-4">
-                        <a href="https://in.linkedin.com/company/businzotech" class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-gray-400 hover:bg-blue-600 hover:text-white transition-all"><i class='bx bxl-linkedin text-xl'></i></a>
-                        <a href="https://x.com/businzotech" class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-gray-400 hover:bg-blue-400 hover:text-white transition-all"><i class='bx bxl-twitter text-xl'></i></a>
-                        <a href="https://www.facebook.com/BusinzoTechnologies" class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-gray-400 hover:bg-pink-600 hover:text-white transition-all"><i class='bx bxl-facebook text-xl'></i></a>
+                        <a href="https://in.linkedin.com/company/businzotech" class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-muted hover:bg-primary hover:text-foreground transition-all"><i class='bx bxl-linkedin text-xl'></i></a>
+                        <a href="https://x.com/businzotech" class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-muted hover:bg-primary-light hover:text-foreground transition-all"><i class='bx bxl-twitter text-xl'></i></a>
+                        <a href="https://www.facebook.com/BusinzoTechnologies" class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-muted hover:bg-pink-600 hover:text-foreground transition-all"><i class='bx bxl-facebook text-xl'></i></a>
                     </div>
                 </div>
             </div>
@@ -80,39 +80,39 @@
                     @csrf
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="contact-field" data-field="first_name">
-                            <label for="first_name" class="block text-sm font-medium text-slate-300 mb-2">First Name <span class="text-accent">*</span></label>
+                            <label for="first_name" class="block text-sm font-medium text-muted mb-2">First Name <span class="text-accent">*</span></label>
                             <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" autocomplete="given-name" maxlength="255"
-                                class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                                class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                                 placeholder="John" aria-describedby="first_name-error first_name-hint">
-                            <p id="first_name-hint" class="text-gray-600 text-xs mt-1">Letters only, at least 3 characters.</p>
+                            <p id="first_name-hint" class="text-subtle text-xs mt-1">Letters only, at least 3 characters.</p>
                             <p id="first_name-error" class="contact-error text-red-400 text-xs mt-1 hidden" role="alert"></p>
                             @error('first_name') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                         </div>
                         <div class="contact-field" data-field="last_name">
-                            <label for="last_name" class="block text-sm font-medium text-slate-300 mb-2">Last Name</label>
+                            <label for="last_name" class="block text-sm font-medium text-muted mb-2">Last Name</label>
                             <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}" autocomplete="family-name" maxlength="255"
-                                class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                                class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                                 placeholder="Doe" aria-describedby="last_name-error last_name-hint">
-                            <p id="last_name-hint" class="text-gray-600 text-xs mt-1">Optional. Letters only, min 3 characters if provided.</p>
+                            <p id="last_name-hint" class="text-subtle text-xs mt-1">Optional. Letters only, min 3 characters if provided.</p>
                             <p id="last_name-error" class="contact-error text-red-400 text-xs mt-1 hidden" role="alert"></p>
                             @error('last_name') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
                     <div class="contact-field" data-field="email">
-                        <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Work Email <span class="text-accent">*</span></label>
+                        <label for="email" class="block text-sm font-medium text-muted mb-2">Work Email <span class="text-accent">*</span></label>
                         <input type="email" id="email" name="email" value="{{ old('email') }}" autocomplete="email" maxlength="255" inputmode="email"
-                            class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                            class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                             placeholder="john@company.com" aria-describedby="email-error email-hint">
-                        <p id="email-hint" class="text-gray-600 text-xs mt-1">Use your work or business email address.</p>
+                        <p id="email-hint" class="text-subtle text-xs mt-1">Use your work or business email address.</p>
                         <p id="email-error" class="contact-error text-red-400 text-xs mt-1 hidden" role="alert"></p>
                         @error('email') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="contact-field" data-field="service">
-                        <label for="service" class="block text-sm font-medium text-slate-300 mb-2">Interested Service</label>
+                        <label for="service" class="block text-sm font-medium text-muted mb-2">Interested Service</label>
                         <select id="service" name="service"
-                            class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                            class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                             aria-describedby="service-error">
                             <option value="">Select a service...</option>
                             <option value="web" {{ old('service') == 'web' ? 'selected' : '' }}>Web Application Development</option>
@@ -127,26 +127,26 @@
 
                     <div class="contact-field" data-field="message">
                         <div class="flex items-center justify-between mb-2">
-                            <label for="message" class="block text-sm font-medium text-gray-300">Project Details <span class="text-accent">*</span></label>
-                            <span id="message-counter" class="text-xs text-gray-600">0 / 1000</span>
+                            <label for="message" class="block text-sm font-medium text-muted">Project Details <span class="text-accent">*</span></label>
+                            <span id="message-counter" class="text-xs text-subtle">0 / 1000</span>
                         </div>
                         <textarea id="message" name="message" rows="5" maxlength="1000"
-                            class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors resize-none"
+                            class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none"
                             placeholder="Tell us about your platform — number of users, key features, timeline, and any specific requirements..."
                             aria-describedby="message-error message-hint">{{ old('message') }}</textarea>
-                        <p id="message-hint" class="text-gray-600 text-xs mt-1">Minimum 3 characters. Letters, numbers, spaces, and . , ' # - allowed.</p>
+                        <p id="message-hint" class="text-subtle text-xs mt-1">Minimum 3 characters. Letters, numbers, spaces, and . , ' # - allowed.</p>
                         <p id="message-error" class="contact-error text-red-400 text-xs mt-1 hidden" role="alert"></p>
                         @error('message') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                     </div>
 
                     <button type="submit" id="contact-submit-btn"
-                        class="w-full btn-premium py-4 rounded-lg text-black font-bold text-lg flex justify-center items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed transition-opacity">
+                        class="w-full btn-premium py-4 rounded-lg font-bold text-lg flex justify-center items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed transition-opacity">
                         <span id="contact-submit-label">Send Message</span>
                         <i id="contact-submit-icon" class='bx bx-send'></i>
                         <i id="contact-submit-spinner" class='bx bx-loader-alt bx-spin hidden'></i>
                     </button>
                     
-                    <p class="text-xs text-gray-500 text-center mt-4">By submitting this form, you agree to our <a href="{{ route('businzo.privacy') }}" class="text-gray-400 hover:text-white underline">privacy policy</a> and <a href="{{ route('businzo.terms') }}" class="text-gray-400 hover:text-white underline">terms of service</a>.</p>
+                    <p class="text-xs text-muted text-center mt-4">By submitting this form, you agree to our <a href="{{ route('businzo.privacy') }}" class="text-muted hover:text-foreground underline">privacy policy</a> and <a href="{{ route('businzo.terms') }}" class="text-muted hover:text-foreground underline">terms of service</a>.</p>
                 </form>
             </div>
 
@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (!input || !errorEl) return;
 
-        const baseClasses = ['border-white/10', 'focus:border-blue-500', 'focus:ring-blue-500'];
+        const baseClasses = ['border-white/10', 'focus:border-primary', 'focus:ring-primary'];
         const invalidClasses = ['border-red-500/70', 'focus:border-red-500', 'focus:ring-red-500'];
         const validClasses = ['border-emerald-500/50', 'focus:border-emerald-500', 'focus:ring-emerald-500'];
 
@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function () {
         messageCounter.textContent = `${len} / 1000`;
         messageCounter.classList.toggle('text-red-400', len > 1000);
         messageCounter.classList.toggle('text-amber-400', len >= 900 && len <= 1000);
-        messageCounter.classList.toggle('text-gray-600', len < 900);
+        messageCounter.classList.toggle('text-subtle', len < 900);
     }
 
     function debounce(fn, delay) {

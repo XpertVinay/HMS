@@ -7,11 +7,11 @@
     <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 z-0"></div>
     <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10" data-aos="fade-up">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-6">
-            <i class='bx bx-briefcase text-gray-300'></i>
-            <span class="text-xs font-bold tracking-widest text-gray-300 uppercase">Selected Work</span>
+            <i class='bx bx-briefcase text-muted'></i>
+            <span class="text-xs font-bold tracking-widest text-muted uppercase">Selected Work</span>
         </div>
-        <h1 class="text-5xl md:text-7xl font-black font-['Outfit'] tracking-tight mb-6">Portfolio & <span class="text-gray-600">case studies</span></h1>
-        <p class="text-xl text-gray-400 max-w-3xl font-light">A few examples of platforms we’ve engineered — across web applications, mobile, AI/ML, and custom software.</p>
+        <h1 class="text-5xl md:text-7xl font-black font-['Outfit'] tracking-tight mb-6">Portfolio & <span class="text-subtle">case studies</span></h1>
+        <p class="text-xl text-muted max-w-3xl font-light">A few examples of platforms we’ve engineered — across web applications, mobile, AI/ML, and custom software.</p>
     </div>
 </div>
 
@@ -23,11 +23,11 @@
                     <div class="w-12 h-12 rounded-2xl bg-primary/15 border border-white/10 flex items-center justify-center">
                         <i class='bx bx-buildings text-2xl text-primary'></i>
                     </div>
-                    <span class="text-xs font-bold tracking-widest text-gray-500 uppercase">Web + Mobile + SaaS</span>
+                    <span class="text-xs font-bold tracking-widest text-muted uppercase">Web + Mobile + SaaS</span>
                 </div>
                 <h3 class="text-2xl font-black font-['Outfit'] mt-6 mb-3">Residential Community Management System</h3>
-                <p class="text-gray-400 leading-relaxed mb-6">A multi-role platform for communities: admin dashboards, billing workflows, helpdesk ticketing, vendor ecosystem, and mobile-ready APIs.</p>
-                <div class="text-white font-semibold flex items-center gap-2 group-hover:text-primary transition-colors">
+                <p class="text-muted leading-relaxed mb-6">A multi-role platform for communities: admin dashboards, billing workflows, helpdesk ticketing, vendor ecosystem, and mobile-ready APIs.</p>
+                <div class="text-foreground font-semibold flex items-center gap-2 group-hover:text-primary transition-colors">
                     View case study <i class='bx bx-right-arrow-alt text-xl'></i>
                 </div>
             </a>
@@ -35,25 +35,25 @@
             <div class="glass-panel p-8 rounded-3xl opacity-70" data-aos="fade-up" data-aos-delay="150">
                 <div class="flex items-start justify-between gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
-                        <i class='bx bx-globe text-2xl text-gray-300'></i>
+                        <i class='bx bx-globe text-2xl text-muted'></i>
                     </div>
-                    <span class="text-xs font-bold tracking-widest text-gray-500 uppercase">Web App</span>
+                    <span class="text-xs font-bold tracking-widest text-muted uppercase">Web App</span>
                 </div>
                 <h3 class="text-2xl font-black font-['Outfit'] mt-6 mb-3">Enterprise Portal</h3>
-                <p class="text-gray-400 leading-relaxed mb-6">Role-based workflows, dashboards, and reporting with secure authentication and scalable APIs.</p>
-                <div class="text-gray-500 text-sm">More case studies coming soon.</div>
+                <p class="text-muted leading-relaxed mb-6">Role-based workflows, dashboards, and reporting with secure authentication and scalable APIs.</p>
+                <div class="text-muted text-sm">More case studies coming soon.</div>
             </div>
 
             <div class="glass-panel p-8 rounded-3xl opacity-70" data-aos="fade-up" data-aos-delay="200">
                 <div class="flex items-start justify-between gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
-                        <i class='bx bx-brain text-2xl text-blue-400'></i>
+                        <i class='bx bx-brain text-2xl text-primary-light'></i>
                     </div>
-                    <span class="text-xs font-bold tracking-widest text-gray-500 uppercase">AI / ML</span>
+                    <span class="text-xs font-bold tracking-widest text-muted uppercase">AI / ML</span>
                 </div>
                 <h3 class="text-2xl font-black font-['Outfit'] mt-6 mb-3">AI Workflow Automation</h3>
-                <p class="text-gray-400 leading-relaxed mb-6">Applied ML and LLM integrations: classification, summarization, document Q&A, and decision support for operations teams.</p>
-                <div class="text-gray-500 text-sm">More case studies coming soon.</div>
+                <p class="text-muted leading-relaxed mb-6">Applied ML and LLM integrations: classification, summarization, document Q&A, and decision support for operations teams.</p>
+                <div class="text-muted text-sm">More case studies coming soon.</div>
             </div>
         </div>
     </div>
@@ -62,7 +62,7 @@
 <section class="py-24 border-t border-white/5 bg-background">
     <div class="max-w-4xl mx-auto text-center px-6" data-aos="zoom-in">
         <h2 class="text-3xl font-black mb-6 font-['Outfit']">Want results like these?</h2>
-        <p class="text-gray-400 mb-8">Tell us what you’re building — web app, mobile product, AI/ML feature, or a custom platform — and we’ll propose a roadmap.</p>
+        <p class="text-muted mb-8">Tell us what you’re building — web app, mobile product, AI/ML feature, or a custom platform — and we’ll propose a roadmap.</p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="{{ route('businzo.estimate') }}" class="btn-premium px-8 py-3 rounded-full font-bold inline-flex items-center justify-center gap-2">
                 <i class='bx bx-calculator'></i> Get an Estimate

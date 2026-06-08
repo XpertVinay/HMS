@@ -13,11 +13,11 @@
     <div class="absolute inset-0 flex items-end pb-20">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-6">
-                <i class='bx bx-code-alt text-accent-400'></i>
-                <span class="text-xs font-bold tracking-widest text-gray-300 uppercase">The Company</span>
+                <i class='bx bx-code-alt text-accent-light'></i>
+                <span class="text-xs font-bold tracking-widest text-muted uppercase">The Company</span>
             </div>
-            <h1 class="text-5xl md:text-7xl font-black font-['Outfit'] tracking-tight mb-4 text-white" data-aos="fade-up">We Build <br><span class="text-gray-500">Software Products.</span></h1>
-            <p class="text-lg text-gray-400 max-w-xl font-light" data-aos="fade-up" data-aos-delay="100">Web applications, mobile experiences, AI/ML systems, and custom platforms — engineered for performance and reliability.</p>
+            <h1 class="text-5xl md:text-7xl font-black font-['Outfit'] tracking-tight mb-4 text-foreground" data-aos="fade-up">We Build <br><span class="text-muted">Software Products.</span></h1>
+            <p class="text-lg text-muted max-w-xl font-light" data-aos="fade-up" data-aos-delay="100">Web applications, mobile experiences, AI/ML systems, and custom platforms — engineered for performance and reliability.</p>
         </div>
     </div>
 </div>
@@ -28,34 +28,34 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
             <div data-aos="fade-right">
                 <h2 class="text-3xl font-bold mb-6 font-['Outfit']">Our Mission</h2>
-                <div class="w-12 h-1 bg-accent-500 mb-8"></div>
-                <p class="text-xl text-gray-400 leading-relaxed font-light mb-8">
+                <div class="w-12 h-1 bg-accent mb-8"></div>
+                <p class="text-xl text-muted leading-relaxed font-light mb-8">
                     Businzo Technologies exists to solve operational complexity through well-engineered software. We specialize in multi-tenant web platforms, mobile companion apps, and AI-assisted workflows for industries where off-the-shelf tools fall short.
                 </p>
-                <p class="text-gray-500 leading-relaxed mb-6">
+                <p class="text-muted leading-relaxed mb-6">
                     We deliver product engineering end-to-end: UX, architecture, backend, frontend, mobile, DevOps, and quality systems. We also maintain a portfolio of internal builds and case studies that reflect how we solve real operational problems.
                 </p>
-                <p class="text-gray-500 leading-relaxed">
+                <p class="text-muted leading-relaxed">
                     We bring the same engineering rigor to every client engagement: Dockerized deployments, automated testing, static analysis, and clean multi-tenant data isolation.
                 </p>
             </div>
             
             <div class="grid grid-cols-2 gap-6" data-aos="fade-left">
                 <div class="glass-panel p-8 rounded-2xl flex flex-col justify-center">
-                    <h4 class="text-5xl font-black text-white font-['Outfit'] tracking-tighter mb-2">6<span class="text-accent-500">+</span></h4>
-                    <p class="text-sm text-gray-500 font-bold uppercase tracking-wider">User Portals</p>
+                    <h4 class="text-5xl font-black text-foreground font-['Outfit'] tracking-tighter mb-2">6<span class="text-accent">+</span></h4>
+                    <p class="text-sm text-muted font-bold uppercase tracking-wider">User Portals</p>
                 </div>
                 <div class="glass-panel p-8 rounded-2xl flex flex-col justify-center">
-                    <h4 class="text-5xl font-black text-white font-['Outfit'] tracking-tighter mb-2">36<span class="text-purple-500">+</span></h4>
-                    <p class="text-sm text-gray-500 font-bold uppercase tracking-wider">Data Models</p>
+                    <h4 class="text-5xl font-black text-foreground font-['Outfit'] tracking-tighter mb-2">36<span class="text-accent-light">+</span></h4>
+                    <p class="text-sm text-muted font-bold uppercase tracking-wider">Data Models</p>
                 </div>
                 <div class="glass-panel p-8 rounded-2xl flex flex-col justify-center">
-                    <h4 class="text-5xl font-black text-white font-['Outfit'] tracking-tighter mb-2">25<span class="text-blue-500">+</span></h4>
-                    <p class="text-sm text-gray-500 font-bold uppercase tracking-wider">DB Migrations</p>
+                    <h4 class="text-5xl font-black text-foreground font-['Outfit'] tracking-tighter mb-2">25<span class="text-primary">+</span></h4>
+                    <p class="text-sm text-muted font-bold uppercase tracking-wider">DB Migrations</p>
                 </div>
                 <div class="glass-panel p-8 rounded-2xl flex flex-col justify-center">
-                    <h4 class="text-5xl font-black text-white font-['Outfit'] tracking-tighter mb-2">1<span class="text-pink-500"></span></h4>
-                    <p class="text-sm text-gray-500 font-bold uppercase tracking-wider">Codebase, Many Tenants</p>
+                    <h4 class="text-5xl font-black text-foreground font-['Outfit'] tracking-tighter mb-2">1<span class="text-primary-light"></span></h4>
+                    <p class="text-sm text-muted font-bold uppercase tracking-wider">Codebase, Many Tenants</p>
                 </div>
             </div>
         </div>
@@ -67,15 +67,15 @@
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="text-center mb-16 max-w-3xl mx-auto" data-aos="fade-up">
             <h2 class="text-4xl font-black mb-6 font-['Outfit']">What We Specialize In</h2>
-            <p class="text-gray-400 text-lg">Four core disciplines — the foundations of everything we deliver.</p>
+            <p class="text-muted text-lg">Four core disciplines — the foundations of everything we deliver.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="glass-panel p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="100">
                 <i class='bx bx-globe text-4xl text-primary mb-6'></i>
                 <h4 class="text-xl font-bold mb-4 font-['Outfit']">Web & SaaS Platforms</h4>
-                <p class="text-gray-500 leading-relaxed mb-4">Dashboards, portals, marketplaces, and secure SaaS products — built with modern frameworks and strong DevOps practices.</p>
-                <ul class="text-sm text-gray-500 space-y-2">
+                <p class="text-muted leading-relaxed mb-4">Dashboards, portals, marketplaces, and secure SaaS products — built with modern frameworks and strong DevOps practices.</p>
+                <ul class="text-sm text-muted space-y-2">
                     <li class="flex items-center gap-2"><i class='bx bx-check text-primary'></i> API-first architecture</li>
                     <li class="flex items-center gap-2"><i class='bx bx-check text-primary'></i> Secure authentication</li>
                     <li class="flex items-center gap-2"><i class='bx bx-check text-primary'></i> Performance at scale</li>
@@ -83,10 +83,10 @@
             </div>
 
             <div class="glass-panel p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="200">
-                <i class='bx bx-mobile-alt text-4xl text-accent mb-6'></i>
+                <i class='bx bx-mobile-alt text-4xl gradient-text-accent mb-6'></i>
                 <h4 class="text-xl font-bold mb-4 font-['Outfit']">Mobile Applications</h4>
-                <p class="text-gray-500 leading-relaxed mb-4">Native and cross-platform apps connected to secure backends — built for speed, usability, and reliability.</p>
-                <ul class="text-sm text-gray-500 space-y-2">
+                <p class="text-muted leading-relaxed mb-4">Native and cross-platform apps connected to secure backends — built for speed, usability, and reliability.</p>
+                <ul class="text-sm text-muted space-y-2">
                     <li class="flex items-center gap-2"><i class='bx bx-check text-accent'></i> iOS (Swift) & Android (Kotlin)</li>
                     <li class="flex items-center gap-2"><i class='bx bx-check text-accent'></i> Secure API integration</li>
                     <li class="flex items-center gap-2"><i class='bx bx-check text-accent'></i> Offline-friendly UX</li>
@@ -94,23 +94,23 @@
             </div>
 
             <div class="glass-panel p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="300">
-                <i class='bx bx-brain text-4xl text-blue-400 mb-6'></i>
+                <i class='bx bx-brain text-4xl gradient-text-accent mb-6'></i>
                 <h4 class="text-xl font-bold mb-4 font-['Outfit']">AI & Intelligent Automation</h4>
-                <p class="text-gray-500 leading-relaxed mb-4">Practical AI that integrates into existing workflows — not just chatbot wrappers. Document Q&A, smart routing, and predictive analytics.</p>
-                <ul class="text-sm text-gray-500 space-y-2">
-                    <li class="flex items-center gap-2"><i class='bx bx-check text-blue-400'></i> RAG over private records</li>
-                    <li class="flex items-center gap-2"><i class='bx bx-check text-blue-400'></i> Approval workflow assistants</li>
-                    <li class="flex items-center gap-2"><i class='bx bx-check text-blue-400'></i> Automated ticket classification</li>
+                <p class="text-muted leading-relaxed mb-4">Practical AI that integrates into existing workflows — not just chatbot wrappers. Document Q&A, smart routing, and predictive analytics.</p>
+                <ul class="text-sm text-muted space-y-2">
+                    <li class="flex items-center gap-2"><i class='bx bx-check text-accent-light'></i> RAG over private records</li>
+                    <li class="flex items-center gap-2"><i class='bx bx-check text-accent-light'></i> Approval workflow assistants</li>
+                    <li class="flex items-center gap-2"><i class='bx bx-check text-accent-light'></i> Automated ticket classification</li>
                 </ul>
             </div>
             <div class="glass-panel p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="350">
-                <i class='bx bx-cube-alt text-4xl text-red-400 mb-6'></i>
+                <i class='bx bx-cube-alt text-4xl text-primary-light mb-6'></i>
                 <h4 class="text-xl font-bold mb-4 font-['Outfit']">Custom Software Development</h4>
-                <p class="text-gray-500 leading-relaxed mb-4">Bespoke systems for your domain — internal tools, workflow platforms, integrations, and complex data-driven products.</p>
-                <ul class="text-sm text-gray-500 space-y-2">
-                    <li class="flex items-center gap-2"><i class='bx bx-check text-red-400'></i> Domain-driven design</li>
-                    <li class="flex items-center gap-2"><i class='bx bx-check text-red-400'></i> Integrations & automation</li>
-                    <li class="flex items-center gap-2"><i class='bx bx-check text-red-400'></i> Maintainable codebases</li>
+                <p class="text-muted leading-relaxed mb-4">Bespoke systems for your domain — internal tools, workflow platforms, integrations, and complex data-driven products.</p>
+                <ul class="text-sm text-muted space-y-2">
+                    <li class="flex items-center gap-2"><i class='bx bx-check text-primary-light'></i> Domain-driven design</li>
+                    <li class="flex items-center gap-2"><i class='bx bx-check text-primary-light'></i> Integrations & automation</li>
+                    <li class="flex items-center gap-2"><i class='bx bx-check text-primary-light'></i> Maintainable codebases</li>
                 </ul>
             </div>
         </div>
@@ -122,32 +122,32 @@
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="text-center mb-20 max-w-3xl mx-auto" data-aos="fade-up">
             <h2 class="text-4xl font-black mb-6 font-['Outfit']">Engineering Principles</h2>
-            <p class="text-gray-400 text-lg">How we build — and how we build for you.</p>
+            <p class="text-muted text-lg">How we build — and how we build for you.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="group" data-aos="fade-up" data-aos-delay="100">
                 <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:bg-white/10 transition-colors">
-                    <i class='bx bx-rocket text-3xl text-gray-300'></i>
+                    <i class='bx bx-rocket text-3xl text-muted'></i>
                 </div>
                 <h4 class="text-xl font-bold mb-4 font-['Outfit']">Ship with Confidence</h4>
-                <p class="text-gray-500 leading-relaxed">Every pull request passes PHPStan static analysis, PHPUnit tests, migration checks, and frontend builds in CI. We deploy what we can prove works.</p>
+                <p class="text-muted leading-relaxed">Every pull request passes PHPStan static analysis, PHPUnit tests, migration checks, and frontend builds in CI. We deploy what we can prove works.</p>
             </div>
             
             <div class="group" data-aos="fade-up" data-aos-delay="200">
                 <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:bg-white/10 transition-colors">
-                    <i class='bx bx-shield-quarter text-3xl text-gray-300'></i>
+                    <i class='bx bx-shield-quarter text-3xl text-muted'></i>
                 </div>
                 <h4 class="text-xl font-bold mb-4 font-['Outfit']">Tenant-First Security</h4>
-                <p class="text-gray-500 leading-relaxed">Organization-scoped queries, role-based middleware, JWT deny lists, and session regeneration on login. Data isolation is architectural, not optional.</p>
+                <p class="text-muted leading-relaxed">Organization-scoped queries, role-based middleware, JWT deny lists, and session regeneration on login. Data isolation is architectural, not optional.</p>
             </div>
             
             <div class="group" data-aos="fade-up" data-aos-delay="300">
                 <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:bg-white/10 transition-colors">
-                    <i class='bx bx-chip text-3xl text-gray-300'></i>
+                    <i class='bx bx-chip text-3xl text-muted'></i>
                 </div>
                 <h4 class="text-xl font-bold mb-4 font-['Outfit']">Built to Scale</h4>
-                <p class="text-gray-500 leading-relaxed">Docker Compose for local dev, Nginx reverse proxy, Redis-backed queues, and per-tenant theme engines. One codebase serves unlimited organizations.</p>
+                <p class="text-muted leading-relaxed">Docker Compose for local dev, Nginx reverse proxy, Redis-backed queues, and per-tenant theme engines. One codebase serves unlimited organizations.</p>
             </div>
         </div>
     </div>
