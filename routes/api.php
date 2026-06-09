@@ -35,10 +35,16 @@ Route::prefix('api/v1')->name('api.v1.')->middleware('throttle:api')->group(func
         // We will move login to v1 later or keep backward compatibility
         Route::post('/login', [\App\Http\Controllers\Api\V1\AuthController::class, 'login'])->name('login');
         
-        Route::middleware('auth:api_member,api_resident,api_staff,api_vendor')->group(function() {
+        Route::middleware('auth:api_member,api_resident,api_staff,api_vendor,api_admin')->group(function () {
             Route::post('/logout', [\App\Http\Controllers\Api\V1\AuthController::class, 'logout'])->name('logout');
             Route::get('/profile', [\App\Http\Controllers\Api\V1\AuthController::class, 'profile'])->name('profile');
         });
+    });
+
+    // Push notification device registration (all mobile-authenticated roles)
+    Route::prefix('devices')->name('devices.')->middleware('auth:api_member,api_resident,api_staff,api_vendor,api_admin')->group(function () {
+        Route::post('/register', [\App\Http\Controllers\Api\V1\DeviceController::class, 'register'])->name('register');
+        Route::delete('/{deviceUuid}', [\App\Http\Controllers\Api\V1\DeviceController::class, 'revoke'])->name('revoke');
     });
 
     // Member & Resident APIs

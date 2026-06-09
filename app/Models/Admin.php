@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Traits\HasPersonName;
+use App\Traits\HasPushNotifications;
 use App\Traits\TenantScoped;
-use Illuminate\Notifications\Notifiable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 /**
@@ -14,7 +14,7 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
  */
 class Admin extends Authenticatable implements JWTSubject
 {
-    use HasPersonName, TenantScoped, Notifiable;
+    use HasPersonName, HasPushNotifications, TenantScoped;
 
     protected $table = 'admin';
 

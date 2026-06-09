@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Listeners\DeleteExpiredFcmTokens;
+use App\Services\FirebaseCredentialsService;
+use App\Services\PushNotificationService;
+use Illuminate\Notifications\Events\NotificationFailed;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
@@ -14,7 +19,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(PushNotificationService::class);
+        $this->app->singleton(FirebaseCredentialsService::class);
     }
 
     /**
@@ -30,6 +36,16 @@ class AppServiceProvider extends ServiceProvider
 
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+        });
+
+        Event::listen(NotificationFailed::class, DeleteExpiredFcmTokens::class);
+
+        $this->app->booted(function (): void {
+            try {
+                app(FirebaseCredentialsService::class)->applyToConfig();
+            } catch (\Throwable) {
+                // Database may be unavailable during install/migrate.
+            }
         });
     }
 }

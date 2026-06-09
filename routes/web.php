@@ -99,6 +99,8 @@ Route::middleware('domain')->group(function () {
     Route::get('/events', [HomeController::class, 'events'])->name('home.events');
     Route::get('/gallery', [HomeController::class, 'gallery'])->name('home.gallery');
     Route::get('/donors', [HomeController::class, 'donors'])->name('home.donors');
+    Route::post('/donate/initiate', [\App\Http\Controllers\Payment\DonationController::class, 'initiate'])->name('donate.initiate');
+    Route::post('/donate/callback', [\App\Http\Controllers\Payment\DonationController::class, 'callback'])->name('donate.callback');
     Route::get('/sponsors', [HomeController::class, 'sponsors'])->name('home.sponsors');
     Route::get('/notices', [HomeController::class, 'notices'])->name('home.notices');
 
@@ -113,6 +115,7 @@ Route::middleware('domain')->group(function () {
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
     Route::get('/register', [RegisterController::class, 'showForm'])->name('register');
     Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
+    Route::post('/register/payment-callback', [RegisterController::class, 'paymentCallback'])->name('register.payment_callback');
 
     /*
     |--------------------------------------------------------------------------

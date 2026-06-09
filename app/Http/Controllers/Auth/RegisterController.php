@@ -36,27 +36,90 @@ class RegisterController extends Controller
             'admin_password' => 'required|string|min:6|confirmed',
         ]);
 
-        DB::transaction(function () use ($request) {
+        $feeAmount = env('RWA_REGISTRATION_FEE', 2499.00);
+
+        $pending = \App\Models\PendingRwaRegistration::create([
+            'org_name' => $request->org_name,
+            'org_address' => $request->org_address,
+            'registration_code' => $request->registration_code,
+            'subdomain' => $request->subdomain,
+            'admin_username' => $request->admin_username,
+            'admin_first_name' => $request->admin_first_name,
+            'admin_last_name' => $request->admin_last_name,
+            'admin_email' => $request->admin_email,
+            'admin_password' => Hash::make($request->admin_password),
+            'fee_amount' => $feeAmount,
+            'status' => 'pending_payment',
+        ]);
+
+        $razorpayService = new \App\Services\RazorpayService();
+        $order = $razorpayService->createOrder($feeAmount, 'RWA_REG_' . $pending->id);
+
+        return view('payment.checkout', [
+            'orderId' => $order->id,
+            'amount' => $feeAmount,
+            'callbackUrl' => route('register.payment_callback', ['pending_id' => $pending->id]),
+            'name' => $request->org_name,
+            'email' => $request->admin_email,
+            'description' => 'RWA Registration Fee'
+        ]);
+    }
+
+    /**
+     * Handle Razorpay payment callback for registration.
+     */
+    public function paymentCallback(Request $request)
+    {
+        $pendingId = $request->query('pending_id');
+        $razorpayPaymentId = $request->razorpay_payment_id;
+        $razorpayOrderId = $request->razorpay_order_id;
+        $razorpaySignature = $request->razorpay_signature;
+
+        $razorpayService = new \App\Services\RazorpayService();
+        $isValid = $razorpayService->verifySignature($razorpayOrderId, $razorpayPaymentId, $razorpaySignature);
+
+        if (!$isValid) {
+            return redirect()->route('register')->withErrors(['payment' => 'Payment verification failed. Please try again.']);
+        }
+
+        $pending = \App\Models\PendingRwaRegistration::findOrFail($pendingId);
+
+        if ($pending->status === 'converted') {
+            return redirect()->route('login')->with('success', 'Registration already completed.');
+        }
+
+        DB::transaction(function () use ($pending, $razorpayOrderId, $razorpayPaymentId) {
             $org = Organization::create([
-                'name' => $request->org_name,
-                'address' => $request->org_address,
-                'registration_code' => $request->registration_code,
-                'subdomain' => $request->subdomain,
+                'name' => $pending->org_name,
+                'address' => $pending->org_address,
+                'registration_code' => $pending->registration_code,
+                'subdomain' => $pending->subdomain,
                 'status' => 'pending',
             ]);
 
             Admin::create([
-                'username' => $request->admin_username,
-                'first_name' => $request->admin_first_name,
-                'last_name' => $request->admin_last_name,
-                'email' => $request->admin_email,
-                'password' => Hash::make($request->admin_password),
+                'username' => $pending->admin_username,
+                'first_name' => $pending->admin_first_name,
+                'last_name' => $pending->admin_last_name,
+                'email' => $pending->admin_email,
+                'password' => $pending->admin_password, // Already hashed
                 'organization_id' => $org->id,
                 'role' => 'admin',
+            ]);
+
+            $pending->update(['status' => 'converted']);
+
+            \App\Models\Payment::create([
+                'razorpay_order_id' => $razorpayOrderId,
+                'razorpay_payment_id' => $razorpayPaymentId,
+                'amount' => $pending->fee_amount,
+                'status' => 'success',
+                'type' => 'rwa_registration',
+                'reference_id' => $pending->id,
             ]);
         });
 
         return redirect()->route('login')
-            ->with('success', 'Registration submitted! Your organization is pending approval.');
+            ->with('success', 'Payment successful! Registration submitted and your organization is pending approval.');
     }
 }

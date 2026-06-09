@@ -20,7 +20,6 @@ class CheckDomain
         ];
 
         if (in_array($request->getHost(), $blockedDomains)) {
-            // print_r("HALT:::::::" . $blockedDomains[1]); exit;
             return redirect($request->getSchemeAndHttpHost()); // or abort(404);
         }
 

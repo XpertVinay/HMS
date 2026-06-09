@@ -48,7 +48,7 @@ class HomeController extends Controller
     {
         $members = Member::where('organization_id', $this->orgId())
             ->orderBy('username', 'asc')
-            ->get();
+            ->paginate(12);
 
         return view('home.members', compact('members'));
     }

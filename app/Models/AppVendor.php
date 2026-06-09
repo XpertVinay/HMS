@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasPersonName;
+use App\Traits\HasPushNotifications;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -14,7 +15,7 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
  */
 class AppVendor extends Authenticatable implements JWTSubject
 {
-    use HasPersonName;
+    use HasPersonName, HasPushNotifications;
 
     protected $table = 'vendor';
 
