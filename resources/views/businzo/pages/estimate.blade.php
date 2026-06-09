@@ -6,8 +6,8 @@
 <div class="pt-32 pb-20 relative overflow-hidden bg-background border-b border-white/10">
     <div class="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 z-0"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center" data-aos="fade-up">
-        <h1 class="text-4xl md:text-5xl font-bold font-['Outfit'] mb-6">Project <span class="gradient-text">Estimator</span></h1>
-        <p class="text-xl text-muted max-w-3xl mx-auto">Get an instant ballpark estimate for your web platform, mobile app, AI/ML integration, or custom software development.</p>
+        <h1 class="text-4xl md:text-5xl font-bold font-['Outfit'] mb-6">Start Your <span class="gradient-text-accent">Project</span></h1>
+        <p class="text-xl text-muted max-w-3xl mx-auto">Get an instant ballpark estimate for your AI-powered platform — web, mobile, MCP integrations, or custom software. Transparent pricing to help you plan with confidence.</p>
     </div>
 </div>
 
@@ -207,7 +207,7 @@
                     </p>
 
                     <button class="w-full btn-premium py-4 rounded-lg text-white font-bold text-lg" onclick="document.getElementById('contact-modal').classList.remove('hidden')">
-                        Request Formal Proposal
+                        Book a Consultation
                     </button>
                 </div>
             </div>

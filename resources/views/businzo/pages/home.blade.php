@@ -1,10 +1,10 @@
 @extends('businzo.layouts.app')
 
-@section('title', 'Businzo | Web, Mobile & AI Software Engineering')
+@section('title', 'Businzo | AI-Powered Software — Production-Ready & Built for Growth')
 
 @section('content')
     <!-- Hero Section -->
-    <section class="relative min-h-[90vh] flex items-center pt-10 overflow-hidden">
+    <section class="relative min-h-[90vh] flex items-center pt-10 overflow-hidden gradient-hero-bg">
         <!-- Abstract Glows -->
         <div class="absolute inset-0 z-0 pointer-events-none">
             <div
@@ -24,22 +24,21 @@
 
                 <div class="text-left space-y-8 max-w-2xl">
 
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md"
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-md"
                         data-aos="fade-right">
                         <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                        <span class="text-xs font-bold tracking-widest text-muted uppercase">IT Services • Web • Mobile •
-                            AI/ML</span>
+                        <span class="text-xs font-bold tracking-widest text-primary-light uppercase">AI-Powered Software Engineering</span>
                     </div>
 
                     <h1 class="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight"
                         data-aos="fade-right" data-aos-delay="100">
-                        Build modern <br>
-                        <span class="gradient-text-accent">software products.</span>
+                        Production-ready software <br>
+                        <span class="shimmer-text">that drives growth.</span>
                     </h1>
 
-                    <p class="text-lg md:text-xl text-muted leading-relaxed font-light" data-aos="fade-right"
+                    <p class="text-lg md:text-xl text-muted leading-relaxed font-light max-w-xl" data-aos="fade-right"
                         data-aos-delay="200">
-                        Businzo Technologies develops secure, scalable web, mobile, and AI solutions that accelerate business growth. From MVPs to enterprise platforms, we deliver custom software, AI agents, MCP integrations, and intelligent automation. Transform ideas into production-ready products with robust architecture, enterprise-grade security, seamless deployment, and future-ready innovation.
+                        We turn ambitious ideas into secure, scalable products — powered by AI agents, MCP integrations, and intelligent automation. From MVP to enterprise, we ship software your business can rely on.
                     </p>
 
                     <div class="flex flex-col sm:flex-row gap-4 pt-4" data-aos="fade-up" data-aos-delay="300">
@@ -48,20 +47,26 @@
                             Start Your Project
                             <i class='bx bx-right-arrow-alt text-xl group-hover:translate-x-1 transition-transform'></i>
                         </a>
-                        <a href="{{ route('businzo.services') }}"
+                        <a href="{{ route('businzo.contact') }}"
                             class="btn-outline px-8 py-4 rounded-full text-center flex items-center justify-center font-bold w-full sm:w-auto">
-                            Explore Expertise
+                            Book a Consultation
                         </a>
                     </div>
 
                     <div data-aos="fade-up" data-aos-delay="400"
-                        class="flex flex-wrap items-center gap-x-6 gap-y-3 pt-10 border-t border-white/10 text-sm font-medium text-muted">
-                        <div class="flex items-center gap-2"><i class='bx bx-check-circle text-muted'></i> Product
-                            Strategy</div>
-                        <div class="flex items-center gap-2"><i class='bx bx-check-circle text-muted'></i> Clean
-                            Architecture</div>
-                        <div class="flex items-center gap-2"><i class='bx bx-check-circle text-muted'></i> Secure
-                            Delivery</div>
+                        class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-10 border-t border-white/10">
+                        <div class="trust-pill flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold text-muted">
+                            <i class='bx bx-shield-quarter text-primary-light'></i> Enterprise Security
+                        </div>
+                        <div class="trust-pill flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold text-muted">
+                            <i class='bx bx-network-chart text-accent-light'></i> MCP Integrations
+                        </div>
+                        <div class="trust-pill flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold text-muted">
+                            <i class='bx bx-trending-up text-primary-light'></i> Built to Scale
+                        </div>
+                        <div class="trust-pill flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold text-muted">
+                            <i class='bx bx-bot text-accent-light'></i> AI Automation
+                        </div>
                     </div>
                 </div>
 
@@ -75,15 +80,15 @@
                         </div>
                     </div>
 
-                    <div class="absolute -bottom-8 -left-8 glass-panel p-6 rounded-2xl animate-[bounce_5s_infinite]">
+                    <div class="absolute -bottom-8 -left-8 glass-panel p-6 rounded-2xl animate-float-subtle">
                         <div class="flex items-center gap-4">
                             <div
                                 class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary-light">
                                 <i class='bx bx-rocket text-2xl'></i>
                             </div>
                             <div>
-                                <div class="text-xs text-muted font-bold uppercase tracking-wider mb-1">Delivery</div>
-                                <div class="text-2xl font-black text-foreground">MVP → Scale</div>
+                                <div class="text-xs text-muted font-bold uppercase tracking-wider mb-1">Ship Faster</div>
+                                <div class="text-2xl font-black text-foreground">Idea → Production</div>
                             </div>
                         </div>
                     </div>
@@ -101,8 +106,8 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <div class="text-center mb-12" data-aos="fade-up">
                 <p class="text-sm font-bold tracking-widest gradient-text-accent uppercase mb-4">Technology Stack</p>
-                <h2 class="text-3xl md:text-4xl font-black font-['Outfit'] mb-4">Built with production-proven technologies</h2>
-                <p class="text-muted text-sm md:text-base max-w-2xl mx-auto">Browse by discipline — select a category to explore the languages, tools, and frameworks we use in production.</p>
+                <h2 class="text-3xl md:text-4xl font-black font-['Outfit'] mb-4">Battle-tested tools for <span class="text-muted">production-grade delivery</span></h2>
+                <p class="text-muted text-sm md:text-base max-w-2xl mx-auto">Modern frameworks, cloud-native infrastructure, and AI/ML pipelines — chosen for security, performance, and long-term scalability.</p>
             </div>
 
             @php
@@ -128,7 +133,7 @@
                         'id' => 'mobile',
                         'title' => 'Mobile App',
                         'icon' => 'bx-mobile-alt',
-                        'accent' => 'text-accent',
+                        'accent' => 'gradient-text-accent',
                         'glow' => 'glow-accent',
                         'items' => [
                             ['icon' => 'bxl-android', 'label' => 'Android', 'detail' => 'Kotlin · Java'],
@@ -173,7 +178,7 @@
                         'id' => 'api',
                         'title' => 'RESTful / GraphQL',
                         'icon' => 'bx-git-merge',
-                        'accent' => 'text-accent-light',
+                        'accent' => 'gradient-text-accent',
                         'glow' => 'glow-accent',
                         'items' => [
                             ['icon' => 'bx-transfer-alt', 'label' => 'REST API', 'detail' => 'Resource-oriented endpoints'],
@@ -188,7 +193,7 @@
                         'id' => 'ai',
                         'title' => 'AI/ML Engineering',
                         'icon' => 'bx-brain',
-                        'accent' => 'text-accent',
+                        'accent' => 'gradient-text-accent',
                         'glow' => 'glow-accent',
                         'items' => [
                             ['icon' => 'bx-chip', 'label' => 'Transformers', 'detail' => 'Hugging Face · fine-tuning'],
@@ -267,33 +272,31 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div data-aos="fade-right">
-                    <h2 class="text-sm font-bold tracking-widest gradient-text-accent uppercase mb-4">Portfolio Highlight</h2>
-                    <h3 class="text-4xl md:text-5xl font-black mb-6">Case studies that <br><span class="text-muted">prove
-                            delivery.</span></h3>
+                    <h2 class="text-sm font-bold tracking-widest gradient-text-accent uppercase mb-4">Proven Results</h2>
+                    <h3 class="text-4xl md:text-5xl font-black mb-6">Software that delivers <br><span class="text-muted">measurable outcomes.</span></h3>
                     <p class="text-muted leading-relaxed mb-8 text-lg font-light">
-                        Explore our case studies to see how we handle architecture, security, and modular delivery for
-                        real-world operations — across web apps, mobile products, AI features, and custom platforms.
+                        Real platforms we've engineered — from AI-powered automation to multi-tenant SaaS — built for security, scale, and business impact.
                     </p>
                     <div class="grid grid-cols-2 gap-4 mb-8">
                         <div class="glass-panel p-4 rounded-xl">
-                            <i class='bx bx-user-check text-2xl text-primary mb-2'></i>
-                            <div class="text-sm font-bold text-foreground">Role-based systems</div>
-                            <div class="text-xs text-muted mt-1">Portals, permissions, audit-ready flows</div>
+                            <i class='bx bx-bot text-2xl text-primary mb-2'></i>
+                            <div class="text-sm font-bold text-foreground">AI & MCP</div>
+                            <div class="text-xs text-muted mt-1">Agents, RAG pipelines & smart workflows</div>
                         </div>
                         <div class="glass-panel p-4 rounded-xl">
-                            <i class='bx bx-palette text-2xl gradient-text-accent mb-2'></i>
-                            <div class="text-sm font-bold text-foreground">Design systems</div>
-                            <div class="text-xs text-muted mt-1">Premium UI patterns & consistency</div>
+                            <i class='bx bx-shield-quarter text-2xl gradient-text-accent mb-2'></i>
+                            <div class="text-sm font-bold text-foreground">Enterprise Security</div>
+                            <div class="text-xs text-muted mt-1">RBAC, encryption & audit-ready systems</div>
                         </div>
                         <div class="glass-panel p-4 rounded-xl">
-                            <i class='bx bx-receipt text-2xl text-primary-light mb-2'></i>
-                            <div class="text-sm font-bold text-foreground">Business workflows</div>
-                            <div class="text-xs text-muted mt-1">Billing, approvals, automation</div>
+                            <i class='bx bx-trending-up text-2xl text-primary-light mb-2'></i>
+                            <div class="text-sm font-bold text-foreground">Scalable Growth</div>
+                            <div class="text-xs text-muted mt-1">Multi-tenant SaaS & cloud-native infra</div>
                         </div>
                         <div class="glass-panel p-4 rounded-xl">
-                            <i class='bx bx-store-alt text-2xl gradient-text-accent mb-2'></i>
-                            <div class="text-sm font-bold text-foreground">Platform ecosystems</div>
-                            <div class="text-xs text-muted mt-1">Marketplaces, listings, payments</div>
+                            <i class='bx bx-cog text-2xl gradient-text-accent mb-2'></i>
+                            <div class="text-sm font-bold text-foreground">Intelligent Automation</div>
+                            <div class="text-xs text-muted mt-1">Workflows that reduce manual overhead</div>
                         </div>
                     </div>
                     <a href="{{ route('businzo.portfolio') }}"
@@ -303,38 +306,34 @@
                 </div>
                 <div data-aos="fade-left">
                     <div class="glass-panel p-8 rounded-3xl">
-                        <h4 class="text-lg font-bold mb-6 font-['Outfit']">How we engineer</h4>
+                        <h4 class="text-lg font-bold mb-6 font-['Outfit']">Why teams choose Businzo</h4>
                         <ul class="space-y-4">
                             <li class="flex items-start gap-3">
                                 <i class='bx bx-check-circle text-primary text-xl mt-0.5'></i>
                                 <div>
-                                    <span class="text-foreground font-semibold">Architecture-first</span>
-                                    <p class="text-sm text-muted">Clear boundaries, scalable APIs, and robust data
-                                        modeling for growth.</p>
+                                    <span class="text-foreground font-semibold">AI-native engineering</span>
+                                    <p class="text-sm text-muted">LLM agents, MCP integrations, and intelligent automation woven into your product from day one.</p>
                                 </div>
                             </li>
                             <li class="flex items-start gap-3">
                                 <i class='bx bx-check-circle text-primary text-xl mt-0.5'></i>
                                 <div>
-                                    <span class="text-foreground font-semibold">Security by default</span>
-                                    <p class="text-sm text-muted">Role-based access, safe auth patterns, and deployment
-                                        hygiene.</p>
+                                    <span class="text-foreground font-semibold">Production-ready delivery</span>
+                                    <p class="text-sm text-muted">CI/CD pipelines, automated testing, and secure deployments — not prototypes that stall.</p>
                                 </div>
                             </li>
                             <li class="flex items-start gap-3">
                                 <i class='bx bx-check-circle text-primary text-xl mt-0.5'></i>
                                 <div>
-                                    <span class="text-foreground font-semibold">Automated quality gates</span>
-                                    <p class="text-sm text-muted">Static analysis, tests, and CI checks before releases.
-                                    </p>
+                                    <span class="text-foreground font-semibold">Security & compliance built in</span>
+                                    <p class="text-sm text-muted">Enterprise-grade auth, encryption, and audit trails that protect your data as you scale.</p>
                                 </div>
                             </li>
                             <li class="flex items-start gap-3">
                                 <i class='bx bx-check-circle text-primary text-xl mt-0.5'></i>
                                 <div>
-                                    <span class="text-foreground font-semibold">End-to-end delivery</span>
-                                    <p class="text-sm text-muted">From discovery to deploy: web, mobile, AI/ML, and
-                                        custom integrations.</p>
+                                    <span class="text-foreground font-semibold">Growth-oriented architecture</span>
+                                    <p class="text-sm text-muted">Modular, API-first systems designed to handle new users, features, and markets without rewrites.</p>
                                 </div>
                             </li>
                         </ul>
@@ -349,10 +348,9 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="max-w-3xl mb-20" data-aos="fade-up">
                 <h2 class="text-sm font-bold tracking-widest gradient-text-accent uppercase mb-4">What We Build</h2>
-                <h3 class="text-4xl md:text-5xl font-black mb-6">End-to-end engineering for <br><span
-                        class="text-muted">web, mobile & AI.</span></h3>
-                <p class="text-muted text-lg font-light">From startups to enterprise teams — we handle architecture,
-                    development, deployment, and ongoing iteration.</p>
+                <h3 class="text-4xl md:text-5xl font-black mb-6">Outcome-driven software <br><span
+                        class="text-muted">for ambitious teams.</span></h3>
+                <p class="text-muted text-lg font-light">Every engagement is focused on business results — faster operations, smarter automation, and platforms that scale with your growth.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -365,13 +363,9 @@
                     </div>
                     <div class="relative z-10">
                         <i class='bx bx-layer text-4xl text-primary mb-6'></i>
-                        <h4 class="text-2xl font-bold mb-4">Enterprise Web Platforms</h4>
+                        <h4 class="text-2xl font-bold mb-4">Scalable Web Platforms</h4>
                         <p class="text-muted mb-8 max-w-mx leading-relaxed">
-                            <strong>Enterprise-grade software platforms engineered for scale, security, and
-                                reliability.</strong> We build multi-role ecosystems, operational dashboards, transaction
-                            engines, and partner marketplaces with modern architectures, automated delivery pipelines, and
-                            resilient infrastructure—ensuring high performance, strict data isolation, seamless scalability,
-                            and long-term maintainability.
+                            Launch SaaS products and enterprise portals that handle growth without breaking. Multi-tenant architecture, role-based access, and cloud-native deployment — so your platform performs under real-world load.
                         </p>
                         <a href="{{ route('businzo.services') }}#web"
                             class="text-foreground font-semibold flex items-center gap-2 hover:text-primary transition-colors">
@@ -388,10 +382,9 @@
                     </div>
                     <div class="relative z-10">
                         <i class='bx bx-mobile text-4xl gradient-text-accent mb-6'></i>
-                        <h4 class="text-2xl font-bold mb-4">Mobile Apps</h4>
+                        <h4 class="text-2xl font-bold mb-4">Mobile Products</h4>
                         <p class="text-muted mb-8 leading-relaxed">
-                            Native iOS & Android apps backed by JWT-secured REST APIs. Residents pay bills, raise tickets,
-                            and browse community feeds from their phones.
+                            Native iOS & Android apps that keep users engaged. Secure APIs, offline-ready UX, and push notifications — mobile experiences that drive retention and revenue.
                         </p>
                         <a href="{{ route('businzo.services') }}#mobile"
                             class="text-foreground font-semibold flex items-center gap-2 hover:text-accent transition-colors">
@@ -408,10 +401,9 @@
                     </div>
                     <div class="relative z-10">
                         <i class='bx bx-brain text-4xl gradient-text-accent mb-6'></i>
-                        <h4 class="text-2xl font-bold mb-4">AI & Automation</h4>
+                        <h4 class="text-2xl font-bold mb-4">AI & Intelligent Automation</h4>
                         <p class="text-muted mb-8 leading-relaxed">
-                            Smart ticket routing, document Q&A over society records, predictive maintenance alerts, and
-                            autonomous approval assistants.
+                            AI agents, MCP integrations, RAG pipelines, and workflow automation that cut manual work and unlock smarter decisions across your operations.
                         </p>
                         <a href="{{ route('businzo.services') }}#ai"
                             class="text-foreground font-semibold flex items-center gap-2 hover:text-accent transition-colors">
@@ -432,11 +424,9 @@
                     </div>
                     <div class="relative z-10">
                         <i class='bx bx-cube-alt text-4xl text-primary mb-6'></i>
-                        <h4 class="text-2xl font-bold mb-4">Custom SaaS & Domain Platforms</h4>
+                        <h4 class="text-2xl font-bold mb-4">Custom Software & SaaS</h4>
                         <p class="text-muted mb-8 max-w-md leading-relaxed">
-                            When off-the-shelf won't work. We build industry-specific platforms — property management,
-                            vendor ecosystems, approval workflows, and super-admin consoles — from discovery to production
-                            deployment.
+                            When generic tools fall short, we build domain-specific platforms tailored to your market — from discovery through production launch and beyond.
                         </p>
                         <a href="{{ route('businzo.services') }}#custom"
                             class="text-foreground font-semibold flex items-center gap-2 hover:text-primary-light transition-colors">
@@ -516,7 +506,7 @@
                 </div>
                 <a href="{{ route('businzo.contact') }}"
                     class="btn-outline px-6 py-2.5 rounded-full text-sm font-bold whitespace-nowrap hover:bg-white hover:text-black hover:border-white transition-all">
-                    Discuss your project <i class='bx bx-right-arrow-alt'></i>
+                    Book a Consultation <i class='bx bx-right-arrow-alt'></i>
                 </a>
             </div>
         </div>
@@ -529,50 +519,23 @@
         </div>
 
         <div class="max-w-4xl mx-auto px-6 lg:px-8 relative z-10 text-center" data-aos="zoom-in" data-aos-duration="1000">
-            <h2 class="text-4xl md:text-6xl font-black mb-8 tracking-tight">Ready to build your <br><span
-                    class="text-muted">next platform?</span></h2>
-            <p class="text-muted text-lg mb-8 max-w-2xl mx-auto">Whether you need a web application, mobile app, AI/ML
-                integration, or a full custom platform — let's scope it together.</p>
+            <h2 class="text-4xl md:text-6xl font-black mb-8 tracking-tight">Ready to ship <br><span
+                    class="gradient-text-accent">AI-powered software?</span></h2>
+            <p class="text-muted text-lg mb-8 max-w-2xl mx-auto">Let's scope your next platform — secure, scalable, and built to accelerate your business. Most inquiries receive a response within 24 hours.</p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center mt-12">
                 <a href="{{ route('businzo.estimate') }}"
                     class="btn-premium px-10 py-4 rounded-full font-bold text-lg inline-flex items-center justify-center gap-2">
-                    <i class='bx bx-calculator text-2xl'></i> Get an Estimate
+                    <i class='bx bx-rocket text-2xl'></i> Start Your Project
                 </a>
                 <a href="{{ route('businzo.contact') }}"
                     class="btn-outline px-10 py-4 rounded-full font-bold text-lg inline-flex items-center justify-center">
-                    Talk to Our Team
+                    Book a Consultation
                 </a>
             </div>
         </div>
     </section>
 @endsection
-
-@push('styles')
-<style>
-    .tech-category-scroll {
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-        -webkit-overflow-scrolling: touch;
-    }
-    .tech-category-scroll::-webkit-scrollbar {
-        display: none;
-    }
-    .tech-category-btn.is-active {
-        border-color: rgba(27, 68, 155, 0.4);
-        background: rgba(27, 68, 155, 0.1);
-        color: var(--text-foreground);
-        box-shadow: 0 4px 20px rgba(27, 68, 155, 0.15);
-    }
-    .tech-panel {
-        animation: techPanelIn 0.25s ease-out;
-    }
-    @keyframes techPanelIn {
-        from { opacity: 0; transform: translateY(6px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-</style>
-@endpush
 
 @push('scripts')
 <script>

@@ -6,8 +6,8 @@
 <div class="pt-32 pb-20 relative overflow-hidden bg-background border-b border-white/10">
     <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 z-0"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center" data-aos="fade-up">
-        <h1 class="text-4xl md:text-5xl font-bold font-['Outfit'] mb-6">Let's Build <span class="gradient-text">Together</span></h1>
-        <p class="text-xl text-muted max-w-3xl mx-auto">Need a web application, mobile app, AI/ML feature, or custom software platform? Tell us about your project and we'll respond within 24 hours.</p>
+        <h1 class="text-4xl md:text-5xl font-bold font-['Outfit'] mb-6">Book a <span class="gradient-text-accent">Consultation</span></h1>
+        <p class="text-xl text-muted max-w-3xl mx-auto">Ready to build AI-powered, production-ready software? Tell us about your project — we respond within 24 hours with a clear next step.</p>
     </div>
 </div>
 
@@ -17,9 +17,9 @@
             
             <!-- Contact Info -->
             <div data-aos="fade-right">
-                <h2 class="text-3xl font-bold font-['Outfit'] mb-8">From idea to production.</h2>
+                <h2 class="text-3xl font-bold font-['Outfit'] mb-8">Let's scope your next platform.</h2>
                 <p class="text-muted mb-10 leading-relaxed">
-                    We don't just consult — we ship production software. From MVPs to enterprise platforms, we build web applications, mobile apps, AI/ML systems, and custom software with clean architecture and reliable deployment practices.
+                    We engineer AI-powered software that ships — web platforms, mobile products, MCP integrations, and intelligent automation. Secure, scalable, and built to accelerate your business growth.
                 </p>
 
                 <div class="space-y-8">
@@ -29,7 +29,7 @@
                         </div>
                         <div>
                             <h4 class="text-lg font-bold font-['Outfit'] mb-1">What We Build</h4>
-                            <p class="text-muted">Web apps, mobile applications, AI/ML engineering, custom platforms, integrations, and automation.</p>
+                            <p class="text-muted">AI-powered web & mobile platforms, MCP integrations, intelligent automation, and custom SaaS — production-ready from day one.</p>
                         </div>
                     </div>
 
@@ -117,7 +117,7 @@
                             <option value="">Select a service...</option>
                             <option value="web" {{ old('service') == 'web' ? 'selected' : '' }}>Web Application Development</option>
                             <option value="mobile" {{ old('service') == 'mobile' ? 'selected' : '' }}>Mobile Application Development</option>
-                            <option value="ai" {{ old('service') == 'ai' ? 'selected' : '' }}>AI/ML Engineering</option>
+                            <option value="ai" {{ old('service') == 'ai' ? 'selected' : '' }}>AI, MCP & Automation</option>
                             <option value="custom" {{ old('service') == 'custom' ? 'selected' : '' }}>Custom Software Development</option>
                             <option value="consulting" {{ old('service') == 'consulting' ? 'selected' : '' }}>Architecture & Consulting</option>
                         </select>
@@ -141,7 +141,7 @@
 
                     <button type="submit" id="contact-submit-btn"
                         class="w-full btn-premium py-4 rounded-lg font-bold text-lg flex justify-center items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed transition-opacity">
-                        <span id="contact-submit-label">Send Message</span>
+                        <span id="contact-submit-label">Book a Consultation</span>
                         <i id="contact-submit-icon" class='bx bx-send'></i>
                         <i id="contact-submit-spinner" class='bx bx-loader-alt bx-spin hidden'></i>
                     </button>
@@ -374,15 +374,3 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 @endpush
 
-@push('styles')
-<style>
-    @keyframes contact-shake {
-        0%, 100% { transform: translateX(0); }
-        20%, 60% { transform: translateX(-4px); }
-        40%, 80% { transform: translateX(4px); }
-    }
-    .shake-once {
-        animation: contact-shake 0.35s ease-in-out;
-    }
-</style>
-@endpush

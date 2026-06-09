@@ -15,6 +15,12 @@ if [ ! -f "vendor/autoload.php" ]; then
     composer install --no-interaction --optimize-autoloader
 fi
 
+# Ensure Vite production manifest includes all configured entrypoints
+if [ ! -f "public/build/manifest.json" ] || ! grep -q '"resources/css/businzo.css"' public/build/manifest.json 2>/dev/null; then
+    echo "Building frontend assets (Vite manifest missing or outdated)..."
+    npm run build
+fi
+
 # Generate APP_KEY if not set
 if [ -z "$APP_KEY" ] && ! grep -q "^APP_KEY=base64:" .env 2>/dev/null; then
     echo "Generating application key..."

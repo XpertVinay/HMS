@@ -10,8 +10,8 @@
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary-light text-xs font-bold tracking-widest uppercase mb-6">
                 Join the Team
             </div>
-            <h1 class="text-5xl md:text-7xl font-black font-['Outfit'] tracking-tight mb-6">Build Platforms <span class="gradient-text">That Matter.</span></h1>
-            <p class="text-xl text-muted max-w-3xl mx-auto font-light">Join a team that ships production software — web platforms, mobile apps, AI/ML systems, and custom tooling. Work on architecture, engineering, and delivery.</p>
+            <h1 class="text-5xl md:text-7xl font-black font-['Outfit'] tracking-tight mb-6">Build <span class="gradient-text-accent">AI-Powered Software.</span></h1>
+            <p class="text-xl text-muted max-w-3xl mx-auto font-light">Join a team engineering production-ready platforms — AI agents, MCP integrations, web & mobile products, and intelligent automation that drives real business outcomes.</p>
         </div>
     </div>
 </div>

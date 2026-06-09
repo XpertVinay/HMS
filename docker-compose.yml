@@ -8,7 +8,7 @@ services:
     volumes:
       - .:/var/www/html
       - /var/www/html/vendor
-      - /var/www/html/public/build
+      # - /var/www/html/public/build
     depends_on:
       db:
         condition: service_healthy

@@ -10,8 +10,8 @@
             <i class='bx bx-briefcase text-muted'></i>
             <span class="text-xs font-bold tracking-widest text-muted uppercase">Selected Work</span>
         </div>
-        <h1 class="text-5xl md:text-7xl font-black font-['Outfit'] tracking-tight mb-6">Portfolio & <span class="text-subtle">case studies</span></h1>
-        <p class="text-xl text-muted max-w-3xl font-light">A few examples of platforms we’ve engineered — across web applications, mobile, AI/ML, and custom software.</p>
+        <h1 class="text-5xl md:text-7xl font-black font-['Outfit'] tracking-tight mb-6">Software that <span class="text-subtle">delivers outcomes.</span></h1>
+        <p class="text-xl text-muted max-w-3xl font-light">Case studies across AI-powered platforms, scalable SaaS, mobile products, and intelligent automation — built for security, scale, and business growth.</p>
     </div>
 </div>
 
@@ -51,8 +51,8 @@
                     </div>
                     <span class="text-xs font-bold tracking-widest text-muted uppercase">AI / ML</span>
                 </div>
-                <h3 class="text-2xl font-black font-['Outfit'] mt-6 mb-3">AI Workflow Automation</h3>
-                <p class="text-muted leading-relaxed mb-6">Applied ML and LLM integrations: classification, summarization, document Q&A, and decision support for operations teams.</p>
+                <h3 class="text-2xl font-black font-['Outfit'] mt-6 mb-3">AI & MCP Automation</h3>
+                <p class="text-muted leading-relaxed mb-6">LLM agents, MCP integrations, RAG pipelines, and intelligent workflow automation that reduce manual overhead and accelerate decisions.</p>
                 <div class="text-muted text-sm">More case studies coming soon.</div>
             </div>
         </div>
@@ -61,14 +61,14 @@
 
 <section class="py-24 border-t border-white/5 bg-background">
     <div class="max-w-4xl mx-auto text-center px-6" data-aos="zoom-in">
-        <h2 class="text-3xl font-black mb-6 font-['Outfit']">Want results like these?</h2>
-        <p class="text-muted mb-8">Tell us what you’re building — web app, mobile product, AI/ML feature, or a custom platform — and we’ll propose a roadmap.</p>
+        <h2 class="text-3xl font-black mb-6 font-['Outfit']">Ready for results like these?</h2>
+        <p class="text-muted mb-8">Let's scope your AI-powered platform — secure, scalable, and built to grow your business.</p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="{{ route('businzo.estimate') }}" class="btn-premium px-8 py-3 rounded-full font-bold inline-flex items-center justify-center gap-2">
-                <i class='bx bx-calculator'></i> Get an Estimate
+                <i class='bx bx-rocket'></i> Start Your Project
             </a>
             <a href="{{ route('businzo.contact') }}" class="btn-outline px-8 py-3 rounded-full font-bold inline-flex items-center justify-center">
-                Contact Us
+                Book a Consultation
             </a>
         </div>
     </div>

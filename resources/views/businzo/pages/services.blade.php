@@ -1,14 +1,22 @@
 @extends('businzo.layouts.app')
 
-@section('title', 'Expertise — Web, Mobile & AI Development')
+@section('title', 'Expertise — AI-Powered Software, MCP & Automation')
 
 @section('content')
 <!-- Page Header -->
 <div class="pt-32 pb-20 relative overflow-hidden bg-background border-b border-white/5">
     <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3N2Zz4=')] [mask-image:linear-gradient(to_bottom,white,transparent)] z-0"></div>
     <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10" data-aos="fade-up">
-        <h1 class="text-5xl md:text-7xl font-black font-['Outfit'] tracking-tight mb-6 max-w-4xl">Software development <span class="text-subtle">services</span> for modern teams.</h1>
-        <p class="text-xl text-muted max-w-2xl font-light">Web applications, mobile apps, AI/ML engineering, and custom software — delivered with clean architecture, secure implementation, and production-ready deployment.</p>
+        <h1 class="text-5xl md:text-7xl font-black font-['Outfit'] tracking-tight mb-6 max-w-4xl">AI-powered software <span class="text-subtle">that delivers results.</span></h1>
+        <p class="text-xl text-muted max-w-2xl font-light">Outcome-driven engineering — web platforms, mobile products, MCP integrations, and intelligent automation built for security, scalability, and business growth.</p>
+        <div class="flex flex-col sm:flex-row gap-4 mt-10">
+            <a href="{{ route('businzo.estimate') }}" class="btn-premium px-8 py-3.5 rounded-full font-bold inline-flex items-center justify-center gap-2 w-fit">
+                Start Your Project <i class='bx bx-right-arrow-alt'></i>
+            </a>
+            <a href="{{ route('businzo.contact') }}" class="btn-outline px-8 py-3.5 rounded-full font-bold inline-flex items-center justify-center w-fit">
+                Book a Consultation
+            </a>
+        </div>
     </div>
 </div>
 
@@ -22,9 +30,9 @@
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary-light text-xs font-bold tracking-widest uppercase mb-8">
                     <i class='bx bx-code'></i> Web Architecture
                 </div>
-                <h2 class="text-4xl font-black font-['Outfit'] mb-6 tracking-tight">Enterprise Web Platforms</h2>
+                <h2 class="text-4xl font-black font-['Outfit'] mb-6 tracking-tight">Scalable Web Platforms</h2>
                 <p class="text-muted mb-8 leading-relaxed font-light text-lg">
-                    We engineer secure, scalable web applications: dashboards, internal tools, portals, marketplaces, and SaaS platforms. Our focus is performance, maintainability, and operational reliability — from database design to CI/CD.
+                    Ship SaaS products and enterprise portals that grow with your business. We deliver high-performance dashboards, marketplaces, and multi-tenant systems — engineered for uptime, security, and long-term maintainability.
                 </p>
                 <div class="space-y-6 mb-10">
                     <div class="flex gap-4">
@@ -32,8 +40,8 @@
                             <i class='bx bx-check text-xl text-primary-light'></i>
                         </div>
                         <div>
-                            <h4 class="text-foreground font-bold mb-1">Scalable APIs & Architecture</h4>
-                            <p class="text-sm text-muted">Clean boundaries, modular services, and API-first design that supports rapid iteration.</p>
+                            <h4 class="text-foreground font-bold mb-1">API-First, Built to Scale</h4>
+                            <p class="text-sm text-muted">Modular architecture and clean APIs that support rapid feature delivery without technical debt.</p>
                         </div>
                     </div>
                     <div class="flex gap-4">
@@ -41,8 +49,8 @@
                             <i class='bx bx-check text-xl text-primary-light'></i>
                         </div>
                         <div>
-                            <h4 class="text-foreground font-bold mb-1">Role-Based Access Control</h4>
-                            <p class="text-sm text-muted">Secure authentication, permissions, and audit-friendly workflows.</p>
+                            <h4 class="text-foreground font-bold mb-1">Enterprise Security</h4>
+                            <p class="text-sm text-muted">RBAC, secure authentication, encryption, and audit trails that protect data as you scale.</p>
                         </div>
                     </div>
                     <div class="flex gap-4">
@@ -50,13 +58,13 @@
                             <i class='bx bx-check text-xl text-primary-light'></i>
                         </div>
                         <div>
-                            <h4 class="text-foreground font-bold mb-1">Production-Ready Delivery</h4>
-                            <p class="text-sm text-muted">Dockerized environments, automated tests, static analysis, and safe deployments.</p>
+                            <h4 class="text-foreground font-bold mb-1">Production-Ready from Day One</h4>
+                            <p class="text-sm text-muted">CI/CD pipelines, automated testing, containerized deployments — software that ships, not stalls.</p>
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('businzo.estimate') }}?type=web" class="btn-outline px-6 py-3 rounded-full text-sm font-bold inline-flex items-center gap-2 hover:bg-white hover:text-black hover:border-white transition-all">
-                    Estimate Web Project <i class='bx bx-right-arrow-alt'></i>
+                <a href="{{ route('businzo.estimate') }}?type=web" class="btn-premium px-6 py-3 rounded-full text-sm font-bold inline-flex items-center gap-2">
+                    Start Your Project <i class='bx bx-right-arrow-alt'></i>
                 </a>
             </div>
             <div class="order-1 lg:order-2" data-aos="fade-left">
@@ -114,25 +122,25 @@
                         <div class="flex-grow p-4 pt-10 flex flex-col gap-4 relative">
                             <div class="text-center mb-2">
                                 <div class="text-xs text-muted">Mobile App</div>
-                                <div class="text-sm font-bold text-white">Green Valley Society</div>
+                                <div class="text-sm font-bold text-white">Your Product</div>
                             </div>
                             <div class="h-24 rounded-xl bg-gradient-to-br from-accent/20 to-primary/20 border border-white/5 flex items-center justify-center">
                                 <div class="text-center">
-                                    <div class="text-xs text-muted">Maintenance Due</div>
-                                    <div class="text-lg font-black text-white">₹4,500</div>
+                                    <div class="text-xs text-muted">Revenue This Month</div>
+                                    <div class="text-lg font-black text-white">+24%</div>
                                 </div>
                             </div>
                             <div class="grid grid-cols-2 gap-3">
                                 <div class="h-16 rounded-xl bg-white/5 flex flex-col items-center justify-center">
-                                    <i class='bx bx-support gradient-text-accent text-lg'></i>
-                                    <span class="text-[10px] text-muted mt-1">Helpdesk</span>
+                                    <i class='bx bx-bot gradient-text-accent text-lg'></i>
+                                    <span class="text-[10px] text-muted mt-1">AI Agent</span>
                                 </div>
                                 <div class="h-16 rounded-xl bg-white/5 flex flex-col items-center justify-center">
-                                    <i class='bx bx-group text-primary-light text-lg'></i>
-                                    <span class="text-[10px] text-muted mt-1">Community</span>
+                                    <i class='bx bx-bell text-primary-light text-lg'></i>
+                                    <span class="text-[10px] text-muted mt-1">Alerts</span>
                                 </div>
                             </div>
-                            <div class="h-10 rounded-xl bg-accent/20 border border-accent/30 flex items-center justify-center text-xs font-bold gradient-text-accent mt-auto">Pay Now</div>
+                            <div class="h-10 rounded-xl bg-accent/20 border border-accent/30 flex items-center justify-center text-xs font-bold gradient-text-accent mt-auto">Take Action</div>
                         </div>
                     </div>
                 </div>
@@ -141,9 +149,9 @@
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/20 bg-accent/5 gradient-text-accent text-xs font-bold tracking-widest uppercase mb-8">
                     <i class='bx bx-mobile-alt'></i> Mobile Engineering
                 </div>
-                <h2 class="text-4xl font-black font-['Outfit'] mb-6 tracking-tight">Native & API-First Mobile</h2>
+                <h2 class="text-4xl font-black font-['Outfit'] mb-6 tracking-tight">Mobile Products That Drive Engagement</h2>
                 <p class="text-muted mb-8 leading-relaxed font-light text-lg">
-                    We build polished mobile products that feel native and stay reliable at scale. From secure authentication and API integration to offline-friendly UX — we deliver apps that users keep.
+                    Native iOS and Android apps that users love and businesses depend on. Secure backends, offline-ready UX, and push notifications — mobile experiences built to retain users and grow revenue.
                 </p>
                 <div class="space-y-6 mb-10">
                     <div class="flex gap-4">
@@ -152,7 +160,7 @@
                         </div>
                         <div>
                             <h4 class="text-foreground font-bold mb-1">iOS Native (Swift)</h4>
-                            <p class="text-sm text-muted">Polished native UI with push notifications, biometric login, and offline-capable bill viewing.</p>
+                            <p class="text-sm text-muted">Premium native UI with push notifications, biometric auth, and offline-capable experiences.</p>
                         </div>
                     </div>
                     <div class="flex gap-4">
@@ -174,8 +182,8 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('businzo.estimate') }}?type=mobile" class="btn-outline px-6 py-3 rounded-full text-sm font-bold inline-flex items-center gap-2 hover:bg-white hover:text-black hover:border-white transition-all">
-                    Estimate Mobile App <i class='bx bx-right-arrow-alt'></i>
+                <a href="{{ route('businzo.estimate') }}?type=mobile" class="btn-premium px-6 py-3 rounded-full text-sm font-bold inline-flex items-center gap-2">
+                    Start Your Project <i class='bx bx-right-arrow-alt'></i>
                 </a>
             </div>
         </div>
@@ -189,9 +197,9 @@
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/20 bg-accent/5 gradient-text-accent text-xs font-bold tracking-widest uppercase mb-8">
                     <i class='bx bx-brain'></i> AI & Data
                 </div>
-                <h2 class="text-4xl font-black font-['Outfit'] mb-6 tracking-tight">Practical AI Integration</h2>
+                <h2 class="text-4xl font-black font-['Outfit'] mb-6 tracking-tight">AI, MCP & Intelligent Automation</h2>
                 <p class="text-muted mb-8 leading-relaxed font-light text-lg">
-                    We deliver AI/ML that is useful in production: classification, forecasting, recommendations, document intelligence, and LLM-powered assistants — integrated into your product with privacy and safety controls.
+                    Production-grade AI that moves the needle — LLM agents, MCP integrations, RAG pipelines, and workflow automation embedded in your product with enterprise security and privacy controls.
                 </p>
                 <div class="space-y-6 mb-10">
                     <div class="flex gap-4">
@@ -199,8 +207,8 @@
                             <i class='bx bx-data text-xl gradient-text-accent-light'></i>
                         </div>
                         <div>
-                            <h4 class="text-foreground font-bold mb-1">RAG over Private Records</h4>
-                            <p class="text-sm text-muted">Semantic search across society documents, bylaws, and maintenance history — answers grounded in your data, not the public internet.</p>
+                            <h4 class="text-foreground font-bold mb-1">RAG & Document Intelligence</h4>
+                            <p class="text-sm text-muted">Semantic search and Q&A over your private data — answers grounded in your documents, not the public internet.</p>
                         </div>
                     </div>
                     <div class="flex gap-4">
@@ -208,8 +216,8 @@
                             <i class='bx bx-bot text-xl gradient-text-accent-light'></i>
                         </div>
                         <div>
-                            <h4 class="text-foreground font-bold mb-1">Smart Workflow Automation</h4>
-                            <p class="text-sm text-muted">AI-assisted ticket classification, approval routing, and vendor matching based on service history and reviews.</p>
+                            <h4 class="text-foreground font-bold mb-1">MCP & Agent Integrations</h4>
+                            <p class="text-sm text-muted">Connect AI agents to your tools and data via Model Context Protocol — intelligent workflows that act on your systems autonomously.</p>
                         </div>
                     </div>
                     <div class="flex gap-4">
@@ -217,33 +225,33 @@
                             <i class='bx bx-line-chart text-xl gradient-text-accent-light'></i>
                         </div>
                         <div>
-                            <h4 class="text-foreground font-bold mb-1">Predictive Analytics</h4>
-                            <p class="text-sm text-muted">Maintenance payment forecasting, vendor performance scoring, and community engagement insights.</p>
+                            <h4 class="text-foreground font-bold mb-1">Predictive & Decision Intelligence</h4>
+                            <p class="text-sm text-muted">Forecasting, classification, and scoring models that turn data into actionable business insights.</p>
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('businzo.estimate') }}?type=ai" class="btn-outline px-6 py-3 rounded-full text-sm font-bold inline-flex items-center gap-2 hover:bg-white hover:text-black hover:border-white transition-all">
-                    Estimate AI Integration <i class='bx bx-right-arrow-alt'></i>
+                <a href="{{ route('businzo.estimate') }}?type=ai" class="btn-premium px-6 py-3 rounded-full text-sm font-bold inline-flex items-center gap-2">
+                    Start Your Project <i class='bx bx-right-arrow-alt'></i>
                 </a>
             </div>
             <div class="order-1 lg:order-2" data-aos="fade-left">
                 <div class="glass-panel rounded-3xl p-2 relative">
                     <div class="absolute inset-0 bg-gradient-to-tr from-accent/20 to-transparent opacity-50 rounded-3xl blur-xl"></div>
                     <div class="bg-[#0a0a0a] border border-white/10 rounded-2xl h-[400px] flex flex-col overflow-hidden relative z-10 p-6">
-                        <div class="text-xs text-muted uppercase tracking-wider mb-4">AI Assistant — Support Desk</div>
+                        <div class="text-xs text-muted uppercase tracking-wider mb-4">AI Agent — MCP Connected</div>
                         <div class="space-y-4 flex-grow">
                             <div class="bg-white/5 rounded-xl p-4 max-w-[85%]">
-                                <p class="text-sm text-muted">"What's the process for NOC approval in our society?"</p>
+                                <p class="text-sm text-muted">"Summarize open support tickets and route urgent ones to the right team."</p>
                             </div>
                             <div class="bg-accent/10 border border-accent/20 rounded-xl p-4 max-w-[85%] ml-auto">
-                                <p class="text-sm text-muted">Based on your internal policy document (Section 4.2), this request requires verification and approval. I can generate the checklist, route it to the right team, and draft the response. <span class="text-accent-light">Create workflow →</span></p>
+                                <p class="text-sm text-muted">Found 12 open tickets — 3 marked urgent. I've classified them, assigned owners via MCP, and drafted responses. <span class="text-accent-light">Execute workflow →</span></p>
                             </div>
                             <div class="bg-white/5 rounded-xl p-4 max-w-[85%]">
-                                <p class="text-sm text-muted">"Show me unpaid maintenance for Block B"</p>
+                                <p class="text-sm text-muted">"Generate a Q4 revenue forecast from our CRM data."</p>
                             </div>
                         </div>
                         <div class="h-10 rounded-lg bg-white/5 border border-white/10 flex items-center px-4 mt-4">
-                            <span class="text-xs text-muted">Ask anything about your society...</span>
+                            <span class="text-xs text-muted">Ask your AI agent anything...</span>
                         </div>
                     </div>
                 </div>
@@ -259,9 +267,9 @@
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary-light text-xs font-bold tracking-widest uppercase mb-8">
                     <i class='bx bx-cube-alt'></i> Custom Software
                 </div>
-                <h2 class="text-4xl font-black font-['Outfit'] mb-6 tracking-tight">Domain-Specific Platforms</h2>
+                <h2 class="text-4xl font-black font-['Outfit'] mb-6 tracking-tight">Custom Software for Your Market</h2>
                 <p class="text-muted mb-8 leading-relaxed font-light text-lg">
-                    We build custom SaaS and domain platforms — from scratch — for industries with unique workflows. We replicate this approach for property management, healthcare scheduling, logistics, education, and any domain where generic software doesn't fit.
+                    When off-the-shelf tools can't keep up, we build domain-specific platforms from the ground up — tailored workflows, white-label SaaS, and super-admin consoles that give you a competitive edge.
                 </p>
                 <div class="space-y-6 mb-10">
                     <div class="flex gap-4">
@@ -292,8 +300,8 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('businzo.estimate') }}?type=custom" class="btn-outline px-6 py-3 rounded-full text-sm font-bold inline-flex items-center gap-2 hover:bg-white hover:text-black hover:border-white transition-all">
-                    Estimate Custom Platform <i class='bx bx-right-arrow-alt'></i>
+                <a href="{{ route('businzo.estimate') }}?type=custom" class="btn-premium px-6 py-3 rounded-full text-sm font-bold inline-flex items-center gap-2">
+                    Start Your Project <i class='bx bx-right-arrow-alt'></i>
                 </a>
             </div>
             <div class="order-1 lg:order-2" data-aos="fade-left">
@@ -344,11 +352,11 @@
 <!-- Global CTA -->
 <section class="py-24 border-t border-white/5 bg-background">
     <div class="max-w-4xl mx-auto text-center px-6" data-aos="zoom-in">
-        <h2 class="text-3xl font-black mb-6 font-['Outfit']">Have a platform idea?</h2>
-        <p class="text-muted mb-8">Tell us what you’re building — a web app, mobile product, AI feature, or a full custom platform — and we’ll propose a delivery plan.</p>
+        <h2 class="text-3xl md:text-4xl font-black mb-6 font-['Outfit']">Let's build software that <span class="gradient-text-accent">grows your business.</span></h2>
+        <p class="text-muted mb-8 max-w-2xl mx-auto">Share your vision — we'll scope a secure, scalable, AI-ready platform and propose a clear path from idea to production.</p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="{{ route('businzo.estimate') }}" class="btn-premium px-8 py-3 rounded-full font-bold inline-flex items-center justify-center gap-2">
-                <i class='bx bx-calculator'></i> Get an Estimate
+                <i class='bx bx-rocket'></i> Start Your Project
             </a>
             <a href="{{ route('businzo.contact') }}" class="btn-outline px-8 py-3 rounded-full font-bold inline-flex items-center justify-center">
                 Book a Consultation
