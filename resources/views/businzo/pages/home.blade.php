@@ -39,9 +39,7 @@
 
                     <p class="text-lg md:text-xl text-muted leading-relaxed font-light" data-aos="fade-right"
                         data-aos-delay="200">
-                        Businzo Technologies is an IT software development company delivering web applications, mobile apps,
-                        AI/ML engineering, and custom software. From MVPs to enterprise platforms — we design, build, and
-                        deploy systems that scale.
+                        Businzo Technologies develops secure, scalable web, mobile, and AI solutions that accelerate business growth. From MVPs to enterprise platforms, we deliver custom software, AI agents, MCP integrations, and intelligent automation. Transform ideas into production-ready products with robust architecture, enterprise-grade security, seamless deployment, and future-ready innovation.
                     </p>
 
                     <div class="flex flex-col sm:flex-row gap-4 pt-4" data-aos="fade-up" data-aos-delay="300">
@@ -95,136 +93,171 @@
     </section>
 
     <!-- Tech Stack -->
-    <section class="py-20 border-y border-white/5 bg-elevated relative overflow-hidden">
+    <section class="py-20 border-y border-white/5 bg-elevated relative overflow-hidden" id="tech-stack-section">
         <div
             class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3N2Zz4=')] [mask-image:linear-gradient(to_bottom,white,transparent)] opacity-40 pointer-events-none">
         </div>
 
         <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-14" data-aos="fade-up">
+            <div class="text-center mb-12" data-aos="fade-up">
                 <p class="text-sm font-bold tracking-widest gradient-text-accent uppercase mb-4">Technology Stack</p>
-                <h2 class="text-3xl md:text-4xl font-black font-['Outfit'] mb-4">Built with production-proven technologies
-                </h2>
-                <p class="text-muted text-sm md:text-base max-w-2xl mx-auto">Full-stack engineering across languages,
-                    databases, DevOps, and modern AI — not limited to a single stack.</p>
+                <h2 class="text-3xl md:text-4xl font-black font-['Outfit'] mb-4">Built with production-proven technologies</h2>
+                <p class="text-muted text-sm md:text-base max-w-2xl mx-auto">Browse by discipline — select a category to explore the languages, tools, and frameworks we use in production.</p>
             </div>
 
             @php
                 $techCategories = [
                     [
-                        'title' => 'Web Frameworks',
-                        'icon' => 'bx-code-alt',
+                        'id' => 'web',
+                        'title' => 'Web App',
+                        'icon' => 'bx-globe',
                         'accent' => 'text-primary',
                         'glow' => 'glow-primary',
-                        'span' => 'lg:col-span-2',
-                        'grid' => 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4',
                         'items' => [
-                            ['icon' => 'bxl-php', 'label' => 'PHP', 'framework' => 'Laravel · CodeIgniter · Yii'],
-                            ['icon' => 'bxl-java', 'label' => 'Java', 'framework' => 'Spring Boot · JSP/Servlet'],
-                            ['icon' => 'bxl-python', 'label' => 'Python', 'framework' => 'Django · Flask · FastAPI'],
-                            ['icon' => 'bxl-nodejs', 'label' => 'MERN', 'framework' => 'Mongo · Express · React · Node'],
-                            ['icon' => 'bxl-nodejs', 'label' => 'NestJS', 'framework' => 'Node.js Framework'],
-                            ['icon' => 'bxl-react', 'label' => 'Next.js', 'framework' => 'React Framework'],
-                            ['icon' => 'bxl-react', 'label' => 'React', 'framework' => 'SPA · SSR'],
-                            ['icon' => 'bxl-angular', 'label' => 'Angular', 'framework' => 'Enterprise SPA'],
-                            ['icon' => 'bxl-android', 'label' => 'Android', 'framework' => 'Kotlin · Java'],
-                            ['icon' => 'bxl-apple', 'label' => 'iOS', 'framework' => 'Swift · SwiftUI'],
-                            ['icon' => 'bxl-react', 'label' => 'React Native', 'framework' => 'Cross-platform Mobile'],
+                            ['icon' => 'bxl-php', 'label' => 'PHP', 'detail' => 'Laravel · CodeIgniter · Yii'],
+                            ['icon' => 'bxl-java', 'label' => 'Java', 'detail' => 'Spring Boot · JSP/Servlet'],
+                            ['icon' => 'bxl-python', 'label' => 'Python', 'detail' => 'Django · Flask · FastAPI'],
+                            ['icon' => 'bxl-nodejs', 'label' => 'Node.js', 'detail' => 'Express · NestJS · MERN'],
+                            ['icon' => 'bxl-react', 'label' => 'React', 'detail' => 'SPA · SSR · Next.js'],
+                            ['icon' => 'bxl-angular', 'label' => 'Angular', 'detail' => 'Enterprise SPA'],
+                            ['icon' => 'bxl-vuejs', 'label' => 'Vue.js', 'detail' => 'Nuxt · Composition API'],
+                            ['icon' => 'bx-code-block', 'label' => 'TypeScript', 'detail' => 'Type-safe frontends & APIs'],
                         ],
                     ],
                     [
-                        'title' => 'Databases',
-                        'icon' => 'bx-data',
-                        'accent' => 'text-primary-light',
-                        'glow' => 'glow-primary',
-                        'span' => '',
-                        'grid' => 'grid-cols-1 sm:grid-cols-3',
+                        'id' => 'mobile',
+                        'title' => 'Mobile App',
+                        'icon' => 'bx-mobile-alt',
+                        'accent' => 'text-accent',
+                        'glow' => 'glow-accent',
                         'items' => [
-                            ['icon' => 'bx-data', 'label' => 'SQL', 'framework' => 'MySQL · PostgreSQL'],
-                            ['icon' => 'bxl-mongodb', 'label' => 'NoSQL', 'framework' => 'MongoDB · Redis'],
-                            ['icon' => 'bx-search-alt', 'label' => 'Elasticsearch', 'framework' => 'Search & Analytics'],
+                            ['icon' => 'bxl-android', 'label' => 'Android', 'detail' => 'Kotlin · Java'],
+                            ['icon' => 'bxl-apple', 'label' => 'iOS', 'detail' => 'Swift · SwiftUI'],
+                            ['icon' => 'bxl-react', 'label' => 'React Native', 'detail' => 'Cross-platform apps'],
+                            ['icon' => 'bx-mobile', 'label' => 'Flutter', 'detail' => 'Dart · Material & Cupertino'],
+                            ['icon' => 'bx-lock-alt', 'label' => 'Secure APIs', 'detail' => 'JWT · OAuth · Keychain'],
+                            ['icon' => 'bx-wifi-off', 'label' => 'Offline UX', 'detail' => 'Local cache · sync queues'],
                         ],
                     ],
                     [
+                        'id' => 'devops',
                         'title' => 'DevOps',
                         'icon' => 'bx-server',
                         'accent' => 'text-primary-light',
                         'glow' => 'glow-primary',
-                        'span' => '',
-                        'grid' => 'grid-cols-1 sm:grid-cols-2',
                         'items' => [
-                            ['icon' => 'bxl-docker', 'label' => 'Docker', 'framework' => 'Containers'],
-                            ['icon' => 'bx-cube', 'label' => 'Kubernetes', 'framework' => 'Orchestration'],
+                            ['icon' => 'bxl-docker', 'label' => 'Docker', 'detail' => 'Containerized services'],
+                            ['icon' => 'bx-cube', 'label' => 'Kubernetes', 'detail' => 'Orchestration & scaling'],
+                            ['icon' => 'bx-git-branch', 'label' => 'CI/CD', 'detail' => 'GitHub Actions · GitLab CI'],
+                            ['icon' => 'bx-cloud', 'label' => 'Cloud', 'detail' => 'AWS · GCP · Azure'],
+                            ['icon' => 'bx-shield-quarter', 'label' => 'Nginx', 'detail' => 'Reverse proxy · TLS'],
+                            ['icon' => 'bx-line-chart', 'label' => 'Monitoring', 'detail' => 'Logs · alerts · uptime'],
                         ],
                     ],
                     [
-                        'title' => 'AI / ML',
+                        'id' => 'database',
+                        'title' => 'Database',
+                        'icon' => 'bx-data',
+                        'accent' => 'text-primary-light',
+                        'glow' => 'glow-primary',
+                        'items' => [
+                            ['icon' => 'bx-data', 'label' => 'MySQL', 'detail' => 'Relational · transactions'],
+                            ['icon' => 'bx-data', 'label' => 'PostgreSQL', 'detail' => 'Advanced SQL · JSONB'],
+                            ['icon' => 'bxl-mongodb', 'label' => 'MongoDB', 'detail' => 'Document store'],
+                            ['icon' => 'bxl-redis', 'label' => 'Redis', 'detail' => 'Cache · sessions · queues'],
+                            ['icon' => 'bx-search-alt', 'label' => 'Elasticsearch', 'detail' => 'Search & analytics'],
+                            ['icon' => 'bx-transfer', 'label' => 'Migrations', 'detail' => 'Schema versioning · rollbacks'],
+                        ],
+                    ],
+                    [
+                        'id' => 'api',
+                        'title' => 'RESTful / GraphQL',
+                        'icon' => 'bx-git-merge',
+                        'accent' => 'text-accent-light',
+                        'glow' => 'glow-accent',
+                        'items' => [
+                            ['icon' => 'bx-transfer-alt', 'label' => 'REST API', 'detail' => 'Resource-oriented endpoints'],
+                            ['icon' => 'bx-network-chart', 'label' => 'GraphQL', 'detail' => 'Apollo · flexible queries'],
+                            ['icon' => 'bx-file', 'label' => 'OpenAPI', 'detail' => 'Swagger · contract-first design'],
+                            ['icon' => 'bx-plug', 'label' => 'gRPC', 'detail' => 'High-performance microservices'],
+                            ['icon' => 'bx-key', 'label' => 'Auth', 'detail' => 'JWT · OAuth 2.0 · RBAC'],
+                            ['icon' => 'bx-broadcast', 'label' => 'WebSockets', 'detail' => 'Real-time events & feeds'],
+                        ],
+                    ],
+                    [
+                        'id' => 'ai',
+                        'title' => 'AI/ML Engineering',
                         'icon' => 'bx-brain',
                         'accent' => 'text-accent',
                         'glow' => 'glow-accent',
-                        'span' => 'lg:col-span-2',
-                        'grid' => 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-6',
                         'items' => [
-                            ['icon' => 'bx-chip', 'label' => 'Transformers', 'framework' => 'Hugging Face'],
-                            ['icon' => 'bx-brain', 'label' => 'BERT', 'framework' => 'NLP Models'],
-                            ['icon' => 'bx-bot', 'label' => 'AI Agents', 'framework' => 'Autonomous Workflows'],
-                            ['icon' => 'bx-network-chart', 'label' => 'MCP', 'framework' => 'Model Context Protocol'],
-                            ['icon' => 'bx-git-merge', 'label' => 'A2A Protocol', 'framework' => 'Agent-to-Agent'],
-                            ['icon' => 'bx-sparkles', 'label' => 'GenAI', 'framework' => 'LLM Applications'],
+                            ['icon' => 'bx-chip', 'label' => 'Transformers', 'detail' => 'Hugging Face · fine-tuning'],
+                            ['icon' => 'bx-brain', 'label' => 'NLP', 'detail' => 'BERT · embeddings · classification'],
+                            ['icon' => 'bx-bot', 'label' => 'AI Agents', 'detail' => 'Autonomous workflows'],
+                            ['icon' => 'bx-book-open', 'label' => 'RAG', 'detail' => 'Document Q&A over private data'],
+                            ['icon' => 'bx-network-chart', 'label' => 'MCP', 'detail' => 'Model Context Protocol'],
+                            ['icon' => 'bx-sparkles', 'label' => 'GenAI', 'detail' => 'LLM apps · OpenAI · Claude'],
                         ],
                     ],
                 ];
             @endphp
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5" data-aos="fade-up" data-aos-delay="100">
-                @foreach ($techCategories as $category)
-                    <div
-                        class="glass-panel rounded-3xl p-6 md:p-8 hover:bg-white/[0.02] transition-colors {{ $category['span'] }}">
-                        <div class="flex items-center gap-3 mb-6 pb-5 border-b border-white/5">
-                            <div
-                                class="w-10 h-10 rounded-xl {{ $category['glow'] }} border border-white/10 flex items-center justify-center">
-                                <i class='bx {{ $category['icon'] }} text-xl {{ $category['accent'] }}'></i>
-                            </div>
-                            <div>
-                                <h3 class="text-sm font-bold text-foreground font-['Outfit']">{{ $category['title'] }}</h3>
-                                <p class="text-[10px] text-subtle uppercase tracking-widest font-bold">
-                                    {{ count($category['items']) }} technologies
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="grid {{ $category['grid'] }} gap-3">
-                            @foreach ($category['items'] as $tech)
-                                <div
-                                    class="group flex items-start gap-3 p-3 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-white/15 transition-all">
-                                    <div
-                                        class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                                        @if ($tech['icon'] == 'bx-sparkles')
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round" class="lucide lucide-sparkles w-4 h-4 mr-2" aria-hidden="true">
-                                                <path
-                                                    d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z">
-                                                </path>
-                                                <path d="M20 2v4"></path>
-                                                <path d="M22 4h-4"></path>
-                                                <circle cx="4" cy="20" r="2"></circle>
-                                            </svg>
-                                        @else
-                                            <i
-                                                class='bx {{ $tech['icon'] }} text-xl text-muted group-hover:text-foreground transition-colors'></i>
-                                        @endif
-                                    </div>
-                                    <div class="min-w-0 flex-1">
-                                        <div class="text-xs font-bold text-foreground leading-tight mb-0.5">{{ $tech['label'] }}</div>
-                                        <div class="text-[10px] text-subtle leading-snug line-clamp-2">{{ $tech['framework'] }}
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
+            <div data-aos="fade-up" data-aos-delay="100">
+                {{-- Horizontally scrollable category tabs --}}
+                <div class="relative mb-6">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-elevated to-transparent z-10"></div>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-elevated to-transparent z-10"></div>
+                    <div id="tech-category-scroll" class="tech-category-scroll flex gap-3 overflow-x-auto pb-2 -mx-1 px-1 scroll-smooth">
+                        @foreach ($techCategories as $index => $category)
+                            <button type="button"
+                                class="tech-category-btn shrink-0 flex items-center gap-2.5 px-5 py-3 rounded-2xl border transition-all duration-200 {{ $index === 0 ? 'is-active border-primary/40 bg-primary/10 text-foreground' : 'border-white/10 bg-white/[0.02] text-muted hover:bg-white/[0.05] hover:border-white/20 hover:text-foreground' }}"
+                                data-tech-category="{{ $category['id'] }}"
+                                aria-expanded="{{ 'false' }}"
+                                aria-controls="tech-panel-{{ $category['id'] }}">
+                                <span class="w-9 h-9 rounded-xl {{ $category['glow'] }} border border-white/10 flex items-center justify-center">
+                                    <i class='bx {{ $category['icon'] }} text-lg {{ $category['accent'] }}'></i>
+                                </span>
+                                <span class="text-sm font-bold font-['Outfit'] whitespace-nowrap">{{ $category['title'] }}</span>
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-subtle whitespace-nowrap">{{ count($category['items']) }} tools</span>
+                            </button>
+                        @endforeach
                     </div>
-                @endforeach
+                </div>
+
+                {{-- Full-width expandable technology panel --}}
+                <div id="tech-stack-panel" class="w-full glass-panel rounded-3xl overflow-hidden">
+                    @foreach ($techCategories as $index => $category)
+                        <div id="tech-panel-{{ $category['id'] }}"
+                            class="tech-panel {{ $index === 0 ? '' : 'hidden' }}"
+                            role="region"
+                            aria-label="{{ $category['title'] }} technologies">
+                            <div class="p-6 md:p-8 border-b border-white/5 flex items-center gap-3">
+                                <div class="w-11 h-11 rounded-xl {{ $category['glow'] }} border border-white/10 flex items-center justify-center">
+                                    <i class='bx {{ $category['icon'] }} text-xl {{ $category['accent'] }}'></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-foreground font-['Outfit']">{{ $category['title'] }}</h3>
+                                    <p class="text-xs text-muted">{{ count($category['items']) }} technologies in this stack</p>
+                                </div>
+                            </div>
+                            <div class="p-6 md:p-8">
+                                <div class="flex flex-wrap gap-3">
+                                    @foreach ($category['items'] as $tech)
+                                        <div class="group flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:bg-white/[0.06] hover:border-white/20 transition-all">
+                                            <div class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                                                <i class='bx {{ $tech['icon'] }} text-lg text-muted group-hover:text-foreground transition-colors'></i>
+                                            </div>
+                                            <div class="min-w-0">
+                                                <div class="text-sm font-bold text-foreground leading-tight">{{ $tech['label'] }}</div>
+                                                <div class="text-[11px] text-subtle leading-snug">{{ $tech['detail'] }}</div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </section>
@@ -446,7 +479,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" data-aos="fade-up" data-aos-delay="100">
                 @foreach ($deliverySteps as $index => $phase)
                     @php
-                        $phaseColor = $index % 2 === 0 ? 'text-primary' : 'text-accent';
+                        $phaseColor = $index % 2 === 0 ? 'text-primary' : 'gradient-text-accent';
                         $phaseGlow = $index % 2 === 0 ? 'glow-primary' : 'glow-accent';
                     @endphp
                     <div class="glass-panel rounded-3xl p-6 hover:bg-white/[0.02] transition-colors group relative"
@@ -514,3 +547,85 @@
         </div>
     </section>
 @endsection
+
+@push('styles')
+<style>
+    .tech-category-scroll {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        -webkit-overflow-scrolling: touch;
+    }
+    .tech-category-scroll::-webkit-scrollbar {
+        display: none;
+    }
+    .tech-category-btn.is-active {
+        border-color: rgba(27, 68, 155, 0.4);
+        background: rgba(27, 68, 155, 0.1);
+        color: var(--text-foreground);
+        box-shadow: 0 4px 20px rgba(27, 68, 155, 0.15);
+    }
+    .tech-panel {
+        animation: techPanelIn 0.25s ease-out;
+    }
+    @keyframes techPanelIn {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+@endpush
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const buttons = document.querySelectorAll('.tech-category-btn');
+        const panels = document.querySelectorAll('.tech-panel');
+        const scrollContainer = document.getElementById('tech-category-scroll');
+
+        if (!buttons.length || !panels.length) return;
+
+        function setActiveCategory(categoryId) {
+            buttons.forEach((btn) => {
+                const isActive = btn.dataset.techCategory === categoryId;
+                btn.classList.toggle('is-active', isActive);
+                btn.classList.toggle('border-primary/40', isActive);
+                btn.classList.toggle('bg-primary/10', isActive);
+                btn.classList.toggle('text-foreground', isActive);
+                btn.classList.toggle('border-white/10', !isActive);
+                btn.classList.toggle('bg-white/[0.02]', !isActive);
+                btn.classList.toggle('text-muted', !isActive);
+                btn.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+            });
+
+            panels.forEach((panel) => {
+                const isVisible = panel.id === 'tech-panel-' + categoryId;
+                panel.classList.toggle('hidden', !isVisible);
+            });
+        }
+
+        buttons.forEach((btn) => {
+            btn.addEventListener('click', function () {
+                const categoryId = this.dataset.techCategory;
+                setActiveCategory(categoryId);
+
+                const panel = document.getElementById('tech-panel-' + categoryId);
+                if (panel) {
+                    panel.style.animation = 'none';
+                    panel.offsetHeight;
+                    panel.style.animation = '';
+                }
+
+                this.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            });
+        });
+
+        if (scrollContainer) {
+            scrollContainer.addEventListener('wheel', function (event) {
+                if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+                    event.preventDefault();
+                    scrollContainer.scrollLeft += event.deltaY;
+                }
+            }, { passive: false });
+        }
+    });
+</script>
+@endpush

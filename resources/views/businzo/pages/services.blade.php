@@ -157,7 +157,7 @@
                     </div>
                     <div class="flex gap-4">
                         <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
-                            <i class='bx bxl-android text-xl text-accent-light'></i>
+                            <i class='bx bxl-android text-xl gradient-text-accent-light'></i>
                         </div>
                         <div>
                             <h4 class="text-foreground font-bold mb-1">Android Native (Kotlin)</h4>
@@ -166,7 +166,7 @@
                     </div>
                     <div class="flex gap-4">
                         <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
-                            <i class='bx bx-qr text-xl text-accent-light'></i>
+                            <i class='bx bx-qr text-xl gradient-text-accent-light'></i>
                         </div>
                         <div>
                             <h4 class="text-foreground font-bold mb-1">Secure Mobile + Backend</h4>
@@ -196,7 +196,7 @@
                 <div class="space-y-6 mb-10">
                     <div class="flex gap-4">
                         <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
-                            <i class='bx bx-data text-xl text-accent-light'></i>
+                            <i class='bx bx-data text-xl gradient-text-accent-light'></i>
                         </div>
                         <div>
                             <h4 class="text-foreground font-bold mb-1">RAG over Private Records</h4>
@@ -205,7 +205,7 @@
                     </div>
                     <div class="flex gap-4">
                         <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
-                            <i class='bx bx-bot text-xl text-accent-light'></i>
+                            <i class='bx bx-bot text-xl gradient-text-accent-light'></i>
                         </div>
                         <div>
                             <h4 class="text-foreground font-bold mb-1">Smart Workflow Automation</h4>
@@ -214,7 +214,7 @@
                     </div>
                     <div class="flex gap-4">
                         <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
-                            <i class='bx bx-line-chart text-xl text-accent-light'></i>
+                            <i class='bx bx-line-chart text-xl gradient-text-accent-light'></i>
                         </div>
                         <div>
                             <h4 class="text-foreground font-bold mb-1">Predictive Analytics</h4>

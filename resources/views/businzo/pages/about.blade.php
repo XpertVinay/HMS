@@ -13,7 +13,7 @@
     <div class="absolute inset-0 flex items-end pb-20">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-6">
-                <i class='bx bx-code-alt text-accent-light'></i>
+                <i class='bx bx-code-alt gradient-text-accent-light'></i>
                 <span class="text-xs font-bold tracking-widest text-muted uppercase">Businzo Technologies</span>
             </div>
             <h1 class="text-5xl md:text-7xl font-black font-['Outfit'] tracking-tight mb-4 text-foreground" data-aos="fade-up">We Build <br><span class="text-muted">Software Products.</span></h1>
@@ -42,7 +42,7 @@
             
             <div class="grid grid-cols-2 gap-6" data-aos="fade-left">
                 <div class="glass-panel p-8 rounded-2xl flex flex-col justify-center">
-                    <h4 class="text-5xl font-black text-foreground font-['Outfit'] tracking-tighter mb-2">6<span class="text-accent">+</span></h4>
+                    <h4 class="text-5xl font-black text-foreground font-['Outfit'] tracking-tighter mb-2">6<span class="gradient-gradient-text-accent">+</span></h4>
                     <p class="text-sm text-muted font-bold uppercase tracking-wider">User Portals</p>
                 </div>
                 <div class="glass-panel p-8 rounded-2xl flex flex-col justify-center">
@@ -87,9 +87,9 @@
                 <h4 class="text-xl font-bold mb-4 font-['Outfit']">Mobile Applications</h4>
                 <p class="text-muted leading-relaxed mb-4">Native and cross-platform apps connected to secure backends — built for speed, usability, and reliability.</p>
                 <ul class="text-sm text-muted space-y-2">
-                    <li class="flex items-center gap-2"><i class='bx bx-check text-accent'></i> iOS (Swift) & Android (Kotlin)</li>
-                    <li class="flex items-center gap-2"><i class='bx bx-check text-accent'></i> Secure API integration</li>
-                    <li class="flex items-center gap-2"><i class='bx bx-check text-accent'></i> Offline-friendly UX</li>
+                    <li class="flex items-center gap-2"><i class='bx bx-check gradient-text-accent'></i> iOS (Swift) & Android (Kotlin)</li>
+                    <li class="flex items-center gap-2"><i class='bx bx-check gradient-text-accent'></i> Secure API integration</li>
+                    <li class="flex items-center gap-2"><i class='bx bx-check gradient-text-accent'></i> Offline-friendly UX</li>
                 </ul>
             </div>
 
@@ -98,9 +98,9 @@
                 <h4 class="text-xl font-bold mb-4 font-['Outfit']">AI & Intelligent Automation</h4>
                 <p class="text-muted leading-relaxed mb-4">Practical AI that integrates into existing workflows — not just chatbot wrappers. Document Q&A, smart routing, and predictive analytics.</p>
                 <ul class="text-sm text-muted space-y-2">
-                    <li class="flex items-center gap-2"><i class='bx bx-check text-accent-light'></i> RAG over private records</li>
-                    <li class="flex items-center gap-2"><i class='bx bx-check text-accent-light'></i> Approval workflow assistants</li>
-                    <li class="flex items-center gap-2"><i class='bx bx-check text-accent-light'></i> Automated ticket classification</li>
+                    <li class="flex items-center gap-2"><i class='bx bx-check gradient-text-accent-light'></i> RAG over private records</li>
+                    <li class="flex items-center gap-2"><i class='bx bx-check gradient-text-accent-light'></i> Approval workflow assistants</li>
+                    <li class="flex items-center gap-2"><i class='bx bx-check gradient-text-accent-light'></i> Automated ticket classification</li>
                 </ul>
             </div>
             <div class="glass-panel p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="350">

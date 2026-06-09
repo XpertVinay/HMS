@@ -60,7 +60,7 @@
             --color-accent: #d51c27;
             --color-accent-light: #e83a4a;
             --text-foreground: #e8eaed;
-            --text-muted: #9aa3b2;
+            --: #9aa3b2;
             --text-subtle: #7a8494;
             --border-color: rgba(255, 255, 255, 0.1);
             --border-hover: rgba(255, 255, 255, 0.2);
@@ -167,13 +167,13 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="{{ route('businzo.home') }}" class="text-muted hover:text-foreground transition-colors font-medium text-sm">Home</a>
-                    <a href="{{ route('businzo.about') }}" class="text-muted hover:text-foreground transition-colors font-medium text-sm">Company</a>
-                    <a href="{{ route('businzo.portfolio') }}" class="text-muted hover:text-foreground transition-colors font-medium text-sm">Work</a>
+                    <a href="{{ route('businzo.home') }}" class=" hover:text-foreground transition-colors font-medium text-sm">Home</a>
+                    <a href="{{ route('businzo.about') }}" class=" hover:text-foreground transition-colors font-medium text-sm">Company</a>
+                    <a href="{{ route('businzo.portfolio') }}" class=" hover:text-foreground transition-colors font-medium text-sm">Work</a>
                     
                     <!-- Services Dropdown -->
                     <div class="relative group py-2">
-                        <button class="text-muted hover:text-foreground transition-colors font-medium text-sm flex items-center gap-1">
+                        <button class=" hover:text-foreground transition-colors font-medium text-sm flex items-center gap-1">
                             Expertise <i class='bx bx-chevron-down text-lg mt-0.5 transition-transform group-hover:-rotate-180'></i>
                         </button>
                         <div class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[280px] rounded-xl glass-panel p-2">
@@ -181,34 +181,34 @@
                                 <i class='bx bx-desktop text-xl text-primary group-hover/item:text-primary-light'></i>
                                 <div>
                                     <div class="text-sm font-bold text-foreground mb-0.5">Web Architecture</div>
-                                    <div class="text-xs text-muted">Multi-tenant SaaS & enterprise portals</div>
+                                    <div class="text-xs ">Multi-tenant SaaS & enterprise portals</div>
                                 </div>
                             </a>
                             <a href="{{ route('businzo.services') }}#mobile" class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group/item">
                                 <i class='bx bx-mobile-alt text-xl gradient-text-accent group-hover/item:text-accent-light'></i>
                                 <div>
                                     <div class="text-sm font-bold text-foreground mb-0.5">Mobile Engineering</div>
-                                    <div class="text-xs text-muted">JWT APIs, iOS & Android apps</div>
+                                    <div class="text-xs ">JWT APIs, iOS & Android apps</div>
                                 </div>
                             </a>
                             <a href="{{ route('businzo.services') }}#ai" class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group/item">
                                 <i class='bx bx-brain text-xl text-primary-light group-hover/item:text-primary-light'></i>
                                 <div>
                                     <div class="text-sm font-bold text-foreground mb-0.5">AI & Data</div>
-                                    <div class="text-xs text-muted">Smart workflows, RAG & automation</div>
+                                    <div class="text-xs ">Smart workflows, RAG & automation</div>
                                 </div>
                             </a>
                             <a href="{{ route('businzo.services') }}#custom" class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group/item">
                                 <i class='bx bx-code-alt text-xl gradient-text-accent group-hover/item:text-accent-light'></i>
                                 <div>
                                     <div class="text-sm font-bold text-foreground mb-0.5">Custom Software</div>
-                                    <div class="text-xs text-muted">SaaS, portals & industry-specific products</div>
+                                    <div class="text-xs ">SaaS, portals & industry-specific products</div>
                                 </div>
                             </a>
                         </div>
                     </div>
 
-                    <a href="{{ route('businzo.contact') }}" class="text-muted hover:text-foreground transition-colors font-medium text-sm">Contact</a>
+                    <a href="{{ route('businzo.contact') }}" class=" hover:text-foreground transition-colors font-medium text-sm">Contact</a>
                     
                     <div class="h-4 w-px bg-white/10 mx-2"></div>
                     
@@ -219,7 +219,7 @@
 
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-muted hover:text-foreground focus:outline-none p-2">
+                    <button id="mobile-menu-btn" class=" hover:text-foreground focus:outline-none p-2">
                         <i class='bx bx-menu text-2xl'></i>
                     </button>
                 </div>
@@ -229,17 +229,17 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-background border-b border-white/10 absolute w-full left-0 top-full shadow-2xl">
             <div class="px-6 py-6 space-y-4">
-                <a href="{{ route('businzo.home') }}" class="block text-xl text-muted hover:text-foreground font-medium">Home</a>
-                <a href="{{ route('businzo.about') }}" class="block text-xl text-muted hover:text-foreground font-medium">Company</a>
-                <a href="{{ route('businzo.portfolio') }}" class="block text-xl text-muted hover:text-foreground font-medium">Work</a>
+                <a href="{{ route('businzo.home') }}" class="block text-xl  hover:text-foreground font-medium">Home</a>
+                <a href="{{ route('businzo.about') }}" class="block text-xl  hover:text-foreground font-medium">Company</a>
+                <a href="{{ route('businzo.portfolio') }}" class="block text-xl  hover:text-foreground font-medium">Work</a>
                 <div class="py-2 border-y border-white/5">
                     <span class="block text-xs text-subtle uppercase tracking-widest font-bold mb-3">Expertise</span>
-                    <a href="{{ route('businzo.services') }}#web" class="block py-2 text-muted hover:text-foreground">Web Architecture</a>
-                    <a href="{{ route('businzo.services') }}#mobile" class="block py-2 text-muted hover:text-foreground">Mobile Engineering</a>
-                    <a href="{{ route('businzo.services') }}#ai" class="block py-2 text-muted hover:text-foreground">AI & Data Models</a>
-                    <a href="{{ route('businzo.services') }}#custom" class="block py-2 text-muted hover:text-foreground">Custom Software</a>
+                    <a href="{{ route('businzo.services') }}#web" class="block py-2  hover:text-foreground">Web Architecture</a>
+                    <a href="{{ route('businzo.services') }}#mobile" class="block py-2  hover:text-foreground">Mobile Engineering</a>
+                    <a href="{{ route('businzo.services') }}#ai" class="block py-2  hover:text-foreground">AI & Data Models</a>
+                    <a href="{{ route('businzo.services') }}#custom" class="block py-2  hover:text-foreground">Custom Software</a>
                 </div>
-                <a href="{{ route('businzo.contact') }}" class="block text-xl text-muted hover:text-foreground font-medium">Contact</a>
+                <a href="{{ route('businzo.contact') }}" class="block text-xl  hover:text-foreground font-medium">Contact</a>
                 <a href="{{ route('businzo.estimate') }}" class="block w-full text-center btn-premium px-4 py-3 rounded-lg font-bold mt-4">Get Estimate</a>
             </div>
         </div>
@@ -259,41 +259,41 @@
                     <a href="{{ route('businzo.home') }}" class="flex items-center gap-2 mb-6">
                         <img src="{{ asset('assets/images/businzo/logo.png') }}" alt="Businzo Technologies Logo" class="h-16 w-auto rounded-2xl shadow-xl border border-white/10">
                     </a>
-                    <p class="text-muted text-sm leading-relaxed mb-8 max-w-sm">
+                    <p class=" text-sm leading-relaxed mb-8 max-w-sm">
                         We build production-grade software — web platforms, mobile applications, AI/ML engineering, and custom systems. From discovery to deployment, we ship secure, scalable products that teams rely on.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="https://in.linkedin.com/company/businzotech" class="text-muted hover:text-foreground transition-colors"><i class='bx bxl-linkedin text-2xl'></i></a>
-                        <a href="https://x.com/businzotech" class="text-muted hover:text-foreground transition-colors"><i class='bx bxl-twitter text-2xl'></i></a>
-                        <a href="https://www.facebook.com/BusinzoTechnologies" class="text-muted hover:text-foreground transition-colors"><i class='bx bxl-facebook text-2xl'></i></a>
+                        <a href="https://in.linkedin.com/company/businzotech" class=" hover:text-foreground transition-colors"><i class='bx bxl-linkedin text-2xl'></i></a>
+                        <a href="https://x.com/businzotech" class=" hover:text-foreground transition-colors"><i class='bx bxl-twitter text-2xl'></i></a>
+                        <a href="https://www.facebook.com/BusinzoTechnologies" class=" hover:text-foreground transition-colors"><i class='bx bxl-facebook text-2xl'></i></a>
                     </div>
                 </div>
 
                 <div>
                     <h4 class="text-foreground font-semibold mb-6 font-['Outfit']">Engineering</h4>
                     <ul class="space-y-4">
-                        <li><a href="{{ route('businzo.services') }}#web" class="text-muted hover:text-foreground text-sm transition-colors">Web Apps</a></li>
-                        <li><a href="{{ route('businzo.services') }}#mobile" class="text-muted hover:text-foreground text-sm transition-colors">Mobile OS</a></li>
-                        <li><a href="{{ route('businzo.services') }}#ai" class="text-muted hover:text-foreground text-sm transition-colors">Machine Learning</a></li>
-                        <li><a href="{{ route('businzo.services') }}#custom" class="text-muted hover:text-foreground text-sm transition-colors">System Arch</a></li>
+                        <li><a href="{{ route('businzo.services') }}#web" class=" hover:text-foreground text-sm transition-colors">Web Apps</a></li>
+                        <li><a href="{{ route('businzo.services') }}#mobile" class=" hover:text-foreground text-sm transition-colors">Mobile OS</a></li>
+                        <li><a href="{{ route('businzo.services') }}#ai" class=" hover:text-foreground text-sm transition-colors">Machine Learning</a></li>
+                        <li><a href="{{ route('businzo.services') }}#custom" class=" hover:text-foreground text-sm transition-colors">System Arch</a></li>
                     </ul>
                 </div>
 
                 <div>
                     <h4 class="text-foreground font-semibold mb-6 font-['Outfit']">Company</h4>
                     <ul class="space-y-4">
-                        <li><a href="{{ route('businzo.about') }}" class="text-muted hover:text-foreground text-sm transition-colors">About Us</a></li>
-                        <li><a href="{{ route('businzo.careers') }}" class="text-muted hover:text-foreground text-sm transition-colors">Careers</a></li>
-                        <li><a href="#" class="text-muted hover:text-foreground text-sm transition-colors">Blog</a></li>
-                        <li><a href="{{ route('businzo.contact') }}" class="text-muted hover:text-foreground text-sm transition-colors">Contact</a></li>
+                        <li><a href="{{ route('businzo.about') }}" class=" hover:text-foreground text-sm transition-colors">About Us</a></li>
+                        <li><a href="{{ route('businzo.careers') }}" class=" hover:text-foreground text-sm transition-colors">Careers</a></li>
+                        <li><a href="#" class=" hover:text-foreground text-sm transition-colors">Blog</a></li>
+                        <li><a href="{{ route('businzo.contact') }}" class=" hover:text-foreground text-sm transition-colors">Contact</a></li>
                     </ul>
                 </div>
 
                 <div>
                     <h4 class="text-foreground font-semibold mb-6 font-['Outfit']">Legal</h4>
                     <ul class="space-y-4">
-                        <li><a href="{{ route('businzo.privacy') }}" class="text-muted hover:text-foreground text-sm transition-colors">Privacy Policy</a></li>
-                        <li><a href="{{ route('businzo.terms') }}" class="text-muted hover:text-foreground text-sm transition-colors">Terms of Service</a></li>
+                        <li><a href="{{ route('businzo.privacy') }}" class=" hover:text-foreground text-sm transition-colors">Privacy Policy</a></li>
+                        <li><a href="{{ route('businzo.terms') }}" class=" hover:text-foreground text-sm transition-colors">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>

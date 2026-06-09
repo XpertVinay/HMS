@@ -198,7 +198,7 @@
                         </div>
                         <div class="flex justify-between">
                             <span class="text-muted">Est. Timeline:</span>
-                            <span class="font-medium gradient-text-accent" id="summary-timeline">2-4 Weeks</span>
+                            <span class="font-medium gradient-gradient-gradient-text-accent" id="summary-timeline">2-4 Weeks</span>
                         </div>
                     </div>
 

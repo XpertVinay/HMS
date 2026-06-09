@@ -35,7 +35,7 @@
 
                     <div class="flex items-start gap-4">
                         <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
-                            <i class='bx bx-envelope text-2xl text-accent'></i>
+                            <i class='bx bx-envelope text-2xl gradient-text-accent'></i>
                         </div>
                         <div>
                             <h4 class="text-lg font-bold font-['Outfit'] mb-1">Email Us</h4>
@@ -80,7 +80,7 @@
                     @csrf
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="contact-field" data-field="first_name">
-                            <label for="first_name" class="block text-sm font-medium text-muted mb-2">First Name <span class="text-accent">*</span></label>
+                            <label for="first_name" class="block text-sm font-medium text-muted mb-2">First Name <span class="gradient-gradient-text-accent">*</span></label>
                             <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" autocomplete="given-name" maxlength="255"
                                 class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                                 placeholder="John" aria-describedby="first_name-error first_name-hint">
@@ -100,7 +100,7 @@
                     </div>
 
                     <div class="contact-field" data-field="email">
-                        <label for="email" class="block text-sm font-medium text-muted mb-2">Work Email <span class="text-accent">*</span></label>
+                        <label for="email" class="block text-sm font-medium text-muted mb-2">Work Email <span class="gradient-gradient-text-accent">*</span></label>
                         <input type="email" id="email" name="email" value="{{ old('email') }}" autocomplete="email" maxlength="255" inputmode="email"
                             class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                             placeholder="john@company.com" aria-describedby="email-error email-hint">
@@ -127,7 +127,7 @@
 
                     <div class="contact-field" data-field="message">
                         <div class="flex items-center justify-between mb-2">
-                            <label for="message" class="block text-sm font-medium text-muted">Project Details <span class="text-accent">*</span></label>
+                            <label for="message" class="block text-sm font-medium text-muted">Project Details <span class="gradient-gradient-text-accent">*</span></label>
                             <span id="message-counter" class="text-xs text-subtle">0 / 1000</span>
                         </div>
                         <textarea id="message" name="message" rows="5" maxlength="1000"
