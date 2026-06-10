@@ -246,6 +246,29 @@ class TenantTheme extends Model
         ];
     }
 
+    /* ── Accessors ─────────────────────────────────── */
+
+    public function getLogoLightAttribute($value)
+    {
+        if (empty($value)) return $value;
+        if (str_starts_with($value, 'http') || str_starts_with($value, '/')) return $value;
+        return asset('storage/' . $value);
+    }
+
+    public function getLogoDarkAttribute($value)
+    {
+        if (empty($value)) return $value;
+        if (str_starts_with($value, 'http') || str_starts_with($value, '/')) return $value;
+        return asset('storage/' . $value);
+    }
+
+    public function getFaviconAttribute($value)
+    {
+        if (empty($value)) return $value;
+        if (str_starts_with($value, 'http') || str_starts_with($value, '/')) return $value;
+        return asset('storage/' . $value);
+    }
+
     /**
      * Generate an ETag for cache validation based on version + timestamp.
      */

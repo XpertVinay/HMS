@@ -30,12 +30,17 @@ class Admin extends Authenticatable implements JWTSubject
         'rwa_election_copy',
         'social_registration_number',
         'is_id_verified',
+        'profile_image',
+        'gallery_images',
+        'other_documents',
     ];
 
     protected $hidden = ['password'];
 
     protected $casts = [
         'is_id_verified' => 'boolean',
+        'gallery_images' => 'array',
+        'other_documents' => 'array',
     ];
 
     public function getRoleAttribute(): string

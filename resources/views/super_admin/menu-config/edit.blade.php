@@ -380,7 +380,7 @@
                 </div>
                 <div class="meta-field">
                     <label for="residential_type">Residential Type</label>
-                    <select id="residential_type" name="residential_type">
+                    <select id="residential_type" name="residential_type" required>
                         <option value="">— Select Type —</option>
                         @foreach($residentialTypes as $key => $preset)
                             <option value="{{ $key }}"

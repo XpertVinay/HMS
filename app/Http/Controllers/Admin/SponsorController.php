@@ -32,7 +32,10 @@ class SponsorController extends Controller
         return view('admin.sponsors.index');
     }
 
-    public function create() { return view('admin.sponsors.create'); }
+    public function create()
+    {
+        return view('admin.sponsors.create');
+    }
 
     public function store(Request $request)
     {

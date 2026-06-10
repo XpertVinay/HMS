@@ -79,7 +79,7 @@
             
             <div class="mb-4">
                 <label class="block text-sm font-bold text-gray-700 mb-2">Ticket Status</label>
-                <select name="status" class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-100 focus:border-indigo-500 transition">
+                <select name="status" class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-100 focus:border-indigo-500 transition" required>
                     <option value="pending" {{ $ticket->status == 'pending' ? 'selected' : '' }}>Pending</option>
                     <option value="in_progress" {{ $ticket->status == 'in_progress' ? 'selected' : '' }}>In Progress</option>
                     <option value="resolved" {{ $ticket->status == 'resolved' ? 'selected' : '' }}>Resolved</option>
@@ -88,7 +88,7 @@
             
             <div class="mb-4">
                 <label class="block text-sm font-bold text-gray-700 mb-2">Assign Vendor</label>
-                <select name="assigned_vendor_id" class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-100 transition">
+                <select name="assigned_vendor_id" class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-100 transition" required>
                     <option value="">-- No Vendor Assigned --</option>
                     @foreach($vendors as $vendor)
                         <option value="{{ $vendor->id }}" {{ $ticket->assigned_vendor_id == $vendor->id ? 'selected' : '' }}>
@@ -121,7 +121,7 @@
                     
                     <div>
                         <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Approval Status</label>
-                        <select name="vendor_approval_status" class="w-full p-2 border border-gray-300 rounded-lg">
+                        <select name="vendor_approval_status" class="w-full p-2 border border-gray-300 rounded-lg" required>
                             <option value="">-- N/A --</option>
                             <option value="pending_vendor" {{ $ticket->vendor_approval_status == 'pending_vendor' ? 'selected' : '' }}>Waiting for Vendor Invoice</option>
                             <option value="pending_approval" {{ $ticket->vendor_approval_status == 'pending_approval' ? 'selected' : '' }}>Waiting for Member/Admin Approval</option>
@@ -134,7 +134,7 @@
             
             <div class="mb-6">
                 <label class="block text-sm font-bold text-gray-700 mb-2">Staff Response / Remarks</label>
-                <textarea name="response" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-100 transition" placeholder="Add resolution remarks...">{{ $ticket->response }}</textarea>
+                <textarea name="response" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-100 transition" placeholder="Add resolution remarks..." required>{{ $ticket->response }}</textarea>
             </div>
             
             <button type="submit" class="btn-modern w-full">Update Ticket</button>

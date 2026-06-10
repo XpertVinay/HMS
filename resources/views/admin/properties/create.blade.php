@@ -14,11 +14,11 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="form-group">
                 <label>Unit / Flat / House No.</label>
-                <input type="text" name="unit_number" value="{{ old('unit_number') }}" placeholder="e.g. Flat 1204 or House No. 87">
+                <input type="text" name="unit_number" value="{{ old('unit_number') }}" placeholder="e.g. Flat 1204 or House No. 87" required>
             </div>
             <div class="form-group">
                 <label>Building / Society Name (Optional)</label>
-                <input type="text" name="street_area" value="{{ old('street_area') }}" placeholder="e.g. Sunrise Residency">
+                <input type="text" name="street_area" value="{{ old('street_area') }}" placeholder="e.g. Sunrise Residency" required>
             </div>
             <div class="form-group">
                 <label>Locality / Village / Sector *</label>
@@ -38,11 +38,11 @@
             </div>
             <div class="form-group">
                 <label>PIN Code</label>
-                <input type="text" name="pincode" value="{{ old('pincode') }}">
+                <input type="text" name="pincode" value="{{ old('pincode') }}" required>
             </div>
             <div class="form-group">
                 <label>Property Type</label>
-                <select name="type">
+                <select name="type" required>
                     <option value="flat">Flat</option>
                     <option value="house">House</option>
                     <option value="plot">Plot</option>
@@ -53,13 +53,13 @@
 
         <div class="form-group mt-4">
             <label>Additional Unstructured Details (Optional)</label>
-            <textarea name="unstructured_data" rows="2" placeholder="e.g. Post Office Rampur, Tehsil Bilari... This will be stored dynamically.">{{ old('unstructured_data') }}</textarea>
+            <textarea name="unstructured_data" rows="2" placeholder="e.g. Post Office Rampur, Tehsil Bilari... This will be stored dynamically." required>{{ old('unstructured_data') }}</textarea>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 border-t border-gray-100 pt-4">
             <div class="form-group">
                 <label>Assign Owner</label>
-                <select name="owner_id">
+                <select name="owner_id" required>
                     <option value="">None</option>
                     @foreach($members as $m)
                         <option value="{{ $m->id }}">{{ $m->username }}</option>
@@ -68,7 +68,7 @@
             </div>
             <div class="form-group">
                 <label>Assign Resident</label>
-                <select name="resident_id">
+                <select name="resident_id" required>
                     <option value="">None</option>
                     @foreach($residents as $r)
                         <option value="{{ $r->id }}">{{ $r->username }}</option>

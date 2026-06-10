@@ -23,6 +23,7 @@ class Staff extends Authenticatable implements JWTSubject
         'first_name',
         'last_name',
         'email',
+        'profile_image',
         'password',
         'organization_id',
         'mobile_number',

@@ -83,7 +83,7 @@
                             <label for="first_name" class="block text-sm font-medium text-muted mb-2">First Name <span class="gradient-gradient-text-accent">*</span></label>
                             <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" autocomplete="given-name" maxlength="255"
                                 class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
-                                placeholder="John" aria-describedby="first_name-error first_name-hint">
+                                placeholder="John" aria-describedby="first_name-error first_name-hint" required>
                             <p id="first_name-hint" class="text-subtle text-xs mt-1">Letters only, at least 3 characters.</p>
                             <p id="first_name-error" class="contact-error text-red-400 text-xs mt-1 hidden" role="alert"></p>
                             @error('first_name') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
@@ -92,7 +92,7 @@
                             <label for="last_name" class="block text-sm font-medium text-muted mb-2">Last Name</label>
                             <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}" autocomplete="family-name" maxlength="255"
                                 class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
-                                placeholder="Doe" aria-describedby="last_name-error last_name-hint">
+                                placeholder="Doe" aria-describedby="last_name-error last_name-hint" required>
                             <p id="last_name-hint" class="text-subtle text-xs mt-1">Optional. Letters only, min 3 characters if provided.</p>
                             <p id="last_name-error" class="contact-error text-red-400 text-xs mt-1 hidden" role="alert"></p>
                             @error('last_name') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
@@ -103,7 +103,7 @@
                         <label for="email" class="block text-sm font-medium text-muted mb-2">Work Email <span class="gradient-gradient-text-accent">*</span></label>
                         <input type="email" id="email" name="email" value="{{ old('email') }}" autocomplete="email" maxlength="255" inputmode="email"
                             class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
-                            placeholder="john@company.com" aria-describedby="email-error email-hint">
+                            placeholder="john@company.com" aria-describedby="email-error email-hint" required>
                         <p id="email-hint" class="text-subtle text-xs mt-1">Use your work or business email address.</p>
                         <p id="email-error" class="contact-error text-red-400 text-xs mt-1 hidden" role="alert"></p>
                         @error('email') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
@@ -113,7 +113,7 @@
                         <label for="service" class="block text-sm font-medium text-muted mb-2">Interested Service</label>
                         <select id="service" name="service"
                             class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
-                            aria-describedby="service-error">
+                            aria-describedby="service-error" required>
                             <option value="">Select a service...</option>
                             <option value="web" {{ old('service') == 'web' ? 'selected' : '' }}>Web Application Development</option>
                             <option value="mobile" {{ old('service') == 'mobile' ? 'selected' : '' }}>Mobile Application Development</option>
@@ -133,7 +133,7 @@
                         <textarea id="message" name="message" rows="5" maxlength="1000"
                             class="contact-input w-full bg-background border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none"
                             placeholder="Tell us about your platform — number of users, key features, timeline, and any specific requirements..."
-                            aria-describedby="message-error message-hint">{{ old('message') }}</textarea>
+                            aria-describedby="message-error message-hint" required>{{ old('message') }}</textarea>
                         <p id="message-hint" class="text-subtle text-xs mt-1">Minimum 3 characters. Letters, numbers, spaces, and . , ' # - allowed.</p>
                         <p id="message-error" class="contact-error text-red-400 text-xs mt-1 hidden" role="alert"></p>
                         @error('message') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror

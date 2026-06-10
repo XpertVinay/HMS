@@ -37,7 +37,10 @@ class ResidentController extends Controller
         return view('admin.residents.index');
     }
 
-    public function create() { return view('admin.residents.create'); }
+    public function create()
+    {
+        return view('admin.residents.create');
+    }
 
     public function store(Request $request)
     {
@@ -68,7 +71,9 @@ class ResidentController extends Controller
     {
         $resident = Resident::where('organization_id', $this->orgId())->findOrFail($id);
         $data = $request->only('username', 'first_name', 'last_name', 'email', 'address', 'mobile_number');
-        if ($request->filled('password')) { $data['password'] = Hash::make($request->password); }
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        }
         $resident->update($data);
         return redirect()->route('admin.residents.index')->with('success', 'Resident updated.');
     }

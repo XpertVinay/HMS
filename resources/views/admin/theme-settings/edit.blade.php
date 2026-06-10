@@ -116,10 +116,10 @@
                         <label for="{{ $field }}">{{ $label }}</label>
                         <div class="color-input-wrapper">
                             <input type="color" id="{{ $field }}_picker" value="{{ $value }}"
-                                   onchange="document.getElementById('{{ $field }}').value = this.value;">
+                                   onchange="document.getElementById('{{ $field }}').value = this.value;" required>
                             <input type="text" id="{{ $field }}" name="{{ $field }}" value="{{ $value }}"
                                    onchange="document.getElementById('{{ $field }}_picker').value = this.value;"
-                                   placeholder="#000000" pattern="^#[0-9a-fA-F]{6}$">
+                                   placeholder="#000000" pattern="^#[0-9a-fA-F]{6}$" required>
                         </div>
                     </div>
                     @endforeach

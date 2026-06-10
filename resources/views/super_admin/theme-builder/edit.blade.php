@@ -206,10 +206,10 @@
                                 <label for="{{ $field }}">{{ $label }}</label>
                                 <div class="color-input-wrapper">
                                     <input type="color" id="{{ $field }}_picker" value="{{ $value }}"
-                                           onchange="document.getElementById('{{ $field }}').value = this.value; updatePreview();">
+                                           onchange="document.getElementById('{{ $field }}').value = this.value; updatePreview();" required>
                                     <input type="text" id="{{ $field }}" name="{{ $field }}" value="{{ $value }}"
                                            onchange="document.getElementById('{{ $field }}_picker').value = this.value; updatePreview();"
-                                           placeholder="#000000" pattern="^#[0-9a-fA-F]{6}$">
+                                           placeholder="#000000" pattern="^#[0-9a-fA-F]{6}$" required>
                                 </div>
                             </div>
                             @endforeach
@@ -231,10 +231,10 @@
                                 <label for="{{ $field }}">{{ $label }}</label>
                                 <div class="color-input-wrapper">
                                     <input type="color" id="{{ $field }}_picker" value="{{ $value }}"
-                                           onchange="document.getElementById('{{ $field }}').value = this.value;">
+                                           onchange="document.getElementById('{{ $field }}').value = this.value;" required>
                                     <input type="text" id="{{ $field }}" name="{{ $field }}" value="{{ $value }}"
                                            onchange="document.getElementById('{{ $field }}_picker').value = this.value;"
-                                           placeholder="#000000">
+                                           placeholder="#000000" required>
                                 </div>
                             </div>
                             @endforeach
@@ -268,7 +268,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div>
                                 <label class="block text-sm font-semibold mb-2" style="color: var(--text-secondary);">Primary Font</label>
-                                <select name="font_primary" class="select-modern" id="font_primary" onchange="updatePreview();">
+                                <select name="font_primary" class="select-modern" id="font_primary" onchange="updatePreview();" required>
                                     @foreach($allowedFonts as $font)
                                     <option value="{{ $font }}" {{ ($theme->font_primary ?? 'Inter') === $font ? 'selected' : '' }}
                                             style="font-family: '{{ $font }}', sans-serif;">
@@ -279,7 +279,7 @@
                             </div>
                             <div>
                                 <label class="block text-sm font-semibold mb-2" style="color: var(--text-secondary);">Secondary Font</label>
-                                <select name="font_secondary" class="select-modern" id="font_secondary">
+                                <select name="font_secondary" class="select-modern" id="font_secondary" required>
                                     @foreach($allowedFonts as $font)
                                     <option value="{{ $font }}" {{ ($theme->font_secondary ?? 'Poppins') === $font ? 'selected' : '' }}>
                                         {{ $font }}
@@ -328,7 +328,7 @@
                                 <div class="flex items-center gap-3">
                                     <input type="range" min="0" max="30" value="{{ intval($value) }}" 
                                            class="flex-1"
-                                           oninput="document.getElementById('{{ $field }}').value = this.value + 'px'; document.getElementById('{{ $field }}_preview').style.borderRadius = this.value + 'px'; document.getElementById('{{ $field }}_val').textContent = this.value + 'px';">
+                                           oninput="document.getElementById('{{ $field }}').value = this.value + 'px'; document.getElementById('{{ $field }}_preview').style.borderRadius = this.value + 'px'; document.getElementById('{{ $field }}_val').textContent = this.value + 'px';" required>
                                     <span id="{{ $field }}_val" class="font-mono text-xs w-12 text-right" style="color: var(--text-primary);">{{ $value }}</span>
                                     <input type="hidden" name="{{ $field }}" id="{{ $field }}" value="{{ $value }}">
                                 </div>
@@ -382,7 +382,7 @@
                         </p>
                         <textarea name="component_tokens" id="component_tokens" rows="16" 
                                   class="custom-css-editor"
-                                  placeholder='{ "button": { "border-radius": "20px" }, "card": { "shadow": "none" } }'>{{ json_encode($theme->component_tokens ?? new \stdClass, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) }}</textarea>
+                                  placeholder='{ "button": { "border-radius": "20px" }, "card": { "shadow": "none" } }' required>{{ json_encode($theme->component_tokens ?? new \stdClass, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) }}</textarea>
                         <p class="text-xs mt-2" style="color: var(--text-tertiary, #94a3b8);">
                             <i class='bx bx-info-circle mr-1'></i> 
                             Supported components: button, card, sidebar, navbar, input, table, modal, badge
@@ -402,7 +402,7 @@
                         </p>
                         <textarea name="custom_css" id="custom_css" rows="16"
                                   class="custom-css-editor"
-                                  placeholder=".custom-button { text-transform: uppercase; }">{{ $theme->custom_css ?? '' }}</textarea>
+                                  placeholder=".custom-button { text-transform: uppercase; }" required>{{ $theme->custom_css ?? '' }}</textarea>
                     </div>
                 </div>
 

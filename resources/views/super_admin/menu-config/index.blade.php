@@ -279,8 +279,8 @@
 
 <!-- Filter Bar -->
 <form method="GET" action="{{ route('super_admin.menu_config.index') }}" class="filter-bar">
-    <input type="text" name="search" placeholder="🔍 Search by name, subdomain or location..." value="{{ request('search') }}">
-    <select name="type" onchange="this.form.submit()">
+    <input type="text" name="search" placeholder="🔍 Search by name, subdomain or location..." value="{{ request('search') }}" required>
+    <select name="type" onchange="this.form.submit()" required>
         <option value="">All Residential Types</option>
         @foreach($residentialTypes as $key => $preset)
             <option value="{{ $key }}" {{ request('type') === $key ? 'selected' : '' }}>{{ $preset['label'] }}</option>

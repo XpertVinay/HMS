@@ -43,7 +43,7 @@
                 <input type="text" name="response" class="form-control" required placeholder="Type a message..." style="flex: 1; border-radius: 20px; padding: 10px 15px; border: 1px solid #ccc;">
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
-                <select name="status" class="form-control" style="width: auto; padding: 8px; border-radius: 8px;">
+                <select name="status" class="form-control" style="width: auto; padding: 8px; border-radius: 8px;" required>
                     <option value="pending" {{ $ticket->status === 'pending' ? 'selected' : '' }}>Pending</option>
                     <option value="in_progress" {{ $ticket->status === 'in_progress' ? 'selected' : '' }}>In Progress</option>
                     <option value="resolved" {{ $ticket->status === 'resolved' ? 'selected' : '' }}>Resolved</option>

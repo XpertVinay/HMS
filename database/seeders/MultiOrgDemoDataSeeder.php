@@ -84,7 +84,7 @@ class MultiOrgDemoDataSeeder extends Seeder
 
         for ($orgIndex = 1; $orgIndex <= 10; $orgIndex++) {
             $this->command->info("Generating data for Organization #{$orgIndex}");
-            
+
             // 1. Create Organization
             $organization = Organization::create([
                 'name' => $faker->company . ' RWA',
@@ -146,15 +146,15 @@ class MultiOrgDemoDataSeeder extends Seeder
             // 4. Members, Residents, and Properties
             $members = [];
             $residents = [];
-            
+
             for ($i = 0; $i < 20; $i++) {
                 $address = 'Unit ' . $faker->numberBetween(100, 999) . ', ' . $faker->streetName;
-                
+
                 $member = Member::create([
                     'username' => $faker->unique()->userName . 'm' . $orgIndex,
                     'first_name' => $faker->firstName,
                     'last_name' => $faker->lastName,
-                    'position' => $faker->randomElement(['President', 'Secretary', 'Treasurer', 'Member', 'Resident']),
+                    'position' => $faker->randomElement(['President', 'Secretary', 'Treasurer', 'Member', null]),
                     'email' => "member{$i}_org{$orgIndex}@example.com",
                     'password' => $password,
                     'address' => $address, // Shared address with property
@@ -251,7 +251,7 @@ class MultiOrgDemoDataSeeder extends Seeder
 
                 Gallery::create([
                     'title' => 'Gallery Item ' . $i,
-                    'image_url' => 'https://via.placeholder.com/400x300?text=Org+'.$orgIndex.'+Image+'.$i,
+                    'image_url' => 'https://via.placeholder.com/400x300?text=Org+' . $orgIndex . '+Image+' . $i,
                     'organization_id' => $orgId,
                 ]);
 
@@ -272,6 +272,7 @@ class MultiOrgDemoDataSeeder extends Seeder
                 Ticket::create([
                     'organization_id' => $orgId,
                     'member_id' => $faker->randomElement($members)->id,
+                    'resident_id' => !empty($residents) && $faker->boolean(50) ? $faker->randomElement($residents)->id : null,
                     'subject' => 'Issue ' . $i,
                     'description' => $faker->sentence,
                     'category' => 'Maintenance',

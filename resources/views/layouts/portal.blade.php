@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="{{ $themeMode ?? 'light' }}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,18 +10,20 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
     @php
         $faviconUrl = $theme->favicon ?? $activeOrg->resolved_logo ?? '/assets/images/businzo_logo.png';
-        $finalFaviconSrc = (str_starts_with($faviconUrl, 'http') || str_starts_with($faviconUrl, '/')) 
-            ? $faviconUrl 
+        $finalFaviconSrc = (str_starts_with($faviconUrl, 'http') || str_starts_with($faviconUrl, '/'))
+            ? $faviconUrl
             : asset('storage/' . $faviconUrl);
     @endphp
     <link rel="shortcut icon" href="{{ $finalFaviconSrc }}">
     <link rel="manifest" href="/manifest.json">
     @include('partials.theme-variables')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
+
     @stack('styles')
 </head>
-<body style="background-color: var(--background-secondary); color: var(--text-primary); font-family: var(--font-primary, 'Outfit', 'Inter', sans-serif); -webkit-font-smoothing: antialiased; margin: 0; padding: 0; box-sizing: border-box;">
+
+<body
+    style="background-color: var(--background-secondary); color: var(--text-primary); font-family: var(--font-primary, 'Outfit', 'Inter', sans-serif); -webkit-font-smoothing: antialiased; margin: 0; padding: 0; box-sizing: border-box;">
     @include('partials.sidebar')
 
     <section class="home-section">
@@ -36,11 +39,12 @@
             @endif
             @if($errors->any())
                 <div class="alert-custom error flex-col items-start">
-                    <div class="flex items-center gap-2 mb-2"><i class='bx bx-error-circle text-xl'></i> <strong>Please fix the following errors:</strong></div>
+                    <div class="flex items-center gap-2 mb-2"><i class='bx bx-error-circle text-xl'></i> <strong>Please fix
+                            the following errors:</strong></div>
                     <ul class="mb-0 pl-6 list-disc w-full">
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
                     </ul>
                 </div>
             @endif
@@ -98,7 +102,7 @@
         const chatPopupBody = document.getElementById('chatPopupBody');
         const chatInputMessage = document.getElementById('chatInputMessage');
 
-        if(openChatBtn && chatPopupWindow && closeChatBtn) {
+        if (openChatBtn && chatPopupWindow && closeChatBtn) {
             openChatBtn.addEventListener('click', () => {
                 chatPopupWindow.classList.add('active');
                 setTimeout(() => chatInputMessage.focus(), 100);
@@ -113,7 +117,7 @@
         function handleChatSubmit(e) {
             e.preventDefault();
             const message = chatInputMessage.value.trim();
-            if(!message) return;
+            if (!message) return;
 
             // Add user message
             const msgHtml = `<div class="chat-message sent">${escapeHtml(message)}</div>`;
@@ -135,17 +139,17 @@
 
         function escapeHtml(unsafe) {
             return unsafe
-                 .replace(/&/g, "&amp;")
-                 .replace(/</g, "&lt;")
-                 .replace(/>/g, "&gt;")
-                 .replace(/"/g, "&quot;")
-                 .replace(/'/g, "&#039;");
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
         }
     </script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             var $tables = $('.data-table:not(.ajax-table), table.w-full.text-left.border-collapse:not(.ajax-table)');
             if ($tables.length > 0) {
                 $tables.DataTable({
@@ -163,6 +167,22 @@
             }
         });
     </script>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/6a28fd25135ef41c3064c772/1jqo1pni0';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+
     @stack('scripts')
 </body>
+
 </html>

@@ -21,6 +21,7 @@ class Resident extends Authenticatable implements JWTSubject
         'first_name',
         'last_name',
         'email',
+        'profile_image',
         'password',
         'address',
         'mobile_number',

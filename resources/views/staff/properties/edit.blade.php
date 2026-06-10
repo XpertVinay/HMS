@@ -38,7 +38,7 @@
             
             <div class="form-group">
                 <label>Assign Owner (Member)</label>
-                <select name="owner_id">
+                <select name="owner_id" required>
                     <option value="">-- No Owner Assigned --</option>
                     @foreach($members as $member)
                         <option value="{{ $member->id }}" {{ old('owner_id', $property->owner_id ?? '') == $member->id ? 'selected' : '' }}>

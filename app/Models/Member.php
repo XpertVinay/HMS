@@ -22,6 +22,7 @@ class Member extends Authenticatable implements JWTSubject
         'last_name',
         'position',
         'email',
+        'profile_image',
         'password',
         'address',
         'phone',
