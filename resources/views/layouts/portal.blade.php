@@ -53,31 +53,9 @@
         </div>
     </section>
 
-    {{-- Floating Chat --}}
-    <a href="javascript:void(0)" class="floating-chat-btn" id="openChatBtn">
-        <i class='bx bx-message-rounded-dots'></i>
-    </a>
-
-    {{-- Chat Popup Window --}}
-    <div class="chat-popup-window" id="chatPopupWindow">
-        <div class="chat-popup-header">
-            <span><i class='bx bx-support mr-1'></i> Help & Support</span>
-            <span class="close-chat-btn" id="closeChatBtn">&times;</span>
-        </div>
-        <div class="chat-popup-body" id="chatPopupBody">
-            <div class="chat-message received">
-                Hello! 👋 How can we help you today?
-            </div>
-        </div>
-        <div class="chat-popup-footer">
-            <form id="chatPopupForm" onsubmit="handleChatSubmit(event)">
-                <input type="text" id="chatInputMessage" placeholder="Type your message..." required autocomplete="off">
-                <button type="submit"><i class='bx bx-send'></i></button>
-            </form>
-        </div>
-    </div>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="{{ asset('js/global-validation.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Sidebar toggle

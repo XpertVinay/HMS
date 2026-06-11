@@ -42,6 +42,7 @@ class AdminController extends Controller
             'first_name' => 'nullable|string|max:100',
             'last_name' => 'nullable|string|max:100',
             'email' => 'required|email|max:50|unique:admin,email',
+            'mobile_number' => 'nullable|string|max:20',
             'password' => 'required|string|min:6',
         ]);
 
@@ -50,6 +51,7 @@ class AdminController extends Controller
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
+            'mobile_number' => $request->mobile_number,
             'password' => Hash::make($request->password),
             'role' => 'admin',
             'organization_id' => $this->orgId(),

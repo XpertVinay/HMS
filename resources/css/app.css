@@ -8,6 +8,7 @@
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
+@source '../../public/js/**/*.js';
 
 @theme {
     --font-sans: 'Outfit', 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -40,5 +41,8 @@
     .text-gradient {
         @apply bg-clip-text text-transparent;
         background-image: linear-gradient(to right, var(--color-primary), var(--color-accent, #a855f7));
+    }
+    .is-invalid {
+        @apply !border-red-500 !ring-1 !ring-red-500;
     }
 }

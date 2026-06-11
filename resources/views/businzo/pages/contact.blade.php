@@ -200,6 +200,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 const emailPattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
                 if (!emailPattern.test(trimmed)) return 'Please enter a valid email address.';
                 if (/^(test|example|noreply)@/i.test(trimmed)) return 'Please use a real work or business email.';
+                
+                const allowedDomains = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com'];
+                const domain = trimmed.split('@')[1]?.toLowerCase();
+                if (allowedDomains.length > 0 && !allowedDomains.includes(domain)) {
+                    return 'Please enter an email with an allowed domain.';
+                }
+                
                 return '';
             },
         },
