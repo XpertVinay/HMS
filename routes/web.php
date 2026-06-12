@@ -232,6 +232,14 @@ Route::middleware('domain')->group(function () {
             Route::delete('/{id}', [\App\Http\Controllers\Admin\PortalMenuController::class, 'destroy'])->name('destroy');
             Route::post('/reorder', [\App\Http\Controllers\Admin\PortalMenuController::class, 'reorder'])->name('reorder');
         });
+
+        // Roles & Permissions
+        Route::prefix('roles-permissions')->name('roles_permissions.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Admin\RolePermissionController::class, 'index'])->name('index');
+            Route::post('/roles', [\App\Http\Controllers\Admin\RolePermissionController::class, 'storeRole'])->name('roles.store');
+            Route::post('/permissions', [\App\Http\Controllers\Admin\RolePermissionController::class, 'storePermission'])->name('permissions.store');
+            Route::post('/matrix', [\App\Http\Controllers\Admin\RolePermissionController::class, 'updateMatrix'])->name('matrix.update');
+        });
     });
 
     /*
@@ -428,6 +436,35 @@ Route::middleware('domain')->group(function () {
             Route::put('/{id}', [\App\Http\Controllers\Admin\PortalMenuController::class, 'update'])->name('update');
             Route::delete('/{id}', [\App\Http\Controllers\Admin\PortalMenuController::class, 'destroy'])->name('destroy');
             Route::post('/reorder', [\App\Http\Controllers\Admin\PortalMenuController::class, 'reorder'])->name('reorder');
+        });
+
+        // Roles & Permissions
+        Route::prefix('roles-permissions')->name('roles_permissions.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\SuperAdmin\RolePermissionController::class, 'index'])->name('index');
+            Route::post('/roles', [\App\Http\Controllers\SuperAdmin\RolePermissionController::class, 'storeRole'])->name('roles.store');
+            Route::post('/permissions', [\App\Http\Controllers\SuperAdmin\RolePermissionController::class, 'storePermission'])->name('permissions.store');
+            Route::post('/matrix', [\App\Http\Controllers\SuperAdmin\RolePermissionController::class, 'updateMatrix'])->name('matrix.update');
+        });
+
+        // Industry Onboarding Config
+        Route::prefix('industries')->name('industries.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\SuperAdmin\IndustryController::class, 'index'])->name('index');
+            Route::get('/create', [\App\Http\Controllers\SuperAdmin\IndustryController::class, 'create'])->name('create');
+            Route::post('/', [\App\Http\Controllers\SuperAdmin\IndustryController::class, 'store'])->name('store');
+            Route::get('/{industry}/edit', [\App\Http\Controllers\SuperAdmin\IndustryController::class, 'edit'])->name('edit');
+            Route::put('/{industry}', [\App\Http\Controllers\SuperAdmin\IndustryController::class, 'update'])->name('update');
+            Route::delete('/{industry}', [\App\Http\Controllers\SuperAdmin\IndustryController::class, 'destroy'])->name('destroy');
+
+            // Features
+            Route::get('/{industry}/features', [\App\Http\Controllers\SuperAdmin\IndustryController::class, 'features'])->name('features');
+            Route::post('/{industry}/features', [\App\Http\Controllers\SuperAdmin\IndustryController::class, 'storeFeature'])->name('features.store');
+            Route::delete('/{industry}/features/{feature}', [\App\Http\Controllers\SuperAdmin\IndustryController::class, 'destroyFeature'])->name('features.destroy');
+
+            // Role Presets
+            Route::get('/{industry}/role-presets', [\App\Http\Controllers\SuperAdmin\IndustryController::class, 'rolePresets'])->name('role_presets');
+            Route::post('/{industry}/role-presets', [\App\Http\Controllers\SuperAdmin\IndustryController::class, 'storeRolePreset'])->name('role_presets.store');
+            Route::put('/{industry}/role-presets/{preset}', [\App\Http\Controllers\SuperAdmin\IndustryController::class, 'updateRolePreset'])->name('role_presets.update');
+            Route::delete('/{industry}/role-presets/{preset}', [\App\Http\Controllers\SuperAdmin\IndustryController::class, 'destroyRolePreset'])->name('role_presets.destroy');
         });
     });
 });

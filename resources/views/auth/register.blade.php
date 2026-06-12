@@ -64,6 +64,59 @@
                 </div>
 
                 <div>
+                    <h3 class="text-sm font-bold text-white/90 uppercase tracking-wider mb-4 pb-2 border-b border-white/10 flex items-center gap-2 mt-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[var(--primary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                        Industry & Features
+                    </h3>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-xs font-semibold text-white/70 ml-1">Select Industry</label>
+                            <select name="industry_id" id="industrySelect" class="glass-input" required>
+                                <option value="" disabled selected>-- Choose Industry --</option>
+                                @foreach($industries as $industry)
+                                    <option value="{{ $industry->id }}" data-base-fee="{{ $industry->base_fee }}">
+                                        {{ $industry->name }} - Base Fee: ${{ number_format($industry->base_fee, 2) }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+                        <div id="featuresContainer" class="hidden mt-4 bg-black/20 p-4 rounded-xl border border-white/10">
+                            <h4 class="text-sm font-semibold text-white/90 mb-3">Optional Features</h4>
+                            @foreach($industries as $industry)
+                                <div class="industry-features hidden" id="features_industry_{{ $industry->id }}">
+                                    @forelse($industry->features as $feature)
+                                        <label class="flex items-center space-x-3 mb-2 cursor-pointer group p-2 hover:bg-white/5 rounded-lg transition-colors">
+                                            <input type="checkbox" name="features[]" value="{{ $feature->id }}" class="feature-checkbox w-5 h-5 rounded border-white/20 bg-black/30 text-[var(--primary)] focus:ring-[var(--primary)] focus:ring-offset-0" data-price="{{ $feature->price }}">
+                                            <div class="flex-1">
+                                                <span class="text-sm text-white block">{{ $feature->name }}</span>
+                                                @if($feature->description)
+                                                    <span class="text-xs text-white/50 block">{{ $feature->description }}</span>
+                                                @endif
+                                            </div>
+                                            <span class="text-sm font-bold text-green-400">+${{ number_format($feature->price, 2) }}</span>
+                                        </label>
+                                    @empty
+                                        <p class="text-white/50 text-xs italic">No optional features available for this industry.</p>
+                                    @endforelse
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <!-- Price Calculator Summary -->
+                        <div class="mt-4 bg-gradient-to-r from-black/40 to-black/20 p-4 rounded-xl border border-white/10 flex justify-between items-center">
+                            <div>
+                                <span class="text-xs text-white/60 block">Total Registration Fee</span>
+                                <span class="text-sm text-white/40 block" id="feeBreakdown">Base: $0.00 + Features: $0.00</span>
+                            </div>
+                            <div class="text-2xl font-bold text-green-400" id="totalFeeDisplay">
+                                $0.00
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
                     <h3 class="text-sm font-bold text-white/90 uppercase tracking-wider mb-4 pb-2 border-b border-white/10 mt-6 flex items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[var(--primary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                         Admin Account
@@ -118,4 +171,65 @@
         </svg>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const industrySelect = document.getElementById('industrySelect');
+        const featuresContainer = document.getElementById('featuresContainer');
+        const totalFeeDisplay = document.getElementById('totalFeeDisplay');
+        const feeBreakdown = document.getElementById('feeBreakdown');
+        
+        function calculateTotal() {
+            let baseFee = 0;
+            let featureFee = 0;
+            
+            const selectedOption = industrySelect.options[industrySelect.selectedIndex];
+            if (selectedOption && selectedOption.value) {
+                baseFee = parseFloat(selectedOption.getAttribute('data-base-fee') || 0);
+            }
+
+            const activeFeaturesDiv = document.querySelector('.industry-features:not(.hidden)');
+            if (activeFeaturesDiv) {
+                const checkboxes = activeFeaturesDiv.querySelectorAll('.feature-checkbox');
+                checkboxes.forEach(cb => {
+                    if (cb.checked) {
+                        featureFee += parseFloat(cb.getAttribute('data-price') || 0);
+                    }
+                });
+            }
+
+            const total = baseFee + featureFee;
+            totalFeeDisplay.textContent = '$' + total.toFixed(2);
+            feeBreakdown.textContent = `Base: $${baseFee.toFixed(2)} + Features: $${featureFee.toFixed(2)}`;
+        }
+
+        industrySelect.addEventListener('change', function() {
+            // Hide all feature lists and uncheck everything
+            document.querySelectorAll('.industry-features').forEach(el => {
+                el.classList.add('hidden');
+                el.querySelectorAll('.feature-checkbox').forEach(cb => cb.checked = false);
+            });
+            
+            const selectedId = this.value;
+            if (selectedId) {
+                featuresContainer.classList.remove('hidden');
+                const featuresDiv = document.getElementById('features_industry_' + selectedId);
+                if (featuresDiv) {
+                    featuresDiv.classList.remove('hidden');
+                }
+            } else {
+                featuresContainer.classList.add('hidden');
+            }
+            
+            calculateTotal();
+        });
+
+        // Add listeners to checkboxes
+        document.querySelectorAll('.feature-checkbox').forEach(cb => {
+            cb.addEventListener('change', calculateTotal);
+        });
+    });
+</script>
+@endpush
 @endsection

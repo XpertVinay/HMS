@@ -128,7 +128,7 @@
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
     <script>
         $(document).ready(function () {
-            var $tables = $('.data-table:not(.ajax-table), table.w-full.text-left.border-collapse:not(.ajax-table)');
+            var $tables = $('.data-table:not(.ajax-table):not(.no-datatable), table.w-full.text-left.border-collapse:not(.ajax-table):not(.no-datatable)');
             if ($tables.length > 0) {
                 $tables.DataTable({
                     lengthMenu: [[10, 20, 30, 40, 50], [10, 20, 30, 40, 50]],

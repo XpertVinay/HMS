@@ -16,7 +16,8 @@ class RegisterController extends Controller
      */
     public function showForm()
     {
-        return view('auth.register');
+        $industries = \App\Models\Industry::where('is_active', true)->with('features')->get();
+        return view('auth.register', compact('industries'));
     }
 
     /**
@@ -34,9 +35,20 @@ class RegisterController extends Controller
             'admin_last_name' => 'nullable|string|max:100',
             'admin_email' => 'required|email|max:50',
             'admin_password' => 'required|string|min:6|confirmed',
+            'industry_id' => 'required|exists:industries,id',
+            'features' => 'nullable|array',
+            'features.*' => 'exists:industry_features,id',
         ]);
 
-        $feeAmount = env('RWA_REGISTRATION_FEE', 2499.00);
+        $industry = \App\Models\Industry::findOrFail($request->industry_id);
+        $baseFee = (float) $industry->base_fee;
+        $featureFee = 0;
+
+        if ($request->has('features') && is_array($request->features)) {
+            $featureFee = (float) \App\Models\IndustryFeature::whereIn('id', $request->features)->sum('price');
+        }
+
+        $totalFeeAmount = $baseFee + $featureFee;
 
         $pending = \App\Models\PendingRwaRegistration::create([
             'org_name' => $request->org_name,
@@ -48,16 +60,20 @@ class RegisterController extends Controller
             'admin_last_name' => $request->admin_last_name,
             'admin_email' => $request->admin_email,
             'admin_password' => Hash::make($request->admin_password),
-            'fee_amount' => $feeAmount,
+            'industry_id' => $industry->id,
+            'selected_features' => $request->features ?? [],
+            'platform_fee' => $baseFee,
+            'feature_fee' => $featureFee,
+            'fee_amount' => $totalFeeAmount,
             'status' => 'pending_payment',
         ]);
 
         $razorpayService = new \App\Services\RazorpayService();
-        $order = $razorpayService->createOrder($feeAmount, 'RWA_REG_' . $pending->id);
+        $order = $razorpayService->createOrder($totalFeeAmount, 'RWA_REG_' . $pending->id);
 
         return view('payment.checkout', [
             'orderId' => $order->id,
-            'amount' => $feeAmount,
+            'amount' => $totalFeeAmount,
             'callbackUrl' => route('register.payment_callback', ['pending_id' => $pending->id]),
             'name' => $request->org_name,
             'email' => $request->admin_email,
@@ -94,6 +110,10 @@ class RegisterController extends Controller
                 'address' => $pending->org_address,
                 'registration_code' => $pending->registration_code,
                 'subdomain' => $pending->subdomain,
+                'industry_id' => $pending->industry_id,
+                'selected_features' => $pending->selected_features,
+                'platform_fee' => $pending->platform_fee,
+                'feature_fee' => $pending->feature_fee,
                 'status' => 'pending',
             ]);
 
@@ -105,6 +125,31 @@ class RegisterController extends Controller
                 'password' => $pending->admin_password, // Already hashed
                 'organization_id' => $org->id,
                 'role' => 'admin',
+            ]);
+
+            // Assign Roles and Permissions based on Industry Presets
+            $industryPresets = \App\Models\IndustryRolePreset::where('industry_id', $org->industry_id)->get();
+            foreach ($industryPresets as $preset) {
+                $role = \Spatie\Permission\Models\Role::firstOrCreate([
+                    'name' => $preset->role_name,
+                    'guard_name' => 'web',
+                    'organization_id' => $org->id,
+                ]);
+
+                if (!empty($preset->default_permissions)) {
+                    // Find matching global permissions
+                    $permissions = \Spatie\Permission\Models\Permission::whereNull('organization_id')
+                        ->whereIn('name', $preset->default_permissions)
+                        ->get();
+                    $role->syncPermissions($permissions);
+                }
+            }
+
+            // Fallback: If no preset was created for 'admin', create it.
+            $adminRole = \Spatie\Permission\Models\Role::firstOrCreate([
+                'name' => 'admin',
+                'guard_name' => 'web',
+                'organization_id' => $org->id,
             ]);
 
             $pending->update(['status' => 'converted']);

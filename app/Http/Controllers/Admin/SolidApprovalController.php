@@ -16,11 +16,11 @@ class SolidApprovalController extends Controller
      */
     public function index(Request $request)
     {
-        $admin = \App\Models\Admin::find(session('aid'));
+        $orgId = $this->orgId();
         
         if ($request->ajax()) {
             $query = SolidApproval::with(['member', 'maintenance', 'staffReviewer'])
-                ->where('solid_approvals.organization_id', $admin->organization_id)
+                ->where('solid_approvals.organization_id', $orgId)
                 ->where('solid_approvals.status', 'pending_admin');
                 
             return DataTables::of($query)
@@ -86,15 +86,20 @@ class SolidApprovalController extends Controller
      */
     public function approve(Request $request, $id)
     {
-        $admin = \App\Models\Admin::find(session('aid'));
+        $orgId = $this->orgId();
         
-        $approval = SolidApproval::where('organization_id', $admin->organization_id)
+        $adminId = session('aid');
+        if (!\App\Models\Admin::where('id', $adminId)->exists()) {
+            $adminId = null;
+        }
+        
+        $approval = SolidApproval::where('organization_id', $orgId)
             ->where('status', 'pending_admin')
             ->findOrFail($id);
             
         $approval->update([
             'status' => 'approved',
-            'stage_2_admin_id' => $admin->id
+            'stage_2_admin_id' => $adminId
         ]);
         
         return back()->with('success', 'SOLID request fully approved and finalized.');
@@ -105,15 +110,20 @@ class SolidApprovalController extends Controller
      */
     public function reject(Request $request, $id)
     {
-        $admin = \App\Models\Admin::find(session('aid'));
+        $orgId = $this->orgId();
         
-        $approval = SolidApproval::where('organization_id', $admin->organization_id)
+        $adminId = session('aid');
+        if (!\App\Models\Admin::where('id', $adminId)->exists()) {
+            $adminId = null;
+        }
+        
+        $approval = SolidApproval::where('organization_id', $orgId)
             ->where('status', 'pending_admin')
             ->findOrFail($id);
             
         $approval->update([
             'status' => 'rejected',
-            'stage_2_admin_id' => $admin->id
+            'stage_2_admin_id' => $adminId
         ]);
         
         return back()->with('success', 'SOLID request rejected.');
@@ -124,7 +134,7 @@ class SolidApprovalController extends Controller
      */
     public function settings()
     {
-        $organization = \App\Models\Admin::find(session('aid'))->organization;
+        $organization = $this->activeOrg();
         return view('admin.solid.settings', compact('organization'));
     }
 
@@ -141,7 +151,7 @@ class SolidApprovalController extends Controller
             'solid_decoration_charge' => 'required|numeric|min:0',
         ]);
 
-        $organization = \App\Models\Admin::find(session('aid'))->organization;
+        $organization = $this->activeOrg();
         
         $organization->update([
             'solid_sale_charge' => $request->solid_sale_charge,

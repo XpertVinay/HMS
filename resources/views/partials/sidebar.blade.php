@@ -4,6 +4,20 @@
 @endphp
 
 <div class="sidebar">
+    <style>
+        .sidebar .nav-links li a .toggle-icon {
+            margin-left: auto;
+            transition: transform 0.3s;
+        }
+
+        .sidebar.close .nav-links li a .toggle-icon {
+            display: none !important;
+        }
+
+        .sidebar .nav-links li a[aria-expanded="true"] .toggle-icon {
+            transform: rotate(180deg);
+        }
+    </style>
     <div class="logo-details">
         <a href="{{ route('home') }}">
             @php
@@ -14,133 +28,154 @@
                 } elseif (isset($activeOrg)) {
                     $logoUrl = $activeOrg->resolved_logo ?? '/assets/images/businzo_logo.png';
                 }
-                
-                $finalLogoSrc = (str_starts_with($logoUrl, 'http') || str_starts_with($logoUrl, '/')) 
-                    ? $logoUrl 
+
+                $finalLogoSrc = (str_starts_with($logoUrl, 'http') || str_starts_with($logoUrl, '/'))
+                    ? $logoUrl
                     : asset('storage/' . $logoUrl);
             @endphp
             <i><img src="{{ $finalLogoSrc }}" alt="logo"></i>
         </a>
     </div>
     <ul class="nav-links">
-        @if($role === 'admin')
-            <li><a href="{{ route('admin.dashboard') }}" class="{{ str_contains($currentRoute, 'admin.dashboard') ? 'active' : '' }}"><i class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>
-            @if(in_array('announcements', $activeOrg->enabled_menus))
-            <li><a href="{{ route('admin.announcements.index') }}" class="{{ str_contains($currentRoute, 'announcements') ? 'active' : '' }}"><i class='bx bx-bell'></i><span class="links_name">Notices</span></a></li>
-            @endif
-            @if(in_array('maintenance', $activeOrg->enabled_menus))
-            <li><a href="{{ route('admin.maintenance.index') }}" class="{{ str_contains($currentRoute, 'maintenance') ? 'active' : '' }}"><i class='bx bx-pie-chart-alt-2'></i><span class="links_name">Maintenance</span></a></li>
-            @endif
-            @if(in_array('helpdesk', $activeOrg->enabled_menus))
-            <li><a href="{{ route('admin.helpdesk.index') }}" class="{{ str_contains($currentRoute, 'helpdesk') ? 'active' : '' }}"><i class='bx bx-support'></i><span class="links_name">Helpdesk</span></a></li>
-            @endif
-            @if(in_array('members', $activeOrg->enabled_menus))
-            <li><a href="{{ route('admin.members.index') }}" class="{{ str_contains($currentRoute, 'members') ? 'active' : '' }}"><i class='bx bx-list-ul'></i><span class="links_name">Members</span></a></li>
-            @endif
-            @if(in_array('staff', $activeOrg->enabled_menus))
-            <li><a href="{{ route('admin.staff.index') }}" class="{{ str_contains($currentRoute, 'admin.staff') ? 'active' : '' }}"><i class='bx bx-list-ul'></i><span class="links_name">Staff</span></a></li>
-            @endif
-            @if(in_array('residents', $activeOrg->enabled_menus))
-            <li><a href="{{ route('admin.residents.index') }}" class="{{ str_contains($currentRoute, 'residents') ? 'active' : '' }}"><i class='bx bx-home-smile'></i><span class="links_name">Residents</span></a></li>
-            @endif
-            @if(in_array('vendors', $activeOrg->enabled_menus))
-            <li><a href="{{ route('admin.vendors.index') }}" class="{{ str_contains($currentRoute, 'vendors') ? 'active' : '' }}"><i class='bx bx-store-alt'></i><span class="links_name">Vendors</span></a></li>
-            <li><a href="{{ route('admin.advertisements.index') }}" class="{{ str_contains($currentRoute, 'admin.advertisements') ? 'active' : '' }}"><i class='bx bx-megaphone'></i><span class="links_name">Vendor Ads</span></a></li>
-            <li><a href="{{ route('admin.commissions.index') }}" class="{{ str_contains($currentRoute, 'commissions') ? 'active' : '' }}"><i class='bx bx-money'></i><span class="links_name">Commissions</span></a></li>
-            @endif
-            @if(in_array('properties', $activeOrg->enabled_menus))
-            <li><a href="{{ route('admin.properties.index') }}" class="{{ str_contains($currentRoute, 'properties') ? 'active' : '' }}"><i class='bx bx-building-house'></i><span class="links_name">Properties</span></a></li>
-            @endif
-            @if(in_array('donors', $activeOrg->enabled_menus))
-            <li><a href="{{ route('admin.donors.index') }}" class="{{ str_contains($currentRoute, 'donors') ? 'active' : '' }}"><i class='bx bx-donate-heart'></i><span class="links_name">Donors</span></a></li>
-            @endif
-            @if(in_array('sponsors', $activeOrg->enabled_menus))
-            <li><a href="{{ route('admin.sponsors.index') }}" class="{{ str_contains($currentRoute, 'sponsors') ? 'active' : '' }}"><i class='bx bx-star'></i><span class="links_name">Sponsors</span></a></li>
-            @endif
-            @if(in_array('events', $activeOrg->enabled_menus))
-            <li><a href="{{ route('admin.events.index') }}" class="{{ str_contains($currentRoute, 'events') ? 'active' : '' }}"><i class='bx bx-calendar-event'></i><span class="links_name">Events</span></a></li>
-            @endif
-            @if(in_array('gallery', $activeOrg->enabled_menus))
-            <li><a href="{{ route('admin.gallery.index') }}" class="{{ str_contains($currentRoute, 'gallery') ? 'active' : '' }}"><i class='bx bx-image'></i><span class="links_name">Gallery</span></a></li>
-            @endif
-            @if(in_array('solid_approvals', $activeOrg->enabled_menus))
-            <li><a href="{{ route('admin.solid.index') }}" class="{{ str_contains($currentRoute, 'solid.index') || str_contains($currentRoute, 'solid.approve') ? 'active' : '' }}"><i class='bx bx-check-square'></i><span class="links_name">SOLID Approvals</span></a></li>
-            @endif
-            @if(in_array('solid_settings', $activeOrg->enabled_menus))
-            <li><a href="{{ route('admin.solid.settings') }}" class="{{ str_contains($currentRoute, 'solid.settings') ? 'active' : '' }}"><i class='bx bx-cog'></i><span class="links_name">SOLID Settings</span></a></li>
-            @endif
-            @if(in_array('community_approvals', $activeOrg->enabled_menus))
-            <li><a href="{{ route('admin.community.approvals') }}" class="{{ str_contains($currentRoute, 'community') ? 'active' : '' }}"><i class='bx bx-check-double'></i><span class="links_name">Comm. Approvals</span></a></li>
-            @endif
-            <li><a href="{{ route('admin.theme_settings.edit') }}" class="{{ str_contains($currentRoute, 'theme_settings') ? 'active' : '' }}"><i class='bx bx-palette'></i><span class="links_name">Theme Settings</span></a></li>
-            <li><a href="{{ route('admin.cms.index') }}" class="{{ str_contains($currentRoute, 'admin.cms') ? 'active' : '' }}"><i class='bx bx-layout'></i><span class="links_name">CMS / Pages</span></a></li>
-            <li><a href="{{ route('admin.portal_menus.index') }}" class="{{ str_contains($currentRoute, 'portal_menus') ? 'active' : '' }}"><i class='bx bx-menu-alt-right'></i><span class="links_name">Portal Menus</span></a></li>
+        @if(in_array($role, ['admin', 'member', 'staff', 'vendor']))
+            <li><a href="{{ route($role . '.dashboard') }}"
+                    class="{{ str_contains($currentRoute, $role . '.dashboard') ? 'active' : '' }}"><i
+                        class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>
 
-        @elseif($role === 'member')
-            <li><a href="{{ route('member.dashboard') }}" class="{{ str_contains($currentRoute, 'member.dashboard') ? 'active' : '' }}"><i class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>
-            @if(in_array('announcements', $activeOrg->enabled_menus))
-            <li><a href="{{ route('member.announcements.index') }}" class="{{ str_contains($currentRoute, 'announcements') ? 'active' : '' }}"><i class='bx bx-bell'></i><span class="links_name">Notices</span></a></li>
-            @endif
-            @if(in_array('maintenance', $activeOrg->enabled_menus))
-            <li><a href="{{ route('member.maintenance.index') }}" class="{{ str_contains($currentRoute, 'maintenance') ? 'active' : '' }}"><i class='bx bx-pie-chart-alt-2'></i><span class="links_name">Maintenance</span></a></li>
-            @endif
-            @if(in_array('solid_approvals', $activeOrg->enabled_menus))
-            <li><a href="{{ route('member.solid.index') }}" class="{{ str_contains($currentRoute, 'solid') ? 'active' : '' }}"><i class='bx bx-file'></i><span class="links_name">SOLID Approvals</span></a></li>
-            @endif
-            @if(in_array('helpdesk', $activeOrg->enabled_menus))
-            <li><a href="{{ route('member.helpdesk.index') }}" class="{{ str_contains($currentRoute, 'helpdesk') ? 'active' : '' }}"><i class='bx bx-support'></i><span class="links_name">Helpdesk</span></a></li>
-            @endif
-            @if(in_array('community_approvals', $activeOrg->enabled_menus))
-            <li><a href="{{ route('member.community.feed') }}" class="{{ str_contains($currentRoute, 'community') ? 'active' : '' }}"><i class='bx bx-world'></i><span class="links_name">Community Feed</span></a></li>
-            @endif
-            @if(in_array('vendors', $activeOrg->enabled_menus))
-            <li><a href="{{ route('member.vendors.directory') }}" class="{{ str_contains($currentRoute, 'vendors.directory') || str_contains($currentRoute, 'vendors.show') ? 'active' : '' }}"><i class='bx bx-store-alt'></i><span class="links_name">Vendor Directory</span></a></li>
-            <li><a href="{{ route('member.vendors.vote.index') }}" class="{{ str_contains($currentRoute, 'vendors.vote') ? 'active' : '' }}"><i class='bx bx-check-double'></i><span class="links_name">Vendor Voting</span></a></li>
-            @endif
+            @php
+                $orgId = $activeOrg->id ?? null;
+                $dashboardMenus = [];
+                if ($orgId) {
+                    $dashboardMenus = \App\Models\PortalMenu::where('organization_id', $orgId)
+                        ->whereIn('visibility', ['dashboard', 'both'])
+                        ->with([
+                            'children' => function ($q) {
+                                $q->whereIn('visibility', ['dashboard', 'both'])->orderBy('order');
+                            }
+                        ])
+                        ->whereNull('parent_id')
+                        ->orderBy('order')
+                        ->get()
+                        ->filter(function ($menu) use ($role) {
+                            return empty($menu->roles) || in_array($role, $menu->roles);
+                        });
+                }
+            @endphp
 
-        @elseif($role === 'staff')
-            <li><a href="{{ route('staff.dashboard') }}" class="{{ str_contains($currentRoute, 'staff.dashboard') ? 'active' : '' }}"><i class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>
-            @if(in_array('helpdesk', $activeOrg->enabled_menus))
-            <li><a href="{{ route('staff.helpdesk.index') }}" class="{{ str_contains($currentRoute, 'helpdesk') ? 'active' : '' }}"><i class='bx bx-support'></i><span class="links_name">Helpdesk</span></a></li>
-            @endif
-            @if(in_array('members', $activeOrg->enabled_menus))
-            <li><a href="{{ route('staff.members.index') }}" class="{{ str_contains($currentRoute, 'members') ? 'active' : '' }}"><i class='bx bx-user'></i><span class="links_name">Members (Owners)</span></a></li>
-            @endif
-            @if(in_array('residents', $activeOrg->enabled_menus))
-            <li><a href="{{ route('staff.residents.index') }}" class="{{ str_contains($currentRoute, 'residents') ? 'active' : '' }}"><i class='bx bx-group'></i><span class="links_name">Residents (Tenants)</span></a></li>
-            @endif
-            @if(in_array('properties', $activeOrg->enabled_menus))
-            <li><a href="{{ route('staff.properties.index') }}" class="{{ str_contains($currentRoute, 'properties') ? 'active' : '' }}"><i class='bx bx-building-house'></i><span class="links_name">Properties</span></a></li>
-            @endif
-            @if(in_array('community_approvals', $activeOrg->enabled_menus))
-            <li><a href="{{ route('staff.community.moderation') }}" class="{{ str_contains($currentRoute, 'community') ? 'active' : '' }}"><i class='bx bx-check-shield'></i><span class="links_name">Comm. Moderation</span></a></li>
-            @endif
-            @if(in_array('solid_approvals', $activeOrg->enabled_menus))
-            <li><a href="{{ route('staff.solid.index') }}" class="{{ str_contains($currentRoute, 'solid') ? 'active' : '' }}"><i class='bx bx-shield-quarter'></i><span class="links_name">SOLID Verification</span></a></li>
-            @endif
-
-        @elseif($role === 'vendor')
-            <li><a href="{{ route('vendor.dashboard') }}" class="{{ str_contains($currentRoute, 'vendor.dashboard') ? 'active' : '' }}"><i class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>
-            <li><a href="{{ route('vendor.advertisements.index') }}" class="{{ str_contains($currentRoute, 'vendor.advertisements') ? 'active' : '' }}"><i class='bx bx-megaphone'></i><span class="links_name">Advertisements</span></a></li>
-            <li><a href="{{ route('vendor.services.index') }}" class="{{ str_contains($currentRoute, 'vendor.services') ? 'active' : '' }}"><i class='bx bx-wrench'></i><span class="links_name">Service Requests</span></a></li>
-            <li><a href="{{ route('vendor.reviews.index') }}" class="{{ str_contains($currentRoute, 'vendor.reviews') ? 'active' : '' }}"><i class='bx bx-star'></i><span class="links_name">My Reviews</span></a></li>
+            @foreach($dashboardMenus as $parent)
+                @php
+                    $hasAllowedChild = false;
+                    foreach ($parent->children as $child) {
+                        if (empty($child->roles) || in_array($role, $child->roles)) {
+                            $hasAllowedChild = true;
+                            break;
+                        }
+                    }
+                @endphp
+                @if(count($parent->children) == 0 || $hasAllowedChild)
+                    @if(count($parent->children) > 0)
+                        @php
+                            $isParentActive = false;
+                            foreach ($parent->children as $child) {
+                                $cleanRoute = str_replace('admin.', '', $child->route_name);
+                                if ($child->route_name && str_contains($currentRoute, $cleanRoute)) {
+                                    $isParentActive = true;
+                                    break;
+                                }
+                            }
+                        @endphp
+                        <li class="nav-item-dropdown">
+                            <a class="nav-link" data-toggle="collapse" href="#collapseMenu{{ $parent->id }}" role="button"
+                                aria-expanded="{{ $isParentActive ? 'true' : 'false' }}" aria-controls="collapseMenu{{ $parent->id }}">
+                                <i class='bx {{ $parent->icon ?? 'bx-folder' }}'></i>
+                                <span class="links_name">{{ $parent->title }}</span>
+                                <i class='bx bx-chevron-down toggle-icon ml-auto'></i>
+                            </a>
+                            <ul class="collapse list-unstyled {{ $isParentActive ? 'show' : '' }}" id="collapseMenu{{ $parent->id }}"
+                                style="padding-left: 25px; margin-bottom: 0;">
+                                @foreach($parent->children as $child)
+                                    @if(empty($child->roles) || in_array($role, $child->roles))
+                                        @php
+                                            $cleanRoute = str_replace('admin.', '', $child->route_name);
+                                            $routeName = $child->route_name ? $role . '.' . $cleanRoute : '#';
+                                        @endphp
+                                        <li>
+                                            <a href="{{ $child->route_name && Route::has($routeName) ? route($routeName) : url($child->url) }}"
+                                                class="{{ $child->route_name && str_contains($currentRoute, $cleanRoute) ? 'active' : '' }}">
+                                                <span class="links_name" style="font-size: 13px;">{{ $child->title }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </li>
+                    @else
+                        @php
+                            $cleanRoute = str_replace('admin.', '', $parent->route_name);
+                            $routeName = $parent->route_name ? $role . '.' . $cleanRoute : '#';
+                        @endphp
+                        <li>
+                            <a href="{{ $parent->route_name && Route::has($routeName) ? route($routeName) : url($parent->url) }}"
+                                class="{{ $parent->route_name && str_contains($currentRoute, $cleanRoute) ? 'active' : '' }}">
+                                <i class='bx {{ $parent->icon ?? 'bx-circle' }}'></i>
+                                <span class="links_name">{{ $parent->title }}</span>
+                            </a>
+                        </li>
+                    @endif
+                @endif
+            @endforeach
 
         @elseif($role === 'super_admin')
-            <li><a href="{{ route('super_admin.dashboard') }}" class="{{ str_contains($currentRoute, 'super_admin.dashboard') ? 'active' : '' }}"><i class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>
-            <li><a href="{{ route('super_admin.earnings') }}" class="{{ str_contains($currentRoute, 'super_admin.earnings') ? 'active' : '' }}"><i class='bx bx-money'></i><span class="links_name">Earnings</span></a></li>
-            <li><a href="{{ route('super_admin.theme_builder.index') }}" class="{{ str_contains($currentRoute, 'theme_builder') ? 'active' : '' }}"><i class='bx bx-palette'></i><span class="links_name">Theme Builder</span></a></li>
-            <li><a href="{{ route('super_admin.cms.index') }}" class="{{ str_contains($currentRoute, 'super_admin.cms') ? 'active' : '' }}"><i class='bx bx-layout'></i><span class="links_name">CMS / Pages</span></a></li>
-            <li><a href="{{ route('super_admin.portal_menus.index') }}" class="{{ str_contains($currentRoute, 'portal_menus') ? 'active' : '' }}"><i class='bx bx-menu-alt-right'></i><span class="links_name">Portal Menus</span></a></li>
-            <li><a href="{{ route('super_admin.menu_config.index') }}" class="{{ str_contains($currentRoute, 'menu_config') ? 'active' : '' }}"><i class='bx bx-menu'></i><span class="links_name">Menu Config</span></a></li>
+            <li><a href="{{ route('super_admin.dashboard') }}"
+                    class="{{ str_contains($currentRoute, 'super_admin.dashboard') ? 'active' : '' }}"><i
+                        class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>
+            <li><a href="{{ route('super_admin.earnings') }}"
+                    class="{{ str_contains($currentRoute, 'super_admin.earnings') ? 'active' : '' }}"><i
+                        class='bx bx-money'></i><span class="links_name">Earnings</span></a></li>
+            <li><a href="{{ route('super_admin.theme_builder.index') }}"
+                    class="{{ str_contains($currentRoute, 'theme_builder') ? 'active' : '' }}"><i
+                        class='bx bx-palette'></i><span class="links_name">Theme Builder</span></a></li>
+            <li><a href="{{ route('super_admin.cms.index') }}"
+                    class="{{ str_contains($currentRoute, 'super_admin.cms') ? 'active' : '' }}"><i
+                        class='bx bx-layout'></i><span class="links_name">CMS / Pages</span></a></li>
+            <li><a href="{{ route('super_admin.portal_menus.index') }}"
+                    class="{{ str_contains($currentRoute, 'portal_menus') ? 'active' : '' }}"><i
+                        class='bx bx-menu-alt-right'></i><span class="links_name">Portal Menus</span></a></li>
+            <li><a href="{{ route('super_admin.menu_config.index') }}"
+                    class="{{ str_contains($currentRoute, 'menu_config') ? 'active' : '' }}"><i class='bx bx-menu'></i><span
+                        class="links_name">Menu Config</span></a></li>
+            <li><a href="{{ route('super_admin.industries.index') }}"
+                    class="{{ str_contains($currentRoute, 'industries') ? 'active' : '' }}"><i
+                        class='bx bx-building-house'></i><span class="links_name">Industries</span></a></li>
+            <li><a href="{{ route('super_admin.roles_permissions.index') }}"
+                    class="{{ str_contains($currentRoute, 'roles_permissions') ? 'active' : '' }}"><i
+                        class='bx bx-shield-quarter'></i><span class="links_name">Roles & Perms</span></a></li>
 
             @if(session()->has('managed_org_id'))
-                <li style="padding: 10px; color: #fff; text-transform: uppercase; font-size: 11px; font-weight: bold; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">Managing: {{ Str::limit(session('managed_org_name'), 20) }}</li>
-                <li><a href="{{ route('admin.admins.index') }}" class="{{ str_contains($currentRoute, 'admin.admins') ? 'active' : '' }}"><i class='bx bx-shield'></i><span class="links_name">Admins</span></a></li>
-                <li><a href="{{ route('admin.members.index') }}" class="{{ str_contains($currentRoute, 'members') ? 'active' : '' }}"><i class='bx bx-list-ul'></i><span class="links_name">Members</span></a></li>
-                <li><a href="{{ route('admin.staff.index') }}" class="{{ str_contains($currentRoute, 'admin.staff') ? 'active' : '' }}"><i class='bx bx-list-ul'></i><span class="links_name">Staff</span></a></li>
-                <li><a href="{{ route('admin.residents.index') }}" class="{{ str_contains($currentRoute, 'residents') ? 'active' : '' }}"><i class='bx bx-home-smile'></i><span class="links_name">Residents</span></a></li>
-                <li><a href="{{ route('admin.vendors.index') }}" class="{{ str_contains($currentRoute, 'vendors') ? 'active' : '' }}"><i class='bx bx-store-alt'></i><span class="links_name">Vendors</span></a></li>
-                <li><a href="{{ route('admin.properties.index') }}" class="{{ str_contains($currentRoute, 'properties') ? 'active' : '' }}"><i class='bx bx-building-house'></i><span class="links_name">Properties</span></a></li>
+                <li
+                    style="padding: 10px; color: #fff; text-transform: uppercase; font-size: 11px; font-weight: bold; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
+                    Managing: {{ Str::limit(session('managed_org_name'), 20) }}</li>
+                <li><a href="{{ route('admin.admins.index') }}"
+                        class="{{ str_contains($currentRoute, 'admin.admins') ? 'active' : '' }}"><i
+                            class='bx bx-shield'></i><span class="links_name">Admins</span></a></li>
+                <li><a href="{{ route('admin.members.index') }}"
+                        class="{{ str_contains($currentRoute, 'members') ? 'active' : '' }}"><i class='bx bx-list-ul'></i><span
+                            class="links_name">Members</span></a></li>
+                <li><a href="{{ route('admin.staff.index') }}"
+                        class="{{ str_contains($currentRoute, 'admin.staff') ? 'active' : '' }}"><i
+                            class='bx bx-list-ul'></i><span class="links_name">Staff</span></a></li>
+                <li><a href="{{ route('admin.residents.index') }}"
+                        class="{{ str_contains($currentRoute, 'residents') ? 'active' : '' }}"><i
+                            class='bx bx-home-smile'></i><span class="links_name">Residents</span></a></li>
+                <li><a href="{{ route('admin.vendors.index') }}"
+                        class="{{ str_contains($currentRoute, 'vendors') ? 'active' : '' }}"><i
+                            class='bx bx-store-alt'></i><span class="links_name">Vendors</span></a></li>
+                <li><a href="{{ route('admin.properties.index') }}"
+                        class="{{ str_contains($currentRoute, 'properties') ? 'active' : '' }}"><i
+                            class='bx bx-building-house'></i><span class="links_name">Properties</span></a></li>
+                <li><a href="{{ route('admin.roles_permissions.index') }}"
+                        class="{{ str_contains($currentRoute, 'admin.roles_permissions') ? 'active' : '' }}"><i
+                            class='bx bx-shield-quarter'></i><span class="links_name">Roles & Perms</span></a></li>
             @endif
         @endif
     </ul>

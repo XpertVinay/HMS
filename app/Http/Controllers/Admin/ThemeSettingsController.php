@@ -120,10 +120,15 @@ class ThemeSettingsController extends Controller
             $this->themeService->createTheme($organization, $validated);
         }
 
+        $adminId = session('aid');
+        if (!\App\Models\Admin::where('id', $adminId)->exists()) {
+            $adminId = null;
+        }
+
         // Log the consent for dispute resolution
         ThemeConsentLog::create([
             'organization_id' => $organization->id,
-            'admin_id' => session('aid'),
+            'admin_id' => $adminId,
             'action' => 'Theme Settings Updated',
             'ip_address' => $request->ip(),
             'user_agent' => $request->userAgent(),

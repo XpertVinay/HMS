@@ -1,113 +1,50 @@
 @extends('layouts.portal')
-@section('title', 'Admin Dashboard')
+@section('title', __('Admin Dashboard'))
 
 @section('content')
 <div class="overview-boxes">
+    @foreach($widgets as $widget)
     <div class="box">
         <div class="right-side">
-            <div class="box-topic">Total Members</div>
-            <div class="number">{{ $totalMembers }}</div>
+            <div class="box-topic">{{ __($widget['title']) }}</div>
+            <div class="number">{{ $widget['value'] }}</div>
+            @if(isset($widget['subtitle']))
+                <div style="font-size: 12px; color: #888;">{{ __($widget['subtitle']) }}</div>
+            @endif
         </div>
-        <i class='bx bxs-user icon member'></i>
+        <i class='bx {{ $widget['icon'] }} icon {{ $widget['color_class'] ?? '' }}' {!! isset($widget['style']) ? 'style="'.$widget['style'].'"' : '' !!}></i>
     </div>
-    <div class="box">
-        <div class="right-side">
-            <div class="box-topic">Total Staff</div>
-            <div class="number">{{ $totalStaff }}</div>
-        </div>
-        <i class='bx bxs-user-circle icon staff'></i>
-    </div>
-    <div class="box">
-        <div class="right-side">
-            <div class="box-topic">Society Fund</div>
-            <div class="number">₹{{ number_format($societyFund, 2) }}</div>
-        </div>
-        <i class='bx bx-money icon money'></i>
-    </div>
-    <div class="box">
-        <div class="right-side">
-            <div class="box-topic">Unpaid Maintenance</div>
-            <div class="number">{{ $unpaidMaintenance }}</div>
-        </div>
-        <i class='bx bxs-file icon file'></i>
-    </div>
-    <div class="box">
-        <div class="right-side">
-            <div class="box-topic">Amenity Bookings</div>
-            <div class="number">₹0.00</div>
-            <div style="font-size: 12px; color: #888;">(Coming Soon)</div>
-        </div>
-        <i class='bx bx-calendar-event icon' style="background: #e2e3ff; color: #4e73df;"></i>
-    </div>
-    <div class="box">
-        <div class="right-side">
-            <div class="box-topic">Vendor Listings</div>
-            <div class="number">₹0.00</div>
-            <div style="font-size: 12px; color: #888;">(Coming Soon)</div>
-        </div>
-        <i class='bx bx-store-alt icon' style="background: #e0f8e9; color: #1cc88a;"></i>
-    </div>
-    <div class="box">
-        <div class="right-side">
-            <div class="box-topic">Requests Resolved</div>
-            <div class="number">{{ $totalRequestsResolved }}</div>
-        </div>
-        <i class='bx bx-check-circle icon staff'></i>
-    </div>
-    <div class="box">
-        <div class="right-side">
-            <div class="box-topic">Pending Requests</div>
-            <div class="number">{{ $pendingRequests }}</div>
-        </div>
-        <i class='bx bx-time icon file'></i>
-    </div>
-    <div class="box">
-        <div class="right-side">
-            <div class="box-topic">Monthly Maintenance</div>
-            <div class="number">₹{{ number_format($monthlyMaintenanceCollected, 2) }}</div>
-        </div>
-        <i class='bx bx-money icon money'></i>
-    </div>
+    @endforeach
 </div>
 
 <div class="sales-boxes">
+    @foreach($tables as $table)
     <div class="box">
-        <div class="box-title">Registry</div>
+        <div class="box-title">{{ __($table['title']) }}</div>
         <table class="data-table">
             <thead>
-                <tr><th>#</th><th>In Time</th><th>Visitor Name</th></tr>
+                <tr>
+                    @foreach($table['columns'] as $col)
+                    <th>{{ __($col) }}</th>
+                    @endforeach
+                </tr>
             </thead>
             <tbody>
-                @foreach($recentRegistry as $i => $entry)
+                @foreach($table['data'] as $row)
                 <tr>
-                    <td>{{ $i + 1 }}</td>
-                    <td>{{ $entry->created_at?->format('M d, H:i') }}</td>
-                    <td>{{ $entry->visitor_name }}</td>
+                    @foreach($row as $cell)
+                    <td>{{ $cell }}</td>
+                    @endforeach
                 </tr>
                 @endforeach
             </tbody>
         </table>
-    </div>
-
-    <div class="box">
-        <div class="box-title">Members Directory</div>
-        <table class="data-table">
-            <thead>
-                <tr><th>#</th><th>Email</th><th>Username</th></tr>
-            </thead>
-            <tbody>
-                @foreach($recentMembers as $i => $member)
-                <tr>
-                    <td>{{ $i + 1 }}</td>
-                    <td>{{ $member->email }}</td>
-                    <td>{{ $member->username }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        @if(isset($table['action_url']) && $table['action_url'])
         <div style="margin-top: 15px;">
-            <a href="{{ route('admin.members.index') }}" class="btn-modern">See All</a>
+            <a href="{{ $table['action_url'] }}" class="btn-modern">{{ __('See All') }}</a>
         </div>
+        @endif
     </div>
+    @endforeach
 </div>
 @endsection

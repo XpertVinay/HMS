@@ -114,6 +114,48 @@
                 </div>
 
                 <div class="form-group">
+                    <label>Visibility <span class="text-danger">*</span></label>
+                    <select name="visibility" class="form-control" required>
+                        <option value="public">Public Site</option>
+                        <option value="dashboard">Dashboard Sidebar</option>
+                        <option value="both">Both</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Icon Class (Dashboard)</label>
+                    <input type="text" name="icon" class="form-control" placeholder="e.g. bx-bell">
+                </div>
+
+                <div class="form-group">
+                    <label>Route Name (Dashboard)</label>
+                    <input type="text" name="route_name" class="form-control" placeholder="e.g. events.index">
+                    <small class="text-muted">Dynamic prefix like 'admin.' or 'member.' will be applied automatically.</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Allowed Roles (Dashboard)</label>
+                    <div class="d-flex flex-wrap gap-3">
+                        <div class="form-check mr-3">
+                            <input class="form-check-input" type="checkbox" name="roles[]" value="admin" id="roleAdmin">
+                            <label class="form-check-label" for="roleAdmin">Admin</label>
+                        </div>
+                        <div class="form-check mr-3">
+                            <input class="form-check-input" type="checkbox" name="roles[]" value="member" id="roleMember">
+                            <label class="form-check-label" for="roleMember">Member</label>
+                        </div>
+                        <div class="form-check mr-3">
+                            <input class="form-check-input" type="checkbox" name="roles[]" value="staff" id="roleStaff">
+                            <label class="form-check-label" for="roleStaff">Staff</label>
+                        </div>
+                        <div class="form-check mr-3">
+                            <input class="form-check-input" type="checkbox" name="roles[]" value="vendor" id="roleVendor">
+                            <label class="form-check-label" for="roleVendor">Vendor</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label>Open In</label>
                     <select name="target" class="form-control" required>
                         <option value="_self">Same Window</option>

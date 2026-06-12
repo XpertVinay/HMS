@@ -58,14 +58,20 @@
                         $orgId = $activeOrg->id ?? null;
                         
                         $menus = \App\Models\PortalMenu::where('organization_id', $orgId)
-                            ->with(['children' => function($q) { $q->orderBy('order'); }])
+                            ->whereIn('visibility', ['public', 'both'])
+                            ->with(['children' => function($q) { 
+                                $q->whereIn('visibility', ['public', 'both'])->orderBy('order'); 
+                            }])
                             ->whereNull('parent_id')
                             ->orderBy('order')
                             ->get();
                             
                         if ($menus->isEmpty() && $orgId) {
                             $menus = \App\Models\PortalMenu::whereNull('organization_id')
-                                ->with(['children' => function($q) { $q->orderBy('order'); }])
+                                ->whereIn('visibility', ['public', 'both'])
+                                ->with(['children' => function($q) { 
+                                    $q->whereIn('visibility', ['public', 'both'])->orderBy('order'); 
+                                }])
                                 ->whereNull('parent_id')
                                 ->orderBy('order')
                                 ->get();

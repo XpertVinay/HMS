@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -27,6 +28,16 @@ class Organization extends Model
         'solid_interior_charge',
         'solid_decoration_charge',
         'vendor_acceptance_timeout_minutes',
+        'industry_id',
+        'selected_features',
+        'platform_fee',
+        'feature_fee',
+    ];
+
+    protected $casts = [
+        'selected_features' => 'array',
+        'platform_fee' => 'decimal:2',
+        'feature_fee' => 'decimal:2',
     ];
 
     /**
@@ -119,6 +130,11 @@ class Organization extends Model
         return $this->hasMany(AppVendor::class, 'organization_id');
     }
 
+    public function industry(): BelongsTo
+    {
+        return $this->belongsTo(Industry::class);
+    }
+
     public function announcements(): HasMany
     {
         return $this->hasMany(Announcement::class, 'organization_id');
@@ -176,10 +192,6 @@ class Organization extends Model
 
     /* ── Accessors ─────────────────────────────────── */
 
-    /**
-     * Returns the list of enabled menu keys for this organization.
-     * Falls back to all available menus if no config exists.
-     */
     public function getEnabledMenusAttribute(): array
     {
         if ($this->relationLoaded('menuConfig') && $this->menuConfig) {
@@ -188,6 +200,31 @@ class Organization extends Model
 
         $config = $this->menuConfig;
         return $config ? $config->enabled_menus : array_keys(config('menu_items', []));
+    }
+
+    /**
+     * Returns the hierarchical menu structure for this organization.
+     * Falls back to the industry default if no custom hierarchy exists.
+     */
+    public function getMenuHierarchyAttribute(): array
+    {
+        return \Illuminate\Support\Facades\Cache::remember("org_{$this->id}_menu_hierarchy", 86400, function () {
+            if ($this->relationLoaded('menuConfig') && $this->menuConfig && $this->menuConfig->menu_hierarchy) {
+                return $this->menuConfig->menu_hierarchy;
+            }
+
+            $config = $this->menuConfig;
+            if ($config && $config->menu_hierarchy) {
+                return $config->menu_hierarchy;
+            }
+
+            // Fallback to industry preset
+            if ($this->industry && $this->industry->menuPreset) {
+                return $this->industry->menuPreset->menu_hierarchy;
+            }
+
+            return [];
+        });
     }
 
     /**

@@ -7,11 +7,12 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -19,10 +20,17 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'organization_id',
         'name',
+        'username',
         'email',
+        'mobile_number',
+        'address',
+        'status',
+        'is_verified',
         'profile_image',
         'password',
+        'user_meta',
     ];
 
     /**
@@ -45,6 +53,13 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_verified' => 'boolean',
+            'user_meta' => 'array',
         ];
+    }
+
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
     }
 }

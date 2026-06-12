@@ -63,8 +63,57 @@ class DashboardController extends Controller
 
     public function approveOrg(int $id)
     {
-        Organization::findOrFail($id)->update(['status' => 'approved']);
-        return redirect()->route('super_admin.dashboard')->with('success', 'Organization approved.');
+        $org = Organization::findOrFail($id);
+        $org->update(['status' => 'approved']);
+
+        if ($org->industry_id) {
+            $industry = \App\Models\Industry::with(['rolePresets', 'menuPreset'])->find($org->industry_id);
+            if ($industry) {
+                foreach ($industry->rolePresets as $preset) {
+                    $role = \Spatie\Permission\Models\Role::firstOrCreate([
+                        'name' => $preset->role_name,
+                        'guard_name' => 'web',
+                        'organization_id' => $org->id,
+                    ]);
+
+                    if (!empty($preset->default_permissions) && is_array($preset->default_permissions)) {
+                        $role->syncPermissions($preset->default_permissions);
+                    }
+                }
+
+                // Seed Portal Menus from Industry Preset
+                if ($industry->menuPreset && !empty($industry->menuPreset->menu_hierarchy)) {
+                    $this->seedMenusFromHierarchy($industry->menuPreset->menu_hierarchy, $org->id, null);
+                }
+            }
+        }
+
+        return redirect()->route('super_admin.dashboard')->with('success', 'Organization approved and default industry roles/menus assigned.');
+    }
+
+    private function seedMenusFromHierarchy(array $hierarchy, int $orgId, ?int $parentId = null, &$order = 1)
+    {
+        foreach ($hierarchy as $item) {
+            $menu = \App\Models\PortalMenu::create([
+                'organization_id' => $orgId,
+                'parent_id' => $parentId,
+                'title' => $item['title'] ?? $item['label'] ?? 'Menu',
+                'url' => $item['url'] ?? '#',
+                'type' => $item['type'] ?? 'standard',
+                'order' => $order++,
+                'target' => $item['target'] ?? '_self',
+                'visibility' => $item['visibility'] ?? 'dashboard',
+                'roles' => $item['roles'] ?? null,
+                'permissions' => $item['permissions'] ?? null,
+                'icon' => $item['icon'] ?? null,
+                'route_name' => $item['route_name'] ?? $item['route'] ?? null,
+                'is_preset' => true,
+            ]);
+
+            if (!empty($item['children'])) {
+                $this->seedMenusFromHierarchy($item['children'], $orgId, $menu->id, $order);
+            }
+        }
     }
 
     public function rejectOrg(int $id)

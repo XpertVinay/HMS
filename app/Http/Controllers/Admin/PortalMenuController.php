@@ -73,6 +73,11 @@ class PortalMenuController extends Controller
             'type' => 'required|in:standard,cms,custom',
             'parent_id' => 'nullable|exists:portal_menus,id',
             'target' => 'required|in:_self,_blank',
+            'visibility' => 'required|in:public,dashboard,both',
+            'icon' => 'nullable|string|max:255',
+            'route_name' => 'nullable|string|max:255',
+            'roles' => 'nullable|array',
+            'roles.*' => 'string',
         ]);
 
         $maxOrder = PortalMenu::where('organization_id', $orgId)->where('parent_id', $request->parent_id)->max('order') ?? 0;
@@ -85,6 +90,10 @@ class PortalMenuController extends Controller
             'parent_id' => $request->parent_id,
             'target' => $request->target,
             'order' => $maxOrder + 1,
+            'visibility' => $request->visibility,
+            'icon' => $request->icon,
+            'route_name' => $request->route_name,
+            'roles' => $request->roles,
         ]);
 
         return redirect()->back()->with('success', 'Menu item added successfully.');
@@ -103,6 +112,11 @@ class PortalMenuController extends Controller
             'type' => 'required|in:standard,cms,custom',
             'parent_id' => 'nullable|exists:portal_menus,id',
             'target' => 'required|in:_self,_blank',
+            'visibility' => 'required|in:public,dashboard,both',
+            'icon' => 'nullable|string|max:255',
+            'route_name' => 'nullable|string|max:255',
+            'roles' => 'nullable|array',
+            'roles.*' => 'string',
         ]);
 
         // Prevent setting itself as parent
@@ -116,6 +130,10 @@ class PortalMenuController extends Controller
             'type' => $request->type,
             'parent_id' => $request->parent_id,
             'target' => $request->target,
+            'visibility' => $request->visibility,
+            'icon' => $request->icon,
+            'route_name' => $request->route_name,
+            'roles' => $request->roles,
         ]);
 
         return redirect()->back()->with('success', 'Menu item updated successfully.');

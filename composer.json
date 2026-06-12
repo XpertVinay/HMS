@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.10.1",
         "php-open-source-saver/jwt-auth": "^2.9",
         "razorpay/razorpay": "^2.9",
+        "spatie/laravel-permission": "^8.0",
         "yajra/laravel-datatables-oracle": "^12.7"
     },
     "require-dev": {

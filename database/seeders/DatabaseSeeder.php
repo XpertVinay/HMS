@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
         }
 
         $this->call(SuperAdminSeeder::class);
+        $this->call(IndustryPresetsSeeder::class);
+        $this->call(RolePermissionSeeder::class);
 
         // Suppressed old demo data seeder
         // $this->call(DemoDataSeeder::class);

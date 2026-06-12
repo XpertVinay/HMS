@@ -83,6 +83,49 @@
                 </div>
 
                 <div class="form-group">
+                    <label>Visibility <span class="text-danger">*</span></label>
+                    <select name="visibility" class="form-control" required>
+                        <option value="public" {{ $menu->visibility === 'public' ? 'selected' : '' }}>Public Site</option>
+                        <option value="dashboard" {{ $menu->visibility === 'dashboard' ? 'selected' : '' }}>Dashboard Sidebar</option>
+                        <option value="both" {{ $menu->visibility === 'both' ? 'selected' : '' }}>Both</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Icon Class (Dashboard)</label>
+                    <input type="text" name="icon" value="{{ $menu->icon }}" class="form-control" placeholder="e.g. bx-bell">
+                </div>
+
+                <div class="form-group">
+                    <label>Route Name (Dashboard)</label>
+                    <input type="text" name="route_name" value="{{ $menu->route_name }}" class="form-control" placeholder="e.g. events.index">
+                    <small class="text-muted">Dynamic prefix like 'admin.' or 'member.' will be applied automatically.</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Allowed Roles (Dashboard)</label>
+                    <div class="d-flex flex-wrap gap-3">
+                        @php $roles = is_array($menu->roles) ? $menu->roles : []; @endphp
+                        <div class="form-check mr-3">
+                            <input class="form-check-input" type="checkbox" name="roles[]" value="admin" id="roleAdmin{{ $menu->id }}" {{ in_array('admin', $roles) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="roleAdmin{{ $menu->id }}">Admin</label>
+                        </div>
+                        <div class="form-check mr-3">
+                            <input class="form-check-input" type="checkbox" name="roles[]" value="member" id="roleMember{{ $menu->id }}" {{ in_array('member', $roles) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="roleMember{{ $menu->id }}">Member</label>
+                        </div>
+                        <div class="form-check mr-3">
+                            <input class="form-check-input" type="checkbox" name="roles[]" value="staff" id="roleStaff{{ $menu->id }}" {{ in_array('staff', $roles) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="roleStaff{{ $menu->id }}">Staff</label>
+                        </div>
+                        <div class="form-check mr-3">
+                            <input class="form-check-input" type="checkbox" name="roles[]" value="vendor" id="roleVendor{{ $menu->id }}" {{ in_array('vendor', $roles) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="roleVendor{{ $menu->id }}">Vendor</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label>Open In</label>
                     <select name="target" class="form-control" required>
                         <option value="_self" {{ $menu->target === '_self' ? 'selected' : '' }}>Same Window</option>

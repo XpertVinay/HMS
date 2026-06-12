@@ -86,15 +86,29 @@ class MultiOrgDemoDataSeeder extends Seeder
             $this->command->info("Generating data for Organization #{$orgIndex}");
 
             // 1. Create Organization
+            if ($orgIndex === 1) {
+                // rcms -> Healthcare
+                $industryId = \App\Models\Industry::where('name', 'Healthcare')->value('id') ?? 1;
+            } elseif ($orgIndex === 2) {
+                // org2 -> Real Estate
+                $industryId = \App\Models\Industry::where('name', 'Real Estate')->value('id') ?? 1;
+            } elseif ($orgIndex === 3) {
+                // org3 -> Education
+                $industryId = \App\Models\Industry::where('name', 'Education')->value('id') ?? 1;
+            } else {
+                // Others -> RWA
+                $industryId = \App\Models\Industry::where('name', 'RWA (Resident Welfare Association)')->value('id') ?? 1;
+            }
             $organization = Organization::create([
                 'name' => $faker->company . ' RWA',
                 'address' => $faker->address,
                 'location' => $faker->city . ', ' . $faker->state,
                 'residential_type' => $faker->randomElement(['Apartment', 'Villa', 'Mixed']),
                 'registration_code' => 'ORG-' . strtoupper($faker->bothify('???-###')) . '-' . $orgIndex,
-                'subdomain' => strtolower($faker->word) . '-' . $orgIndex,
+                'subdomain' => $orgIndex === 1 ? 'rcms' : 'org' . $orgIndex,
                 'status' => 'approved',
-                'logo_url' => 'https://via.placeholder.com/150x50?text=Org+' . $orgIndex,
+                'industry_id' => $industryId,
+                'logo_url' => 'https://rcms.local.com/assets/images/businzo_logo.png',
                 'primary_color' => $faker->hexColor,
                 'secondary_color' => $faker->hexColor,
             ]);
@@ -113,6 +127,12 @@ class MultiOrgDemoDataSeeder extends Seeder
                 'theme_mode' => 'light',
                 'theme_version' => '1.0.0',
             ]);
+
+            // Seed Portal Menus for this org
+            $industry = \App\Models\Industry::with('menuPreset')->find($industryId);
+            if ($industry && $industry->menuPreset && !empty($industry->menuPreset->menu_hierarchy)) {
+                $this->seedMenusFromHierarchy($industry->menuPreset->menu_hierarchy, $orgId);
+            }
 
             // 3. Admins & Staff
             for ($i = 0; $i < 5; $i++) {
@@ -154,7 +174,7 @@ class MultiOrgDemoDataSeeder extends Seeder
                     'username' => $faker->unique()->userName . 'm' . $orgIndex,
                     'first_name' => $faker->firstName,
                     'last_name' => $faker->lastName,
-                    'position' => $faker->randomElement(['President', 'Secretary', 'Treasurer', 'Member', null]),
+                    'position' => $faker->randomElement(['President', 'Secretary', 'Treasurer', 'Member']),
                     'email' => "member{$i}_org{$orgIndex}@example.com",
                     'password' => $password,
                     'address' => $address, // Shared address with property
@@ -265,14 +285,14 @@ class MultiOrgDemoDataSeeder extends Seeder
 
                 Sponsor::create([
                     'name' => $faker->company,
-                    'logo_url' => 'https://via.placeholder.com/150x150?text=Sponsor',
+                    'logo_url' => 'https://rcms.local.com/assets/images/businzo_logo.png',
                     'organization_id' => $orgId,
                 ]);
 
                 Ticket::create([
                     'organization_id' => $orgId,
                     'member_id' => $faker->randomElement($members)->id,
-                    'resident_id' => !empty($residents) && $faker->boolean(50) ? $faker->randomElement($residents)->id : null,
+                    // 'resident_id' => !empty($residents) && $faker->boolean(50) ? $faker->randomElement($residents)->id : null,
                     'subject' => 'Issue ' . $i,
                     'description' => $faker->sentence,
                     'category' => 'Maintenance',
@@ -286,5 +306,30 @@ class MultiOrgDemoDataSeeder extends Seeder
         }
 
         $this->command->info('Multi-Org Demo Data generation completed successfully.');
+    }
+
+    private function seedMenusFromHierarchy(array $hierarchy, int $orgId, ?int $parentId = null, &$order = 1)
+    {
+        foreach ($hierarchy as $item) {
+            $menu = \App\Models\PortalMenu::create([
+                'organization_id' => $orgId,
+                'parent_id' => $parentId,
+                'title' => $item['title'] ?? $item['label'] ?? 'Menu',
+                'url' => $item['url'] ?? '#',
+                'type' => $item['type'] ?? 'standard',
+                'order' => $order++,
+                'target' => $item['target'] ?? '_self',
+                'visibility' => $item['visibility'] ?? 'dashboard',
+                'roles' => $item['roles'] ?? null,
+                'permissions' => $item['permissions'] ?? null,
+                'icon' => $item['icon'] ?? null,
+                'route_name' => $item['route_name'] ?? $item['route'] ?? null,
+                'is_preset' => false,
+            ]);
+
+            if (!empty($item['children'])) {
+                $this->seedMenusFromHierarchy($item['children'], $orgId, $menu->id, $order);
+            }
+        }
     }
 }

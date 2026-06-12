@@ -24,12 +24,12 @@ class ResolveOrganization
     public function __construct(
         protected TenantResolver $tenantResolver,
         protected ThemeService $themeService,
-    ) {}
+    ) {
+    }
 
     public function handle(Request $request, Closure $next): Response
     {
-        $businzoDomains = array_filter(explode(' ', (string) env('BUSINZO_DOMAIN', 'businzo.local.com www.businzo.local.com')));
-
+        $businzoDomains = array_filter(explode(' ', (string) env('BUSINZO_DOMAIN', 'businzo.com www.businzo.com')));
         if (in_array($request->getHost(), $businzoDomains, true)) {
             return $next($request);
         }
@@ -37,15 +37,16 @@ class ResolveOrganization
         // ── 1. Resolve Organization ──────────────────────
         $org = $this->tenantResolver->resolve($request);
 
+
         if (!$org) {
             $host = strtolower($request->getHost());
             $baseHost = strtolower(parse_url(config('app.url'), PHP_URL_HOST) ?? 'localhost');
-            
+
             $cleanHost = preg_replace('/^www\./', '', $host);
             $cleanBaseHost = preg_replace('/^www\./', '', $baseHost);
-            
+
             $isIp = filter_var($cleanHost, FILTER_VALIDATE_IP);
-            
+
             // If the host is not the base domain, not an IP, and not localhost, then it's an unrecognized
             // subdomain or custom domain. We must throw a 404 instead of showing the default portal.
             if (!$isIp && $cleanHost !== $cleanBaseHost && $cleanHost !== 'localhost') {
@@ -69,6 +70,7 @@ class ResolveOrganization
         $theme = $this->themeService->resolveTheme($org);
         $themeCss = $this->themeService->getThemeCss($org);
         $themeCustomCss = $this->themeService->getCustomCss($theme);
+
 
         // ── 3. Bind to Container ─────────────────────────
         app()->instance('active_org', $org);

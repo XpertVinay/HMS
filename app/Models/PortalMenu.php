@@ -14,6 +14,18 @@ class PortalMenu extends Model
         'type',
         'order',
         'target',
+        'visibility',
+        'roles',
+        'permissions',
+        'icon',
+        'route_name',
+        'is_preset',
+    ];
+
+    protected $casts = [
+        'roles' => 'array',
+        'permissions' => 'array',
+        'is_preset' => 'boolean',
     ];
 
     public function organization()

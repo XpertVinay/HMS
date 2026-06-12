@@ -14,10 +14,10 @@ class CommunityApprovalController extends Controller
      */
     public function index()
     {
-        $admin = \App\Models\Admin::find(session('aid'));
+        $orgId = $this->orgId();
         
         $posts = CommunityPost::with(['member', 'staffReviewer'])
-            ->where('organization_id', $admin->organization_id)
+            ->where('organization_id', $orgId)
             ->where('status', 'pending_stage_2')
             ->orderBy('created_at', 'asc')
             ->paginate(10);
@@ -30,15 +30,16 @@ class CommunityApprovalController extends Controller
      */
     public function approve(Request $request, $id)
     {
-        $admin = \App\Models\Admin::find(session('aid'));
+        $orgId = $this->orgId();
+        $adminId = session('aid'); // Will be null for super admins
         
-        $post = CommunityPost::where('organization_id', $admin->organization_id)
+        $post = CommunityPost::where('organization_id', $orgId)
             ->where('status', 'pending_stage_2')
             ->findOrFail($id);
             
         $post->update([
             'status' => 'approved',
-            'stage_2_admin_id' => $admin->id
+            'stage_2_admin_id' => $adminId
         ]);
         
         return back()->with('success', 'Post successfully approved! It is now live in the Community Feed.');
@@ -49,15 +50,16 @@ class CommunityApprovalController extends Controller
      */
     public function reject(Request $request, $id)
     {
-        $admin = \App\Models\Admin::find(session('aid'));
+        $orgId = $this->orgId();
+        $adminId = session('aid');
         
-        $post = CommunityPost::where('organization_id', $admin->organization_id)
+        $post = CommunityPost::where('organization_id', $orgId)
             ->where('status', 'pending_stage_2')
             ->findOrFail($id);
             
         $post->update([
             'status' => 'rejected',
-            'stage_2_admin_id' => $admin->id
+            'stage_2_admin_id' => $adminId
         ]);
         
         return back()->with('success', 'Post rejected. It will not be published.');
@@ -68,7 +70,8 @@ class CommunityApprovalController extends Controller
      */
     public function bulkAction(Request $request)
     {
-        $admin = \App\Models\Admin::find(session('aid'));
+        $orgId = $this->orgId();
+        $adminId = session('aid');
         
         $action = $request->input('action');
         $postIds = $request->input('post_ids', []);
@@ -79,12 +82,12 @@ class CommunityApprovalController extends Controller
         
         $status = $action === 'approve' ? 'approved' : 'rejected';
 
-        CommunityPost::where('organization_id', $admin->organization_id)
+        CommunityPost::where('organization_id', $orgId)
             ->where('status', 'pending_stage_2')
             ->whereIn('id', $postIds)
             ->update([
                 'status' => $status,
-                'stage_2_admin_id' => $admin->id
+                'stage_2_admin_id' => $adminId
             ]);
             
         return response()->json([

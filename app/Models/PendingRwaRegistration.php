@@ -21,5 +21,21 @@ class PendingRwaRegistration extends Model
         'admin_password',
         'fee_amount',
         'status',
+        'industry_id',
+        'selected_features',
+        'platform_fee',
+        'feature_fee',
     ];
+
+    protected $casts = [
+        'selected_features' => 'array',
+        'platform_fee' => 'decimal:2',
+        'feature_fee' => 'decimal:2',
+        'fee_amount' => 'decimal:2',
+    ];
+
+    public function industry()
+    {
+        return $this->belongsTo(Industry::class);
+    }
 }
