@@ -76,7 +76,8 @@ class ResolveOrganization
         view()->share('themeMode', $theme->theme_mode ?? 'light');
 
         // ── 5. Session for Backward Compatibility ────────
-        session(['active_org_id' => $org->id]);
+        // Removed session(['active_org_id']) as it corrupts session state before StartSession runs.
+        // Uses app('active_org') globally instead.
 
         return $next($request);
     }

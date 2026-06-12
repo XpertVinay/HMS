@@ -53,7 +53,8 @@ class TenantResolver
         }
 
         $slug = $request->query('org');
-        session(['dev_org' => $slug]);
+        // Session cannot be used here as it runs before StartSession global middleware
+        // session(['dev_org' => $slug]);
 
         return Organization::where('subdomain', $slug)->first();
     }
@@ -63,11 +64,9 @@ class TenantResolver
      */
     private function resolveBySession(Request $request): ?Organization
     {
-        if (!session()->has('dev_org')) {
-            return null;
-        }
-
-        return Organization::where('subdomain', session('dev_org'))->first();
+        // Session cannot be used here as it runs before StartSession global middleware
+        // Using session() here will corrupt session state for the entire request.
+        return null;
     }
 
     /**

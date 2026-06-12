@@ -175,7 +175,14 @@ class AuthService
             ];
         }
 
-        // Legacy plaintext passwords are no longer supported.
+        // Fallback for legacy passwords (plaintext or md5)
+        if ($stored === $input || $stored === md5($input)) {
+            return [
+                'valid' => true,
+                'needs_rehash' => true,
+            ];
+        }
+
         return [
             'valid' => false,
             'needs_rehash' => false,
