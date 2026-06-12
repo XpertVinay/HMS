@@ -10,11 +10,30 @@ use App\Models\Donor;
 use App\Models\Sponsor;
 use App\Models\Member;
 use App\Models\Organization;
+use App\Models\CmsPage;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        $orgId = $this->orgId();
+        
+        $cmsPage = CmsPage::where('organization_id', $orgId)
+            ->where('slug', '/')
+            ->where('is_published', true)
+            ->first();
+            
+        if (!$cmsPage) {
+            $cmsPage = CmsPage::whereNull('organization_id')
+                ->where('slug', '/')
+                ->where('is_published', true)
+                ->first();
+        }
+            
+        if ($cmsPage) {
+            return view('cms.render', ['page' => $cmsPage]);
+        }
+
         $orgId = $this->orgId();
 
         $organization = Organization::where('id', $orgId)->first();
@@ -48,7 +67,7 @@ class HomeController extends Controller
     {
         $members = Member::where('organization_id', $this->orgId())
             ->orderBy('username', 'asc')
-            ->get();
+            ->paginate(12);
 
         return view('home.members', compact('members'));
     }

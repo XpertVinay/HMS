@@ -99,6 +99,8 @@ Route::middleware('domain')->group(function () {
     Route::get('/events', [HomeController::class, 'events'])->name('home.events');
     Route::get('/gallery', [HomeController::class, 'gallery'])->name('home.gallery');
     Route::get('/donors', [HomeController::class, 'donors'])->name('home.donors');
+    Route::post('/donate/initiate', [\App\Http\Controllers\Payment\DonationController::class, 'initiate'])->name('donate.initiate');
+    Route::post('/donate/callback', [\App\Http\Controllers\Payment\DonationController::class, 'callback'])->name('donate.callback');
     Route::get('/sponsors', [HomeController::class, 'sponsors'])->name('home.sponsors');
     Route::get('/notices', [HomeController::class, 'notices'])->name('home.notices');
 
@@ -113,6 +115,7 @@ Route::middleware('domain')->group(function () {
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
     Route::get('/register', [RegisterController::class, 'showForm'])->name('register');
     Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
+    Route::post('/register/payment-callback', [RegisterController::class, 'paymentCallback'])->name('register.payment_callback');
 
     /*
     |--------------------------------------------------------------------------
@@ -209,6 +212,26 @@ Route::middleware('domain')->group(function () {
         // Theme Settings for RWA Admins
         Route::get('/theme-settings', [\App\Http\Controllers\Admin\ThemeSettingsController::class, 'edit'])->name('theme_settings.edit');
         Route::put('/theme-settings', [\App\Http\Controllers\Admin\ThemeSettingsController::class, 'update'])->name('theme_settings.update');
+
+        // CMS Page Builder
+        Route::prefix('cms')->name('cms.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Admin\CmsPageController::class, 'index'])->name('index');
+            Route::get('/create', [\App\Http\Controllers\Admin\CmsPageController::class, 'create'])->name('create');
+            Route::post('/', [\App\Http\Controllers\Admin\CmsPageController::class, 'store'])->name('store');
+            Route::get('/{id}/builder', [\App\Http\Controllers\Admin\CmsPageController::class, 'builder'])->name('builder');
+            Route::post('/{id}/builder', [\App\Http\Controllers\Admin\CmsPageController::class, 'saveBuilder'])->name('saveBuilder');
+            Route::post('/upload-asset', [\App\Http\Controllers\Admin\CmsPageController::class, 'uploadAsset'])->name('uploadAsset');
+            Route::post('/{id}/toggle-publish', [\App\Http\Controllers\Admin\CmsPageController::class, 'togglePublish'])->name('togglePublish');
+        });
+
+        // Portal Menus
+        Route::prefix('portal-menus')->name('portal_menus.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Admin\PortalMenuController::class, 'index'])->name('index');
+            Route::post('/', [\App\Http\Controllers\Admin\PortalMenuController::class, 'store'])->name('store');
+            Route::put('/{id}', [\App\Http\Controllers\Admin\PortalMenuController::class, 'update'])->name('update');
+            Route::delete('/{id}', [\App\Http\Controllers\Admin\PortalMenuController::class, 'destroy'])->name('destroy');
+            Route::post('/reorder', [\App\Http\Controllers\Admin\PortalMenuController::class, 'reorder'])->name('reorder');
+        });
     });
 
     /*
@@ -385,6 +408,26 @@ Route::middleware('domain')->group(function () {
             Route::post('/{orgId}/publish', [\App\Http\Controllers\SuperAdmin\ThemeBuilderController::class, 'publish'])->name('publish');
             Route::post('/{orgId}/rollback', [\App\Http\Controllers\SuperAdmin\ThemeBuilderController::class, 'rollback'])->name('rollback');
             Route::post('/{orgId}/apply-preset', [\App\Http\Controllers\SuperAdmin\ThemeBuilderController::class, 'applyPreset'])->name('apply_preset');
+        });
+
+        // CMS Page Builder
+        Route::prefix('cms')->name('cms.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Admin\CmsPageController::class, 'index'])->name('index');
+            Route::get('/create', [\App\Http\Controllers\Admin\CmsPageController::class, 'create'])->name('create');
+            Route::post('/', [\App\Http\Controllers\Admin\CmsPageController::class, 'store'])->name('store');
+            Route::get('/{id}/builder', [\App\Http\Controllers\Admin\CmsPageController::class, 'builder'])->name('builder');
+            Route::post('/{id}/builder', [\App\Http\Controllers\Admin\CmsPageController::class, 'saveBuilder'])->name('saveBuilder');
+            Route::post('/upload-asset', [\App\Http\Controllers\Admin\CmsPageController::class, 'uploadAsset'])->name('uploadAsset');
+            Route::post('/{id}/toggle-publish', [\App\Http\Controllers\Admin\CmsPageController::class, 'togglePublish'])->name('togglePublish');
+        });
+
+        // Portal Menus
+        Route::prefix('portal-menus')->name('portal_menus.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Admin\PortalMenuController::class, 'index'])->name('index');
+            Route::post('/', [\App\Http\Controllers\Admin\PortalMenuController::class, 'store'])->name('store');
+            Route::put('/{id}', [\App\Http\Controllers\Admin\PortalMenuController::class, 'update'])->name('update');
+            Route::delete('/{id}', [\App\Http\Controllers\Admin\PortalMenuController::class, 'destroy'])->name('destroy');
+            Route::post('/reorder', [\App\Http\Controllers\Admin\PortalMenuController::class, 'reorder'])->name('reorder');
         });
     });
 });

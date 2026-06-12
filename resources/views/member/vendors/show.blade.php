@@ -90,7 +90,7 @@
             </div>
             <div style="margin-bottom: 15px;">
                 <label>Review Detail</label>
-                <textarea name="review_text" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; height: 100px;" placeholder="Tell us about your experience..."></textarea>
+                <textarea name="review_text" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; height: 100px;" placeholder="Tell us about your experience..." required></textarea>
             </div>
             <button type="submit" class="btn-modern" style="width: 100%; padding: 10px;">Submit Review</button>
         </form>

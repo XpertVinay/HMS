@@ -203,6 +203,10 @@ class Organization extends Model
             return $this->logo_url;
         }
 
+        if (str_starts_with($this->logo_url, 'logos/') || str_starts_with($this->logo_url, 'themes/')) {
+            return asset('storage/' . $this->logo_url);
+        }
+
         return '/uploads/logos/' . $this->logo_url;
     }
 

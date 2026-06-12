@@ -20,6 +20,7 @@ class SuperAdmin extends Authenticatable implements JWTSubject
         'first_name',
         'last_name',
         'email',
+        'profile_image',
         'password',
     ];
 

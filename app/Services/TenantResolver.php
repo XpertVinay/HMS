@@ -24,21 +24,25 @@ class TenantResolver
     {
         // 1. Dev mode override via ?org= query parameter
         $org = $this->resolveByQueryParam($request);
-        if ($org) return $org;
+        if ($org)
+            return $org;
 
         // 2. Session-based dev override (sticky)
         $org = $this->resolveBySession($request);
-        if ($org) return $org;
+        if ($org)
+            return $org;
 
         $host = $request->getHost();
 
         // 3. Try custom domain lookup (e.g., myrwa.com, community.network.com)
         $org = $this->resolveByCustomDomain($host);
-        if ($org) return $org;
+        if ($org)
+            return $org;
 
         // 4. Try subdomain extraction (e.g., org1.businzo.com → org1)
         $org = $this->resolveBySubdomain($host);
-        if ($org) return $org;
+        if ($org)
+            return $org;
 
         return null;
     }
@@ -96,8 +100,17 @@ class TenantResolver
     {
         $parts = explode('.', $host);
 
-        // Need at least 3 parts for a subdomain (sub.domain.tld)
-        if (count($parts) < 3 || $parts[0] === 'www') {
+        if (count($parts) === 3 && $parts[0] != 'www') {
+            $subdomain = $parts[0];
+        }
+
+        if (count($parts) === 2 && $parts[0] != 'www') {
+            $subdomain = $parts[0];
+        }
+
+
+        // Need at least 2 parts to extract a slug (domain.tld or sub.domain.tld)
+        if (count($parts) < 2 || $parts[0] === 'www') {
             return null;
         }
 

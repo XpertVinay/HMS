@@ -38,7 +38,10 @@ class DonorController extends Controller
         return view('admin.donors.index');
     }
 
-    public function create() { return view('admin.donors.create'); }
+    public function create()
+    {
+        return view('admin.donors.create');
+    }
 
     public function store(Request $request)
     {

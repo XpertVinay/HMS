@@ -6,12 +6,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Traits\HasPersonName;
+use App\Traits\HasPushNotifications;
 use App\Traits\TenantScoped;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 class Member extends Authenticatable implements JWTSubject
 {
-    use HasPersonName, TenantScoped;
+    use HasPersonName, HasPushNotifications, TenantScoped;
 
     protected $table = 'member';
 
@@ -19,7 +20,9 @@ class Member extends Authenticatable implements JWTSubject
         'username',
         'first_name',
         'last_name',
+        'position',
         'email',
+        'profile_image',
         'password',
         'address',
         'phone',

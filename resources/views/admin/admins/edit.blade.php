@@ -22,7 +22,7 @@
             </div>
             <div class="form-group" style="margin-bottom: 15px;">
                 <label>Password (Leave blank to keep current)</label>
-                <input type="password" name="password" class="form-control" style="width: 100%; padding: 8px;">
+                <input type="password" name="password" class="form-control" style="width: 100%; padding: 8px;" required>
             </div>
             <button type="submit" class="btn-modern btn-primary">Update</button>
             <a href="{{ route('admin.admins.index') }}" class="btn-modern" style="background: #ccc; color: #333;">Cancel</a>

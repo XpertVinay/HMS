@@ -33,7 +33,10 @@ class StaffController extends Controller
         return view('admin.staff.index');
     }
 
-    public function create() { return view('admin.staff.create'); }
+    public function create()
+    {
+        return view('admin.staff.create');
+    }
 
     public function store(Request $request)
     {
@@ -67,7 +70,9 @@ class StaffController extends Controller
     {
         $staffMember = Staff::where('organization_id', $this->orgId())->findOrFail($id);
         $data = $request->only('username', 'first_name', 'last_name', 'email', 'mobile_number');
-        if ($request->filled('password')) { $data['password'] = Hash::make($request->password); }
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        }
         $staffMember->update($data);
         return redirect()->route('admin.staff.index')->with('success', 'Staff updated successfully.');
     }

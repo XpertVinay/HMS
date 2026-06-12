@@ -66,7 +66,7 @@ class VendorController extends Controller
     public function update(Request $request, int $id)
     {
         $vendor = AppVendor::findOrFail($id);
-        
+
         \DB::transaction(function () use ($request, $vendor) {
             $data = $request->only('business_name', 'first_name', 'last_name', 'email', 'business_registration', 'bank_account_details');
             if ($request->filled('password')) {
@@ -74,7 +74,7 @@ class VendorController extends Controller
             }
             $vendor->update($data);
         });
-        
+
         return redirect()->route('admin.vendors.index')->with('success', 'Vendor updated.');
     }
 
@@ -83,7 +83,7 @@ class VendorController extends Controller
         \DB::transaction(function () use ($id) {
             AppVendor::findOrFail($id)->delete();
         });
-        
+
         return redirect()->route('admin.vendors.index')->with('success', 'Vendor removed.');
     }
 }

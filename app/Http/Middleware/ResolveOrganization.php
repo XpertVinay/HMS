@@ -28,6 +28,12 @@ class ResolveOrganization
 
     public function handle(Request $request, Closure $next): Response
     {
+        $businzoDomains = array_filter(explode(' ', (string) env('BUSINZO_DOMAIN', 'businzo.local.com www.businzo.local.com')));
+
+        if (in_array($request->getHost(), $businzoDomains, true)) {
+            return $next($request);
+        }
+
         // ── 1. Resolve Organization ──────────────────────
         $org = $this->tenantResolver->resolve($request);
 

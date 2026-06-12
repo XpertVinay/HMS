@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Traits\HasPersonName;
+use App\Traits\HasPushNotifications;
 use App\Traits\TenantScoped;
-use Illuminate\Notifications\Notifiable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 /**
@@ -14,7 +14,7 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
  */
 class Admin extends Authenticatable implements JWTSubject
 {
-    use HasPersonName, TenantScoped, Notifiable;
+    use HasPersonName, HasPushNotifications, TenantScoped;
 
     protected $table = 'admin';
 
@@ -30,12 +30,17 @@ class Admin extends Authenticatable implements JWTSubject
         'rwa_election_copy',
         'social_registration_number',
         'is_id_verified',
+        'profile_image',
+        'gallery_images',
+        'other_documents',
     ];
 
     protected $hidden = ['password'];
 
     protected $casts = [
         'is_id_verified' => 'boolean',
+        'gallery_images' => 'array',
+        'other_documents' => 'array',
     ];
 
     public function getRoleAttribute(): string

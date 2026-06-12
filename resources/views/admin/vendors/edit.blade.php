@@ -6,7 +6,7 @@
     <div class="form-group"><label>Business Name</label><input type="text" name="business_name" required value="{{ old('business_name', $vendor->business_name) }}"></div>
     @include('partials.name_fields', ['vendor' => $vendor])
     <div class="form-group"><label>Email</label><input type="email" name="email" required value="{{ old('email', $vendor->email) }}"></div>
-    <div class="form-group"><label>New Password</label><input type="password" name="password"></div>
+    <div class="form-group"><label>New Password</label><input type="password" name="password" required></div>
     <button type="submit" class="btn-modern">Update</button><a href="{{ route('admin.vendors.index') }}" class="btn-modern btn-outline" style="margin-left:8px;">Cancel</a>
 </form></div>
 @endsection

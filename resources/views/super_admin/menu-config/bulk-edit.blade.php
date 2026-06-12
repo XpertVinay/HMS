@@ -349,7 +349,7 @@
             <div class="meta-fields">
                 <div class="meta-field">
                     <label for="residential_type">Residential Type (Optional)</label>
-                    <select id="residential_type" name="residential_type" onchange="applyPreset()">
+                    <select id="residential_type" name="residential_type" onchange="applyPreset()" required>
                         <option value="">— Select Type to Auto-Configure —</option>
                         @foreach($residentialTypes as $key => $preset)
                             <option value="{{ $key }}" data-desc="{{ $preset['description'] }}">

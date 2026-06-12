@@ -35,7 +35,10 @@ class EventController extends Controller
         return view('admin.events.index');
     }
 
-    public function create() { return view('admin.events.create'); }
+    public function create()
+    {
+        return view('admin.events.create');
+    }
 
     public function store(Request $request)
     {

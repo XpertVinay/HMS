@@ -7,7 +7,7 @@
     @include('partials.name_fields')
     <div class="form-group"><label>Email</label><input type="email" name="email" required value="{{ old('email') }}"></div>
     <div class="form-group"><label>Password</label><input type="password" name="password" required></div>
-    <div class="form-group"><label>Registration #</label><input type="text" name="business_registration" value="{{ old('business_registration') }}"></div>
+    <div class="form-group"><label>Registration #</label><input type="text" name="business_registration" value="{{ old('business_registration') }}" required></div>
     <button type="submit" class="btn-modern">Add Vendor</button><a href="{{ route('admin.vendors.index') }}" class="btn-modern btn-outline" style="margin-left:8px;">Cancel</a>
 </form></div>
 @endsection

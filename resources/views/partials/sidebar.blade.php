@@ -73,7 +73,8 @@
             <li><a href="{{ route('admin.community.approvals') }}" class="{{ str_contains($currentRoute, 'community') ? 'active' : '' }}"><i class='bx bx-check-double'></i><span class="links_name">Comm. Approvals</span></a></li>
             @endif
             <li><a href="{{ route('admin.theme_settings.edit') }}" class="{{ str_contains($currentRoute, 'theme_settings') ? 'active' : '' }}"><i class='bx bx-palette'></i><span class="links_name">Theme Settings</span></a></li>
-
+            <li><a href="{{ route('admin.cms.index') }}" class="{{ str_contains($currentRoute, 'admin.cms') ? 'active' : '' }}"><i class='bx bx-layout'></i><span class="links_name">CMS / Pages</span></a></li>
+            <li><a href="{{ route('admin.portal_menus.index') }}" class="{{ str_contains($currentRoute, 'portal_menus') ? 'active' : '' }}"><i class='bx bx-menu-alt-right'></i><span class="links_name">Portal Menus</span></a></li>
 
         @elseif($role === 'member')
             <li><a href="{{ route('member.dashboard') }}" class="{{ str_contains($currentRoute, 'member.dashboard') ? 'active' : '' }}"><i class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>
@@ -128,6 +129,8 @@
             <li><a href="{{ route('super_admin.dashboard') }}" class="{{ str_contains($currentRoute, 'super_admin.dashboard') ? 'active' : '' }}"><i class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a></li>
             <li><a href="{{ route('super_admin.earnings') }}" class="{{ str_contains($currentRoute, 'super_admin.earnings') ? 'active' : '' }}"><i class='bx bx-money'></i><span class="links_name">Earnings</span></a></li>
             <li><a href="{{ route('super_admin.theme_builder.index') }}" class="{{ str_contains($currentRoute, 'theme_builder') ? 'active' : '' }}"><i class='bx bx-palette'></i><span class="links_name">Theme Builder</span></a></li>
+            <li><a href="{{ route('super_admin.cms.index') }}" class="{{ str_contains($currentRoute, 'super_admin.cms') ? 'active' : '' }}"><i class='bx bx-layout'></i><span class="links_name">CMS / Pages</span></a></li>
+            <li><a href="{{ route('super_admin.portal_menus.index') }}" class="{{ str_contains($currentRoute, 'portal_menus') ? 'active' : '' }}"><i class='bx bx-menu-alt-right'></i><span class="links_name">Portal Menus</span></a></li>
             <li><a href="{{ route('super_admin.menu_config.index') }}" class="{{ str_contains($currentRoute, 'menu_config') ? 'active' : '' }}"><i class='bx bx-menu'></i><span class="links_name">Menu Config</span></a></li>
 
             @if(session()->has('managed_org_id'))

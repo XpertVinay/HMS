@@ -16,6 +16,10 @@
                 <input type="email" name="email" class="form-control" value="{{ old('email') }}" required style="width: 100%; padding: 8px;">
             </div>
             <div class="form-group" style="margin-bottom: 15px;">
+                <label>Phone Number</label>
+                <input type="tel" name="mobile_number" class="form-control" value="{{ old('mobile_number') }}" required style="width: 100%; padding: 8px;">
+            </div>
+            <div class="form-group" style="margin-bottom: 15px;">
                 <label>Password</label>
                 <input type="password" name="password" class="form-control" required style="width: 100%; padding: 8px;">
             </div>

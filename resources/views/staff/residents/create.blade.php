@@ -41,7 +41,7 @@
             
             <div class="form-group">
                 <label>{{ isset($resident) ? 'New Password (leave blank to keep current)' : 'Password' }} @if(!isset($resident))<span class="text-red-500">*</span>@endif</label>
-                <input type="password" name="password" {{ isset($resident) ? '' : 'required' }}>
+                <input type="password" name="password" {{ isset($resident) ? '' : 'required' }} required>
             </div>
         </div>
         

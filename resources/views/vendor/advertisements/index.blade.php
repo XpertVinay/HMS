@@ -25,11 +25,11 @@
             </div>
             <div style="margin-bottom: 15px;">
                 <label>Description</label>
-                <textarea name="description" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; height: 80px;" placeholder="Optional details..."></textarea>
+                <textarea name="description" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; height: 80px;" placeholder="Optional details..." required></textarea>
             </div>
             <div style="margin-bottom: 15px;">
                 <label>Target URL</label>
-                <input type="url" name="target_url" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" placeholder="https://yourwebsite.com/offer">
+                <input type="url" name="target_url" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" placeholder="https://yourwebsite.com/offer" required>
             </div>
             <button type="submit" class="btn-modern" style="width: 100%; padding: 10px;">Submit for Approval (Fee: $10.00)</button>
         </form>

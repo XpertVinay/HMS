@@ -38,7 +38,7 @@
             </div>
             <div class="form-group">
                 <label>Property Type</label>
-                <select name="type">
+                <select name="type" required>
                     <option value="flat" {{ $property->type == 'flat' ? 'selected' : '' }}>Flat</option>
                     <option value="house" {{ $property->type == 'house' ? 'selected' : '' }}>House</option>
                     <option value="plot" {{ $property->type == 'plot' ? 'selected' : '' }}>Plot</option>
@@ -49,13 +49,13 @@
 
         <div class="form-group mt-4">
             <label>Additional Unstructured Details (Optional)</label>
-            <textarea name="unstructured_data" rows="2">{{ old('unstructured_data', $property->address_metadata['additional_info'] ?? '') }}</textarea>
+            <textarea name="unstructured_data" rows="2" required>{{ old('unstructured_data', $property->address_metadata['additional_info'] ?? '') }}</textarea>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 border-t border-gray-100 pt-4">
             <div class="form-group">
                 <label>Assign Owner</label>
-                <select name="owner_id">
+                <select name="owner_id" required>
                     <option value="">None</option>
                     @foreach($members as $m)
                         <option value="{{ $m->id }}" {{ $property->owner_id == $m->id ? 'selected' : '' }}>{{ $m->username }}</option>
@@ -64,7 +64,7 @@
             </div>
             <div class="form-group">
                 <label>Assign Resident</label>
-                <select name="resident_id">
+                <select name="resident_id" required>
                     <option value="">None</option>
                     @foreach($residents as $r)
                         <option value="{{ $r->id }}" {{ $property->resident_id == $r->id ? 'selected' : '' }}>{{ $r->username }}</option>

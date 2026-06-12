@@ -54,10 +54,18 @@ class MultiOrgDemoDataSeeder extends Seeder
         for ($i = 0; $i < 15; $i++) {
             $vendor = AppVendor::create([
                 'business_name' => $faker->unique()->company,
+                'first_name' => $faker->firstName,
+                'last_name' => $faker->lastName,
                 'email' => $faker->unique()->companyEmail,
                 'password' => $password,
+                'business_registration' => strtoupper($faker->bothify('GSTIN##########??')),
+                'bank_account_details' => $faker->iban('IN'),
                 'is_gst_verified_staff' => $faker->boolean(70),
                 'is_gst_verified_admin' => $faker->boolean(70),
+                'global_rating' => $faker->randomFloat(1, 3, 5),
+                'total_tasks_completed' => $faker->numberBetween(5, 500),
+                'is_active_globally' => $faker->boolean(80),
+                'is_featured' => $faker->boolean(20),
             ]);
             $vendors[] = $vendor;
 
@@ -76,17 +84,19 @@ class MultiOrgDemoDataSeeder extends Seeder
 
         for ($orgIndex = 1; $orgIndex <= 10; $orgIndex++) {
             $this->command->info("Generating data for Organization #{$orgIndex}");
-            
+
             // 1. Create Organization
             $organization = Organization::create([
                 'name' => $faker->company . ' RWA',
                 'address' => $faker->address,
+                'location' => $faker->city . ', ' . $faker->state,
+                'residential_type' => $faker->randomElement(['Apartment', 'Villa', 'Mixed']),
                 'registration_code' => 'ORG-' . strtoupper($faker->bothify('???-###')) . '-' . $orgIndex,
                 'subdomain' => strtolower($faker->word) . '-' . $orgIndex,
                 'status' => 'approved',
+                'logo_url' => 'https://via.placeholder.com/150x50?text=Org+' . $orgIndex,
                 'primary_color' => $faker->hexColor,
                 'secondary_color' => $faker->hexColor,
-                'logo_url' => 'https://via.placeholder.com/150x50?text=Org+' . $orgIndex,
             ]);
             $orgId = $organization->id;
 
@@ -108,9 +118,13 @@ class MultiOrgDemoDataSeeder extends Seeder
             for ($i = 0; $i < 5; $i++) {
                 Admin::create([
                     'username' => $faker->unique()->userName . $orgIndex,
+                    'first_name' => $faker->firstName,
+                    'last_name' => $faker->lastName,
                     'email' => "admin{$i}_org{$orgIndex}@example.com",
                     'password' => $password,
                     'mobile_number' => $faker->numerify('##########'),
+                    'rwa_election_copy' => 'election_copy_document_' . $faker->numberBetween(100, 999) . '.pdf',
+                    'social_registration_number' => 'SRN-' . $faker->numberBetween(10000, 99999),
                     'is_id_verified' => true,
                     'organization_id' => $orgId,
                     'role' => $i === 0 ? 'admin' : 'sub-admin',
@@ -118,9 +132,12 @@ class MultiOrgDemoDataSeeder extends Seeder
 
                 Staff::create([
                     'username' => $faker->unique()->userName . $orgIndex,
+                    'first_name' => $faker->firstName,
+                    'last_name' => $faker->lastName,
                     'email' => "staff{$i}_org{$orgIndex}@example.com",
                     'password' => $password,
                     'mobile_number' => $faker->numerify('##########'),
+                    'employment_contract' => 'employment_contract_' . $faker->numberBetween(100, 999) . '.pdf',
                     'is_id_verified' => true,
                     'organization_id' => $orgId,
                 ]);
@@ -129,16 +146,20 @@ class MultiOrgDemoDataSeeder extends Seeder
             // 4. Members, Residents, and Properties
             $members = [];
             $residents = [];
-            
+
             for ($i = 0; $i < 20; $i++) {
                 $address = 'Unit ' . $faker->numberBetween(100, 999) . ', ' . $faker->streetName;
-                
+
                 $member = Member::create([
                     'username' => $faker->unique()->userName . 'm' . $orgIndex,
+                    'first_name' => $faker->firstName,
+                    'last_name' => $faker->lastName,
+                    'position' => $faker->randomElement(['President', 'Secretary', 'Treasurer', 'Member', null]),
                     'email' => "member{$i}_org{$orgIndex}@example.com",
                     'password' => $password,
                     'address' => $address, // Shared address with property
                     'phone' => $faker->numerify('##########'),
+                    'share_certificate' => 'share_cert_' . $faker->bothify('???###') . '.pdf',
                     'is_deed_verified_staff' => true,
                     'is_deed_verified_admin' => true,
                     'organization_id' => $orgId,
@@ -150,10 +171,13 @@ class MultiOrgDemoDataSeeder extends Seeder
                 if ($faker->boolean(60)) {
                     $resident = Resident::create([
                         'username' => $faker->unique()->userName . 'r' . $orgIndex,
+                        'first_name' => $faker->firstName,
+                        'last_name' => $faker->lastName,
                         'email' => "resident{$i}_org{$orgIndex}@example.com",
                         'password' => $password,
                         'address' => $address, // Shared address
                         'mobile_number' => $faker->numerify('##########'),
+                        'owner_noc' => 'owner_noc_' . $faker->bothify('???###') . '.pdf',
                         'organization_id' => $orgId,
                         'is_rent_agreement_verified_staff' => true,
                         'is_rent_agreement_verified_admin' => true,
@@ -194,6 +218,7 @@ class MultiOrgDemoDataSeeder extends Seeder
                     'status' => 'completed',
                     'payment_method' => 'online',
                     'total_amount' => $service->price,
+                    'closing_remarks' => $faker->boolean(50) ? $faker->sentence : null,
                 ]);
 
                 // Platform Commission (10%)
@@ -226,7 +251,7 @@ class MultiOrgDemoDataSeeder extends Seeder
 
                 Gallery::create([
                     'title' => 'Gallery Item ' . $i,
-                    'image_url' => 'https://via.placeholder.com/400x300?text=Org+'.$orgIndex.'+Image+'.$i,
+                    'image_url' => 'https://via.placeholder.com/400x300?text=Org+' . $orgIndex . '+Image+' . $i,
                     'organization_id' => $orgId,
                 ]);
 
@@ -247,10 +272,15 @@ class MultiOrgDemoDataSeeder extends Seeder
                 Ticket::create([
                     'organization_id' => $orgId,
                     'member_id' => $faker->randomElement($members)->id,
+                    'resident_id' => !empty($residents) && $faker->boolean(50) ? $faker->randomElement($residents)->id : null,
                     'subject' => 'Issue ' . $i,
                     'description' => $faker->sentence,
                     'category' => 'Maintenance',
                     'status' => $faker->randomElement(['pending', 'resolved']),
+                    'response' => $faker->boolean(30) ? $faker->sentence() : null,
+                    'assigned_vendor_id' => $faker->boolean(50) ? $faker->randomElement($vendors)->id : null,
+                    'vendor_category' => 'Maintenance',
+                    'vendor_invoice_amount' => $faker->boolean(50) ? $faker->randomFloat(2, 50, 2000) : null,
                 ]);
             }
         }
