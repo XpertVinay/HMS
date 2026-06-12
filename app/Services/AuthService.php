@@ -155,9 +155,14 @@ class AuthService
             }
         });
 
+        // We no longer strictly scope by organization_id during login because
+        // usernames and emails are globally unique in the database schema.
+        // This allows users to log in from the main portal and be routed to their org.
+        /*
         if ($orgScoped) {
             $query->where('organization_id', $orgId);
         }
+        */
 
         return $query->first();
     }
@@ -198,7 +203,13 @@ class AuthService
         ]);
 
         if ($config['org_scoped']) {
-            session(['organization_id' => $orgId]);
+            // Use the user's actual organization ID instead of the passed $orgId 
+            // which might be a fallback (1) if logged in from the main portal
+            $realOrgId = $user->organization_id ?? $orgId;
+            session([
+                'organization_id' => $realOrgId,
+                'active_org_id' => $realOrgId, // Also update the active_org_id so middleware respects it
+            ]);
         }
 
         if ($role === 'member') {

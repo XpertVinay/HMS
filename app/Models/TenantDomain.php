@@ -26,7 +26,7 @@ class TenantDomain extends Model
     ];
 
     protected $casts = [
-        'is_primary'  => 'boolean',
+        'is_primary' => 'boolean',
         'is_verified' => 'boolean',
         'verified_at' => 'datetime',
     ];
@@ -46,8 +46,8 @@ class TenantDomain extends Model
     public static function resolveByDomain(string $domain): ?self
     {
         return static::where('domain', $domain)
-                     ->where('is_verified', true)
-                     ->first();
+            ->where('is_verified', true)
+            ->first();
     }
 
     /**
@@ -64,7 +64,7 @@ class TenantDomain extends Model
     public static function primaryFor(int $organizationId): ?self
     {
         return static::where('organization_id', $organizationId)
-                     ->where('is_primary', true)
-                     ->first();
+            ->where('is_primary', true)
+            ->first();
     }
 }
